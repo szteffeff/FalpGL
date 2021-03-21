@@ -1,6 +1,6 @@
  #pragma once
 
-#include <GL/glew.h>
+#include "GraphicsHeaders.h"
 
 #include "VertexArray.h"
 #include "IndexBuffer.h"

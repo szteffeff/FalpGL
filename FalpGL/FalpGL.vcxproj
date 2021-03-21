@@ -312,6 +312,7 @@
     <ClInclude Include="src\game\Terminal.h" />
     <ClInclude Include="src\game\OverMap.h" />
     <ClInclude Include="src\game\Player.h" />
+    <ClInclude Include="src\renderer\GraphicsHeaders.h" />
     <ClInclude Include="src\renderer\IndexBuffer.h" />
     <ClInclude Include="src\renderer\renderer.h" />
     <ClInclude Include="src\renderer\Shader.h" />

@@ -1,5 +1,4 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "GraphicsHeaders.h"
 
 #include "renderer.h"
 
@@ -10,7 +9,6 @@
 #include "VertexBufferLayout.h"
 #include "Texture.h"
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+
 
 
