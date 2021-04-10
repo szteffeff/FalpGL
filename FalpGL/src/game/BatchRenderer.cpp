@@ -105,7 +105,7 @@ float *quad::data()
 	return quad_data;
 }
 
-void quad::move(float delta_x, float delta_y)
+void quad::move(float delta_x, float delta_y, bool wrong_function_use_translate)
 {
 	quad_data[0] += delta_x;
 	quad_data[1] += delta_y;
@@ -127,26 +127,22 @@ void quad::move(float delta_x, float delta_y)
 
 }
 
-void quad::teleport(float x, float new_y)
+void quad::teleport(float new_x, float new_y)
 {
-	quad_data[0] = x;
-	quad_data[1] = new_y;
-	quad_data[2] = new_y;
+	Point p = center();
+	quad_data[0]  =  (new_x) + (quad_data[0] - p.x);
+	quad_data[1]  =  (new_y) + (quad_data[1] - p.y);
 
-	quad_data[6] = x;
-	quad_data[7] = new_y;
-	quad_data[8] = new_y;
+	quad_data[6]  =  (new_x) + (quad_data[6] - p.x);
+	quad_data[7]  =  (new_y) + (quad_data[7] - p.y);
 
-	quad_data[12] = x;
-	quad_data[13] = new_y;
-	quad_data[14] = new_y;
+	quad_data[12] = (new_x) + (quad_data[12] - p.x);
+	quad_data[13] = (new_y) + (quad_data[13] - p.y);
+											  
+	quad_data[18] = (new_x) + (quad_data[18] - p.x);
+	quad_data[19] = (new_y) + (quad_data[19] - p.y);
 
-	quad_data[18] = x;
-	quad_data[19] = new_y;
-	quad_data[20] = new_y;
-
-	y_offset += new_y;
-	y = new_y;
+	update();
 }
 
 void quad::modify_height(float delta_y)
@@ -165,28 +161,98 @@ void quad::update()
 }
 
 
+void quad::rotate(float degrees, Point point, bool radians)
+{
+	if (!radians)
+		degrees *= glm::pi<float>() / -180;
+	else
+		degrees *= -1;
+
+	float x = quad_data[0];
+	float y = quad_data[1];
+	quad_data[0] = x * cos(degrees) - y * sin(degrees);
+	quad_data[1] = x * sin(degrees) + y * cos(degrees);
+
+	x = quad_data[6];
+	y = quad_data[7];
+	quad_data[6] = x * cos(degrees) - y * sin(degrees);
+	quad_data[7] = x * sin(degrees) + y * cos(degrees);
+
+	x = quad_data[12];
+	y = quad_data[13];
+	quad_data[12] = x * cos(degrees) - y * sin(degrees);
+	quad_data[13] = x * sin(degrees) + y * cos(degrees);
+
+	x = quad_data[18];
+	y = quad_data[19];
+	quad_data[18] = x * cos(degrees) - y * sin(degrees);
+	quad_data[19] = x * sin(degrees) + y * cos(degrees);
+
+	update();
+}
+
+void quad::scale(float ratio)
+{
+	quad_data[0] *= ratio;
+	quad_data[1] *= ratio;
+
+	quad_data[6] *= ratio;
+	quad_data[7] *= ratio;
+
+	quad_data[12] *= ratio;
+	quad_data[13] *= ratio;
+
+	quad_data[18] *= ratio;
+	quad_data[19] *= ratio;
+
+	update();
+}
+
+void quad::translate(float delta_x, float delta_y)
+{
+	quad_data[0] += delta_x;
+	quad_data[1] += delta_y;
+
+	quad_data[6] += delta_x;
+	quad_data[7] += delta_y;
+
+	quad_data[12] += delta_x;
+	quad_data[13] += delta_y;
+
+	quad_data[18] += delta_x;
+	quad_data[19] += delta_y;
+
+	update();
+}
+
+inline Point quad::center()
+{
+	return Point(((quad_data[0] + quad_data[6] + quad_data[12] + quad_data[18]) / 4), ((quad_data[1] + quad_data[7] + quad_data[13] + quad_data[19]) / 4));
+}
+
+
 void quad::replace_data(const void* data)
 {
 	memcpy(&quad_data, data, 24 * sizeof(float));
 }
 
 
-float quad::get_width()
+float quad::get_width() const
 {
 	return ((quad_data[12] + quad_data[0]) / 2);
 }
 
-float quad::get_height()
+float quad::get_height() const
 {
 	return ((quad_data[6] + quad_data[0]) / 2);;
 }
 
-float quad::get_x()
+float quad::get_x() const
 {
 	return (quad_data[0] + (get_width() / 2));
 }
 
-float quad::get_y()
+float quad::get_y() const
 {
 	return (quad_data[1] + (get_height() / 2));
 }

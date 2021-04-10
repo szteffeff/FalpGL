@@ -19,22 +19,37 @@ public:
 
 	float *data();
 
-	void move(float delta_x, float delta_y);
-	void teleport(float x, float new_y);
+	void move(float delta_x, float delta_y, bool wrong_function_use_translate);
+	void teleport(float new_x, float new_y);
 
 	void modify_height(float delta_y);
 
 	void update();
 
+	void rotate(float degrees, Point point, bool radians = false);
+	void scale(float ratio);
+	void translate(float delta_x, float delta_y);
+
+	inline Point center();
+
 	void replace_data(const void* data);
 
-	float get_height();
-	float get_width();
+	float get_height() const;
+	float get_width() const;
 
-	float get_y();
-	float get_x();
+	float get_y() const;
+	float get_x() const;
 
 };
+
+/*
+*	X Y Z TX TY TI
+*	X Y Z TX TY TI
+*	X Y Z TX TY TI
+*	X Y Z TX TY TI
+* 
+*/
+
 
 class BatchRenderer {
 public:

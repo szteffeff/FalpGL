@@ -20,8 +20,9 @@ public:
 
 	void TBind();
 
-private:
 	quad quad;
+
+private:
 
 	int x, y;
 

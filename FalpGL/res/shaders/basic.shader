@@ -1,7 +1,7 @@
 #shader vertex
 #version 330 core
 
-layout(location = 0) in vec4 size;
+layout(location = 0) in vec4 position;
 layout(location = 1) in vec2 texCoord;
 layout(location = 2) in float texture_index;
 
@@ -12,7 +12,7 @@ uniform mat4 u_MVP;
 
 void main()
 {
-   gl_Position = u_MVP * size;
+   gl_Position = u_MVP * position;
    v_TexCoord = texCoord;
    u_Texture = texture_index;
 };
@@ -32,8 +32,7 @@ uniform sampler2D u_Textures[3];
 
 void main()
 {
-	int index = int(u_Texture);
-	color = texture(u_Textures[index], v_TexCoord);
+	color = texture(u_Textures[int(u_Texture)], v_TexCoord);
 	if (color.w == 0)
 		discard;
 }

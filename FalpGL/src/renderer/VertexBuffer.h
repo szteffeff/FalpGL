@@ -15,7 +15,7 @@ public:
 	VertexBuffer() {}
 	~VertexBuffer();
 
-	unsigned int add_quad(const void* data, int count = 1); // count = number of quads to add or modify in a row
+	unsigned int add_quad(const void* data, int count = 1);
 	void modify_quad(const void* data, unsigned int index, int count = 1);
 	void delete_quad(unsigned int index, int count = 1);
 

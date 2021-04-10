@@ -13,11 +13,12 @@
 
 #include <math.h>
 
+
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 int main(void)
 {
-
 
     GLFWwindow* window;
 
@@ -28,6 +29,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
@@ -42,7 +44,7 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(GLFW_DONT_CARE);
 
     if (glewInit() != GLEW_OK)
         out::error("GLEW init fail!");
@@ -66,7 +68,6 @@ int main(void)
 
         TileMap map;
 
-
         BatchRenderer test(3, "res/shaders/basic.shader");
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -76,7 +77,7 @@ int main(void)
 
         Player boy(test.vertex_buffer);
 
-        Tile red(0.5, 0, test.vertex_buffer);
+        Tile red(0, 0, test.vertex_buffer);
         red.index_change(2.0f); 
         red.update_quad();
         red.data();
@@ -90,40 +91,45 @@ int main(void)
         glfwGetFramebufferSize(window, &width, &height);
         glViewport(0, 0, width, height);
 
-        float a = 0.0f;
+        double xpos, ypos;
 
+        boy.quad.teleport(100, 100);
+        
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            if (a > 360.0f || a < -360.0f)
-                a = -a;
+            map.tick(projection_matrix, 0, 0);
 
-            a += 0.1f;
-
-            map.tick(projection_matrix, sin(a) * 3, cos(a) * 3);
-            map.tick(projection_matrix, sin(a) * 3, cos(a) * 3);
-            map.tick(projection_matrix, sin(a) * 3, cos(a) * 3);
-            map.tick(projection_matrix, sin(a) * 3, cos(a) * 3);
-            map.tick(projection_matrix, sin(a) * 3, cos(a) * 3);
             test.draw(projection_matrix);
             
-            
+            glfwGetCursorPos(window, &xpos, &ypos);
+            xpos -= width / 2;
+            ypos -= height / 2;
+            ypos *= -1;
+
+            //std::cout << xpos << "    -    " << ypos << std::endl;
+
+            boy.quad.teleport(xpos, ypos);
+            boy.quad.rotate(1, Point(0, 0));
+            //boy.quad.scale(1.0005f);
             
             glfwGetFramebufferSize(window, &width, &height);
             if (width != width_old || height != height_old)
             {
                 glViewport(0, 0, width, height);
-                width_old = width;
-                height_old = height;
-
+               
                 std::cout << width << "x" << height << std::endl;
 
                 projection_matrix = glm::ortho(-0.5f * width, 0.5f * width, -0.5f * height, 0.5f * height, -1.0f, 1.0f);
 
                 map.expand(width, height);
+
+                width_old = width;
+                height_old = height;
             }
+
             
 
             /* Swap front and back buffers */
@@ -133,8 +139,6 @@ int main(void)
             glfwPollEvents();
 
         }
-
-
     }
     glfwTerminate();
     return (0);
@@ -143,5 +147,5 @@ int main(void)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-        
+    std::cout << key << " " << scancode << " " << action << std::endl;
 }
