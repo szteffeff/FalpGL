@@ -32,7 +32,7 @@ int main(void)
 
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1200, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1920, 1200, "test", glfwGetPrimaryMonitor(), NULL);
     if (!window)
     {
         glfwTerminate();
@@ -44,7 +44,7 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(1); //1 = VSYNC, -1 = ??
 
     if (glewInit() != GLEW_OK)
         out::error("GLEW init fail!");
