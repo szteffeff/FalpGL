@@ -15,7 +15,7 @@ public:
 	
 	VertexBuffer& active_buffer;
 
-	quad(VertexBuffer& vb, float height, float width);
+	quad(VertexBuffer& vb, float height, float width, float size);
 
 	float *data();
 
@@ -29,6 +29,7 @@ public:
 	void rotate(float degrees, Point point, bool radians = false);
 	void scale(float ratio);
 	void translate(float delta_x, float delta_y);
+	void texture_index(float new_i);
 
 	inline Point center();
 

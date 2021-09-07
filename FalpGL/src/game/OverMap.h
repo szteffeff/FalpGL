@@ -43,8 +43,6 @@ public:
 	void inactive();
 };
 
-
-
 class TileMap {
 private:
 	const int render_distance = 5;

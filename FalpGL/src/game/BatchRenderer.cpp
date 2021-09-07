@@ -57,37 +57,39 @@ void MapRenderer::draw(glm::mat4& proj_matrix, glm::mat4& trans_matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
 
-quad::quad(VertexBuffer& vb, float h, float w)
+quad::quad(VertexBuffer& vb, float h, float w, float size)
 	: y(0.0f), y_offset(0.0f), buffer_index(0), active_buffer(vb), height(h), width(w)
 {
-	quad_data[0] = 0.0f;
-	quad_data[1] = 0.0f;
+	float hs = size / 2;
+
+	quad_data[0] = -hs;
+	quad_data[1] = -hs;
 	quad_data[2] = 0.0f;
 
-	quad_data[6] = 0.0f;
-	quad_data[7] = 0.0f;
+	quad_data[6] = hs;
+	quad_data[7] = -hs;
 	quad_data[8] = 0.0f;
 
-	quad_data[12] = 0.0f;
-	quad_data[13] = 0.0f;
+	quad_data[12] = hs;
+	quad_data[13] = hs;
 	quad_data[14] = 0.0f;
 
-	quad_data[18] = 0.0f;
-	quad_data[19] = 0.0f;
+	quad_data[18] = -hs;
+	quad_data[19] = hs;
 	quad_data[20] = 0.0f;
 
 
 	quad_data[3] = 0.0f;
 	quad_data[4] = 0.0f;
 
-	quad_data[9] = 0.0f;
+	quad_data[9] = 1.0f;
 	quad_data[10] = 0.0f;
 
 	quad_data[15] = 1.0f;
-	quad_data[16] = 0.0f;
+	quad_data[16] = 1.0f;
 
 	quad_data[21] = 0.0f;
-	quad_data[22] = 0.0f;
+	quad_data[22] = 1.0f;
 
 
 	quad_data[5] = 0.0f;
@@ -221,6 +223,16 @@ void quad::translate(float delta_x, float delta_y)
 
 	quad_data[18] += delta_x;
 	quad_data[19] += delta_y;
+
+	update();
+}
+
+void quad::texture_index(float new_i)
+{  //5 11 17 23
+	quad_data[5] = new_i;
+	quad_data[11] = new_i;
+	quad_data[17] = new_i;
+	quad_data[23] = new_i;
 
 	update();
 }

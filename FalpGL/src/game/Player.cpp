@@ -2,7 +2,7 @@
 #include "../renderer/VertexBuffer.h"
 
 Player::Player(VertexBuffer& vb)
-	: x(0), y(0), quad_data(), idle(Texture("res/textures/boy_idle.png")), quad(vb, 0.0f, 0.0f)
+	: x(0), y(0), quad_data(), idle(Texture("res/textures/boy_idle.png")), quad(vb, 0.0f, 0.0f, 0)
 {
 	update_quad();
 	quad.replace_data(&quad_data);
