@@ -149,12 +149,12 @@ void quad::teleport(float new_x, float new_y)
 
 void quad::modify_height(float delta_y)
 {
-	quad_data[2] += delta_y;
-	quad_data[8] += delta_y;
-	quad_data[14] += delta_y;
-	quad_data[20] += delta_y;
+	quad_data[2] = delta_y;
+	quad_data[8] = delta_y;
+	quad_data[14] = delta_y;
+	quad_data[20] = delta_y;
 
-	y_offset += delta_y;
+	//y_offset += delta_y;
 }
 
 void quad::update()

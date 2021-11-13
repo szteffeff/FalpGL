@@ -32,9 +32,8 @@ uniform sampler2D u_Textures[2];
 
 void main()
 {
-	float x = gl_FragCoord.x;
 	int index = int(u_Texture);
-	color = vec4(x, x, x, 1.0);
+	color = vec4(v_TexCoord, 1, 1.0);
 }
 
 

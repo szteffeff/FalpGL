@@ -10,6 +10,7 @@
 #include "Terminal.h"
 #include "OverMap.h"
 #include "Map.h"
+#include "Input.h"
 
 
 #include <math.h>
@@ -17,12 +18,14 @@
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-
+Input controller;
 
 int main(void)
 {
 
     GLFWwindow* window;
+    bool running = true;
+    controller.set_keepalive(&running);
 
     /* Initialize the library */
     if (!glfwInit())
@@ -32,21 +35,40 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    if (false) // fullscreen modes
+        {
+            const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1200, "1234", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
+            glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+            glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+            glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+            glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+
+            /* Create a windowed mode window and its OpenGL context */
+            window = glfwCreateWindow(mode->width, mode->height, "", glfwGetPrimaryMonitor(), NULL);
+            if (!window)
+                {
+                    glfwTerminate();
+                    return -1;
+                }
+        }
+    else
+        {
+        window = glfwCreateWindow(1920, 1200, "", NULL, NULL);
+        if (!window)
+            {
+                glfwTerminate();
+                return -1;
+            }
+        }
 
     glfwSetKeyCallback(window, key_callback);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    glfwSwapInterval(1); //1 = VSYNC, -1 = ??
+    glfwSwapInterval(-1); //1 = VSYNC, -1 = ??
 
     if (glewInit() != GLEW_OK)
         out::error("GLEW init fail!");
@@ -61,12 +83,17 @@ int main(void)
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glDepthFunc(GL_LESS));
 
+    glfwWindowHint(GLFW_SAMPLES, 16);
+
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl; // put into terminal
     {
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
         int width, height, width_old, height_old;
         width_old = 0;
         height_old = 0;
+
 
         //TileMap map;
 
@@ -91,6 +118,7 @@ int main(void)
 
         boy.TBind();
 
+        controller.set_tile(&red);
 
         /*quad test_tile(test.vertex_buffer, 32, 32, 32);
         test_tile.texture_index(2);
@@ -105,7 +133,7 @@ int main(void)
 
         //boy.quad.teleport(100, 100);
         
-        while (!glfwWindowShouldClose(window))
+        while (!glfwWindowShouldClose(window) && running)
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -155,5 +183,5 @@ int main(void)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    
+    controller.recive(key, scancode, action, mods);
 }

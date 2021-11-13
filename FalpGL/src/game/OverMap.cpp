@@ -70,19 +70,17 @@ void Tile::move(float delta_x, float delta_y)
 
 	quad_data[0] = x - 64;
 	quad_data[1] = y - 64;
-	quad_data[2] = 0.0f;
 
 	quad_data[6] = x + 64;
 	quad_data[7] = y - 64;
-	quad_data[8] = 0.0f;
 
 	quad_data[12] = x + 64;
 	quad_data[13] = y + 64;
-	quad_data[14] = 0.0f;
 
 	quad_data[18] = x - 64;
 	quad_data[19] = y + 64;
-	quad_data[20] = 0.0f;
+
+	active_buffer.modify_quad(quad_data, index);
 
 }
 

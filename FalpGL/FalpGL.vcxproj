@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="src\game\Animation.cpp" />
     <ClCompile Include="src\game\BatchRenderer.cpp" />
+    <ClCompile Include="src\game\Input.cpp" />
     <ClCompile Include="src\game\Main.cpp" />
     <ClCompile Include="src\game\Map.cpp" />
     <ClCompile Include="src\game\OverMap.cpp" />
