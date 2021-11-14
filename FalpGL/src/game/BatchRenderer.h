@@ -4,15 +4,27 @@
 //#include "OverMap.h"
 
 
-struct quad /*needs to take height and width of initial quad for setup + locatation to genorate quad_data. also texture stuff?*/
+struct tex_coord {
+	float coords[2][4];
+};
+
+struct quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
 {
 private:
 	float quad_data[24];
+
+	/*
+	float size[2];
+	float position[2];
+	float texture_coordinants[2];
+	float zposition;
+	int texture;
+	*/
+
 public:
 	float height, width, y, y_offset, position[2];
 
 	unsigned int buffer_index;
-	
 	VertexBuffer& active_buffer;
 
 	quad(VertexBuffer& vb, float height, float width, float size);
@@ -40,6 +52,11 @@ public:
 
 	float get_y() const;
 	float get_x() const;
+
+	///////////////
+
+	void set_texture_coords(tex_coord new_coords);
+
 
 };
 

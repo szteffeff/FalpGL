@@ -1,27 +1,41 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <chrono>
 
 #include "../renderer/Texture.h"
+#include "BatchRenderer.h"
+
 
 class Animation {
 public:
+	Animation(quad* quad);
 
-	Animation(std::string filepath, unsigned int frame_count, unsigned int speed);
-	Animation();
-
-	~Animation();
-
-	Texture& get_texture();
-
-	Texture texture;
-
-	unsigned int frame_count, speed, sheet_width, sheet_height, frame_width, frame_height;
+	bool tick();
 
 private:
-	
-	std::string filepath;
+	quad* m_quad;
 
-	
+	bool loop, active;
+	int atlas, length, current_frame;
+	std::vector<float> times;
+	std::vector<tex_coord> tex_coords;
+	std::chrono::high_resolution_clock::time_point last_time = std::chrono::high_resolution_clock::now();
+
+
+
+
 
 };
+
+/*
+* In json/xml file
+* 
+* name/id
+* frame times
+* 
+* list of texture coords
+*	{{1, 0}, {...}, {...}, {...}}
+* 
+*/

@@ -15,6 +15,20 @@
 
 #include <math.h>
 
+/*
+* VertexBuffer - use local buffer
+* Quad - clean up functions
+* Entity
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+*/
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -87,7 +101,7 @@ int main(void)
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
-    std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl; // put into terminal
+    std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
         int width, height, width_old, height_old;
@@ -130,7 +144,7 @@ int main(void)
         glViewport(0, 0, width, height);
 
         double xpos, ypos;
-
+        float xpos1, ypos1;
         //boy.quad.teleport(100, 100);
         
         while (!glfwWindowShouldClose(window) && running)
@@ -146,9 +160,10 @@ int main(void)
             xpos -= width / 2;
             ypos -= height / 2;
             ypos *= -1;
+            xpos1 = (float)xpos;
+            ypos1 = (float)ypos;
 
-
-            boy.quad.teleport(xpos, ypos);
+            boy.quad.teleport(xpos1, ypos1);
             boy.quad.rotate(1, Point(0, 0));
             //boy.quad.scale(1.0005f);
             

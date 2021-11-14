@@ -2,32 +2,34 @@
 
 
 
-
-
-
-
-Animation::Animation(std::string filepath, unsigned int frame_count, unsigned int speed)
-	: filepath(filepath), frame_count(frame_count), speed(speed)
+Animation::Animation(quad* quad)
+	: m_quad(quad), current_frame(0), active(false)
 {
-	texture = Texture(filepath);
-
-	sheet_width = texture.GetWidth();
-	sheet_height = texture.GetHeight();
-
-	frame_width = sheet_width;
-	frame_height = sheet_height / frame_count;
+	tex_coords.resize(length);
+	times.resize(length);
+	//load coords/times from file
 }
 
-Animation::~Animation()
+bool Animation::tick()
 {
-}
+	if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - last_time).count() > times[current_frame])
+	{
+		if (current_frame == length - 1)
+		{
+			if (loop)
+				current_frame = 0;
+			else
+				return false;
+		}
+		else
+		{
+			current_frame++;
+		}
 
-Animation::Animation()
-	: filepath(0), frame_count(0), speed(0), frame_height(0), frame_width(0), sheet_width(0), sheet_height(0)
-{
-}
+		m_quad->set_texture_coords(tex_coords[current_frame]);
 
-Texture& Animation::get_texture()
-{
-	return texture;
+
+	}
+
+	return true;
 }

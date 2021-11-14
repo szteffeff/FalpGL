@@ -268,3 +268,18 @@ float quad::get_y() const
 {
 	return (quad_data[1] + (get_height() / 2));
 }
+
+void quad::set_texture_coords(tex_coord new_coords)
+{
+	quad_data[3] = new_coords.coords[0][0];
+	quad_data[4] = new_coords.coords[0][1];
+
+	quad_data[9] = new_coords.coords[1][0];
+	quad_data[10] = new_coords.coords[1][1];
+
+	quad_data[15] = new_coords.coords[2][0];
+	quad_data[16] = new_coords.coords[2][1];
+
+	quad_data[21] = new_coords.coords[3][0];
+	quad_data[22] = new_coords.coords[3][1];
+}

@@ -11,17 +11,20 @@ VertexBuffer::VertexBuffer(unsigned int size, const void* data) // static buffer
     GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 }
 
-VertexBuffer::VertexBuffer(unsigned int size) // dynamic buffer
+VertexBuffer::VertexBuffer(unsigned int size) // dynamic buffer / size doesn't account for buffers other that 24 floats
     : current_index(0), size(size)
 {
     GLCall(glGenBuffers(1, &m_renderer_id));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
     GLCall(glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW));
+
+    local_data = new float[size / sizeof(float)];
 }
 
 VertexBuffer::~VertexBuffer()
 {
     GLCall(glDeleteBuffers(1, &m_renderer_id));
+    delete[] local_data;
 }
 
 void VertexBuffer::Bind() const
@@ -34,12 +37,12 @@ void VertexBuffer::Unbind() const
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-unsigned int VertexBuffer::add_quad(const void* data, int count) /* only accepts count of 1 quad for now...*/
+unsigned int VertexBuffer::add_quad(const void* data, int count) 
 {
     unsigned int index = 0;
 
     Bind();
-    if (!(free_indexes.empty())) /*needs to check if consectutive free quads are availible for count > 1*/
+    if (!(free_indexes.empty())) 
     {
         index = free_indexes[0];
         free_indexes.erase(free_indexes.begin());

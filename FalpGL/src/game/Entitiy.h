@@ -1,9 +1,10 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
 #include "BatchRenderer.h"
+#include "Animation.h"
 
 class Entity {
 private:
-	unsigned int texture;
+	std::vector<Animation> animations;
 	quad quad;
 };
