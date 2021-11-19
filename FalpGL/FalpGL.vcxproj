@@ -611,6 +611,7 @@
     <ClInclude Include="src\vendor\glm\vec3.hpp" />
     <ClInclude Include="src\vendor\glm\vec4.hpp" />
     <ClInclude Include="src\vendor\glm\vector_relational.hpp" />
+    <ClInclude Include="src\vendor\nlohmann_json\json.hpp" />
     <ClInclude Include="src\vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

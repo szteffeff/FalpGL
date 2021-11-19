@@ -1390,5 +1390,8 @@
     <ClInclude Include="src\game\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vendor\nlohmann_json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
