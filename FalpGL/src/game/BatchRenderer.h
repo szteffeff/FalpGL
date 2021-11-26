@@ -5,7 +5,7 @@
 
 
 struct tex_coord {
-	float coords[2][4];
+	float coords[4][2];
 };
 
 struct quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
@@ -20,6 +20,9 @@ private:
 	float zposition;
 	int texture;
 	*/
+
+public:
+	void operator=(const quad&);
 
 public:
 	float height, width, y, y_offset, position[2];

@@ -7,3 +7,7 @@
 
 #include "../../Dependencies/GLEW/include/GL/glew.h"
 #include "../../Dependencies/GLFW/include/GLFW/glfw3.h"
+
+#include "../vendor/nlohmann_json/json.hpp"
+
+using json = nlohmann::json;

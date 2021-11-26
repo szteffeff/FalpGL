@@ -5,6 +5,9 @@
 
 class Entity {
 private:
+public:
+	Entity(VertexBuffer *a);
+
 	std::vector<Animation> animations;
-	quad quad;
+	quad m_quad;
 };

@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="src\game\Animation.cpp" />
     <ClCompile Include="src\game\BatchRenderer.cpp" />
+    <ClCompile Include="src\game\Entitiy.cpp" />
     <ClCompile Include="src\game\Input.cpp" />
     <ClCompile Include="src\game\Main.cpp" />
     <ClCompile Include="src\game\Map.cpp" />
@@ -173,6 +174,9 @@
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
     <None Include="res\shaders\map.shader" />
+    <Text Include="res\data\animations.json">
+      <FileType>Document</FileType>
+    </Text>
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -312,6 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\Animation.h" />
+    <ClInclude Include="src\game\AnimationTypes.h" />
     <ClInclude Include="src\game\BatchRenderer.h" />
     <ClInclude Include="src\game\Entitiy.h" />
     <ClInclude Include="src\game\Map.h" />
@@ -320,6 +325,7 @@
     <ClInclude Include="src\game\Terminal.h" />
     <ClInclude Include="src\game\OverMap.h" />
     <ClInclude Include="src\game\Player.h" />
+    <ClInclude Include="src\game\Notes.h" />
     <ClInclude Include="src\renderer\GraphicsHeaders.h" />
     <ClInclude Include="src\renderer\Point.h" />
     <ClInclude Include="src\renderer\IndexBuffer.h" />

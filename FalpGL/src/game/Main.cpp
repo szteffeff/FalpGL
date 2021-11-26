@@ -11,24 +11,10 @@
 #include "OverMap.h"
 #include "Map.h"
 #include "Input.h"
+#include "Entitiy.h"
 
 
 #include <math.h>
-
-/*
-* VertexBuffer - use local buffer
-* Quad - clean up functions
-* Entity
-* 
-* 
-* 
-* 
-* 
-* 
-* 
-* 
-* 
-*/
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -108,11 +94,6 @@ int main(void)
         width_old = 0;
         height_old = 0;
 
-
-        //TileMap map;
-
-        Map map;
-
         BatchRenderer test(300, "res/shaders/basic.shader");
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -122,23 +103,28 @@ int main(void)
         
         Player boy(test.vertex_buffer);
 
-        Tile red(0, 0, test.vertex_buffer);
+        /*Tile red(0, 0, test.vertex_buffer);
         red.index_change(2.0f); 
         red.update_quad();
         red.data();
 
         Texture red_grass("res/textures/Rrass32.png");
-        red_grass.Bind(2);
+        red_grass.Bind(2);*/
 
         boy.TBind();
 
-        controller.set_tile(&red);
+        //controller.set_tile(&red);
 
         /*quad test_tile(test.vertex_buffer, 32, 32, 32);
         test_tile.texture_index(2);
         test_tile.translate(500, 0);*/
 
         /* Loop until the user closes the window */
+
+        Entity anim_test(&test.vertex_buffer);
+        anim_test.m_quad = quad(test.vertex_buffer, 256.0f, 128.0f, 100);
+        anim_test.animations.push_back(Animation(&anim_test.m_quad));
+
 
         glfwGetFramebufferSize(window, &width, &height);
         glViewport(0, 0, width, height);
@@ -151,9 +137,10 @@ int main(void)
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            
-            map.draw(projection_matrix);
+
+            anim_test.animations[0].tick();
             test.draw(projection_matrix);
+            
 
             
             glfwGetCursorPos(window, &xpos, &ypos);

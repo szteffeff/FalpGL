@@ -57,6 +57,11 @@ void MapRenderer::draw(glm::mat4& proj_matrix, glm::mat4& trans_matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
 
+void quad::operator=(const quad& src)
+{
+	memcpy(this, &src, sizeof(quad));
+}
+
 quad::quad(VertexBuffer& vb, float h, float w, float size)
 	: y(0.0f), y_offset(0.0f), buffer_index(0), active_buffer(vb), height(h), width(w)
 {
@@ -101,7 +106,6 @@ quad::quad(VertexBuffer& vb, float h, float w, float size)
 	position[1] = 0.0f;
 	buffer_index = active_buffer.add_quad(quad_data);
 }
-
 float *quad::data()
 {
 	return quad_data;
@@ -282,4 +286,6 @@ void quad::set_texture_coords(tex_coord new_coords)
 
 	quad_data[21] = new_coords.coords[3][0];
 	quad_data[22] = new_coords.coords[3][1];
+
+	update();
 }
