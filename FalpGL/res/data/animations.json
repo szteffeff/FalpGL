@@ -4,7 +4,7 @@
     "atlas": 0,
     "loop": true,
     "length": 4,
-    "frame_times": [ 0.1, 0.1, 0.1, 0.1 ],
+    "frame_times": [ 100, 100, 100, 100 ], 
     "texture_coordinants": [
       [
         [ 0.0, 0.0 ],

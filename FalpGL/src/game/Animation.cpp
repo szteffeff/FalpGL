@@ -17,7 +17,7 @@ Animation::Animation(quad* quad)
 
 bool Animation::tick()
 {
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - last_time).count() > times[current_frame] * 1000)
+	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - last_time).count() > times[current_frame])
 	{
 		if (current_frame == length - 1)
 		{
@@ -42,11 +42,15 @@ bool Animation::tick()
 
 void Animation::load(animation_id id)
 {
-	std::ifstream file("res/data/animations.json");
-	std::stringstream buf;
-	buf << file.rdbuf();
-	std::string file_string(buf.str());
-	json j = json::parse(file_string); //File stream must be converted to string for some reason...
+	json j;
+	{
+		std::ifstream file("res/data/animations.json");
+		std::stringstream buf;
+		buf << file.rdbuf();
+		std::string file_string(buf.str());
+		j = json::parse(file_string); //File stream must be converted to string for some reason...
+		file.close();
+	}
 
 	j = j[std::to_string(id)];
 
