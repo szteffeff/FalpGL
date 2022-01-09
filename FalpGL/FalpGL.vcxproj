@@ -156,9 +156,6 @@
     <ClCompile Include="src\game\Json.cpp" />
     <ClCompile Include="src\game\Main.cpp" />
     <ClCompile Include="src\game\Map.cpp" />
-    <ClCompile Include="src\game\OverMap.cpp" />
-    <ClCompile Include="src\game\Player.cpp" />
-    <ClCompile Include="src\game\Terminal.cpp" />
     <ClCompile Include="src\renderer\Point.cpp" />
     <ClCompile Include="src\renderer\RendererIncludes.h" />
     <ClCompile Include="src\renderer\IndexBuffer.cpp" />
@@ -325,10 +322,6 @@
     <ClInclude Include="src\game\Json.h" />
     <ClInclude Include="src\game\Map.h" />
     <ClInclude Include="src\game\Input.h" />
-    <ClInclude Include="src\game\Sprites.h" />
-    <ClInclude Include="src\game\Terminal.h" />
-    <ClInclude Include="src\game\OverMap.h" />
-    <ClInclude Include="src\game\Player.h" />
     <ClInclude Include="src\game\Notes.h" />
     <ClInclude Include="src\renderer\GraphicsHeaders.h" />
     <ClInclude Include="src\renderer\Point.h" />

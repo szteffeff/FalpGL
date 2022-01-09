@@ -1,7 +1,7 @@
 #include "Entitiy.h"
 
 Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
-	:	loader(load), active_animation(0), current_direction(0), entity_id(id)
+	: loader(load), active_animation(0), momentum(), entity_id(id)
 {
 	json j;
 	j = loader->entities[std::to_string(id)];
@@ -24,6 +24,22 @@ Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
 
 void Entity::tick()
 {
+	m_quad.translate(momentum[0], momentum[1]);
+	momentum[0] *= 0.9;
+	momentum[1] *= 0.9;
+
+	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.125)
+	{
+		float dir = (atan2(momentum[1], momentum[0]));
+		if (dir < 0) { dir += 2 * 3.14159; }
+		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
+		set_animation((diri == 0) ? 4 : diri);
+	}
+	else
+	{
+		set_animation(0);
+	}
+
 	animations[active_animation].tick();
 }
 
@@ -32,10 +48,11 @@ void Entity::walk(float direction, float magnitude)
 	float dx = cos(direction * 3.14159 / 180) * magnitude;
 	float dy = sin(direction * 3.14159 / 180) * magnitude;
 
-	m_quad.translate(dx, dy);
+	momentum[0] += (dx * 2 - momentum[0]) * 0.1;
+	momentum[1] += (dy * 2 - momentum[1]) * 0.1;
 }
 
-void Entity::set_animation(animation_id id)
+void Entity::set_animation(int id)
 {
 	if (id == active_animation) { return; }
 	animations[active_animation].unset();

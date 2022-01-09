@@ -11,7 +11,6 @@
 
 #include "Player.h"
 #include "Terminal.h"
-#include "OverMap.h"
 #include "Map.h"
 #include "Input.h"
 #include "Entitiy.h"
@@ -112,6 +111,15 @@ int main(void)
         width_old = 0;
         height_old = 0;
 
+        glfwGetFramebufferSize(window, &width, &height);
+        glViewport(0, 0, width, height);
+
+        double xpos, ypos;
+        float xpos1, ypos1;
+
+
+
+
         BatchRenderer test(300, "res/shaders/basic.shader");
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -124,11 +132,10 @@ int main(void)
 
         Entity player(&test.vertex_buffer, &loader, 0);
 
-        glfwGetFramebufferSize(window, &width, &height);
-        glViewport(0, 0, width, height);
 
-        double xpos, ypos;
-        float xpos1, ypos1;
+
+
+
 
         controller.set_player(&player);
         

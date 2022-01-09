@@ -83,26 +83,21 @@ void Input::tick()
 {
 	if (keys[0].held) {
 		player->walk(90, 1);
-		player->set_animation(animation_id(1));
 	}
 
 	if (keys[1].held) {
 		player->walk(180, 1);
-		player->set_animation(animation_id(2));
 	}
 
 	if (keys[2].held) {
 		player->walk(270, 1);
-		player->set_animation(animation_id(3));
 	}
 
 	if (keys[3].held) {
 		player->walk(0, 1);
-		player->set_animation(animation_id(4));
 	}
 
 	if (!(keys[0].held || keys[1].held || keys[2].held || keys[3].held))
 	{
-		//player->set_animation(animation_id(0));
 	}
 }

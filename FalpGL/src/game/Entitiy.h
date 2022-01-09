@@ -3,6 +3,7 @@
 #include "BatchRenderer.h"
 #include "Animation.h"
 #include <iostream>
+#include <math.h>
 
 class Entity {
 private:
@@ -10,7 +11,7 @@ private:
 	std::vector<Animation> animations;
 	Json_loader* loader;
 	int active_animation, animation_count;
-	float current_direction;
+	float momentum[2];
 	int entity_id;
 
 public:
@@ -22,6 +23,6 @@ public:
 	void tick();
 
 	void walk(float direction, float magnitude);
-	void set_animation(animation_id id);
+	void set_animation(int id);
 
 };
