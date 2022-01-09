@@ -4,20 +4,24 @@
 #include <iostream>
 
 
-
-Animation::Animation(quad* quad)
-	: m_quad(quad), current_frame(0), active(false), atlas(0), length(0), loop(true), last_time(std::chrono::high_resolution_clock::now())
+Animation::Animation(Quad* quad, Json_loader* j, unsigned int id)
+	: m_quad(quad), current_frame(0), active(false), atlas(0), length(0), loop(true), loader(j) , last_time(std::chrono::high_resolution_clock::now())
 {
-	load(animation_id::ENTITY_PLAYER_MOVE_IDLE);
+	load(animation_id(id));
 
 	if (length <= 0) {/*json loading messed up...*/}
 
 
 }
 
+Animation::Animation()
+	: m_quad(nullptr), loader(nullptr)
+{}
+
 bool Animation::tick()
 {
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - last_time).count() > times[current_frame])
+	if ((std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now()
+		- last_time).count() > times[current_frame]) && active)
 	{
 		if (current_frame == length - 1)
 		{
@@ -43,16 +47,7 @@ bool Animation::tick()
 void Animation::load(animation_id id)
 {
 	json j;
-	{
-		std::ifstream file("res/data/animations.json");
-		std::stringstream buf;
-		buf << file.rdbuf();
-		std::string file_string(buf.str());
-		j = json::parse(file_string); //File stream must be converted to string for some reason...
-		file.close();
-	}
-
-	j = j[std::to_string(id)];
+	j = loader->animations[std::to_string(id)];
 
 	loop = j["loop"];
 	atlas = j["atlas"];
@@ -79,5 +74,16 @@ void Animation::load(animation_id id)
 	}
 
 	m_quad->set_texture_coords(tex_coords[current_frame]);
+}
 
+void Animation::set()
+{
+	active = true;
+	m_quad->set_texture_index(atlas);
+	tick();
+}
+
+void Animation::unset()
+{
+	active = false;
 }

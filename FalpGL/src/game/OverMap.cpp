@@ -135,8 +135,8 @@ Tile::~Tile()
 
 void TileMap::fill(int x, int y)
 {
-	float width = (x / 128 / 2) + 3;
-	float height = (y / 128 / 2) + 3;
+	float width = (x / 128 / 2.0f) + 3;
+	float height = (y / 128 / 2.0f) + 3;
 	for (float x = -width; x < width; x++)
 	{
 		for (float y = -height; y < height; y++)

@@ -20,7 +20,7 @@ public:
 
 	void TBind();
 
-	quad quad;
+	Quad quad;
 
 private:
 

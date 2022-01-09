@@ -7,7 +7,7 @@
 
 class Map {
 private:
-	std::vector<quad*> map_vector;
+	std::vector<Quad*> map_vector;
 	unsigned int height, width;
 	BatchRenderer renderer;
 

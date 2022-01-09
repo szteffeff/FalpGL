@@ -1,3 +1,6 @@
+#include <windows.h>
+#include <direct.h>
+
 #include "../renderer/RendererIncludes.h"
 
 #include <iostream>
@@ -12,9 +15,19 @@
 #include "Map.h"
 #include "Input.h"
 #include "Entitiy.h"
+#include "Json.h"
 
 
 #include <math.h>
+
+
+
+std::string get_current_dir() {
+    char buff[FILENAME_MAX]; //create string buffer to hold path
+    _getcwd(buff, FILENAME_MAX);
+    std::string current_working_dir(buff);
+    return current_working_dir;
+}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -22,6 +35,10 @@ Input controller;
 
 int main(void)
 {
+    Json_loader loader;
+
+
+    std::cout << "my directory is " << get_current_dir() << "\n";
 
     GLFWwindow* window;
     bool running = true;
@@ -43,7 +60,6 @@ int main(void)
             glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
             glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
             glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-
 
             /* Create a windowed mode window and its OpenGL context */
             window = glfwCreateWindow(mode->width, mode->height, "", glfwGetPrimaryMonitor(), NULL);
@@ -83,9 +99,11 @@ int main(void)
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glDepthFunc(GL_LESS));
 
-    glfwWindowHint(GLFW_SAMPLES, 16);
+    glEnable(GL_MULTISAMPLE);
+    glfwWindowHint(GLFW_SAMPLES, 2);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
 
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
@@ -101,44 +119,26 @@ int main(void)
         layout.Push<float>(1);
         test.add_layout(layout);
         
-        Player boy(test.vertex_buffer);
+        Texture atlas_0 = Texture("res/gfx/atlas1.png");
+        atlas_0.Bind(0);
 
-        /*Tile red(0, 0, test.vertex_buffer);
-        red.index_change(2.0f); 
-        red.update_quad();
-        red.data();
-
-        Texture red_grass("res/textures/Rrass32.png");
-        red_grass.Bind(2);*/
-
-        boy.TBind();
-
-        //controller.set_tile(&red);
-
-        /*quad test_tile(test.vertex_buffer, 32, 32, 32);
-        test_tile.texture_index(2);
-        test_tile.translate(500, 0);*/
-
-        /* Loop until the user closes the window */
-
-        Entity anim_test(&test.vertex_buffer);
-        anim_test.m_quad = quad(test.vertex_buffer, 256.0f, 128.0f, 100);
-        anim_test.animations.push_back(Animation(&anim_test.m_quad));
-
+        Entity player(&test.vertex_buffer, &loader, 0);
 
         glfwGetFramebufferSize(window, &width, &height);
         glViewport(0, 0, width, height);
 
         double xpos, ypos;
         float xpos1, ypos1;
-        //boy.quad.teleport(100, 100);
+
+        controller.set_player(&player);
         
         while (!glfwWindowShouldClose(window) && running)
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            controller.tick();
+            player.tick();
 
-            anim_test.animations[0].tick();
             test.draw(projection_matrix);
             
 
@@ -149,10 +149,6 @@ int main(void)
             ypos *= -1;
             xpos1 = (float)xpos;
             ypos1 = (float)ypos;
-
-            boy.quad.teleport(xpos1, ypos1);
-            boy.quad.rotate(1, Point(0, 0));
-            //boy.quad.scale(1.0005f);
             
             glfwGetFramebufferSize(window, &width, &height);
             if (width != width_old || height != height_old)
@@ -168,7 +164,6 @@ int main(void)
                 width_old = width;
                 height_old = height;
             }
-
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

@@ -7,18 +7,22 @@
 #include "../renderer/Texture.h"
 #include "BatchRenderer.h"
 #include "AnimationTypes.h"
-
+#include "Json.h"
 
 class Animation {
 public:
-	Animation(quad* quad);
+	Animation(Quad* quad, Json_loader* j, unsigned int id);
+	Animation();
 
 	bool tick();
+	void set();
+	void unset();
 
 private:
-	quad* m_quad;
+	Json_loader* loader;
+	Quad* m_quad;
 	bool loop, active;
-	int atlas, length, current_frame;
+	float atlas, length, current_frame;
 	std::vector<float> times;
 	std::vector<tex_coord> tex_coords;
 	std::chrono::high_resolution_clock::time_point last_time;

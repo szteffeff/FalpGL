@@ -1,0 +1,9 @@
+{
+  "0": {
+    "name": "PLAYER",
+    "size": [ 1000.0, 500.0 ],
+    "animation_count": 5,
+    "animations_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DONW", "ENTITY_PLAYER_MOVE_RIGHT" ],
+    "animations": [0, 1, 2, 3, 4 ]
+  }
+}

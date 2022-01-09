@@ -8,7 +8,7 @@ struct tex_coord {
 	float coords[4][2];
 };
 
-struct quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
+struct Quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
 {
 private:
 	float quad_data[24];
@@ -22,15 +22,16 @@ private:
 	*/
 
 public:
-	void operator=(const quad&);
+	void operator=(const Quad&);
 
 public:
 	float height, width, y, y_offset, position[2];
 
 	unsigned int buffer_index;
-	VertexBuffer& active_buffer;
+	VertexBuffer *active_buffer;
 
-	quad(VertexBuffer& vb, float height, float width, float size);
+	Quad(VertexBuffer *vb, float height, float width, float size);
+	Quad();
 
 	float *data();
 
@@ -59,6 +60,7 @@ public:
 	///////////////
 
 	void set_texture_coords(tex_coord new_coords);
+	void set_texture_index(float index);
 
 
 };

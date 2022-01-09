@@ -27,7 +27,7 @@ void Map::fill()
 	float x = 0, y = 0;
 	for (int i = 0; i < 10000; i++)
 	{
-		map_vector[i] = new quad(renderer.vertex_buffer, 32, 32, 32);
+		map_vector[i] = new Quad(&renderer.vertex_buffer, 32, 32, 32);
 		map_vector[i]->translate((x - 50) * 32, (y - 50) * 32);
 		map_vector[i]->texture_index(1);
 

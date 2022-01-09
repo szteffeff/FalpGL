@@ -75,6 +75,9 @@
     <ClCompile Include="src\game\Entitiy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -488,6 +491,8 @@
     </None>
     <None Include="res\shaders\basicBlank.shader" />
     <None Include="res\shaders\map.shader" />
+    <None Include="res\data\entities.json" />
+    <None Include="res\data\tiles.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\stb_image\stb_image.h">
@@ -1400,6 +1405,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Notes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
