@@ -26,3 +26,12 @@ public:
 	void set_animation(int id);
 
 };
+
+
+class player : public Entity {
+private:
+ 	glm::mat4 player_transform_matrix;
+	
+public:
+	
+};
