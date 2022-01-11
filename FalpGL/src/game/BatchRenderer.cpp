@@ -1,9 +1,8 @@
  #include "BatchRenderer.h"
 
 BatchRenderer::BatchRenderer(int size, std::string shader_filepath)
-	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * 10 * sizeof(float)), textures("res/textures/Grass128.png")
-{
-}
+	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * sizeof(float))
+{}
 
 void BatchRenderer::add_layout(VertexBufferLayout &_layout)
 {
@@ -18,9 +17,7 @@ void BatchRenderer::draw(glm::mat4 proj_matrix)
 	vertex_array.Bind();
 	shader.Bind();
 	index_buffer.Bind();
-	
 
-	textures.Bind(1);
 
 	shader.SetUniformMat4f("u_MVP", proj_matrix);
 	shader.SetUniform1iv("u_Textures", 3, samplers);
@@ -28,27 +25,12 @@ void BatchRenderer::draw(glm::mat4 proj_matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
 
-void BatchRenderer::remove_entity(int index)
-{
-}
-
-void BatchRenderer::update()
-{
-
-}
-
-void BatchRenderer::tick()
-{
-}
-
-void MapRenderer::draw(glm::mat4& proj_matrix, glm::mat4& trans_matrix)
+void BatchRenderer::draw(glm::mat4 proj_matrix, glm::mat4 trans_matrix)
 {
 	vertex_array.Bind();
 	shader.Bind();
 	index_buffer.Bind();
 
-
-	textures.Bind(1);
 
 	shader.SetUniformMat4f("u_MVP", proj_matrix);
 	shader.SetUniformMat4f("u_transform", trans_matrix);
@@ -160,12 +142,12 @@ void Quad::teleport(float new_x, float new_y)
 	update();
 }
 
-void Quad::modify_height(float delta_y)
+void Quad::set_height(float new_h)
 {
-	quad_data[2] = delta_y;
-	quad_data[8] = delta_y;
-	quad_data[14] = delta_y;
-	quad_data[20] = delta_y;
+	quad_data[2] = new_h;
+	quad_data[8] = new_h;
+	quad_data[14] = new_h;
+	quad_data[20] = new_h;
 
 	//y_offset += delta_y;
 }

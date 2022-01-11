@@ -28,7 +28,7 @@ void Entity::tick()
 	momentum[0] *= 0.9;
 	momentum[1] *= 0.9;
 
-	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.125)
+	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)
 	{
 		float dir = (atan2(momentum[1], momentum[0]));
 		if (dir < 0) { dir += 2 * 3.14159; }
@@ -48,8 +48,8 @@ void Entity::walk(float direction, float magnitude)
 	float dx = cos(direction * 3.14159 / 180) * magnitude;
 	float dy = sin(direction * 3.14159 / 180) * magnitude;
 
-	momentum[0] += (dx * 2 - momentum[0]) * 0.1;
-	momentum[1] += (dy * 2 - momentum[1]) * 0.1;
+	momentum[0] += (dx * 5 - momentum[0]) * 0.1;
+	momentum[1] += (dy * 5 - momentum[1]) * 0.1;
 }
 
 void Entity::set_animation(int id)

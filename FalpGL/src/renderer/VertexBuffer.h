@@ -7,7 +7,6 @@ class VertexBuffer
 private:
 	unsigned int m_renderer_id, size, current_index;
 	std::vector<unsigned int> free_indexes;
-	float *local_data;
 
 public:
 	VertexBuffer(unsigned int size, const void* data);

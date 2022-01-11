@@ -10,7 +10,7 @@ struct tex_coord {
 
 struct Quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
 {
-private:
+protected:
 	float quad_data[24];
 
 	/*
@@ -38,7 +38,7 @@ public:
 	void move(float delta_x, float delta_y, bool wrong_function_use_translate);
 	void teleport(float new_x, float new_y);
 
-	void modify_height(float delta_y);
+	void set_height(float new_h);
 
 	void update();
 
@@ -62,7 +62,6 @@ public:
 	void set_texture_coords(tex_coord new_coords);
 	void set_texture_index(float index);
 
-
 };
 
 /*
@@ -83,9 +82,6 @@ public:
 
 	Shader shader;
 
-
-	Texture textures;
-
 	int samplers[3] = { 0, 1, 2 };
 
 public:
@@ -96,18 +92,6 @@ public:
 
 	void add_layout(VertexBufferLayout &_layout);
 
-	virtual void draw(glm::mat4 proj_matrix);
-
-	void remove_entity(int index);
-
-	void update();
-
-	void tick();
-};
-
-class MapRenderer : public BatchRenderer {
-public:
-	void draw(glm::mat4 &proj_matrix, glm::mat4 &trans_matrix);
-
-	using BatchRenderer::BatchRenderer;
+	void draw(glm::mat4 proj_matrix);
+	void draw(glm::mat4 proj_matrix, glm::mat4 trans_matrix); //for map.shader
 };

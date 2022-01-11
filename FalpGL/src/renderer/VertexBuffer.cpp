@@ -18,13 +18,11 @@ VertexBuffer::VertexBuffer(unsigned int size) // dynamic buffer / size doesn't a
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
     GLCall(glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW));
 
-    local_data = new float[size / sizeof(float)];
 }
 
 VertexBuffer::~VertexBuffer()
 {
     GLCall(glDeleteBuffers(1, &m_renderer_id));
-    delete[] local_data;
 }
 
 void VertexBuffer::Bind() const

@@ -1,7 +1,7 @@
 #shader vertex
 #version 330 core
 
-layout(location = 0) in vec4 size;
+layout(location = 0) in vec4 position;
 layout(location = 1) in vec2 texCoord;
 layout(location = 2) in float texture_index;
 
@@ -13,7 +13,7 @@ uniform mat4 u_transform;
 
 void main()
 {
-   gl_Position = u_MVP * u_transform * size;
+   gl_Position = u_MVP * u_transform * position;
    v_TexCoord = texCoord;
    u_Texture = texture_index;
 };

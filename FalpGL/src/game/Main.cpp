@@ -8,17 +8,13 @@
 #include <string>
 #include <sstream>
 #include <random>
+#include <math.h>
+#include <random>
 
-#include "Player.h"
-#include "Terminal.h"
 #include "Map.h"
 #include "Input.h"
 #include "Entitiy.h"
 #include "Json.h"
-
-
-#include <math.h>
-
 
 
 std::string get_current_dir() {
@@ -37,7 +33,7 @@ int main(void)
     Json_loader loader;
 
 
-    std::cout << "my directory is " << get_current_dir() << "\n";
+    std::cout << "working directory is: " << get_current_dir() << "\n";
 
     GLFWwindow* window;
     bool running = true;
@@ -86,9 +82,9 @@ int main(void)
     glfwSwapInterval(-1); //1 = VSYNC, -1 = ??
 
     if (glewInit() != GLEW_OK)
-        out::error("GLEW init fail!");
+        std::cout << "GLEW init fail!\n";
     else
-        out::info("GLEW ok");
+        std::cout << "GLEW ok\n";
 
 
     GLCall(glEnable(GL_BLEND));
@@ -99,15 +95,14 @@ int main(void)
     GLCall(glDepthFunc(GL_LESS));
 
     glEnable(GL_MULTISAMPLE);
-    glfwWindowHint(GLFW_SAMPLES, 2);
+    glfwWindowHint(GLFW_SAMPLES, 8);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
 
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
-        int width, height, width_old, height_old;
+        int width, height, width_old, height_old, zoom_x, zoom_y;
         width_old = 0;
         height_old = 0;
 
@@ -117,24 +112,30 @@ int main(void)
         double xpos, ypos;
         float xpos1, ypos1;
 
-
-
-
-        BatchRenderer test(300, "res/shaders/basic.shader");
         VertexBufferLayout layout;
         layout.Push<float>(3);
         layout.Push<float>(2);
         layout.Push<float>(1);
-        test.add_layout(layout);
+
+        BatchRenderer player_render(10, "res/shaders/basic.shader");
+        player_render.add_layout(layout);
+
+        BatchRenderer things(1000, "res/shaders/basic.shader");
+        things.add_layout(layout);
         
         Texture atlas_0 = Texture("res/gfx/atlas1.png");
         atlas_0.Bind(0);
 
-        Entity player(&test.vertex_buffer, &loader, 0);
+        Entity player(&player_render.vertex_buffer, &loader, 0);
 
+        Map main_map(&projection_matrix, &loader);
 
-
-
+        Tile flowers[1000];
+        for (int i = 0; i < 1000; i++)
+        {
+            flowers[i] = Tile(&things.vertex_buffer, &loader, "1");
+            flowers[i].translate((rand() % 100) * 32, (rand() % 100) * 32);
+        }
 
 
         controller.set_player(&player);
@@ -146,8 +147,11 @@ int main(void)
             controller.tick();
             player.tick();
 
-            test.draw(projection_matrix);
+
             
+            main_map.draw();
+            player_render.draw(projection_matrix);
+            things.draw(projection_matrix **main_map.get_trans_matrix());
 
             
             glfwGetCursorPos(window, &xpos, &ypos);
@@ -157,16 +161,14 @@ int main(void)
             xpos1 = (float)xpos;
             ypos1 = (float)ypos;
             
-            glfwGetFramebufferSize(window, &width, &height);
+            //glfwGetFramebufferSize(window, &width, &height);
             if (width != width_old || height != height_old)
             {
                 glViewport(0, 0, width, height);
                
                 std::cout << width << "x" << height << std::endl;
 
-                projection_matrix = glm::ortho(-0.5f * width, 0.5f * width, -0.5f * height, 0.5f * height, -1.0f, 1.0f);
-
-                //map.expand(width, height);
+                projection_matrix = glm::ortho(-0.5f * width + 0.01f, 0.5f * width + 0.01f, -0.5f * height + 0.01f, 0.5f * height + 0.01f, -1.0f, 1.0f);
 
                 width_old = width;
                 height_old = height;
