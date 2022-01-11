@@ -20,9 +20,23 @@ public:
 	Quad* get_quad();
 
 public:
-	void tick();
+	virtual void tick();
 
-	void walk(float direction, float magnitude);
+	virtual void walk(float direction, float magnitude);
 	void set_animation(int id);
 
+};
+
+
+class player : public Entity {
+private:
+ 	glm::mat4 player_transform_matrix;
+	float position_on_screen[2] = { 0, 0 };
+	
+public:
+	glm::mat4 *get_trans_matrix();
+	cosnt float screen_pos_x();
+	const float screen_pos_y();
+	void walk(float direction, float magnitude);
+	void tick();
 };
