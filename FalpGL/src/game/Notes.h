@@ -9,7 +9,11 @@
 * 
 */
 
-
+/* Need to:
+* 
+*	eliminate float for positioning vericies
+*   framebuffer for pixel-perferect windowed mode
+*/
 
 /*
 * 
@@ -18,6 +22,7 @@
 * 
 * probably don't include this anywhere
 *  
+* t i l e   d e p t h
 *  
 * 2 3
 * 0 1

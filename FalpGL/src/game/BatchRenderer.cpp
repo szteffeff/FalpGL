@@ -1,8 +1,10 @@
  #include "BatchRenderer.h"
 
 BatchRenderer::BatchRenderer(int size, std::string shader_filepath)
-	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * sizeof(float))
-{}
+	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * 10 * sizeof(float)) /* I don't know why size is multiplied by 10.                           */
+{}                                                                                               /* It seems like that is making it 10 times bigger than it needs to be. */
+																								 /* But weird things happen when that isn't there, so there it stays.     */
+
 
 void BatchRenderer::add_layout(VertexBufferLayout &_layout)
 {
@@ -45,46 +47,48 @@ void Quad::operator=(const Quad& src)
 }
 
 Quad::Quad(VertexBuffer *vb, float h, float w, float size)
-	: y(0.0f), y_offset(0.0f), buffer_index(0), active_buffer(vb), height(h), width(w)
+	: y(0.0f), y_offset(0.0f), buffer_index(0), active_buffer(vb), height(h), width(w), position()
 {
 
 	quad_data[0] = -w / 2;
 	quad_data[1] = -h / 2;
 	quad_data[2] = 0.0f;
 
+	quad_data[3] = 0.0f;
+	quad_data[4] = 0.0f;
+
+	quad_data[5] = 0.0f;
+
+
 	quad_data[6] = w / 2;
 	quad_data[7] = -h / 2;
 	quad_data[8] = 0.0f;
+
+	quad_data[9] = 1.0f;
+	quad_data[10] = 0.0f;
+
+	quad_data[11] = 0.0f;
+
 
 	quad_data[12] = w / 2;
 	quad_data[13] = h / 2;
 	quad_data[14] = 0.0f;
 
+	quad_data[15] = 1.0f;
+	quad_data[16] = 1.0f;
+
+	quad_data[17] = 0.0f;
+
+
 	quad_data[18] = -w / 2;
 	quad_data[19] = h / 2;
 	quad_data[20] = 0.0f;
 
-
-	quad_data[3] = 0.0f;
-	quad_data[4] = 0.0f;
-
-	quad_data[9] = 1.0f;
-	quad_data[10] = 0.0f;
-
-	quad_data[15] = 1.0f;
-	quad_data[16] = 1.0f;
-
 	quad_data[21] = 0.0f;
 	quad_data[22] = 1.0f;
 
-
-	quad_data[5] = 0.0f;
-	quad_data[11] = 0.0f;
-	quad_data[17] = 0.0f;
 	quad_data[23] = 0.0f;
 
-	position[0] = 0.0f;
-	position[1] = 0.0f;
 	buffer_index = active_buffer->add_quad(quad_data);
 }
 
@@ -218,6 +222,18 @@ void Quad::translate(float delta_x, float delta_y)
 
 	quad_data[18] += delta_x;
 	quad_data[19] += delta_y;
+
+	quad_data[0] = round(quad_data[0]);
+	quad_data[1] = round(quad_data[1]);
+
+	quad_data[6] = round(quad_data[6]);
+	quad_data[7] = round(quad_data[7]);
+
+	quad_data[12] = round(quad_data[12]);
+	quad_data[13] = round(quad_data[13]);
+
+	quad_data[18] = round(quad_data[18]);
+	quad_data[19] = round(quad_data[19]);
 
 	update();
 }

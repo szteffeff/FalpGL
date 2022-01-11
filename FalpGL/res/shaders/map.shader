@@ -13,7 +13,7 @@ uniform mat4 u_transform;
 
 void main()
 {
-   gl_Position = u_MVP * u_transform * position;
+   gl_Position = vec4(u_MVP * u_transform * position);
    v_TexCoord = texCoord;
    u_Texture = texture_index;
 };

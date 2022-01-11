@@ -27,6 +27,7 @@ public:
 	Map(glm::mat4* pm, Json_loader *l);
 	void fill();
 	void draw();
+	void draw(glm::mat4 tm);
 
 	glm::mat4* get_trans_matrix();
 };

@@ -60,17 +60,17 @@ void Animation::load(animation_id id)
 	{
 		times[i] = j["frame_times"][i];
 
-		tex_coords[i].coords[0][0] = j["texture_coordinants"][i][0][0];
-		tex_coords[i].coords[0][1] = j["texture_coordinants"][i][0][1];
+		tex_coords[i].coords[0][0] = (j["texture_coordinants"][i][0][0]) / 2048.0f; /* Denominator must be float or intiger division happens */
+		tex_coords[i].coords[0][1] = (j["texture_coordinants"][i][0][1]) / 2048.0f;
 
-		tex_coords[i].coords[1][0] = j["texture_coordinants"][i][1][0];
-		tex_coords[i].coords[1][1] = j["texture_coordinants"][i][1][1];
+		tex_coords[i].coords[1][0] = (j["texture_coordinants"][i][1][0]) / 2048.0f;
+		tex_coords[i].coords[1][1] = (j["texture_coordinants"][i][1][1]) / 2048.0f;
 
-		tex_coords[i].coords[2][0] = j["texture_coordinants"][i][2][0];
-		tex_coords[i].coords[2][1] = j["texture_coordinants"][i][2][1];
+		tex_coords[i].coords[2][0] = (j["texture_coordinants"][i][2][0]) / 2048.0f;
+		tex_coords[i].coords[2][1] = (j["texture_coordinants"][i][2][1]) / 2048.0f;
 
-		tex_coords[i].coords[3][0] = j["texture_coordinants"][i][3][0];
-		tex_coords[i].coords[3][1] = j["texture_coordinants"][i][3][1];
+		tex_coords[i].coords[3][0] = (j["texture_coordinants"][i][3][0]) / 2048.0f;
+		tex_coords[i].coords[3][1] = (j["texture_coordinants"][i][3][1]) / 2048.0f;
 	}
 
 	m_quad->set_texture_coords(tex_coords[current_frame]);

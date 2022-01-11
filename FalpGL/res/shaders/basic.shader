@@ -32,7 +32,7 @@ uniform sampler2D u_Textures[3];
 
 void main()
 {
-	color = texture(u_Textures[int(u_Texture)], v_TexCoord);
+	color = texture(u_Textures[int(u_Texture)], vec2(v_TexCoord.x, v_TexCoord.y));
 	if (color.w == 0)
 		discard;
 }

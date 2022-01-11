@@ -65,20 +65,32 @@ Quad* Entity::get_quad()
 	return &m_quad;
 }
 
-void Player::walk(float direction, float magnitude)
-{ /* This should all be in Player::tick() */
+void Player::tick()
+{
+	float offset[2] = { 0, 0 };
+
 	if (m_quad.center().x + momentum[0] < -400.0f || m_quad.center().x + momentum[0] > 400.0f)
-		player_screen_position[0] += momentum[0]
+	{
+		offset[0] -= round(momentum[0]);
+	}
 	else
-		m_quad.translate(momentum[0], 0.0f)
-		
-		
+	{
+		m_quad.translate(momentum[0], 0.0f);
+	}
+
 	if (m_quad.center().y + momentum[1] < -400.0f || m_quad.center().y + momentum[1] > 400.0f)
-		player_screen_position[1] += momentum[1]
+	{
+		offset[1] -= round(momentum[1]);
+	}
 	else
-		m_quad.translate(0.0f, momentum[1])
-		
-		
+	{
+		m_quad.translate(0.0f, momentum[1]);
+	}
+
+	player_transform_matrix = glm::translate(player_transform_matrix, glm::vec3(offset[0], offset[1], 0.0f));
+
+
+
 	momentum[0] *= 0.9;
 	momentum[1] *= 0.9;
 
@@ -102,12 +114,12 @@ glm::mat4* Player::get_trans_matrix()
 	return(&player_transform_matrix);
 }
 
-const float Player::screen_pos_x()
+float Player::screen_pos_x()
 {
 	return(position_on_screen[0]);	
 }
 
-const float Player::screen_pos_y()
+float Player::screen_pos_y()
 {
 	return(position_on_screen[1]);	
 }

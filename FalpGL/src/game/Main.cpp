@@ -89,19 +89,20 @@ int main(void)
 
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-    GLCall(glClearColor(0.5f, 0.5f, 0.5f, 1.0f));
+    GLCall(glClearColor(255.0f, 0.0f, 255.0f, 1.0f));
 
     GLCall(glEnable(GL_DEPTH_TEST));
-    GLCall(glDepthFunc(GL_LESS));
+    GLCall(glDepthFunc(GL_LEQUAL));
 
     glEnable(GL_MULTISAMPLE);
     glfwWindowHint(GLFW_SAMPLES, 8);
 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
+        glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
         int width, height, width_old, height_old, zoom_x, zoom_y;
         width_old = 0;
         height_old = 0;
@@ -126,15 +127,16 @@ int main(void)
         Texture atlas_0 = Texture("res/gfx/atlas1.png");
         atlas_0.Bind(0);
 
-        Entity player(&player_render.vertex_buffer, &loader, 0);
+        Player player(&player_render.vertex_buffer, &loader, 0);
 
         Map main_map(&projection_matrix, &loader);
 
-        Tile flowers[1000];
+        std::vector<Tile*> flowers;
+        flowers.resize(1000);
         for (int i = 0; i < 1000; i++)
         {
-            flowers[i] = Tile(&things.vertex_buffer, &loader, "1");
-            flowers[i].translate((rand() % 100) * 32, (rand() % 100) * 32);
+            flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
+            flowers[i]->translate((rand() % 100) * 32, (rand() % 100) * 32);
         }
 
 
@@ -149,9 +151,9 @@ int main(void)
 
 
             
-            main_map.draw();
+            main_map.draw(*player.get_trans_matrix() * zoom_matrix); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix);
-            things.draw(projection_matrix **main_map.get_trans_matrix());
+            things.draw(projection_matrix * *main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
 
             
             glfwGetCursorPos(window, &xpos, &ypos);
@@ -168,7 +170,7 @@ int main(void)
                
                 std::cout << width << "x" << height << std::endl;
 
-                projection_matrix = glm::ortho(-0.5f * width + 0.01f, 0.5f * width + 0.01f, -0.5f * height + 0.01f, 0.5f * height + 0.01f, -1.0f, 1.0f);
+                projection_matrix = glm::ortho(round(-0.5f * width), round(0.5f * width), round(-0.5f * height), round(0.5f * height) + 0.01f, -1.0f, 1.0f);
 
                 width_old = width;
                 height_old = height;
