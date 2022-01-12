@@ -13,6 +13,12 @@ public:
 	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
 };
 
+struct Tilemap {
+public:
+	std::vector<Tile*> x;
+	std::vector<Tile*> y;
+};
+
 
 class Map {
 private:
