@@ -1,6 +1,6 @@
 #pragma once
 #include "Entitiy.h"
-
+#include "Map.h"
 
 struct key {
 	char m_key = 0;
@@ -25,6 +25,8 @@ private:
 	std::vector<key> keys;
 
 	Entity* player;
+	Map* map;
+
 	bool* running;
 	const char alphabet[26] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
 };

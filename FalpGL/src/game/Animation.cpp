@@ -53,24 +53,28 @@ void Animation::load(animation_id id)
 	atlas = j["atlas"];
 	length = j["length"];
 
+	int frame = 0;
+
 	tex_coords.resize(length);
 	times.resize(length);
 
 	for (int i = 0; i < length; i++)
 	{
+		frame = j["frame_order"][i];
+
 		times[i] = j["frame_times"][i];
 
-		tex_coords[i].coords[0][0] = (j["texture_coordinants"][i][0][0]) / 2048.0f; /* Denominator must be float or intiger division happens */
-		tex_coords[i].coords[0][1] = (j["texture_coordinants"][i][0][1]) / 2048.0f;
+		tex_coords[i].coords[0][0] = (j["texture_coordinants"][frame][0][0]) / 2048.0f; /* Denominator must be float or intiger division happens */
+		tex_coords[i].coords[0][1] = (j["texture_coordinants"][frame][0][1]) / 2048.0f;
 
-		tex_coords[i].coords[1][0] = (j["texture_coordinants"][i][1][0]) / 2048.0f;
-		tex_coords[i].coords[1][1] = (j["texture_coordinants"][i][1][1]) / 2048.0f;
+		tex_coords[i].coords[1][0] = (j["texture_coordinants"][frame][1][0]) / 2048.0f;
+		tex_coords[i].coords[1][1] = (j["texture_coordinants"][frame][1][1]) / 2048.0f;
 
-		tex_coords[i].coords[2][0] = (j["texture_coordinants"][i][2][0]) / 2048.0f;
-		tex_coords[i].coords[2][1] = (j["texture_coordinants"][i][2][1]) / 2048.0f;
+		tex_coords[i].coords[2][0] = (j["texture_coordinants"][frame][2][0]) / 2048.0f;
+		tex_coords[i].coords[2][1] = (j["texture_coordinants"][frame][2][1]) / 2048.0f;
 
-		tex_coords[i].coords[3][0] = (j["texture_coordinants"][i][3][0]) / 2048.0f;
-		tex_coords[i].coords[3][1] = (j["texture_coordinants"][i][3][1]) / 2048.0f;
+		tex_coords[i].coords[3][0] = (j["texture_coordinants"][frame][3][0]) / 2048.0f;
+		tex_coords[i].coords[3][1] = (j["texture_coordinants"][frame][3][1]) / 2048.0f;
 	}
 
 	m_quad->set_texture_coords(tex_coords[current_frame]);

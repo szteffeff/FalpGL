@@ -47,6 +47,19 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 }
 
 
+Map::~Map()
+{
+	int i = 0;
+	for (int x = 0.0f; x < width; x++)
+	{
+		for (int y = 0.0f; y < height; y++)
+		{
+			delete map_vector[i];
+			i++;
+		}
+	}
+}
+
 Map::Map(glm::mat4* pm, Json_loader* l)
 	: height(100), width(height), renderer(BatchRenderer(width * height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
 {
@@ -58,6 +71,10 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 
 	map_vector.resize((double)height * (double)width);
 
+	mvec.resize(width);
+	for (int i = 0; i < width; i++)
+		mvec[i].resize(height);
+
 	fill();
 }
 
@@ -68,9 +85,12 @@ void Map::fill()
 	{
 		for (int y = 0.0f; y < height; y++)
 		{
+
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
 			map_vector[i]->translate(x * 32.0f, y * 32.0f);
 			map_vector[i]->texture_index(0);
+
+			mvec[x][y] = map_vector[i];
 
 			i++;
 		}

@@ -18,12 +18,16 @@ class Map {
 private:
 	Json_loader* loader;
 	std::vector<Tile*> map_vector;
+
+	std::vector<std::vector<Tile*>> mvec;
+
 	int height, width;
 	glm::mat4 transformation_matrix;
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;
 
 public:
+	~Map();
 	Map(glm::mat4* pm, Json_loader *l);
 	void fill();
 	void draw();

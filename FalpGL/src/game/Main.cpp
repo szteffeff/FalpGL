@@ -16,7 +16,6 @@
 #include "Entitiy.h"
 #include "Json.h"
 
-
 std::string get_current_dir() {
     char buff[FILENAME_MAX]; //create string buffer to hold path
     _getcwd(buff, FILENAME_MAX);
@@ -47,7 +46,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    if (false) // fullscreen modes
+    if (true) // fullscreen modes
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -152,7 +151,7 @@ int main(void)
 
             
             main_map.draw(*player.get_trans_matrix() * zoom_matrix); /* Has pointer to projection_matrix */
-            player_render.draw(projection_matrix);
+            player_render.draw(projection_matrix * zoom_matrix);
             things.draw(projection_matrix * *main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
 
             

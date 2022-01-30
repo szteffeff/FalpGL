@@ -13,6 +13,7 @@
 * 
 *	eliminate float for positioning vericies
 *   framebuffer for pixel-perferect windowed mode
+*	animation frame oreder
 */
 
 /*

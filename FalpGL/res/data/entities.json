@@ -1,7 +1,7 @@
 {
   "0": {
     "name": "PLAYER",
-    "size": [ 224.0, 96.0 ],
+    "size": [ 128, 128 ],
     "animation_count": 5,
     "animations_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DONW", "ENTITY_PLAYER_MOVE_RIGHT" ],
     "animations": [ 0, 1, 2, 3, 4 ]
