@@ -36,7 +36,7 @@ int main(void)
 
     GLFWwindow* window;
     bool running = true;
-    controller.set_keepalive(&running);
+
 
     /* Initialize the library */
     if (!glfwInit())
@@ -131,15 +131,17 @@ int main(void)
         Map main_map(&projection_matrix, &loader);
 
         std::vector<Tile*> flowers;
-        flowers.resize(1000);
-        for (int i = 0; i < 1000; i++)
+        flowers.resize(100);
+        for (int i = 0; i < 100; i++)
         {
             flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
-            flowers[i]->translate((rand() % 100) * 32, (rand() % 100) * 32);
+            flowers[i]->translate((rand() % 32) * 32, (rand() % 24) * 32);
         }
 
 
         controller.set_player(&player);
+        controller.set_keepalive(&running);
+        controller.set_matrix(&projection_matrix);
         
         while (!glfwWindowShouldClose(window) && running)
         {
@@ -183,7 +185,7 @@ int main(void)
 
         }
 
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100; i++)
         {
             delete flowers[i];
         }

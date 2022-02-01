@@ -28,6 +28,7 @@ private:
 	std::vector<std::vector<Tile*>> mvec;
 
 	int height, width;
+	float offset[2] = { 0.0f, 0.0f };
 	glm::mat4 transformation_matrix;
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;
@@ -35,6 +36,8 @@ private:
 public:
 	~Map();
 	Map(glm::mat4* pm, Json_loader *l);
+
+	void shift(float dx, float dy);
 	void fill();
 	void draw();
 	void draw(glm::mat4 tm);
