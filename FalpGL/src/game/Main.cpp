@@ -185,7 +185,7 @@ int main(void)
 
         for (int i = 0; i < 1000; i++)
         {
-            delete flowers[i]
+            delete flowers[i];
         }
     }
     glfwTerminate();
