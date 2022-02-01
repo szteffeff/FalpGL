@@ -182,6 +182,11 @@ int main(void)
             glfwPollEvents();
 
         }
+
+        for (int i = 0; i < 1000; i++)
+        {
+            delete flowers[i]
+        }
     }
     glfwTerminate();
     return (0);
