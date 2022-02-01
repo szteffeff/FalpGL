@@ -131,8 +131,8 @@ int main(void)
         Map main_map(&projection_matrix, &loader);
 
         std::vector<Tile*> flowers;
-        flowers.resize(100);
-        for (int i = 0; i < 100; i++)
+        flowers.resize(500);
+        for (int i = 0; i < 500; i++)
         {
             flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
             flowers[i]->translate((rand() % 32) * 32, (rand() % 24) * 32);
@@ -185,7 +185,7 @@ int main(void)
 
         }
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 500; i++)
         {
             delete flowers[i];
         }
