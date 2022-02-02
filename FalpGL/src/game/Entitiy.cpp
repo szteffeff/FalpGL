@@ -19,7 +19,8 @@ Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
 		animations[i] = Animation(&m_quad, loader, j["animations"][i]);
 	}
 
-	animations[active_animation].set();
+	set_animation(active_animation);
+	animations[active_animation].tick();
 }
 
 void Entity::tick()
@@ -45,11 +46,11 @@ void Entity::tick()
 
 void Entity::walk(float direction, float magnitude)
 {
-	float dx = cos(direction * 3.14159 / 180) * magnitude;
-	float dy = sin(direction * 3.14159 / 180) * magnitude;
+	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
-	momentum[0] += (dx * 5 - momentum[0]) * 0.1;
-	momentum[1] += (dy * 5 - momentum[1]) * 0.1;
+	momentum[0] += dx;
+	momentum[1] += dy;
 }
 
 void Entity::set_animation(int id)
@@ -67,34 +68,9 @@ Quad* Entity::get_quad()
 
 void Player::tick()
 {
-	float offset[2] = { 0, 0 };
+	m_quad.translate(momentum[0], momentum[1]);
 
-	if (m_quad.center().x + momentum[0] < -400.0f || m_quad.center().x + momentum[0] > 400.0f)
-	{
-		offset[0] -= round(momentum[0]);
-	}
-	else
-	{
-		m_quad.translate(momentum[0], 0.0f);
-	}
-
-	if (m_quad.center().y + momentum[1] < -400.0f || m_quad.center().y + momentum[1] > 400.0f)
-	{
-		offset[1] -= round(momentum[1]);
-	}
-	else
-	{
-		m_quad.translate(0.0f, momentum[1]);
-	}
-
-	player_transform_matrix = glm::translate(player_transform_matrix, glm::vec3(offset[0], offset[1], 0.0f));
-
-
-
-	momentum[0] *= 0.9;
-	momentum[1] *= 0.9;
-
-	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.125)
+	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)
 	{
 		float dir = (atan2(momentum[1], momentum[0]));
 		if (dir < 0) { dir += 2 * 3.14159; }
@@ -106,20 +82,13 @@ void Player::tick()
 		set_animation(0);
 	}
 
+	momentum[0] = 0;
+	momentum[1] = 0;
+
 	animations[active_animation].tick();
 }
 
 glm::mat4* Player::get_trans_matrix()
 {
 	return(&player_transform_matrix);
-}
-
-float Player::screen_pos_x()
-{
-	return(position_on_screen[0]);	
-}
-
-float Player::screen_pos_y()
-{
-	return(position_on_screen[1]);	
 }

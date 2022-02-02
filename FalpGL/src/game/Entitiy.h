@@ -10,9 +10,8 @@ protected:
 	Quad m_quad;
 	std::vector<Animation> animations;
 	Json_loader* loader;
-	int active_animation, animation_count;
-	int entity_id;
-	float momentum[2];
+	int active_animation, animation_count, entity_id;
+	float momentum[2], position[2];
 
 public:
 	std::string name;
@@ -32,11 +31,11 @@ class Player : public Entity { /* Player needs additional data but still must be
 	using Entity::Entity;
 private:
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
-	float position_on_screen[2] = { 0, 0 };
+
+	float offset[2] = { 0.0f, 0.0f };
 	
+
 public:
 	glm::mat4 *get_trans_matrix();
-	float screen_pos_x();
-	float screen_pos_y();
 	void tick();
 };

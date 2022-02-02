@@ -1393,4 +1393,9 @@
   <ItemGroup>
     <Text Include="res\data\animations.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\gfx\atlas1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

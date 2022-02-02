@@ -21,7 +21,7 @@ Animation::Animation()
 bool Animation::tick()
 {
 	if ((std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now()
-		- last_time).count() > times[current_frame]) && active)
+		- last_time).count() > times[current_frame]))
 	{
 		if (current_frame == length - 1)
 		{

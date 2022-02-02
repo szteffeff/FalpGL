@@ -29,8 +29,8 @@ Input controller;
 
 int main(void)
 {
-    Json_loader loader;
 
+    /* Setup the window */
 
     std::cout << "working directory is: " << get_current_dir() << "\n";
 
@@ -100,6 +100,8 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
+        /* Create all the things */
+
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
         glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
         int width, height, width_old, height_old, zoom_x, zoom_y;
@@ -111,6 +113,8 @@ int main(void)
 
         double xpos, ypos;
         float xpos1, ypos1;
+
+        Json_loader loader;
 
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -140,10 +144,12 @@ int main(void)
 
 
         controller.set_player(&player);
+        controller.set_map(&main_map);
         
+        /* Run the Game */
+
         while (!glfwWindowShouldClose(window) && running)
         {
-            /* Render here */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             controller.tick();
             player.tick();
@@ -152,7 +158,7 @@ int main(void)
             
             main_map.draw(*player.get_trans_matrix() * zoom_matrix); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix * zoom_matrix);
-            things.draw(projection_matrix * *main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
+            things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
 
             
             glfwGetCursorPos(window, &xpos, &ypos);

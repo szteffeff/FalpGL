@@ -20,6 +20,11 @@ void Input::set_player(Entity* p)
 	player = p;
 }
 
+void Input::set_map(Map* m)
+{
+	map = m;
+}
+
 void Input::recive(int key, int scancode, int action, int mods) // release = 0, press = 1, repeat = 2
 {
 	if (action == 2) { return; }

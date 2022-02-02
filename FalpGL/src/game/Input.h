@@ -16,6 +16,7 @@ public:
 
 	void set_keepalive(bool* keepalive);
 	void set_player(Entity* p);
+	void set_map(Map* m);
 
 	void recive(int key, int scancode, int action, int mods);
 	void tick();
