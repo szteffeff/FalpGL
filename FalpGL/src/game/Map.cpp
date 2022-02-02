@@ -61,7 +61,7 @@ Map::~Map()
 }
 
 Map::Map(glm::mat4* pm, Json_loader* l)
-	: height(100), width(height), renderer(BatchRenderer(width * height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
+	: height(24), width(32), renderer(BatchRenderer(width * height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
 {
 	renderer.layout.Push<float>(3);
 	renderer.layout.Push<float>(2);
@@ -76,6 +76,34 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 		mvec[i].resize(height);
 
 	fill();
+}
+
+void Map::shift(float dx, float dy)
+{
+	offset[0] += dx;
+	offset[1] += dy;
+
+	if (offset[0] >= 32.0f)
+	{
+		/* new left collum */
+		offset[0] -= 32.0f;
+	}
+	else if (offset[0] <= -32.0f)
+	{
+		/* new right collum */
+		offset[0] += 32.0f;
+	}
+
+	if (offset[1] >= 32.0f)
+	{
+		/* new top row */
+		offset[1] -= 32.0f;
+	}
+	else if (offset[1] <= -32.0f)
+	{
+		/* new bottom row */
+		offset[1] += 32.0f;
+	}
 }
 
 void Map::fill()
@@ -96,7 +124,7 @@ void Map::fill()
 		}
 	}
 
-	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-width * 32 / 2, -height * 32 / 2, 0.0f));
+	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-width * 32, -height * 32, 0.0f));
 }
 
 void Map::draw()

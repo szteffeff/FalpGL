@@ -16,7 +16,7 @@ public:
 
 	void set_keepalive(bool* keepalive);
 	void set_player(Entity* p);
-	void set_map(Map* m);
+	void set_matrix(glm::mat4* m);
 
 	void recive(int key, int scancode, int action, int mods);
 	void tick();
@@ -27,6 +27,7 @@ private:
 
 	Entity* player;
 	Map* map;
+	glm::mat4* zoom_matrix;
 
 	bool* running;
 	const char alphabet[26] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };

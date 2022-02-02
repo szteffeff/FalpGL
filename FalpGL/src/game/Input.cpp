@@ -20,9 +20,9 @@ void Input::set_player(Entity* p)
 	player = p;
 }
 
-void Input::set_map(Map* m)
+void Input::set_matrix(glm::mat4* m)
 {
-	map = m;
+	zoom_matrix = m;
 }
 
 void Input::recive(int key, int scancode, int action, int mods) // release = 0, press = 1, repeat = 2
@@ -56,6 +56,23 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 	default:
 		break;
 	}
+
+	if (action == 0) { return; }
+
+	switch (key)
+	{
+	case(GLFW_KEY_0):
+		*zoom_matrix = glm::scale(*zoom_matrix, glm::vec3(2.0f, 2.0f, 1.0f));
+		break;
+
+	case(GLFW_KEY_9):
+		*zoom_matrix = glm::scale(*zoom_matrix, glm::vec3(0.5f, 0.5f, 1.0f));
+		break;
+
+	default:
+		break;
+	}
+
 }
 
 void Input::tick()
