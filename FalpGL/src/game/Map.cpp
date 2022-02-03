@@ -97,6 +97,7 @@ void Map::shift(float px, float py)
 	else if ((int)round(new_center[0]) % 32 < current_center[0])
 	{
 		//std::left_shift(mvec[0], 1)
+		std::shift_right(mvec.begin(), mvec.end(), 1);
 		for (int i = 0; i < height; i++)
 		{
 			//mvec[width - 1][i] = load_new_tile_at((int)round(new_center[0]) % 32 + ((int)width % 32) / 2)
