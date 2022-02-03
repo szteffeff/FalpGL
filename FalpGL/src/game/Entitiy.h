@@ -27,7 +27,7 @@ public:
 };
 
 
-class Player : public Entity { /* Player needs additional data but still must be used as Entity */
+class Player : public Entity { 
 	using Entity::Entity;
 private:
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
@@ -37,5 +37,7 @@ private:
 
 public:
 	glm::mat4 *get_trans_matrix();
+	float position_x();
+	float position_y();
 	void tick();
 };

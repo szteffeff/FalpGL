@@ -69,6 +69,10 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 
 	renderer.add_layout(renderer.layout);
 
+
+	current_center[0] = width / 2.0f;
+	current_center[1] = height / 2.0f;
+
 	map_vector.resize((double)height * (double)width);
 
 	mvec.resize(width);
@@ -78,32 +82,27 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 	fill();
 }
 
-void Map::shift(float dx, float dy)
+void Map::shift(float px, float py)
 {
-	offset[0] += dx;
-	offset[1] += dy;
+	float new_center[2] = { (px / 2.0f), (px / 2.0f) };
 
-	if (offset[0] >= 32.0f)
+	if ((int)round(new_center[0]) % 32 > current_center[0])
 	{
-		/* new left collum */
-		offset[0] -= 32.0f;
+		//std::left_shift(mvec[0], 1)
+		for (int i = 0; i < height; i++)
+		{
+			//mvec[width - 1][i] = load_new_tile_at((int)round(new_center[0]) % 32 + ((int)width % 32) / 2)
+		}
 	}
-	else if (offset[0] <= -32.0f)
+	else if ((int)round(new_center[0]) % 32 < current_center[0])
 	{
-		/* new right collum */
-		offset[0] += 32.0f;
+		//std::left_shift(mvec[0], 1)
+		for (int i = 0; i < height; i++)
+		{
+			//mvec[width - 1][i] = load_new_tile_at((int)round(new_center[0]) % 32 + ((int)width % 32) / 2)
+		}
 	}
 
-	if (offset[1] >= 32.0f)
-	{
-		/* new top row */
-		offset[1] -= 32.0f;
-	}
-	else if (offset[1] <= -32.0f)
-	{
-		/* new bottom row */
-		offset[1] += 32.0f;
-	}
 }
 
 void Map::fill()

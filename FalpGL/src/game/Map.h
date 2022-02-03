@@ -2,6 +2,8 @@
 #include "../renderer/RendererIncludes.h"
 #include "BatchRenderer.h" 
 #include "Json.h"
+#include <iostream>
+#include <algorithm>
 
 
 struct Tile : public Quad {
@@ -13,11 +15,9 @@ public:
 	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
 };
 
-struct Tilemap {
-public:
-	std::vector<Tile*> x;
-	std::vector<Tile*> y;
-};
+
+
+
 
 
 class Map {
@@ -29,6 +29,7 @@ private:
 
 	int height, width;
 	float offset[2] = { 0.0f, 0.0f };
+	float current_center[2] = { 0.0f, 0.0f };
 	glm::mat4 transformation_matrix;
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;

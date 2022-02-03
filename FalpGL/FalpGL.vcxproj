@@ -140,12 +140,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>src\vendor;$(SolutionDir)FalpGL\Dependencies\GLFW\include;$(SolutionDir)FalpGL\Dependencies\GLEW\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

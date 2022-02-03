@@ -46,6 +46,7 @@ void Entity::tick()
 
 void Entity::walk(float direction, float magnitude)
 {
+	magnitude *= 3;
 	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
 	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
@@ -68,7 +69,18 @@ Quad* Entity::get_quad()
 
 void Player::tick()
 {
+	offset[0] = 0.0f;
+	offset[1] = 0.0f;
+
+	position[0] += momentum[0];
+	position[1] += momentum[1];
+
 	m_quad.translate(momentum[0], momentum[1]);
+
+
+
+	player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+
 
 	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)
 	{
@@ -86,9 +98,21 @@ void Player::tick()
 	momentum[1] = 0;
 
 	animations[active_animation].tick();
+
+	std::cout << position[0] << ", " << position[1] << "\n";
 }
 
 glm::mat4* Player::get_trans_matrix()
 {
 	return(&player_transform_matrix);
+}
+
+float Player::position_y()
+{
+	return offset[1];
+}
+
+float Player::position_x()
+{
+	return offset[0];
 }

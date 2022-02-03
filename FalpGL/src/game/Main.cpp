@@ -46,7 +46,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    if (true) // fullscreen modes
+    if (false) // fullscreen modes
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -152,11 +152,12 @@ int main(void)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             controller.tick();
             player.tick();
+            main_map.shift(player.position_x(), player.position_y());
 
 
             
             main_map.draw(*player.get_trans_matrix() * zoom_matrix); /* Has pointer to projection_matrix */
-            player_render.draw(projection_matrix * zoom_matrix);
+            player_render.draw(projection_matrix * zoom_matrix * *player.get_trans_matrix());
             things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
 
             

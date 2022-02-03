@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/LeoPa/source/repos/FalpGL2/FalpGL/src/vendor/glm
+# Install script for directory: C:/Users/alex/source/repos/szteffeff/FalpGL/FalpGL/src/vendor/glm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/LeoPa/Source/Repos/FalpGL2/FalpGL/src/vendor/glm/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/alex/Source/Repos/szteffeff/FalpGL/FalpGL/src/vendor/glm/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/LeoPa/source/repos/FalpGL2/FalpGL/src/vendor/glm/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/alex/source/repos/szteffeff/FalpGL/FalpGL/src/vendor/glm/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

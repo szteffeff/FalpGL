@@ -27,8 +27,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/LeoPa/source/repos/FalpGL2/FalpGL/src/vendor/glm/out/build/x64-Debug",
-		"source" : "C:/Users/LeoPa/source/repos/FalpGL2/FalpGL/src/vendor/glm"
+		"build" : "C:/Users/alex/source/repos/szteffeff/FalpGL/FalpGL/src/vendor/glm/out/build/x64-Debug",
+		"source" : "C:/Users/alex/source/repos/szteffeff/FalpGL/FalpGL/src/vendor/glm"
 	},
 	"version" : 
 	{
