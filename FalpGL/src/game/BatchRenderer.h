@@ -38,7 +38,7 @@ public:
 	void move(float delta_x, float delta_y, bool wrong_function_use_translate);
 	void teleport(float new_x, float new_y);
 
-	void set_height(float new_h);
+	void set_z(float new_h);
 
 	void update();
 

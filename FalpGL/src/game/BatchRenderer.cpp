@@ -146,7 +146,7 @@ void Quad::teleport(float new_x, float new_y)
 	update();
 }
 
-void Quad::set_height(float new_h)
+void Quad::set_z(float new_h)
 {
 	quad_data[2] = new_h;
 	quad_data[8] = new_h;
