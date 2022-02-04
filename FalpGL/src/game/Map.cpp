@@ -8,7 +8,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader * loader)
 	: Quad(vb, 32, 32, 0.0f)
 {
 	tex_coord tx;
-
+	
 	tx.coords[0][0] = (loader->tiles["0"]["texture_coordinants"][0][0]) / 2048.0f; /* Denominator must be float or intiger division happens */
 	tx.coords[0][1] = (loader->tiles["0"]["texture_coordinants"][0][1]) / 2048.0f;
 
@@ -22,7 +22,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader * loader)
 	tx.coords[3][1] = (loader->tiles["0"]["texture_coordinants"][3][1]) / 2048.0f;
 
 	set_texture_coords(tx);
-	set_height(-0.999);
+	set_z(-0.999);
 }
 
 Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
@@ -43,7 +43,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 	tx.coords[3][1] = (loader->tiles[id]["texture_coordinants"][3][1]) / 2048.0f;
 
 	set_texture_coords(tx);
-	set_height(-0.9);
+	set_z(-0.9);
 }
 
 
