@@ -69,10 +69,6 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 
 	renderer.add_layout(renderer.layout);
 
-
-	current_center[0] = width / 2.0f;
-	current_center[1] = height / 2.0f;
-
 	map_vector.resize((double)height * (double)width);
 
 	mvec.resize(width);
@@ -84,24 +80,17 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 
 void Map::shift(float px, float py)
 {
-	float new_center[2] = { (px / 2.0f), (px / 2.0f) };
+	//std::cout << "map shift" << px << ", " << -width / 2 - 32 << "\n";
 
-	if ((int)round(new_center[0]) % 32 > current_center[0])
+	if (px < -16 + current_center[0] * 64)
 	{
-		//std::left_shift(mvec[0], 1)
-		for (int i = 0; i < height; i++)
-		{
-			//mvec[width - 1][i] = load_new_tile_at((int)round(new_center[0]) % 32 + ((int)width % 32) / 2)
-		}
+		std::cout << "SHIFTED RIGHT!! new center is: " << current_center[0] - 1 << "\n";
+		current_center[0] -= 1;
 	}
-	else if ((int)round(new_center[0]) % 32 < current_center[0])
+	else if (px > 16 + current_center[0] * 64)
 	{
-		//std::left_shift(mvec[0], 1)
-		std::shift_right(mvec.begin(), mvec.end(), 1);
-		for (int i = 0; i < height; i++)
-		{
-			//mvec[width - 1][i] = load_new_tile_at((int)round(new_center[0]) % 32 + ((int)width % 32) / 2)
-		}
+		std::cout << "SHIFTED LEFT!! new center is: " << current_center[0] + 1 << "\n";
+		current_center[0] += 1;
 	}
 
 }

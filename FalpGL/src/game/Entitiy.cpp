@@ -99,7 +99,7 @@ void Player::tick()
 
 	animations[active_animation].tick();
 
-	std::cout << position[0] << ", " << position[1] << "\n";
+	//std::cout << "position: " << position[0] << ", " << position[1] << "\n";
 }
 
 glm::mat4* Player::get_trans_matrix()
@@ -109,10 +109,10 @@ glm::mat4* Player::get_trans_matrix()
 
 float Player::position_y()
 {
-	return offset[1];
+	return position[1];
 }
 
 float Player::position_x()
 {
-	return offset[0];
+	return position[0];
 }
