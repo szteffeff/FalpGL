@@ -82,15 +82,27 @@ void Map::shift(float px, float py)
 {
 	//std::cout << "map shift" << px << ", " << -width / 2 - 32 << "\n";
 
-	if (px < -16 + current_center[0] * 64)
+	if ((px/2) < -16 + current_center[0] * 32)
 	{
-		std::cout << "SHIFTED RIGHT!! new center is: " << current_center[0] - 1 << "\n";
+		std::cout << "SHIFTED LEFT!! new center is: " << current_center[0] - 1 << "\n";
 		current_center[0] -= 1;
+
 	}
-	else if (px > 16 + current_center[0] * 64)
+	else if ((px/2) > 16 + current_center[0] * 32)
 	{
-		std::cout << "SHIFTED LEFT!! new center is: " << current_center[0] + 1 << "\n";
+		std::cout << "SHIFTED RIGHT!! new center is: " << current_center[0] + 1 << "\n";
 		current_center[0] += 1;
+	}
+
+	if ((py / 2) < -16 + current_center[1] * 32)
+	{
+		std::cout << "DOWN!! new center is: " << current_center[1] - 1 << "\n";
+		current_center[1] -= 1;
+	}
+	else if ((py / 2) > 16 + current_center[1] * 32)
+	{
+		std::cout << "SHIFTED UP!! new center is: " << current_center[1] + 1 << "\n";
+		current_center[1] += 1;
 	}
 
 }
