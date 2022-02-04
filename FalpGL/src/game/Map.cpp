@@ -86,23 +86,36 @@ void Map::shift(float px, float py)
 	{
 		std::cout << "SHIFTED LEFT!! new center is: " << current_center[0] - 1 << "\n";
 		current_center[0] -= 1;
+		for (int i = 0; i < height * width; i++) {
+			map_vector[i]->translate(-32, 0);
+		}
 
 	}
 	else if ((px/2) > 16 + current_center[0] * 32)
 	{
 		std::cout << "SHIFTED RIGHT!! new center is: " << current_center[0] + 1 << "\n";
 		current_center[0] += 1;
+		for (int i = 0; i < height * width; i++) {
+			map_vector[i]->translate(32, 0);
+		}
 	}
 
 	if ((py / 2) < -16 + current_center[1] * 32)
 	{
 		std::cout << "DOWN!! new center is: " << current_center[1] - 1 << "\n";
 		current_center[1] -= 1;
+		for (int i = 0; i < height * width; i++) {
+			map_vector[i]->translate(0, -32);
+		}
 	}
 	else if ((py / 2) > 16 + current_center[1] * 32)
 	{
 		std::cout << "SHIFTED UP!! new center is: " << current_center[1] + 1 << "\n";
 		current_center[1] += 1;
+		for (int i = 0; i < height * width; i++) {
+			map_vector[i]->translate(0, 32);
+		}
+
 	}
 
 }
