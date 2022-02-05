@@ -101,6 +101,15 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
         /* Create all the things */
+        /*
+        *    MATRICES:
+        * 
+        * Zoom: scales everything 2x
+        * Player Transform: Moves around everthing to follow player
+        * Map Transform: Centers Everthing
+        * Projection: Fits output to window
+        * 
+        */
 
         glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
         glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
@@ -139,7 +148,7 @@ int main(void)
         for (int i = 0; i < 500; i++)
         {
             flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
-            flowers[i]->translate((rand() % 32) * 32, (rand() % 24) * 32);
+            flowers[i]->translate((rand() % 320) * 32, (rand() % 240) * 32);
         }
 
 
