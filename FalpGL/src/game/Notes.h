@@ -2,13 +2,6 @@
 
 #include "Animation.h"
 
-
-/*
-* Chunks?
-* 
-* 
-*/
-
 /* Need to:
 * 
 *	eliminate float for positioning vericies
