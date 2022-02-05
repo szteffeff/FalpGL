@@ -28,5 +28,65 @@
       [ 32, 928 ],
       [ 0, 928 ]
     ]
+  },
+  "3": {
+    "name": "COBBLESTONE_1",
+    "id": 3,
+    "texture_coordinants": [
+      [ 0, 1120 ],
+      [ 32, 1120 ],
+      [ 32, 1152 ],
+      [ 0, 1152 ]
+    ]
+  },
+  "4": {
+    "name": "COBBLESTONE_2",
+    "id": 4,
+    "texture_coordinants": [
+      [ 32, 1120 ],
+      [ 64, 1120 ],
+      [ 64, 1152 ],
+      [ 32, 1152 ]
+    ]
+  },
+  "5": {
+    "name": "COBBLESTONE_3",
+    "id": 5,
+    "texture_coordinants": [
+      [ 0, 1088 ],
+      [ 32, 1088 ],
+      [ 32, 1120 ],
+      [ 0, 1120 ]
+    ]
+  },
+  "6": {
+    "name": "COBBLESTONE_4",
+    "id": 6,
+    "texture_coordinants": [
+      [ 32, 1088 ],
+      [ 64, 1088 ],
+      [ 64, 1120 ],
+      [ 32, 1120 ]
+    ]
+  },
+  "7": {
+    "name": "COBBLESTONE_5",
+    "id": 7,
+    "texture_coordinants": [
+      [ 64, 1088 ],
+      [ 96, 1088 ],
+      [ 96, 1120 ],
+      [ 64, 1120 ]
+    ]
+  },
+  "8": {
+    "name": "OuterCorner_TopRight",
+    "id": 8,
+    "texture_coordinants": [
+      [ 0, 1056 ],
+      [ 32, 1056 ],
+      [ 32, 1088 ],
+      [ 0, 1088 ]
+    ]
   }
 }
