@@ -1,5 +1,6 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
+#include "TileTypes.h"
 #include "BatchRenderer.h" 
 #include "Json.h"
 #include <iostream>
@@ -13,6 +14,8 @@ public:
 	Tile();
 	Tile(VertexBuffer* vb, Json_loader* loader);
 	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
+
+	void change_type(tile_id _id, Json_loader* loader);
 };
 
 
@@ -37,7 +40,7 @@ private:
 
 public:
 	~Map();
-	Map(glm::mat4* pm, Json_loader *l, int res_x, int res_y);
+	Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y);
 
 	void shift(float dx, float dy);
 	void fill();

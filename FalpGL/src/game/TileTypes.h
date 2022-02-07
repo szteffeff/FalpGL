@@ -1,6 +1,6 @@
 #pragma once
 
-enum class tiles {
+enum tile_id {
 	FLOWER = 1,
 	GRASS,
 	COBBLESTONE_1,

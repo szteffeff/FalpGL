@@ -47,6 +47,27 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 }
 
 
+void Tile::change_type(tile_id id, Json_loader* loader)
+{
+	tex_coord tx;
+	std::string _id = std::to_string(id);
+
+	tx.coords[0][0] = (loader->tiles[_id]["texture_coordinants"][0][0]) / 2048.0f; /* Denominator must be float or intiger division happens */
+	tx.coords[0][1] = (loader->tiles[_id]["texture_coordinants"][0][1]) / 2048.0f;
+
+	tx.coords[1][0] = (loader->tiles[_id]["texture_coordinants"][1][0]) / 2048.0f;
+	tx.coords[1][1] = (loader->tiles[_id]["texture_coordinants"][1][1]) / 2048.0f;
+
+	tx.coords[2][0] = (loader->tiles[_id]["texture_coordinants"][2][0]) / 2048.0f;
+	tx.coords[2][1] = (loader->tiles[_id]["texture_coordinants"][2][1]) / 2048.0f;
+
+	tx.coords[3][0] = (loader->tiles[_id]["texture_coordinants"][3][0]) / 2048.0f;
+	tx.coords[3][1] = (loader->tiles[_id]["texture_coordinants"][3][1]) / 2048.0f;
+
+	set_texture_coords(tx);
+}
+
+
 Map::~Map()
 {
 	int i = 0;
