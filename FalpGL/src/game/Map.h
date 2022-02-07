@@ -27,7 +27,7 @@ private:
 
 	std::vector<std::vector<Tile*>> mvec;
 
-	int height, width, zoom;
+	int height, width;
 	int resolution[2];
 	float offset[2] = { 0.0f, 0.0f };
 	float current_center[2] = { 0.0f, 0.0f };
@@ -37,7 +37,7 @@ private:
 
 public:
 	~Map();
-	Map(glm::mat4* pm, Json_loader *l, int res_x, int res_y, int zm);
+	Map(glm::mat4* pm, Json_loader *l, int res_x, int res_y);
 
 	void shift(float dx, float dy);
 	void fill();

@@ -42,16 +42,15 @@ int main(void)
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 
-    int width, height, width_old = 0, height_old = 0;
-    const int resolution_x = 1920, resolution_y = 1080, scale = 2;
-    double xpos, ypos, zoom = 4;
+    int window_width, window_height, width_old = 0, height_old = 0;
+    const int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
+    double xpos, ypos;
     bool running = true;
 
     glm::mat4 projection_matrix = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
-    glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(zoom, zoom, 1.0f));
 
 
-    if (false) // true = fulscreen, false = windowed
+    if (true) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -64,10 +63,15 @@ int main(void)
             window = glfwCreateWindow(mode->width, mode->height, "", glfwGetPrimaryMonitor(), NULL);
             if (!window) { glfwTerminate(); return -1;}
             
-            width = mode->width;
-            height = mode->height;
+            window_width = mode->width;
+            window_height = mode->height;
 
-            projection_matrix = glm::ortho(round(-0.5f * width), round(0.5f * width), round(-0.5f * height), round(0.5f * height), -1.0f, 1.0f);
+            projection_matrix = glm::ortho(
+                round(-0.5f * window_width), 
+                round(0.5f * window_width), 
+                round(-0.5f * window_height), 
+                round(0.5f * window_height), 
+                -1.0f, 1.0f);
         }
     else
         {
@@ -75,10 +79,15 @@ int main(void)
             window = glfwCreateWindow(1920, 1200, "", NULL, NULL);
             if (!window) { glfwTerminate(); return -1; }
 
-            width = resolution_x / scale;
-            height = resolution_y / scale;
+            window_width = resolution_x / window_scale;
+            window_height = resolution_y / window_scale;
 
-            projection_matrix = glm::ortho((float)(-width / 2 * scale * zoom), (float)(width / 2 * scale * zoom), (float)(-height / 2 * scale * zoom), (float)(height / 2 * scale * zoom), -1.0f, 1.0f);
+            projection_matrix = glm::ortho(
+                round(-0.5f * window_width),
+                round(0.5f * window_width),
+                round(-0.5f * window_height),
+                round(0.5f * window_height),
+                -1.0f, 1.0f);
         }
 
 
@@ -112,8 +121,8 @@ int main(void)
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-    glViewport(0, 0, width, height);
-    glfwSetWindowSize(window, width, height);
+    glViewport(0, 0, window_width, window_height);
+    glfwSetWindowSize(window, window_width, window_height);
 
     glfwSetKeyCallback(window, key_callback);
 
@@ -141,7 +150,7 @@ int main(void)
 
         Player player(&player_render.vertex_buffer, &loader, 0);
 
-        Map main_map(&projection_matrix, &loader, resolution_x, resolution_y, zoom);
+        Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
         std::vector<Tile*> flowers;
         flowers.resize(500);
@@ -165,8 +174,8 @@ int main(void)
             controller.tick();
 
             glfwGetCursorPos(window, &xpos, &ypos);
-            xpos -= width / 2 / zoom;
-            ypos -= height / 2 / zoom;
+            xpos -= window_width / 2;
+            ypos -= window_height / 2;
             ypos *= -1;
 
 
@@ -177,9 +186,9 @@ int main(void)
 
 
             /* Draw all the renderers */
-            main_map.draw(*player.get_trans_matrix() *zoom_matrix); /* Has pointer to projection_matrix */
-            player_render.draw(projection_matrix * zoom_matrix * *player.get_trans_matrix());
-            things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
+            main_map.draw(*player.get_trans_matrix() ); /* Has pointer to projection_matrix */
+            player_render.draw(projection_matrix  * *player.get_trans_matrix());
+            things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix());
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
