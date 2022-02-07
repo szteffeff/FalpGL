@@ -105,7 +105,7 @@ void Map::shift(float px, float py)
 {
 	bool print = false;
 
-	if ((px) < -16 + current_center[0] * 32)
+	if ((px) < -16 + current_center[0] * 32) // left
 	{
 		print = true;
 		current_center[0] -= 1;
@@ -113,7 +113,7 @@ void Map::shift(float px, float py)
 			map_vector[i]->translate(-32, 0);
 		}
 	}
-	else if ((px) > 16 + current_center[0] * 32)
+	else if ((px) > 16 + current_center[0] * 32) // right
 	{
 		print = true;
 		current_center[0] += 1;
@@ -122,25 +122,37 @@ void Map::shift(float px, float py)
 		}
 	}
 
-	if ((py) < -16 + current_center[1] * 32)
+	if ((py) < -16 + current_center[1] * 32) // down
 	{
+		static int tile = 0;
 		print = true;
 		current_center[1] -= 1;
+		std::vector<Tile*> buffer;
+		buffer.resize(width);
 		for (int i = 0; i < height * width; i++) {
-			map_vector[i]->translate(0, -32);
+			if (i > width * height - width - 1)
+			{
+				std::cout << "IIIII " << i - width * height + width << "\n";
+				map_vector[i]->translate(0, -32);
+				map_vector[i]->change_type(tile_id((tile++ % 2) + 2), loader);
+				buffer[i - width * height + width] = map_vector[i];
+			}
+		}
+		std::shift_left(map_vector.begin(), map_vector.end(), width);
+
+
+		for (int i = 0; i < width; i++)
+		{
+			map_vector[((width * height)) - width + i] = buffer[i];
 		}
 	}
-	else if ((py) > 16 + current_center[1] * 32)
+	else if ((py) > 16 + current_center[1] * 32) // up
 	{
 		print = true;
-		std::cout << "ayo u dere\n";
 		current_center[1] += 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(0, 32);
-			if (i < width) {
-
-			}
-		};
+		}
 	}
 
 	if (print) { std::cout << "map center is: " << current_center[0] << ", " << current_center[1] << "\n"; }
@@ -149,9 +161,10 @@ void Map::shift(float px, float py)
 void Map::fill()
 {
 	int i = 0;
-	for (int x = 0.0f; x < width; x++)
+
+	for (int y = 0.0f; y < height; y++)
 	{
-		for (int y = 0.0f; y < height; y++)
+		for (int x = 0.0f; x < width; x++)
 		{
 
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
