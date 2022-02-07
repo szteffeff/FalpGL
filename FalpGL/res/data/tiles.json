@@ -80,13 +80,143 @@
     ]
   },
   "8": {
-    "name": "OuterCorner_TopRight",
+    "name": "OUTERCORNER_TOPRIGHT",
     "id": 8,
     "texture_coordinants": [
       [ 0, 1056 ],
       [ 32, 1056 ],
       [ 32, 1088 ],
       [ 0, 1088 ]
+    ]
+  },
+  "9": {
+    "name": "OUTERCORNER_TOPLEFT",
+    "id": 9,
+    "texture_coordinants": [
+      [ 32, 1056 ],
+      [ 64, 1056 ],
+      [ 64, 1088 ],
+      [ 32, 1088 ]
+    ]
+  },
+  "10": {
+    "name": "BRICKCORNER_TOPRIGHT",
+    "id": 10,
+    "texture_coordinants": [
+      [ 64, 1056 ],
+      [ 96, 1056 ],
+      [ 96, 1088 ],
+      [ 64, 1088 ]
+    ]
+  },
+  "11": {
+    "name": "OUTERCORNER_BOTTOMLEFT",
+    "id": 11,
+    "texture_coordinants": [
+      [ 0, 1024 ],
+      [ 32, 1024 ],
+      [ 32, 1056 ],
+      [ 0, 1056 ]
+    ]
+  },
+  "12": {
+    "name": "OUTERCORNER_BOTTOMRIGHT",
+    "id": 12,
+    "texture_coordinants": [
+      [ 32, 1024 ],
+      [ 64, 1024 ],
+      [ 64, 1056 ],
+      [ 32, 1056 ]
+    ]
+  },
+  "13": {
+    "name": "BRICKCORNER_TOPLEFT",
+    "id": 13,
+    "texture_coordinants": [
+      [ 64, 1024 ],
+      [ 96, 1024 ],
+      [ 96, 1056 ],
+      [ 64, 1056 ]
+    ]
+  },
+  "14": {
+    "name": "SLANTBRICK_RIGHT",
+    "id": 14,
+    "texture_coordinants": [
+      [ 0, 992 ],
+      [ 32, 992 ],
+      [ 32, 1024 ],
+      [ 0, 1024 ]
+    ]
+  },
+  "15": {
+    "name": "SLANTBRICK_TOP",
+    "id": 15,
+    "texture_coordinants": [
+      [ 32, 992 ],
+      [ 64, 992 ],
+      [ 64, 1024 ],
+      [ 32, 1024 ]
+    ]
+  },
+  "16": {
+    "name": "BRICK_THICKTOP",
+    "id": 16,
+    "texture_coordinants": [
+      [ 64, 992 ],
+      [ 96, 992 ],
+      [ 96, 1024 ],
+      [ 64, 1024 ]
+    ]
+  },
+  "17": {
+    "name": "SLANTBRICK_LEFT",
+    "id": 17,
+    "texture_coordinants": [
+      [ 0, 960 ],
+      [ 32, 960 ],
+      [ 32, 992 ],
+      [ 0, 992 ]
+    ]
+  },
+  "18": {
+    "name": "SLANTBRICK_BOTTOM",
+    "id": 18,
+    "texture_coordinants": [
+      [ 32, 960 ],
+      [ 64, 960 ],
+      [ 64, 992 ],
+      [ 32, 992 ]
+    ]
+  },
+  "19": {
+    "name": "COBBLESTONE_6",
+    "id": 19,
+    "texture_coordinants": [
+      [ 64, 960 ],
+      [ 96, 960 ],
+      [ 96, 992 ],
+      [ 64, 992 ]
+    ]
+  },
+  "20": {
+    "name": "COBBLESTONE_7",
+    "id": 20,
+    "texture_coordinants": [
+      [ 0, 928 ],
+      [ 32, 928 ],
+      [ 32, 960 ],
+      [ 0, 960 ]
+    ]
+  },
+  "21": {
+    "name": "COBBLESTONE_8",
+    "id": 21,
+    "texture_coordinants": [
+      [ 32, 928 ],
+      [ 64, 928 ],
+      [ 64, 960 ],
+      [ 32, 960 ]
     ]
   }
 }

@@ -138,7 +138,7 @@ int main(void)
         flowers.resize(500);
         for (int i = 0; i < 500; i++)
         {
-            flowers[i] = new Tile(&things.vertex_buffer, &loader, "8");
+            flowers[i] = new Tile(&things.vertex_buffer, &loader, "21");
             flowers[i]->translate((rand() % 32) * 32, (rand() % 24) * 32);
         }
 
