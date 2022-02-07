@@ -112,10 +112,14 @@ void Map::shift(float px, float py)
 	else if ((py) > 16 + current_center[1] * 32)
 	{
 		print = true;
+		std::cout << "ayo u dere\n";
 		current_center[1] += 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(0, 32);
-		}
+			if (i < width) {
+
+			}
+		};
 	}
 
 	if (print) { std::cout << "map center is: " << current_center[0] << ", " << current_center[1] << "\n"; }
