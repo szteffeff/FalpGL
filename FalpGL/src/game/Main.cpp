@@ -45,8 +45,17 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    if (false) // fullscreen modes
+
+    int width, height, width_old = 0, height_old = 0;
+    double xpos, ypos, zoom = 2;
+
+    glm::mat4 projection_matrix = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(zoom, zoom, 1.0f));
+
+
+    if (false) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -62,23 +71,31 @@ int main(void)
                     glfwTerminate();
                     return -1;
                 }
+            
+            width = mode->width;
+            height = mode->height;
+
+            projection_matrix = glm::ortho(round(-0.5f * width), round(0.5f * width), round(-0.5f * height), round(0.5f * height), -1.0f, 1.0f);
+
         }
     else
         {
-        window = glfwCreateWindow(1920, 1200, "", NULL, NULL);
-        if (!window)
-            {
-                glfwTerminate();
-                return -1;
-            }
+            window = glfwCreateWindow(1920, 1200, "", NULL, NULL);
+            if (!window)
+                {
+                    glfwTerminate();
+                    return -1;
+                }
+
+            int resolution_x = 1920, resolution_y = 1080, scale = 2;
+
+            width = resolution_x / scale;
+            height = resolution_y / scale;
+
+            projection_matrix = glm::ortho((float)(-width / scale * zoom), (float)(width / scale * zoom), (float)(-height / scale * zoom), (float)(height / scale * zoom), -1.0f, 1.0f);
         }
 
-    glfwSetKeyCallback(window, key_callback);
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    glfwSwapInterval(-1); //1 = VSYNC, -1 = ??
 
     if (glewInit() != GLEW_OK)
         std::cout << "GLEW init fail!\n";
@@ -88,31 +105,52 @@ int main(void)
 
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-    GLCall(glClearColor(255.0f, 0.0f, 255.0f, 1.0f));
 
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glDepthFunc(GL_LEQUAL));
 
-    glEnable(GL_MULTISAMPLE);
-    glfwWindowHint(GLFW_SAMPLES, 8);
+    GLCall(glEnable(GL_MULTISAMPLE));
+    GLCall(glfwWindowHint(GLFW_SAMPLES, 8));
+
+    GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+    glViewport(0, 0, width, height);
+    glfwSetWindowSize(window, width, height);
+
+    glfwSetKeyCallback(window, key_callback);
+
+    glfwMakeContextCurrent(window);
+
+    glfwSwapInterval(1);
 
     std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     {
         /* Create all the things */
+        /*
+        *    MATRICES:
+        * 
+        * Zoom: scales everything 2x
+        * Player Transform: Moves around everthing to follow player
+        * Map Transform: Centers Everthing
+        * Projection: Fits output to window
+        * 
+        */
 
-        glm::mat4 projection_matrix = glm::ortho(-320.0f, 320.0f, -240.0f, 240.0f, -1.0f, 1.0f);
-        glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
-        int width, height, width_old, height_old, zoom_x, zoom_y;
-        width_old = 0;
-        height_old = 0;
 
-        glfwGetFramebufferSize(window, &width, &height);
-        glViewport(0, 0, width, height);
 
-        double xpos, ypos;
-        float xpos1, ypos1;
+
+
+
+
+
+        
+
+
+
+
 
         Json_loader loader;
 
@@ -138,8 +176,8 @@ int main(void)
         flowers.resize(500);
         for (int i = 0; i < 500; i++)
         {
-            flowers[i] = new Tile(&things.vertex_buffer, &loader, "21");
-            flowers[i]->translate((rand() % 32) * 32, (rand() % 24) * 32);
+            flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
+            flowers[i]->translate((rand() % 320 - 170) * 32, (rand() % 240 - 120) * 32);
         }
 
 
@@ -165,21 +203,6 @@ int main(void)
             xpos -= width / 2;
             ypos -= height / 2;
             ypos *= -1;
-            xpos1 = (float)xpos;
-            ypos1 = (float)ypos;
-            
-            //glfwGetFramebufferSize(window, &width, &height);
-            if (width != width_old || height != height_old)
-            {
-                glViewport(0, 0, width, height);
-               
-                std::cout << width << "x" << height << std::endl;
-
-                projection_matrix = glm::ortho(round(-0.5f * width), round(0.5f * width), round(-0.5f * height), round(0.5f * height) + 0.01f, -1.0f, 1.0f);
-
-                width_old = width;
-                height_old = height;
-            }
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
