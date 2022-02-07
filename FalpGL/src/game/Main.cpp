@@ -1,8 +1,5 @@
 #include <windows.h>
 #include <direct.h>
-
-#include "../renderer/RendererIncludes.h"
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,14 +8,16 @@
 #include <math.h>
 #include <random>
 
+#include "../renderer/RendererIncludes.h"
 #include "Map.h"
 #include "Input.h"
 #include "Entitiy.h"
 #include "Json.h"
 
 std::string get_current_dir() {
+    void* v; //stops unused return value warning
     char buff[FILENAME_MAX]; //create string buffer to hold path
-    _getcwd(buff, FILENAME_MAX);
+    v = _getcwd(buff, FILENAME_MAX);
     std::string current_working_dir(buff);
     return current_working_dir;
 }
@@ -31,25 +30,22 @@ int main(void)
 {
 
     /* Setup the window */
-
-    std::cout << "working directory is: " << get_current_dir() << "\n";
-
     GLFWwindow* window;
-    bool running = true;
-
 
     /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+    if (!glfwInit()) { return -1; }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 
     int width, height, width_old = 0, height_old = 0;
-    double xpos, ypos, zoom = 2;
+    const int resolution_x = 1920, resolution_y = 1080, scale = 2;
+    double xpos, ypos, zoom = 4;
+    bool running = true;
 
     glm::mat4 projection_matrix = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
     glm::mat4 zoom_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(zoom, zoom, 1.0f));
@@ -66,42 +62,38 @@ int main(void)
 
             /* Create a windowed mode window and its OpenGL context */
             window = glfwCreateWindow(mode->width, mode->height, "", glfwGetPrimaryMonitor(), NULL);
-            if (!window)
-                {
-                    glfwTerminate();
-                    return -1;
-                }
+            if (!window) { glfwTerminate(); return -1;}
             
             width = mode->width;
             height = mode->height;
 
             projection_matrix = glm::ortho(round(-0.5f * width), round(0.5f * width), round(-0.5f * height), round(0.5f * height), -1.0f, 1.0f);
-
         }
     else
         {
+           /* Create a windowed mode windowand its OpenGL context */
             window = glfwCreateWindow(1920, 1200, "", NULL, NULL);
-            if (!window)
-                {
-                    glfwTerminate();
-                    return -1;
-                }
-
-            int resolution_x = 1920, resolution_y = 1080, scale = 2;
+            if (!window) { glfwTerminate(); return -1; }
 
             width = resolution_x / scale;
             height = resolution_y / scale;
 
-            projection_matrix = glm::ortho((float)(-width / scale * zoom), (float)(width / scale * zoom), (float)(-height / scale * zoom), (float)(height / scale * zoom), -1.0f, 1.0f);
+            projection_matrix = glm::ortho((float)(-width / 2 * scale * zoom), (float)(width / 2 * scale * zoom), (float)(-height / 2 * scale * zoom), (float)(height / 2 * scale * zoom), -1.0f, 1.0f);
         }
 
 
+    std::cout << "working directory is: " << get_current_dir() << "\n";
 
-    if (glewInit() != GLEW_OK)
-        std::cout << "GLEW init fail!\n";
-    else
-        std::cout << "GLEW ok\n";
 
+    glfwMakeContextCurrent(window);
+    std::cout << (glewInit() == GLEW_OK ? "GLEW ok\n" : "GLEW init fail!\n");
+
+
+    std::cout << glGetString(GL_VERSION) << " - ";
+    std::cout << glGetString(GL_VENDOR) << " - ";
+    std::cout << glGetString(GL_RENDERER) << " - ";
+    std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION);
+    std::cout << "\n";
 
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
@@ -110,10 +102,13 @@ int main(void)
     GLCall(glDepthFunc(GL_LEQUAL));
 
     GLCall(glEnable(GL_MULTISAMPLE));
-    GLCall(glfwWindowHint(GLFW_SAMPLES, 8));
 
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 
+
+    glfwSetWindowTitle(window, "Test Text");
+
+    glfwWindowHint(GLFW_SAMPLES, 8);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
@@ -122,35 +117,11 @@ int main(void)
 
     glfwSetKeyCallback(window, key_callback);
 
-    glfwMakeContextCurrent(window);
-
     glfwSwapInterval(1);
 
-    std::cout << glGetString(GL_VERSION) << "  -  " << glGetString(GL_VENDOR) << "  -  " << glGetString(GL_RENDERER) << "   -  " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    
     {
         /* Create all the things */
-        /*
-        *    MATRICES:
-        * 
-        * Zoom: scales everything 2x
-        * Player Transform: Moves around everthing to follow player
-        * Map Transform: Centers Everthing
-        * Projection: Fits output to window
-        * 
-        */
-
-
-
-
-
-
-
-
-        
-
-
-
-
 
         Json_loader loader;
 
@@ -170,14 +141,14 @@ int main(void)
 
         Player player(&player_render.vertex_buffer, &loader, 0);
 
-        Map main_map(&projection_matrix, &loader);
+        Map main_map(&projection_matrix, &loader, resolution_x, resolution_y, zoom);
 
         std::vector<Tile*> flowers;
         flowers.resize(500);
         for (int i = 0; i < 500; i++)
         {
             flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
-            flowers[i]->translate((rand() % 320 - 170) * 32, (rand() % 240 - 120) * 32);
+            flowers[i]->translate((rand() % (int)ceil(resolution_x / 32)) * 32, (rand() % (int)ceil(resolution_y / 32)) * 32);
         }
 
 
@@ -187,29 +158,34 @@ int main(void)
         
         while (!glfwWindowShouldClose(window) && running)
         {
+            /* Clear buffers and other OpenGL stuff */
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            /* Handle inputs */
             controller.tick();
+
+            glfwGetCursorPos(window, &xpos, &ypos);
+            xpos -= width / 2 / zoom;
+            ypos -= height / 2 / zoom;
+            ypos *= -1;
+
+
+            /* Tick things that need to be ticked */
+            
             player.tick();
             main_map.shift(player.position_x(), player.position_y());
 
 
-            
-            main_map.draw(*player.get_trans_matrix() * zoom_matrix); /* Has pointer to projection_matrix */
+            /* Draw all the renderers */
+            main_map.draw(*player.get_trans_matrix() *zoom_matrix); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix * zoom_matrix * *player.get_trans_matrix());
             things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix() * zoom_matrix);
-
-            
-            glfwGetCursorPos(window, &xpos, &ypos);
-            xpos -= width / 2;
-            ypos -= height / 2;
-            ypos *= -1;
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
             /* Poll for and process events */
             glfwPollEvents();
-
         }
 
         for (int i = 0; i < 500; i++)

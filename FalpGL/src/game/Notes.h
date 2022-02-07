@@ -10,6 +10,16 @@
 */
 
 /*
+*    MATRICES:
+*
+* Zoom: scales everything 2x
+* Player Transform: Moves around everthing to follow player
+* Map Transform: Centers Everthing
+* Projection: Fits output to window
+*
+*/
+
+/*
 * 
 * file for stuff I don't know where to put yet
 * and notes and things

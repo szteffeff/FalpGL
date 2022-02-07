@@ -60,14 +60,16 @@ Map::~Map()
 	}
 }
 
-Map::Map(glm::mat4* pm, Json_loader* l)
-	: height(24), width(32), renderer(BatchRenderer(width * height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
+Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y, int zm)
+	: zoom(zm), resolution{ res_x, res_y }, width(ceil(res_x / 32) + 2), height(ceil(res_y / 32) + 2), renderer(BatchRenderer(width* height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
 {
 	renderer.layout.Push<float>(3);
 	renderer.layout.Push<float>(2);
 	renderer.layout.Push<float>(1);
 
 	renderer.add_layout(renderer.layout);
+
+	std::cout << "Height\Width: " << height << ", " << width << "\n";
 
 	map_vector.resize((double)height * (double)width);
 
@@ -80,44 +82,43 @@ Map::Map(glm::mat4* pm, Json_loader* l)
 
 void Map::shift(float px, float py)
 {
-	//std::cout << "map shift" << px << ", " << -width / 2 - 32 << "\n";
+	bool print = false;
 
-	if ((px/2) < -16 + current_center[0] * 32)
+	if ((px/zoom) < -16 + current_center[0] * 32)
 	{
-		std::cout << "SHIFTED LEFT!! new center is: " << current_center[0] - 1 << "\n";
+		print = true;
 		current_center[0] -= 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(-32, 0);
 		}
-
 	}
-	else if ((px/2) > 16 + current_center[0] * 32)
+	else if ((px/zoom) > 16 + current_center[0] * 32)
 	{
-		std::cout << "SHIFTED RIGHT!! new center is: " << current_center[0] + 1 << "\n";
+		print = true;
 		current_center[0] += 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(32, 0);
 		}
 	}
 
-	if ((py / 2) < -16 + current_center[1] * 32)
+	if ((py / zoom) < -16 + current_center[1] * 32)
 	{
-		std::cout << "DOWN!! new center is: " << current_center[1] - 1 << "\n";
+		print = true;
 		current_center[1] -= 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(0, -32);
 		}
 	}
-	else if ((py / 2) > 16 + current_center[1] * 32)
+	else if ((py / zoom) > 16 + current_center[1] * 32)
 	{
-		std::cout << "SHIFTED UP!! new center is: " << current_center[1] + 1 << "\n";
+		print = true;
 		current_center[1] += 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(0, 32);
 		}
-
 	}
 
+	if (print) { std::cout << "map center is: " << current_center[0] << ", " << current_center[1] << "\n"; }
 }
 
 void Map::fill()
@@ -138,7 +139,7 @@ void Map::fill()
 		}
 	}
 
-	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-width * 32, -height * 32, 0.0f));
+	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-width / 2 * zoom * 32, -height / 2 * zoom *  32, 0.0f));
 }
 
 void Map::draw()
@@ -150,7 +151,6 @@ void Map::draw(glm::mat4 tm)
 {
 	renderer.draw(*projection_matrix, transformation_matrix * tm);
 }
-
 
 glm::mat4* Map::get_trans_matrix()
 {

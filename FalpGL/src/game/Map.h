@@ -27,7 +27,8 @@ private:
 
 	std::vector<std::vector<Tile*>> mvec;
 
-	int height, width;
+	int height, width, zoom;
+	int resolution[2];
 	float offset[2] = { 0.0f, 0.0f };
 	float current_center[2] = { 0.0f, 0.0f };
 	glm::mat4 transformation_matrix;
@@ -36,7 +37,7 @@ private:
 
 public:
 	~Map();
-	Map(glm::mat4* pm, Json_loader *l);
+	Map(glm::mat4* pm, Json_loader *l, int res_x, int res_y, int zm);
 
 	void shift(float dx, float dy);
 	void fill();
