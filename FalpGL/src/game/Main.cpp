@@ -46,11 +46,12 @@ int main(void)
     const int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
+    const bool windowed = false;
 
     glm::mat4 projection_matrix = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 
 
-    if (true) // true = fulscreen, false = windowed
+    if (!windowed) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -83,11 +84,13 @@ int main(void)
             window_height = resolution_y / window_scale;
 
             projection_matrix = glm::ortho(
-                round(-0.5f * window_width),
-                round(0.5f * window_width),
-                round(-0.5f * window_height),
-                round(0.5f * window_height),
+                round(-0.5f * window_width * window_scale),
+                round(0.5f * window_width * window_scale),
+                round(-0.5f * window_height * window_scale),
+                round(0.5f * window_height * window_scale),
                 -1.0f, 1.0f);
+
+            std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
         }
 
 
@@ -113,6 +116,7 @@ int main(void)
     GLCall(glEnable(GL_MULTISAMPLE));
 
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+    GLCall(glViewport(0, 0, window_width, window_height));
 
 
     glfwSetWindowTitle(window, "Test Text");
@@ -121,7 +125,6 @@ int main(void)
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-    glViewport(0, 0, window_width, window_height);
     glfwSetWindowSize(window, window_width, window_height);
 
     glfwSetKeyCallback(window, key_callback);
