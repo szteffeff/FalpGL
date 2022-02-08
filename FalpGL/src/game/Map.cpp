@@ -82,21 +82,21 @@ Map::~Map()
 }
 
 Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
-	: resolution{ res_x, res_y }, width(ceil(res_x / 32) + 2), height(ceil(res_y / 32) + 2), renderer(BatchRenderer(width* height, "res/shaders/map.shader")), projection_matrix(pm), loader(l)
+	: resolution{ res_x, res_y }, 
+	width((int)ceil(res_x / 32) % 2 == 1 ? ceil(res_x / 32) + 3 : ceil(res_x / 32) + 2), 
+	height((int)ceil(res_y / 32) % 2 == 1 ? ceil(res_y / 32) + 3 : ceil(res_y / 32) + 2),
+	renderer(BatchRenderer(width * height, "res/shaders/map.shader")), 
+	projection_matrix(pm), loader(l)
 {
 	renderer.layout.Push<float>(3);
 	renderer.layout.Push<float>(2);
 	renderer.layout.Push<float>(1);
-
 	renderer.add_layout(renderer.layout);
+
 
 	std::cout << "Height/Width: " << height << ", " << width << "\n";
 
 	map_vector.resize((double)height * (double)width);
-
-	mvec.resize(width);
-	for (int i = 0; i < width; i++)
-		mvec[i].resize(height);
 
 	fill();
 }
@@ -104,7 +104,7 @@ Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 void Map::shift(float px, float py)
 {
 	bool print = false;
-
+	
 	if ((px) < -16 + current_center[0] * 32) // left
 	{
 		print = true;
@@ -129,29 +129,34 @@ void Map::shift(float px, float py)
 		current_center[1] -= 1;
 		std::vector<Tile*> buffer;
 		buffer.resize(width);
-		for (int i = 0; i < height * width; i++) {
-			if (i > width * height - width - 1)
-			{
-				std::cout << "IIIII " << i - width * height + width << "\n";
-				map_vector[i]->translate(0, -32);
-				map_vector[i]->change_type(tile_id((tile++ % 2) + 2), loader);
-				buffer[i - width * height + width] = map_vector[i];
-			}
+		for (int i = (height - 1) * width; i < height * width; i++) {
+			map_vector[i]->translate(0, height * -32);
+			map_vector[i]->change_type(tile_id(((int)abs(current_center[1]) % 20) + 1), loader);
+			buffer[i - width * height + width] = map_vector[i];
 		}
-		std::shift_left(map_vector.begin(), map_vector.end(), width);
-
+		std::shift_right(map_vector.begin(), map_vector.end(), width);
 
 		for (int i = 0; i < width; i++)
 		{
-			map_vector[((width * height)) - width + i] = buffer[i];
+			map_vector[i] = buffer[i];
 		}
 	}
 	else if ((py) > 16 + current_center[1] * 32) // up
 	{
+		static int tile = 0;
 		print = true;
+		std::vector<Tile*> buffer;
+		buffer.resize(width);
 		current_center[1] += 1;
-		for (int i = 0; i < height * width; i++) {
-			map_vector[i]->translate(0, 32);
+		for (int i = 0; i < width; i++) {
+			map_vector[i]->translate(0, height * 32);
+			map_vector[i]->change_type(tile_id(((int)abs(current_center[1]) % 20) + 1), loader);
+			buffer[i] = map_vector[i];
+		}
+		std::shift_left(map_vector.begin(), map_vector.end(), width);
+		for (int i = 0; i < width; i++)
+		{
+			map_vector[((width * height)) - width + i] = buffer[i];
 		}
 	}
 
@@ -162,22 +167,20 @@ void Map::fill()
 {
 	int i = 0;
 
-	for (int y = 0.0f; y < height; y++)
+	for (int y = -height / 2; y < height / 2; y++)
 	{
-		for (int x = 0.0f; x < width; x++)
+		for (int x = -width / 2; x < width / 2; x++)
 		{
 
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
 			map_vector[i]->translate(x * 32.0f, y * 32.0f);
 			map_vector[i]->texture_index(0);
-
-			mvec[x][y] = map_vector[i];
-
 			i++;
 		}
+		std::cout << y << "\n";
 	}
 
-	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-width / 2 * 32, -height / 2 *  32, 0.0f));
+	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));
 }
 
 void Map::draw()
