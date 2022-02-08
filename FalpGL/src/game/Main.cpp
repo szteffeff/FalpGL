@@ -43,15 +43,14 @@ int main(void)
 
 
     int window_width, window_height, width_old = 0, height_old = 0;
-    const int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
+    int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
     const bool windowed = false;
 
-    glm::mat4 projection_matrix = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    glm::mat4 projection_matrix;
 
-
-    if (!windowed) // true = fulscreen, false = windowed
+    if (true) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -64,7 +63,10 @@ int main(void)
             window = glfwCreateWindow(mode->width, mode->height, "", glfwGetPrimaryMonitor(), NULL);
             if (!window) { glfwTerminate(); return -1;}
             
+            resolution_x = mode->width;
             window_width = mode->width;
+
+            resolution_y = mode->height;
             window_height = mode->height;
 
             projection_matrix = glm::ortho(
