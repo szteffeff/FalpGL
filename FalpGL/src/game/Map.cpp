@@ -138,7 +138,7 @@ void Map::shift(float px, float py)
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(0, 32);
 			if (i < width) {
-
+				map_vector[i]->change_type(COBBLESTONE_1, loader);
 			}
 		};
 	}
@@ -149,9 +149,9 @@ void Map::shift(float px, float py)
 void Map::fill()
 {
 	int i = 0;
-	for (int x = 0.0f; x < width; x++)
+	for (int y = 0.0f; y < height; y++)
 	{
-		for (int y = 0.0f; y < height; y++)
+		for (int x = 0.0f; x < width; x++)
 		{
 
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
