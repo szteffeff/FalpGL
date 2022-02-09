@@ -1,76 +1,43 @@
 #pragma once
 
 #include "../renderer/RendererIncludes.h"
-//#include "OverMap.h"
 
 
 struct tex_coord {
 	float coords[4][2];
 };
 
-struct Quad /*needs to take height and width of initial quad for setup + locatation to generate quad_data. also texture stuff?*/
+struct Quad
 {
-protected:
+private:
 	float quad_data[24];
-
-	/*
-	float size[2];
-	float position[2];
-	float texture_coordinants[2];
-	float zposition;
-	int texture;
-	*/
-
-public:
-	void operator=(const Quad&);
-
-public:
-	float height, width, y, y_offset, position[2];
+	void update();
 
 	unsigned int buffer_index;
-	VertexBuffer *active_buffer;
+	VertexBuffer* active_buffer;
+protected:
 
+
+public:
 	Quad(VertexBuffer *vb, float height, float width, float size);
 	Quad();
 
-	float *data();
-
-	void move(float delta_x, float delta_y, bool wrong_function_use_translate);
-	void teleport(float new_x, float new_y);
-
 	void set_z(float new_h);
-
-	void update();
+	void set_texture_coords(tex_coord new_coords);
+	void set_texture_index(float index);
 
 	void rotate(float degrees, Point point, bool radians = false);
 	void scale(float ratio);
 	void translate(float delta_x, float delta_y);
-	void texture_index(float new_i);
 
-	inline Point center();
-
-	void replace_data(const void* data);
+	inline Point center() const;
 
 	float get_height() const;
 	float get_width() const;
 
 	float get_y() const;
 	float get_x() const;
-
-	///////////////
-
-	void set_texture_coords(tex_coord new_coords);
-	void set_texture_index(float index);
-
 };
-
-/*
-*	X Y Z TX TY TI
-*	X Y Z TX TY TI
-*	X Y Z TX TY TI
-*	X Y Z TX TY TI
-* 
-*/
 
 
 class BatchRenderer {
@@ -93,5 +60,4 @@ public:
 	void add_layout(VertexBufferLayout &_layout);
 
 	void draw(glm::mat4 proj_matrix);
-	void draw(glm::mat4 proj_matrix, glm::mat4 trans_matrix); //for map.shader
 };

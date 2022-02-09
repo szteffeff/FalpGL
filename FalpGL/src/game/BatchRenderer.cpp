@@ -27,27 +27,8 @@ void BatchRenderer::draw(glm::mat4 proj_matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
 
-void BatchRenderer::draw(glm::mat4 proj_matrix, glm::mat4 trans_matrix)
-{
-	vertex_array.Bind();
-	shader.Bind();
-	index_buffer.Bind();
-
-
-	shader.SetUniformMat4f("u_MVP", proj_matrix);
-	shader.SetUniformMat4f("u_transform", trans_matrix);
-	shader.SetUniform1iv("u_Textures", 3, samplers);
-
-	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
-}
-
-void Quad::operator=(const Quad& src)
-{
-	memcpy(this, &src, sizeof(Quad));
-}
-
 Quad::Quad(VertexBuffer *vb, float h, float w, float size)
-	: y(0.0f), y_offset(0.0f), buffer_index(0), active_buffer(vb), height(h), width(w), position()
+	: buffer_index(0), active_buffer(vb)
 {
 
 	quad_data[0] = -w / 2;
@@ -93,57 +74,12 @@ Quad::Quad(VertexBuffer *vb, float h, float w, float size)
 }
 
 Quad::Quad()
-	: active_buffer(nullptr)
+	: active_buffer(nullptr), buffer_index(0)
 {
 	for (int i = 0; i < 24; i++)
 	{
 		quad_data[i] = 0.0f;
 	}
-}
-
-float *Quad::data()
-{
-	return quad_data;
-}
-
-void Quad::move(float delta_x, float delta_y, bool wrong_function_use_translate)
-{
-	quad_data[0] += delta_x;
-	quad_data[1] += delta_y;
-	quad_data[2] += delta_y;
-
-	quad_data[6] += delta_x;
-	quad_data[7] += delta_y;
-	quad_data[8] += delta_y;
-
-	quad_data[12] += delta_x;
-	quad_data[13] += delta_y;
-	quad_data[14] += delta_y;
-
-	quad_data[18] += delta_x;
-	quad_data[19] += delta_y;
-	quad_data[20] += delta_y;
-
-	y += delta_y;
-
-}
-
-void Quad::teleport(float new_x, float new_y)
-{
-	Point p = center();
-	quad_data[0]  =  (new_x) + (quad_data[0] - p.x);
-	quad_data[1]  =  (new_y) + (quad_data[1] - p.y);
-
-	quad_data[6]  =  (new_x) + (quad_data[6] - p.x);
-	quad_data[7]  =  (new_y) + (quad_data[7] - p.y);
-
-	quad_data[12] = (new_x) + (quad_data[12] - p.x);
-	quad_data[13] = (new_y) + (quad_data[13] - p.y);
-											  
-	quad_data[18] = (new_x) + (quad_data[18] - p.x);
-	quad_data[19] = (new_y) + (quad_data[19] - p.y);
-
-	update();
 }
 
 void Quad::set_z(float new_h)
@@ -238,25 +174,9 @@ void Quad::translate(float delta_x, float delta_y)
 	update();
 }
 
-void Quad::texture_index(float new_i)
-{  //5 11 17 23
-	quad_data[5] = new_i;
-	quad_data[11] = new_i;
-	quad_data[17] = new_i;
-	quad_data[23] = new_i;
-
-	update();
-}
-
-inline Point Quad::center()
+inline Point Quad::center() const
 {
 	return Point(((quad_data[0] + quad_data[6] + quad_data[12] + quad_data[18]) / 4), ((quad_data[1] + quad_data[7] + quad_data[13] + quad_data[19]) / 4));
-}
-
-
-void Quad::replace_data(const void* data)
-{
-	memcpy(&quad_data, data, 24 * sizeof(float));
 }
 
 

@@ -46,7 +46,7 @@ void Map::fill()
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
 			map_vector[i]->change_type(Tile_id((rand() % 20) + 1), loader);
 			map_vector[i]->translate(x * 32.0f, y * 32.0f);
-			map_vector[i]->texture_index(0);
+			map_vector[i]->set_texture_index(0);
 			i++;
 		}
 	}
@@ -164,12 +164,12 @@ void Map::shift_right()
 
 void Map::draw()
 {
-	renderer.draw(*projection_matrix, transformation_matrix);
+	renderer.draw(*projection_matrix * transformation_matrix);
 }
 
 void Map::draw(glm::mat4 tm)
 {
-	renderer.draw(*projection_matrix, transformation_matrix * tm);
+	renderer.draw(*projection_matrix * transformation_matrix * tm);
 }
 
 glm::mat4* Map::get_trans_matrix()
