@@ -27,8 +27,9 @@ class Map {
 private:
 	Json_loader* loader;
 	std::vector<Tile*> map_vector;
+	std::vector<Tile*> map_vector_static;
 
-	std::vector<std::vector<Tile*>> mvec;
+	
 
 	int height, width;
 	int resolution[2];
@@ -37,6 +38,11 @@ private:
 	glm::mat4 transformation_matrix;
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;
+
+	void shift_up();
+	void shift_down();
+	void shift_left();
+	void shift_right();
 
 public:
 	~Map();
