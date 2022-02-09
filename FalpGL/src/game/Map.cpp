@@ -107,10 +107,20 @@ void Map::shift(float px, float py)
 	
 	if ((px) < -16 + current_center[0] * 32) // left
 	{
+		Tile* buffer_tile;
+		std::vector<Tile*> buffer;
+		buffer.resize(width);
 		print = true;
 		current_center[0] -= 1;
 		for (int i = 0; i < height * width; i++) {
 			map_vector[i]->translate(-32, 0);
+		}
+
+
+		for (int i = width - 1; i < height * (width - 1) ; i += width)
+		{
+			buffer_tile = map_vector[i];
+			std::shift_right(map_vector.begin() + i - (width - 1), map_vector.begin() + i, 1);
 		}
 	}
 	else if ((px) > 16 + current_center[0] * 32) // right
@@ -177,7 +187,6 @@ void Map::fill()
 			map_vector[i]->texture_index(0);
 			i++;
 		}
-		std::cout << y << "\n";
 	}
 
 	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));

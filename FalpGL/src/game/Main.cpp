@@ -50,7 +50,7 @@ int main(void)
 
     glm::mat4 projection_matrix;
 
-    if (true) // true = fulscreen, false = windowed
+    if (false) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
