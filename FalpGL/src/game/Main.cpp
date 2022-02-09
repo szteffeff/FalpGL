@@ -13,6 +13,7 @@
 #include "Input.h"
 #include "Entitiy.h"
 #include "Json.h"
+#include "UI.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -139,6 +140,8 @@ int main(void)
 
         Json_loader loader;
 
+        UserInterface ui;
+
         VertexBufferLayout layout;
         layout.Push<float>(3);
         layout.Push<float>(2);
@@ -154,6 +157,8 @@ int main(void)
         atlas_0.Bind(0);
 
         Player player(&player_render.vertex_buffer, &loader, 0);
+
+        ui.SetHealth(player.GetHealth());
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
@@ -174,6 +179,7 @@ int main(void)
             xpos -= window_width / 2;
             ypos -= window_height / 2;
             ypos *= -1;
+
 
 
             /* Tick things that need to be ticked */

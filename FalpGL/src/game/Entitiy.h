@@ -15,10 +15,12 @@ protected:
 
 public:
 	std::string name;
+	Entity();
 	Entity(VertexBuffer* a, Json_loader* load, unsigned int id);
 	Quad* get_quad();
 
 public:
+
 	virtual void tick();
 
 	void walk(float direction, float magnitude);
@@ -34,10 +36,12 @@ private:
 
 	float offset[2] = { 0.0f, 0.0f };
 	
+	float Health = 100;
 
 public:
 	glm::mat4 *get_trans_matrix();
 	float position_x();
 	float position_y();
 	void tick();
+	float* GetHealth();
 };

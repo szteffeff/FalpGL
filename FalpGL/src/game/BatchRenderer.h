@@ -9,12 +9,13 @@ struct tex_coord {
 
 struct Quad
 {
-private:
+public:
 	float quad_data[24];
 	void update();
 
 	unsigned int buffer_index;
 	VertexBuffer* active_buffer;
+	
 protected:
 
 
@@ -37,6 +38,7 @@ public:
 
 	float get_y() const;
 	float get_x() const;
+	Point find_tile();
 };
 
 

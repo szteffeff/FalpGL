@@ -1,5 +1,9 @@
 #include "Entitiy.h"
 
+Entity::Entity()
+{
+}
+
 Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
 	: loader(load), active_animation(0), momentum(), entity_id(id)
 {
@@ -100,6 +104,11 @@ void Player::tick()
 	animations[active_animation].tick();
 
 	//std::cout << "position: " << position[0] << ", " << position[1] << "\n";
+}
+
+float* Player::GetHealth()
+{
+	return &Health;
 }
 
 glm::mat4* Player::get_trans_matrix()
