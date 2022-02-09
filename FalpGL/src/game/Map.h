@@ -30,6 +30,7 @@ private:
 
 	std::vector<std::vector<Tile*>> mvec;
 
+	float PlayerLast_x, PlayerLast_y;
 	int height, width;
 	int resolution[2];
 	float offset[2] = { 0.0f, 0.0f };
@@ -37,6 +38,7 @@ private:
 	glm::mat4 transformation_matrix;
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;
+	Point tileposition(int index);
 
 public:
 	~Map();

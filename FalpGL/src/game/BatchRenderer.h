@@ -61,7 +61,7 @@ public:
 
 	void set_texture_coords(tex_coord new_coords);
 	void set_texture_index(float index);
-
+	Point find_tile();
 };
 
 /*

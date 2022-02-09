@@ -68,6 +68,11 @@ void Tile::change_type(tile_id id, Json_loader* loader)
 }
 
 
+Point Map::tileposition(int index){
+	map_vector[index];
+	return Point(0, 0);
+}
+
 Map::~Map()
 {
 	int i = 0;
@@ -103,6 +108,15 @@ Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 
 void Map::shift(float px, float py)
 {
+	float Player_Moved_x = PlayerLast_x - px;
+	float Player_Moved_y = PlayerLast_y - py;
+
+	if (Player_Moved_x > 32) { std::cout << "MOVE RIGHT\n";}
+	else if (Player_Moved_x < -32) { std::cout << "MOVE LEFT\n";}
+
+	if (Player_Moved_y > 32) { std::cout << "MOVE UP\n";}
+	else if (Player_Moved_y < -32) { std::cout << "MOVE DOWN\n"; }
+
 	bool print = false;
 	
 	if ((px) < -16 + current_center[0] * 32) // left
@@ -161,6 +175,8 @@ void Map::shift(float px, float py)
 	}
 
 	if (print) { std::cout << "map center is: " << current_center[0] << ", " << current_center[1] << "\n"; }
+	PlayerLast_x = px;
+	PlayerLast_y = py;
 }
 
 void Map::fill()
@@ -177,7 +193,6 @@ void Map::fill()
 			map_vector[i]->texture_index(0);
 			i++;
 		}
-		std::cout << y << "\n";
 	}
 
 	transformation_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));
@@ -192,6 +207,8 @@ void Map::draw(glm::mat4 tm)
 {
 	renderer.draw(*projection_matrix, transformation_matrix * tm);
 }
+
+
 
 glm::mat4* Map::get_trans_matrix()
 {

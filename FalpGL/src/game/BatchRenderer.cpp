@@ -92,6 +92,13 @@ Quad::Quad(VertexBuffer *vb, float h, float w, float size)
 	buffer_index = active_buffer->add_quad(quad_data);
 }
 
+Point Quad::find_tile()
+{
+	float x_tile = quad_data[0] / 32 + 0.5;
+	float y_tile = quad_data[1] / 32 + 0.5;
+	return Point(x_tile, y_tile);
+}
+
 Quad::Quad()
 	: active_buffer(nullptr)
 {
@@ -306,3 +313,5 @@ void Quad::set_texture_index(float index)
 
 	update();
 }
+
+
