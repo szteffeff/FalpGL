@@ -1,34 +1,20 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
-#include "TileTypes.h"
+#include "../types/TileTypes.h"
 #include "BatchRenderer.h" 
 #include "Json.h"
+#include "Tile.h"
 #include <iostream>
 #include <algorithm>
-
-
-struct Tile : public Quad {
-private:
-
-public:
-	Tile();
-	Tile(VertexBuffer* vb, Json_loader* loader);
-	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
-
-	void change_type(tile_id _id, Json_loader* loader);
-};
-
-
-
-
 
 
 class Map {
 private:
 	Json_loader* loader;
 	std::vector<Tile*> map_vector;
+	std::vector<Tile*> map_vector_static;
 
-	std::vector<std::vector<Tile*>> mvec;
+	
 
 	float PlayerLast_x, PlayerLast_y;
 	int height, width;
@@ -39,6 +25,11 @@ private:
 	glm::mat4 *projection_matrix;
 	BatchRenderer renderer;
 	Point tileposition(int index);
+
+	void shift_up();
+	void shift_down();
+	void shift_left();
+	void shift_right();
 
 public:
 	~Map();

@@ -6,7 +6,7 @@
 
 #include "../renderer/Texture.h"
 #include "BatchRenderer.h"
-#include "AnimationTypes.h"
+#include "../types/AnimationTypes.h"
 #include "Json.h"
 
 class Animation {
@@ -28,7 +28,7 @@ private:
 	std::chrono::high_resolution_clock::time_point last_time;
 
 private:
-	void load(animation_id id);
+	void load(Animation_id id);
 
 
 

@@ -7,7 +7,7 @@
 Animation::Animation(Quad* quad, Json_loader* j, unsigned int id)
 	: m_quad(quad), current_frame(0), active(false), atlas(0), length(0), loop(true), loader(j) , last_time(std::chrono::high_resolution_clock::now())
 {
-	load(animation_id(id));
+	load(Animation_id(id));
 
 	if (length <= 0) {/*json loading messed up...*/}
 
@@ -44,10 +44,10 @@ bool Animation::tick()
 	return true;
 }
 
-void Animation::load(animation_id id)
+void Animation::load(Animation_id id)
 {
 	json j;
-	j = loader->animations[std::to_string(id)];
+	j = loader->animations[std::to_string((int)id)];
 
 	loop = j["loop"];
 	atlas = j["atlas"];

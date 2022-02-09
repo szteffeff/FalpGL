@@ -161,7 +161,8 @@
     <ClCompile Include="src\game\Json.cpp" />
     <ClCompile Include="src\game\Main.cpp" />
     <ClCompile Include="src\game\Map.cpp" />
-    <ClCompile Include="src\game\TileTypes.h" />
+    <ClCompile Include="src\game\Tile.cpp" />
+    <ClCompile Include="src\types\TileTypes.h" />
     <ClCompile Include="src\renderer\Point.cpp" />
     <ClCompile Include="src\renderer\RendererIncludes.h" />
     <ClCompile Include="src\renderer\IndexBuffer.cpp" />
@@ -322,7 +323,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\Animation.h" />
-    <ClInclude Include="src\game\AnimationTypes.h" />
+    <ClInclude Include="src\game\Tile.h" />
+    <ClInclude Include="src\types\AnimationTypes.h" />
     <ClInclude Include="src\game\BatchRenderer.h" />
     <ClInclude Include="src\game\Entitiy.h" />
     <ClInclude Include="src\game\Json.h" />
@@ -338,6 +340,7 @@
     <ClInclude Include="src\renderer\VertexArray.h" />
     <ClInclude Include="src\renderer\VertexBuffer.h" />
     <ClInclude Include="src\renderer\VertexBufferLayout.h" />
+    <ClInclude Include="src\types\EntityTypes.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_vector_relational.hpp" />
