@@ -69,7 +69,10 @@
     <ClCompile Include="src\game\Json.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\TileTypes.h">
+    <ClCompile Include="src\types\TileTypes.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1383,13 +1386,19 @@
     <ClInclude Include="src\vendor\nlohmann_json\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\AnimationTypes.h">
+    <ClInclude Include="src\types\AnimationTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Notes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\types\EntityTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

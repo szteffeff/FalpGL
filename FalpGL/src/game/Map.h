@@ -1,26 +1,11 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
-#include "TileTypes.h"
+#include "../types/TileTypes.h"
 #include "BatchRenderer.h" 
 #include "Json.h"
+#include "Tile.h"
 #include <iostream>
 #include <algorithm>
-
-
-struct Tile : public Quad {
-private:
-
-public:
-	Tile();
-	Tile(VertexBuffer* vb, Json_loader* loader);
-	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
-
-	void change_type(tile_id _id, Json_loader* loader);
-};
-
-
-
-
 
 
 class Map {

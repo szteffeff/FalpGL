@@ -50,7 +50,7 @@ int main(void)
 
     glm::mat4 projection_matrix;
 
-    if (false) // true = fulscreen, false = windowed
+    if (!windowed) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -157,14 +157,6 @@ int main(void)
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
-        std::vector<Tile*> flowers;
-        flowers.resize(500);
-        for (int i = 0; i < 500; i++)
-        {
-            flowers[i] = new Tile(&things.vertex_buffer, &loader, "1");
-            flowers[i]->translate((rand() % (int)ceil(resolution_x / 32)) * 32, (rand() % (int)ceil(resolution_y / 32)) * 32);
-        }
-
 
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -200,11 +192,6 @@ int main(void)
 
             /* Poll for and process events */
             glfwPollEvents();
-        }
-
-        for (int i = 0; i < 500; i++)
-        {
-            delete flowers[i];
         }
     }
     glfwTerminate();

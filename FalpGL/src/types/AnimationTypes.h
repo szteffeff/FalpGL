@@ -1,6 +1,6 @@
 #pragma once
 
-enum animation_id {
+enum class Animation_id {
 	ENTITY_PLAYER_MOVE_IDLE = 0,
 	ENTITY_PLAYER_MOVE_UP,
 	ENTITY_PLAYER_MOVE_LEFT,
@@ -9,7 +9,7 @@ enum animation_id {
 
 
 	ENTITY_PLAYER_ATTACK_1 = 100,
-	ENTITY_PLAYER_ATTACK_2, //this works?
+	ENTITY_PLAYER_ATTACK_2, 
 
 };
 
