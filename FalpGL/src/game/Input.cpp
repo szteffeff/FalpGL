@@ -10,6 +10,11 @@ Input::~Input()
 {
 }
 
+void Input::set_pause(bool* pause)
+{
+	pause_menu = pause;
+}
+
 void Input::set_keepalive(bool* keepalive)
 {
 	running = keepalive;
@@ -48,6 +53,10 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 		break;
 
 	case(GLFW_KEY_ESCAPE):
+		*pause_menu = !*pause_menu;
+		std::cout << "Pausing\n";
+		break;
+
 	case(GLFW_KEY_Q):
 		*running = false;
 		std::cout << "stopping\n";

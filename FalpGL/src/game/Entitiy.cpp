@@ -111,6 +111,11 @@ float* Player::GetHealth()
 	return &Health;
 }
 
+float* Player::GetStamina()
+{
+	return &Stamina;
+}
+
 glm::mat4* Player::get_trans_matrix()
 {
 	return(&player_transform_matrix);

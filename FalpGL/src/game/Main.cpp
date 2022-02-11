@@ -48,6 +48,7 @@ int main(void)
     double xpos, ypos;
     bool running = true;
     const bool windowed = false;
+    bool pause = false;
 
     glm::mat4 projection_matrix;
 
@@ -159,10 +160,11 @@ int main(void)
         Player player(&player_render.vertex_buffer, &loader, 0);
 
         ui.SetHealth(player.GetHealth());
+        ui.SetStamina(player.GetStamina());
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
-
+        
         controller.set_player(&player);
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
@@ -183,7 +185,7 @@ int main(void)
 
 
             /* Tick things that need to be ticked */
-            
+            ui.UI_Tick();
             player.tick();
             main_map.shift(player.position_x(), player.position_y());
 

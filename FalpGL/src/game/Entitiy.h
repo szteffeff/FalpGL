@@ -37,6 +37,7 @@ private:
 	float offset[2] = { 0.0f, 0.0f };
 	
 	float Health = 100;
+	float Stamina = 100;
 
 public:
 	glm::mat4 *get_trans_matrix();
@@ -44,4 +45,5 @@ public:
 	float position_y();
 	void tick();
 	float* GetHealth();
+	float* GetStamina();
 };
