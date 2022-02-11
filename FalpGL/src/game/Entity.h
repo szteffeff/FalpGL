@@ -25,6 +25,8 @@ public:
 	virtual void tick();
 	void set_animation(int id);
 	void translate(float x, float y);
+	void set_z(float z);
+	Point center();
 
 };
 

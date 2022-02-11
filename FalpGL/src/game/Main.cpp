@@ -61,11 +61,11 @@ int main(void)
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool windowed = false;
+    const bool fullscreen = true;
 
     glm::mat4 projection_matrix;
 
-    if (!windowed) // true = fulscreen, false = windowed
+    if (fullscreen) // true = fulscreen, false = windowed
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -115,7 +115,15 @@ int main(void)
 
 
     glfwMakeContextCurrent(window);
-    std::cout << (glewInit() == GLEW_OK ? "GLEW ok\n" : "GLEW init fail!\n");
+    if (glewInit() == GLEW_OK)
+    {
+        std::cout << "GLEW ok\n";
+    }
+    else
+    {
+        std::cout << "GLEW init fail!\n";
+        return -1;
+    }
 
 
     std::cout << glGetString(GL_VERSION) << " - ";

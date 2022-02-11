@@ -7,17 +7,21 @@ Creature::Creature() {}
 
 
 
-
+/* Health_Bar */
 
 Health_Bar::Health_Bar(VertexBuffer* buffer)
 	: frame(buffer, loader->entities["HEALTH_BAR_FRAME"]),
 	red_bar(buffer, loader->entities["HEALTH_BAR_RED"]),
 	green_bar(buffer, loader->entities["HEALTH_BAR_GREEN"])
-{}
+{
+	frame.set_z(0.998);
+	red_bar.set_z(0.999);
+	green_bar.set_z(0.999);
+}
 
 
 
-
+/* Player */
 
 Player::Player(VertexBuffer* vb)
 	: m_player(vb, loader->entities["PLAYER"])
@@ -31,9 +35,9 @@ void Player::walk(float direction, float magnitude)
 
 	momentum[0] += dx;
 	momentum[1] += dy;
+
+	std::cout << dx << ", " << dy << "\n";
 }
-
-
 
 void Player::tick()
 {
@@ -85,3 +89,5 @@ float Player::position_x()
 {
 	return position[0];
 }
+
+/* #### */

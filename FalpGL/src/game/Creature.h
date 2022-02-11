@@ -20,16 +20,12 @@ private:
 	float momentum[2], position[2];
 	float Health;
 
-	enum class player_animations { // wrong
+	enum player_animations { // wrong
 		IDLE = 0,
 		UP,
-		DOWN,
 		LEFT,
-		RIGHT,
-		HURT,
-		X,
-		Y,
-		Z
+		DOWN,
+		RIGHT
 	};
 
 
@@ -53,8 +49,17 @@ private:
 	Entity red_bar;
 	Entity green_bar;
 
+	enum frame_animations {
+		EMPTY = 0,
+		QUARTER,
+		HALF,
+		THREE_QAURTER,
+		FULL
+	};
+
 public:
 	Health_Bar(VertexBuffer* buffer);
 
 	void tick(float health_level, float stamina_level, int flask_state);
+	/* needs set coords function */
 };

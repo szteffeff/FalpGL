@@ -43,4 +43,9 @@ void Entity::translate(float x, float y)
 	main_quad.translate(x, y);
 }
 
+void Entity::set_z(float z)
+{
+	main_quad.set_z(z);
+}
+
 
