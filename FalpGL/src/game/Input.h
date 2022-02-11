@@ -15,7 +15,7 @@ public:
 	~Input();
 
 	void set_keepalive(bool* keepalive);
-	void set_player(Sub_Entity* p);
+	void set_player(Player* p);
 	void set_matrix(glm::mat4* m);
 
 	void recive(int key, int scancode, int action, int mods);
@@ -25,7 +25,7 @@ private:
 
 	std::vector<key> keys;
 
-	Sub_Entity* player;
+	Player* player;
 	Map* map;
 	glm::mat4* zoom_matrix;
 

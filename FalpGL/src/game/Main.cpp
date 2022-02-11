@@ -23,14 +23,24 @@ std::string get_current_dir() {
     return current_working_dir;
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+/* Declarations */
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+Json_loader* Animation::loader;
+
+
+
+/* Input needs to be global I think */
 Input controller;
 
 int main(void)
 {
+    UserInterface ui;
+
     Json_loader loader;
-    if (!loader.init()) { return 0; }
+    if (!loader.init()) { return -1; }
+
+    Animation::loader = &loader;
 
     /* Setup the window */
     GLFWwindow* window;
@@ -139,11 +149,6 @@ int main(void)
     
     {
         /* Create all the things */
-
-        Json_loader loader;
-
-        UserInterface ui;
-
         VertexBufferLayout layout;
         layout.Push<float>(3);
         layout.Push<float>(2);
@@ -158,13 +163,13 @@ int main(void)
         Texture atlas_0 = Texture("res/gfx/atlas1.png");
         atlas_0.Bind(0);
 
-        Player player(&player_render.vertex_buffer, &loader, 0);
+        Player player(&player_render.vertex_buffer, loader.entities["PLAYER"]);
 
-        ui.SetHealth(player.GetHealth());
+        
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
-
+        ui.SetHealth(player.GetHealth());
         controller.set_player(&player);
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);

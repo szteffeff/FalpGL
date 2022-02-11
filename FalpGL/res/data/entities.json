@@ -1,28 +1,23 @@
 {
-  "0": {
+  "PLAYER": {
     "name": "PLAYER",
     "size": [ 128, 128 ],
     "animation_count": 5,
-    "animations_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DONW", "ENTITY_PLAYER_MOVE_RIGHT" ],
-    "animations": [ 0, 1, 2, 3, 4 ]
+    "animation_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DOWN", "ENTITY_PLAYER_MOVE_RIGHT" ],
   },
-  "1": {
-    "name": "HEALTH_BAR",
+  "HEALTH_BAR_FRAME": {
     "size": [ "place", "holder" ],
-    "frame": {
-      "atlas": 1,
-      "animation_count": 4,
-      "animation_names": [ "FLASK_EMPTY", "FLASK_QUARTER_FULL", "FLASK_HALF_FULL", "FLASK_THREE_QUARTERS_FULL", "FLASK_FULL" ]
-    },
-    "red_bar": {
-      "atlas": 1,
-      "animation_count": 1,
-      "animations": ["RED_BAR"]
-    },
-    "green_bar": {
-      "atlas": 1,
-      "animation_count": 1,
-      "animations": [ "GREEN_BAR" ]
-    }
+    "animation_count": 5,
+    "animation_names": [ "FLASK_EMPTY", "FLASK_QUARTER", "FLASK_HALF", "FLASK_THREE_QUARTERS", "FLASK_FULL" ]
+  },
+  "HEALTH_BAR_RED": {
+    "size": [ "place", "holder" ],
+    "animation_count": 1,
+    "animation_names": [ "RED_BAR" ]
+  },
+  "HEALTH_BAR_GREEN": {
+    "size": [ "place", "holder" ],
+    "animation_count": 1,
+    "animation_names": [ "GREEN_BAR" ]
   }
 }

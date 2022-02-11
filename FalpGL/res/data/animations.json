@@ -1,10 +1,10 @@
 {
-  "0": {
+  "ENTITY_PLAYER_MOVE_IDLE": {
     "name": "ENTITY_PLAYER_MOVE_IDLE",
     "atlas": 0,
     "loop": true,
     "length": 4,
-    "frame_order": [0, 1, 2, 3], 
+    "frame_order": [ 0, 1, 2, 3 ],
     "frame_times": [ 100, 100, 100, 100 ],
     "texture_coordinants": [
       [
@@ -33,7 +33,7 @@
       ]
     ]
   },
-  "1": {
+  "ENTITY_PLAYER_MOVE_UP": {
     "name": "ENTITY_PLAYER_MOVE_UP",
     "atlas": 0,
     "loop": true,
@@ -91,7 +91,7 @@
       ]
     ]
   },
-  "2": {
+  "ENTITY_PLAYER_MOVE_LEFT": {
     "name": "ENTITY_PLAYER_MOVE_LEFT",
     "atlas": 0,
     "loop": true,
@@ -149,7 +149,7 @@
       ]
     ]
   },
-  "3": {
+  "ENTITY_PLAYER_MOVE_DOWN": {
     "name": "ENTITY_PLAYER_MOVE_DOWN",
     "atlas": 0,
     "loop": true,
@@ -207,7 +207,7 @@
       ]
     ]
   },
-  "4": {
+  "ENTITY_PLAYER_MOVE_RIGHT": {
     "name": "ENTITY_PLAYER_MOVE_RIGHT",
     "atlas": 0,
     "loop": true,
@@ -265,7 +265,7 @@
       ]
     ]
   },
-  "100": {
+  "PLAYER_STATIC": {
     "name": "PLAYER_STATIC",
     "atlas": 0,
     "loop": true,

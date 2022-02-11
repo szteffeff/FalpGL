@@ -15,7 +15,7 @@ void Input::set_keepalive(bool* keepalive)
 	running = keepalive;
 }
 
-void Input::set_player(Sub_Entity* p)
+void Input::set_player(Player* p)
 {
 	player = p;
 }
@@ -29,6 +29,7 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 {
 	if (action == 2) { return; }
 
+	/* Triggers on press and release (twice) */
 	switch (key)
 	{
 	case(GLFW_KEY_W):
@@ -59,6 +60,7 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 
 	if (action == 0) { return; }
 
+	/* Triggers on press (once) */
 	switch (key)
 	{
 	case(GLFW_KEY_0):
