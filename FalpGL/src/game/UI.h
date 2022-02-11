@@ -11,9 +11,17 @@
 //health . ewapons, 
 class UserInterface {
 	float* Player_Health;
-	//Health_Bar hb;
+	float* Player_Stamina;
+	Entity PlayerHealthbar;
+	Entity PlayerStaminaBar;
 
 public:
 	UserInterface();
 	void SetHealth(float* H);
+	void SetStamina(float* S);
+	void UI_Tick();
+	void Placeholder_Health(float HP);
+	void Placeholder_Stamina(float SP);
+
 };
+

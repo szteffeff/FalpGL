@@ -15,6 +15,7 @@ public:
 	Input();
 	~Input();
 
+	void set_pause(bool* pause);
 	void set_keepalive(bool* keepalive);
 	void set_player(Player* p);
 	void set_matrix(glm::mat4* m);
@@ -31,5 +32,6 @@ private:
 	glm::mat4* zoom_matrix;
 
 	bool* running;
+	bool* pause_menu;
 	const char alphabet[26] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
 };
