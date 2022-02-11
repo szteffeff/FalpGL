@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Map.h"
+#include "Creature.h"
 
 struct key {
 	char m_key = 0;

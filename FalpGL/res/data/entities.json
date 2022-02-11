@@ -3,7 +3,7 @@
     "name": "PLAYER",
     "size": [ 128, 128 ],
     "animation_count": 5,
-    "animation_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DOWN", "ENTITY_PLAYER_MOVE_RIGHT" ],
+    "animation_names": [ "ENTITY_PLAYER_MOVE_IDLE", "ENTITY_PLAYER_MOVE_UP", "ENTITY_PLAYER_MOVE_LEFT", "ENTITY_PLAYER_MOVE_DOWN", "ENTITY_PLAYER_MOVE_RIGHT" ]
   },
   "HEALTH_BAR_FRAME": {
     "size": [ "place", "holder" ],

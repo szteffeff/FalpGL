@@ -61,7 +61,7 @@ int main(void)
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool windowed = true;
+    const bool windowed = false;
 
     glm::mat4 projection_matrix;
 
@@ -165,7 +165,7 @@ int main(void)
         Texture atlas_0 = Texture("res/gfx/atlas1.png");
         atlas_0.Bind(0);
 
-        Player player(&player_render.vertex_buffer, loader.entities["PLAYER"]);
+        Player player(&player_render.vertex_buffer);
 
         
 

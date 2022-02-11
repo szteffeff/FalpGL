@@ -11,7 +11,7 @@
 //health . ewapons, 
 class UserInterface {
 	float* Player_Health;
-	Health_Bar hb;
+	//Health_Bar hb;
 
 public:
 	UserInterface();
