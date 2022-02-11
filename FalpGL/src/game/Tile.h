@@ -13,6 +13,7 @@
 
 struct Tile : public Quad {
 private:
+	bool solid;
 
 public:
 	Tile();
@@ -20,4 +21,5 @@ public:
 	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
 
 	void change_type(Tile_id _id, Json_loader* loader);
+	bool is_solid() const;
 };

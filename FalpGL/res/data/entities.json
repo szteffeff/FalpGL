@@ -7,10 +7,22 @@
     "animations": [ 0, 1, 2, 3, 4 ]
   },
   "1": {
-    "name": "STATIC_PLAYER",
-    "size": [ 1000.0, 500.0 ],
-    "animation_count": 1,
-    "animations_names": [ "PLAYER_STATIC" ],
-    "animations": [ 100 ]
+    "name": "HEALTH_BAR",
+    "size": [ "place", "holder" ],
+    "frame": {
+      "atlas": 1,
+      "animation_count": 4,
+      "animation_names": [ "FLASK_EMPTY", "FLASK_QUARTER_FULL", "FLASK_HALF_FULL", "FLASK_THREE_QUARTERS_FULL", "FLASK_FULL" ]
+    },
+    "red_bar": {
+      "atlas": 1,
+      "animation_count": 1,
+      "animations": ["RED_BAR"]
+    },
+    "green_bar": {
+      "atlas": 1,
+      "animation_count": 1,
+      "animations": [ "GREEN_BAR" ]
+    }
   }
 }

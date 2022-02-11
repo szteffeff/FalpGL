@@ -15,7 +15,7 @@ void Input::set_keepalive(bool* keepalive)
 	running = keepalive;
 }
 
-void Input::set_player(Entity* p)
+void Input::set_player(Sub_Entity* p)
 {
 	player = p;
 }

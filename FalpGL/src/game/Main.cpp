@@ -28,6 +28,8 @@ Input controller;
 
 int main(void)
 {
+    Json_loader loader;
+    if (!loader.init()) { return 0; }
 
     /* Setup the window */
     GLFWwindow* window;
@@ -42,11 +44,11 @@ int main(void)
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 
-    int window_width, window_height, width_old = 0, height_old = 0;
+    int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool windowed = false;
+    const bool windowed = true;
 
     glm::mat4 projection_matrix;
 
@@ -136,8 +138,6 @@ int main(void)
     
     {
         /* Create all the things */
-
-        Json_loader loader;
 
         VertexBufferLayout layout;
         layout.Push<float>(3);

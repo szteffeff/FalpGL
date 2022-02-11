@@ -1,6 +1,6 @@
 #include "Entitiy.h"
 
-Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
+Sub_Entity::Sub_Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
 	: loader(load), active_animation(0), momentum(), entity_id(id)
 {
 	json j;
@@ -10,22 +10,47 @@ Entity::Entity(VertexBuffer *a, Json_loader* load, unsigned int id)
 
 	animation_count = j["animation_count"];
 
-	m_quad = Quad(a, j["size"][0], j["size"][1], 0.0f);
+	main_quad = Quad(a, j["size"][0], j["size"][1], 0.0f);
 
 	animations.resize(animation_count);
 
 	for (int i = 0; i < animation_count; i++)
 	{
-		animations[i] = Animation(&m_quad, loader, j["animations"][i]);
+		animations[i] = Animation(&main_quad, loader, j["animations"][i]);
 	}
 
 	set_animation(active_animation);
 	animations[active_animation].tick();
 }
 
-void Entity::tick()
+Sub_Entity::Sub_Entity(VertexBuffer* a, json load) /* takes loader already scoped to full entity */
+	: loader(), active_animation(0), momentum()
 {
-	m_quad.translate(momentum[0], momentum[1]);
+	json j;
+	j = load;
+
+	name = "";
+
+	animation_count = j["animation_count"];
+
+	main_quad = Quad(a, j["size"][0], j["size"][1], 0.0f);
+
+	animations.resize(animation_count);
+
+	for (int i = 0; i < animation_count; i++)
+	{
+		animations[i] = Animation(&main_quad, loader, j["animations"][i]);
+	}
+
+	set_animation(active_animation);
+	animations[active_animation].tick();
+}
+
+Sub_Entity::Sub_Entity() {}
+
+void Sub_Entity::tick()
+{
+	main_quad.translate(momentum[0], momentum[1]);
 	momentum[0] *= 0.9;
 	momentum[1] *= 0.9;
 
@@ -44,7 +69,7 @@ void Entity::tick()
 	animations[active_animation].tick();
 }
 
-void Entity::walk(float direction, float magnitude)
+void Sub_Entity::walk(float direction, float magnitude)
 {
 	magnitude *= 3;
 	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
@@ -54,7 +79,7 @@ void Entity::walk(float direction, float magnitude)
 	momentum[1] += dy;
 }
 
-void Entity::set_animation(int id)
+void Sub_Entity::set_animation(int id)
 {
 	if (id == active_animation) { return; }
 	animations[active_animation].unset();
@@ -62,9 +87,9 @@ void Entity::set_animation(int id)
 	animations[active_animation].set();
 }
 
-Quad* Entity::get_quad()
+Quad* Sub_Entity::get_quad()
 {
-	return &m_quad;
+	return &main_quad;
 }
 
 void Player::tick()
@@ -75,7 +100,7 @@ void Player::tick()
 	position[0] += momentum[0];
 	position[1] += momentum[1];
 
-	m_quad.translate(momentum[0], momentum[1]);
+	main_quad.translate(momentum[0], momentum[1]);
 
 
 
@@ -116,3 +141,9 @@ float Player::position_x()
 {
 	return position[0];
 }
+
+Health_Bar::Health_Bar(BatchRenderer* for_active_buffer, Json_loader* l)
+	: frame(&for_active_buffer->vertex_buffer, l->entities["1"]["flask"]),
+	red_bar(&for_active_buffer->vertex_buffer, l->entities["1"]["red_bar"]),
+	green_bar(&for_active_buffer->vertex_buffer, l->entities["1"]["green_bar"])
+{}

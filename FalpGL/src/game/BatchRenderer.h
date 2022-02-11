@@ -25,6 +25,7 @@ public:
 	void set_z(float new_h);
 	void set_texture_coords(tex_coord new_coords);
 	void set_texture_index(float index);
+	void set_coords(float x0, float  y0, float x2, float y2);
 
 	void rotate(float degrees, Point point, bool radians = false);
 	void scale(float ratio);
@@ -37,6 +38,8 @@ public:
 
 	float get_y() const;
 	float get_x() const;
+
+	Point find_tile();
 };
 
 
