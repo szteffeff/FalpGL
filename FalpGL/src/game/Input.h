@@ -1,5 +1,5 @@
 #pragma once
-#include "Entitiy.h"
+#include "Entity.h"
 #include "Map.h"
 
 struct key {

@@ -11,7 +11,7 @@
 #include "../renderer/RendererIncludes.h"
 #include "Map.h"
 #include "Input.h"
-#include "Entitiy.h"
+#include "Entity.h"
 #include "Json.h"
 #include "UI.h"
 
@@ -27,6 +27,7 @@ std::string get_current_dir() {
 /* Declarations */
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 Json_loader* Animation::loader;
+Json_loader* Creature::loader;
 
 
 
@@ -41,6 +42,7 @@ int main(void)
     if (!loader.init()) { return -1; }
 
     Animation::loader = &loader;
+    Creature::loader = &loader;
 
     /* Setup the window */
     GLFWwindow* window;

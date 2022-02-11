@@ -5,6 +5,7 @@
 
 class Creature {
 public:
+	static Json_loader* loader;
 	Creature();
 };
 
@@ -22,7 +23,7 @@ private:
 	Entity green_bar;
 
 public:
-	Health_Bar(BatchRenderer* for_active_buffer, Json_loader* l);
+	Health_Bar(VertexBuffer* buffer);
 
 	void tick(float health_level, float stamina_level, int flask_state);
 };

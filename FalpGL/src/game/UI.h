@@ -5,12 +5,13 @@
 #include "Json.h"
 #include "Tile.h"
 #include <iostream>
-#include "Entitiy.h"
+#include "Entity.h"
+#include "Creature.h"
 
 //health . ewapons, 
 class UserInterface {
 	float* Player_Health;
-	//Entity PlayerHealthbar;
+	Health_Bar hb;
 
 public:
 	UserInterface();
