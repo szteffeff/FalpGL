@@ -66,3 +66,11 @@ void Tile::change_type(Tile_id id, Json_loader* loader)
 
 	set_texture_coords(tx);
 }
+
+
+/*
+bool Tile::is_solid() const
+{
+	return is_solid;
+}
+*/

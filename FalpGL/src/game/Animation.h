@@ -11,36 +11,24 @@
 
 class Animation {
 public:
-	Animation(Quad* quad, Json_loader* j, unsigned int id);
+
+	Animation(Quad* quad, std::string name);
 	Animation();
+
+	static Json_loader* loader;
 
 	bool tick();
 	void set();
-	void unset();
 
 private:
-	Json_loader* loader;
 	Quad* m_quad;
-	bool loop, active;
+	bool loop;
 	float atlas, length, current_frame;
+	std::string name;
 	std::vector<float> times;
 	std::vector<tex_coord> tex_coords;
 	std::chrono::high_resolution_clock::time_point last_time;
 
 private:
-	void load(Animation_id id);
-
-
-
+	void load(std::string name);
 };
-
-/*
-* In json file
-* 
-* name/id
-* frame times
-* 
-* list of texture coords
-*	{{1, 0}, {...}, {...}, {...}}
-* 
-*/

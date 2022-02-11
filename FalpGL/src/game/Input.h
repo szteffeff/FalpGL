@@ -1,6 +1,7 @@
 #pragma once
-#include "Entitiy.h"
+#include "Entity.h"
 #include "Map.h"
+#include "Creature.h"
 
 struct key {
 	char m_key = 0;
@@ -16,7 +17,7 @@ public:
 
 	void set_pause(bool* pause);
 	void set_keepalive(bool* keepalive);
-	void set_player(Entity* p);
+	void set_player(Player* p);
 	void set_matrix(glm::mat4* m);
 
 	void recive(int key, int scancode, int action, int mods);
@@ -26,7 +27,7 @@ private:
 
 	std::vector<key> keys;
 
-	Entity* player;
+	Player* player;
 	Map* map;
 	glm::mat4* zoom_matrix;
 

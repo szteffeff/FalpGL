@@ -11,7 +11,7 @@
 #include "../renderer/RendererIncludes.h"
 #include "Map.h"
 #include "Input.h"
-#include "Entitiy.h"
+#include "Entity.h"
 #include "Json.h"
 #include "UI.h"
 
@@ -23,12 +23,26 @@ std::string get_current_dir() {
     return current_working_dir;
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+/* Declarations */
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+Json_loader* Animation::loader;
+Json_loader* Creature::loader;
+
+
+
+/* Input needs to be global I think */
 Input controller;
 
 int main(void)
 {
+    UserInterface ui;
+
+    Json_loader loader;
+    if (!loader.init()) { return -1; }
+
+    Animation::loader = &loader;
+    Creature::loader = &loader;
 
     /* Setup the window */
     GLFWwindow* window;
@@ -43,7 +57,7 @@ int main(void)
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 
-    int window_width, window_height, width_old = 0, height_old = 0;
+    int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
@@ -138,11 +152,6 @@ int main(void)
     
     {
         /* Create all the things */
-
-        Json_loader loader;
-
-        UserInterface ui;
-
         VertexBufferLayout layout;
         layout.Push<float>(3);
         layout.Push<float>(2);
@@ -157,14 +166,13 @@ int main(void)
         Texture atlas_0 = Texture("res/gfx/atlas1.png");
         atlas_0.Bind(0);
 
-        Player player(&player_render.vertex_buffer, &loader, 0);
+        Player player(&player_render.vertex_buffer);
 
-        ui.SetHealth(player.GetHealth());
-        ui.SetStamina(player.GetStamina());
+        
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
-        
+        ui.SetHealth(player.GetHealth());
         controller.set_player(&player);
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);

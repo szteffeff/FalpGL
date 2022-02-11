@@ -5,7 +5,8 @@
 #include "Json.h"
 #include "Tile.h"
 #include <iostream>
-#include "Entitiy.h"
+#include "Entity.h"
+#include "Creature.h"
 
 //health . ewapons, 
 class UserInterface {

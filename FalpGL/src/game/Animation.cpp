@@ -4,19 +4,20 @@
 #include <iostream>
 
 
-Animation::Animation(Quad* quad, Json_loader* j, unsigned int id)
-	: m_quad(quad), current_frame(0), active(false), atlas(0), length(0), loop(true), loader(j) , last_time(std::chrono::high_resolution_clock::now())
+Animation::Animation(Quad* quad, std::string name)
+	: m_quad(quad), current_frame(0), atlas(0), length(0), loop(true), last_time(std::chrono::high_resolution_clock::now())
 {
-	load(Animation_id(id));
-
-	if (length <= 0) {/*json loading messed up...*/}
-
-
+	load(name);
 }
 
 Animation::Animation()
-	: m_quad(nullptr), loader(nullptr)
-{}
+	: m_quad(nullptr)
+{
+	loop = true;
+	atlas = 0;
+	length = 0;
+	current_frame = 0;
+}
 
 bool Animation::tick()
 {
@@ -44,10 +45,10 @@ bool Animation::tick()
 	return true;
 }
 
-void Animation::load(Animation_id id)
+void Animation::load(std::string name)
 {
 	json j;
-	j = loader->animations[std::to_string((int)id)];
+	j = loader->animations[name];
 
 	loop = j["loop"];
 	atlas = j["atlas"];
@@ -82,12 +83,6 @@ void Animation::load(Animation_id id)
 
 void Animation::set()
 {
-	active = true;
 	m_quad->set_texture_index(atlas);
 	tick();
-}
-
-void Animation::unset()
-{
-	active = false;
 }

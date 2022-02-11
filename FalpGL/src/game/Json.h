@@ -2,6 +2,7 @@
 
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "../renderer/GraphicsHeaders.h"
 
 class Json_loader {
@@ -13,6 +14,7 @@ private:
 
 public:
 	Json_loader();
+	bool init();
 
 	json animations;
 	json entities;
