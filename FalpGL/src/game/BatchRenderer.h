@@ -15,6 +15,7 @@ private:
 
 	unsigned int buffer_index;
 	VertexBuffer* active_buffer;
+	
 protected:
 
 

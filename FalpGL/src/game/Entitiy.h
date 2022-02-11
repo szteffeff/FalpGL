@@ -26,6 +26,7 @@ public:
 	Quad* get_quad(); //why
 
 public:
+
 	virtual void tick();
 
 	void walk(float direction, float magnitude); // handled in full entity
@@ -59,6 +60,7 @@ public:
 	float position_x();
 	float position_y();
 	void tick();
+	float* GetHealth();
 };
 
 class Health_Bar {

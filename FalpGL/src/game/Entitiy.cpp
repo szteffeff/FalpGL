@@ -127,6 +127,11 @@ void Player::tick()
 	//std::cout << "position: " << position[0] << ", " << position[1] << "\n";
 }
 
+float* Player::GetHealth()
+{
+	return &Health;
+}
+
 glm::mat4* Player::get_trans_matrix()
 {
 	return(&player_transform_matrix);
