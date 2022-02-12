@@ -36,8 +36,6 @@ Input controller;
 
 int main(void)
 {
-    UserInterface ui;
-
     Json_loader loader;
     if (!loader.init()) { return -1; }
 
@@ -61,7 +59,7 @@ int main(void)
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool windowed = false;
+    const bool fullscreen = true;
     bool pause = false;
 
     glm::mat4 projection_matrix;
@@ -157,6 +155,22 @@ int main(void)
 
     glfwSwapInterval(1);
 
+    /* setup cursor */
+    {
+        unsigned char* cursor_image_data;
+        int c_height, c_width, c_bpp;
+        cursor_image_data = stbi_load("res/gfx/cursor.png", &c_height, &c_width, &c_bpp, 4);
+
+
+        GLFWimage cursor_image;
+        cursor_image.height = c_height;
+        cursor_image.width = c_width;
+        cursor_image.pixels = cursor_image_data;
+
+        GLFWcursor* cursor = glfwCreateCursor(&cursor_image, 0, 0);
+
+        glfwSetCursor(window, cursor);
+    }
     
     {
         /* Create all the things */
@@ -168,23 +182,29 @@ int main(void)
         BatchRenderer player_render(10, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
-        BatchRenderer things(1000, "res/shaders/basic.shader");
-        things.add_layout(layout);
+        BatchRenderer interface_renderer(1000, "res/shaders/basic.shader");
+        interface_renderer.add_layout(layout);
         
-        Texture atlas_0 = Texture("res/gfx/atlas1.png");
+        Texture atlas_0 = Texture("res/gfx/atlas0.png");
+        Texture atlas_1 = Texture("res/gfx/atlas1.png");
+
         atlas_0.Bind(0);
+        atlas_1.Bind(1);
+        
+        UserInterface ui;
 
         Player player(&player_render.vertex_buffer);
 
-        
+        Health_Bar hb(&interface_renderer.vertex_buffer);
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
         ui.SetHealth(player.GetHealth());
+        ui.SetStamina(player.GetHealth());
         controller.set_player(&player);
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
-        
+
         while (!glfwWindowShouldClose(window) && running)
         {
             /* Clear buffers and other OpenGL stuff */
@@ -198,18 +218,17 @@ int main(void)
             ypos -= window_height / 2;
             ypos *= -1;
 
-
-
             /* Tick things that need to be ticked */
             ui.UI_Tick();
+            hb.tick();
             player.tick();
             main_map.shift(player.position_x(), player.position_y());
 
 
             /* Draw all the renderers */
-            main_map.draw(*player.get_trans_matrix() ); /* Has pointer to projection_matrix */
-            player_render.draw(projection_matrix  * *player.get_trans_matrix());
-            things.draw(projection_matrix** main_map.get_trans_matrix() * *player.get_trans_matrix());
+            main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
+            player_render.draw(projection_matrix * *player.get_trans_matrix());
+            interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

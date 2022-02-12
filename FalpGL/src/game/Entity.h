@@ -6,9 +6,6 @@
 #include <math.h>
 
 
-/* class player has player entity
-* class health bar has 3 enities
-*/
 
 class Entity {
 protected:
@@ -20,6 +17,7 @@ protected:
 public:
 	Entity(VertexBuffer* a, json load);
 	Entity();
+	~Entity();
 
 public:
 	virtual void tick();
@@ -27,6 +25,9 @@ public:
 	void translate(float x, float y);
 	void set_z(float z);
 	Point center();
+	void set_vertex_pos(float x, float y, int index);
+	void set_vertex_pos(Point p, int index);
+	Point get_vertex_pos(int index);
 
 };
 

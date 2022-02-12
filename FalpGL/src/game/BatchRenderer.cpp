@@ -89,6 +89,16 @@ Quad::Quad()
 	}
 }
 
+void Quad::remove()
+{
+	for (int i = 0; i < 24; i++)
+	{
+		quad_data[i] = 0.0f;
+	}
+	update();
+	active_buffer->delete_quad(buffer_index);
+}
+
 void Quad::set_z(float new_h)
 {
 	quad_data[2] = new_h;
@@ -181,7 +191,7 @@ void Quad::translate(float delta_x, float delta_y)
 	update();
 }
 
-inline Point Quad::center() const
+Point Quad::center() const
 {
 	return Point(((quad_data[0] + quad_data[6] + quad_data[12] + quad_data[18]) / 4), ((quad_data[1] + quad_data[7] + quad_data[13] + quad_data[19]) / 4));
 }
@@ -232,6 +242,41 @@ void Quad::set_texture_index(float index)
 	quad_data[23] = index;
 
 	update();
+}
+
+void Quad::set_vertex_pos(float x, float y, int index)
+{
+	if (index < 0 || index > 3)
+	{
+		throw "Index out of range";
+	}
+	quad_data[6 * index]     = round(x);
+	quad_data[6 * index + 1] = round(y);
+
+	update();
+}
+
+void Quad::set_vertex_pos(Point p, int index)
+{
+	if (index < 0 || index > 3)
+	{
+		throw "Index out of range";
+	}
+	quad_data[6 * index] = round(p.x);
+	quad_data[6 * index + 1] = round(p.y);
+
+	update();
+}
+
+
+Point Quad::get_vertex_pos(int index)
+{
+	if (index < 0 || index > 3)
+	{
+		throw "Index out of range";
+	}
+
+	return Point(quad_data[6 * index], quad_data[6 * index + 1]);
 }
 
 

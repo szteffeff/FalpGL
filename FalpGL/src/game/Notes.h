@@ -25,6 +25,12 @@
 * and notes and things
 * 
 * probably don't include this anywhere
+* 
+* 
+* 
+* 0 1  6 7 12 13  18 19
+* 
+* 
 *  
 * t i l e   d e p t h
 *  

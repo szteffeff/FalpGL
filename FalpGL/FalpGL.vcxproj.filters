@@ -1421,5 +1421,8 @@
     <Image Include="res\gfx\atlas1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\gfx\atlas0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
