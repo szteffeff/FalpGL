@@ -159,7 +159,7 @@ int main(void)
     {
         unsigned char* cursor_image_data;
         int c_height, c_width, c_bpp;
-        cursor_image_data = stbi_load("res/gfx/cursor.png", &c_height, &c_width, &c_bpp, 4);
+        cursor_image_data = stbi_load("res/gfx/textures/cursor.png", &c_height, &c_width, &c_bpp, 4);
 
 
         GLFWimage cursor_image;
