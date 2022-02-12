@@ -22,7 +22,7 @@ void BatchRenderer::draw(glm::mat4 proj_matrix)
 
 
 	shader.SetUniformMat4f("u_MVP", proj_matrix);
-	shader.SetUniform1iv("u_Textures", 3, samplers);
+	shader.SetUniform1iv("u_Textures", 16, samplers);
 
 	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
