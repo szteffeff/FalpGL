@@ -16,6 +16,7 @@ private:
 	bool solid;
 
 public:
+	std::string name;
 	Tile();
 	Tile(VertexBuffer* vb, Json_loader* loader);
 	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);

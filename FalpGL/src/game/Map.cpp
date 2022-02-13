@@ -61,6 +61,9 @@ void Map::fill()
 
 void Map::shift(float px, float py)
 {
+	offset[0] = px - current_center[0] * 32;
+	offset[1] = py - current_center[1] * 32;
+
 	if ((px) < -16 + current_center[0] * 32) // left
 	{
 		shift_left();
@@ -78,6 +81,8 @@ void Map::shift(float px, float py)
 	{
 		shift_up();
 	}
+
+	//std::cout << "offset: " << offset[0] << ", " << offset[1] << "\n";
 }
 
 
@@ -160,6 +165,18 @@ void Map::shift_right()
 }
 
 
+void Map::tile_at_position(float x, float y)
+{
+	x = round((x + width * 32.0 * 0.5 + offset[0]) / 32);
+	y = round((y + height * 32.0 * 0.5 + offset[1]) / 32);
+
+	int index = x + y * width;
+
+	if (index < 0 || index > height * width) { return; }
+
+	//std::cout << "arr: " << x << ", " << y << "\n";
+	std::cout << "tile is: " << map_vector[index]->name << "\n";
+}
 
 
 void Map::draw()

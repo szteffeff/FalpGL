@@ -224,6 +224,8 @@ int main(void)
             player.tick();
             main_map.shift(player.position_x(), player.position_y());
 
+            //std::cout << "mouse: " << xpos << ", " << ypos << "\n";
+            main_map.tile_at_position(xpos, ypos);
 
             /* Draw all the renderers */
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */

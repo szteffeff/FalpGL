@@ -64,6 +64,8 @@ void Tile::change_type(Tile_id id, Json_loader* loader)
 	tx.coords[3][0] = (loader->tiles[_id]["texture_coordinants"][3][0]) / 2048.0f;
 	tx.coords[3][1] = (loader->tiles[_id]["texture_coordinants"][3][1]) / 2048.0f;
 
+	name = loader->tiles[_id]["name"];
+
 	set_texture_coords(tx);
 }
 
