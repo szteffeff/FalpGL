@@ -219,6 +219,8 @@ int main(void)
             ypos -= window_height / 2;
             ypos *= -1;
 
+
+
             /* Tick things that need to be ticked */
             ui.UI_Tick();
             if (pause == false) {

@@ -22,8 +22,9 @@ Health_Bar::Health_Bar(VertexBuffer* buffer)
 
 	/* move bar to line up with frame */
 	/* (42, -4), (30, -20) for double scale */
-	red_bar.translate(21, -2);
-	green_bar.translate(15, -10);
+	/* (21, -2), (15, -10) for single scale */
+	red_bar.translate(42, -4);
+	green_bar.translate(30, -20);
 
 	/* move everything to corner of screen */
 	frame.translate(x_offset, y_offset);
@@ -66,6 +67,14 @@ void Health_Bar::set_stamina(float s)
 void Health_Bar::set_level(frame_animations level)
 {
 	frame.set_animation((int)level);
+}
+
+void Health_Bar::tick(float h, float s, frame_animations level)
+{
+	set_health(h);
+	set_stamina(s);
+	set_level(level);
+	frame.tick();
 }
 
 /* Player */

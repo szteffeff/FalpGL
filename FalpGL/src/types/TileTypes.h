@@ -1,7 +1,8 @@
 #pragma once
 
 enum class Tile_id {
-	FLOWER = 1,
+	BLANK = 0,
+	FLOWER,
 	GRASS,
 	COBBLESTONE_1,
 	COBBLESTONE_2,
