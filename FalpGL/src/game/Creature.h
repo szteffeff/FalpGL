@@ -19,17 +19,14 @@ private:
 	float offset[2] = { 0.0f, 0.0f };
 	float momentum[2], position[2];
 	float Health;
+	float Stamina;
 
-	enum class player_animations { // wrong
+	enum player_animations { // wrong
 		IDLE = 0,
 		UP,
-		DOWN,
 		LEFT,
-		RIGHT,
-		HURT,
-		X,
-		Y,
-		Z
+		DOWN,
+		RIGHT
 	};
 
 
@@ -41,7 +38,7 @@ public:
 	float position_y();
 	void tick();
 	float* GetHealth();
-
+	float* GetStamina();
 
 };
 

@@ -53,11 +53,6 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 		keys[3].held = action;
 		break;
 
-	case(GLFW_KEY_ESCAPE):
-		*pause_menu = !*pause_menu;
-		std::cout << "Pausing\n";
-		break;
-
 	case(GLFW_KEY_Q):
 		*running = false;
 		std::cout << "stopping\n";
@@ -80,6 +75,11 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 		*zoom_matrix = glm::scale(*zoom_matrix, glm::vec3(0.5f, 0.5f, 1.0f));
 		break;
 
+	case(GLFW_KEY_ESCAPE):
+		*pause_menu = !*pause_menu;
+		std::cout << "Pausing\n";
+		break;
+
 	default:
 		break;
 	}
@@ -88,6 +88,10 @@ void Input::recive(int key, int scancode, int action, int mods) // release = 0, 
 
 void Input::tick()
 {
+	if (*pause_menu == true) {
+		return;
+	}
+
 	if (keys[0].held) {
 		player->walk(90, 1);
 	}
