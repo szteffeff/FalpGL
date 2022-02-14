@@ -59,7 +59,7 @@ int main(void)
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool fullscreen = true;
+    const bool windowed = true;
     bool pause = false;
 
     glm::mat4 projection_matrix;
@@ -200,7 +200,8 @@ int main(void)
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
         ui.SetHealth(player.GetHealth());
-        ui.SetStamina(player.GetHealth());
+        ui.SetStamina(player.GetStamina());
+        controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
@@ -222,13 +223,11 @@ int main(void)
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
-            hb.tick();
-            player.tick();
-            main_map.shift(player.position_x(), player.position_y());
-
-            //std::cout << "mouse: " << xpos << ", " << ypos << "\n";
-            //main_map.tile_at_position(xpos, ypos);
-
+            if (pause == false) {
+                player.tick();
+                main_map.shift(player.position_x(), player.position_y());
+            }
+           
             /* Draw all the renderers */
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix * *player.get_trans_matrix());
