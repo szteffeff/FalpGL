@@ -40,5 +40,7 @@ public:
 	void draw();
 	void draw(glm::mat4 tm);
 
+	void tile_at_position(float x, float y);
+
 	glm::mat4* get_trans_matrix();
 };

@@ -79,10 +79,12 @@ void Animation::load(std::string name)
 	}
 
 	m_quad->set_texture_coords(tex_coords[current_frame]);
+	m_quad->set_texture_index(atlas);
 }
 
 void Animation::set()
 {
 	m_quad->set_texture_index(atlas);
+	m_quad->set_texture_coords(tex_coords[current_frame]);
 	tick();
 }

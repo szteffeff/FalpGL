@@ -280,5 +280,171 @@
         [ 0.0000, 1376.0 ]
       ]
     ]
+  },
+  "FLASK_EMPTY": {
+    "name": "FLASK_EMPTY",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_times": [ 1 ],
+    "frame_order": [ 0 ],
+    "texture_coordinants": [
+      [
+        [ 0, 96 ],
+        [ 128, 96 ],
+        [ 128, 128 ],
+        [ 0, 128 ]
+      ]
+    ]
+  },
+  "RED_BAR": {
+    "name": "RED_BAR",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_times": [ 1 ],
+    "frame_order": [ 0 ],
+    "texture_coordinants": [
+      [
+        [ 384, 0 ],
+        [ 512, 0 ],
+        [ 512, 32 ],
+        [ 384, 32 ]
+      ]
+    ]
+  },
+  "GREEN_BAR": {
+    "name": "RED_BAR",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_times": [ 1 ],
+    "frame_order": [ 0 ],
+    "texture_coordinants": [
+      [
+        [ 256, 0 ],
+        [ 384, 0 ],
+        [ 384, 32 ],
+        [ 256, 32 ]
+      ]
+    ]
+  },
+  "FLASK_QUARTER": {
+    "name": "FLASK_QUARTER",
+    "atlas": 1,
+    "loop": true,
+    "length": 4,
+    "frame_times": [ 75, 75, 75, 75 ],
+    "frame_order": [ 0, 1, 2, 3 ],
+    "texture_coordinants": [
+      [
+        [ 128, 96 ],
+        [ 256, 96 ],
+        [ 256, 128 ],
+        [ 128, 128 ]
+      ],
+      [
+        [ 256, 96 ],
+        [ 384, 96 ],
+        [ 384, 128 ],
+        [ 256, 128 ]
+      ],
+      [
+        [ 384, 96 ],
+        [ 512, 96 ],
+        [ 512, 128 ],
+        [ 384, 128 ]
+      ],
+      [
+        [ 0, 64 ],
+        [ 128, 64 ],
+        [ 128, 96 ],
+        [ 0, 96 ]
+      ]
+    ]
+  },
+  "FLASK_HALF": {
+    "name": "FLASK_HALF",
+    "atlas": 1,
+    "loop": true,
+    "length": 4,
+    "frame_times": [ 75, 75, 75, 75 ],
+    "frame_order": [ 0, 1, 2, 3 ],
+    "texture_coordinants": [
+      [
+        [ 128, 64 ],
+        [ 256, 64 ],
+        [ 256, 96 ],
+        [ 128, 96 ]
+      ],
+      [
+        [ 256, 64 ],
+        [ 384, 64 ],
+        [ 384, 96 ],
+        [ 256, 96 ]
+      ],
+      [
+        [ 384, 64 ],
+        [ 512, 64 ],
+        [ 512, 96 ],
+        [ 384, 96 ]
+      ],
+      [
+        [ 0, 32 ],
+        [ 128, 32 ],
+        [ 128, 64 ],
+        [ 0, 64 ]
+      ]
+    ]
+  },
+  "FLASK_THREE_QUARTERS": {
+    "name": "FLASK_THREE_QUARTERS",
+    "atlas": 1,
+    "loop": true,
+    "length": 4,
+    "frame_times": [ 75, 75, 75, 75 ],
+    "frame_order": [ 0, 1, 2, 3 ],
+    "texture_coordinants": [
+      [
+        [ 128, 32 ],
+        [ 256, 32 ],
+        [ 256, 64 ],
+        [ 128, 64 ]
+      ],
+      [
+        [ 256, 32 ],
+        [ 384, 32 ],
+        [ 384, 64 ],
+        [ 256, 64 ]
+      ],
+      [
+        [ 384, 32 ],
+        [ 512, 32 ],
+        [ 512, 64 ],
+        [ 384, 64 ]
+      ],
+      [
+        [ 0, 0 ],
+        [ 128, 0 ],
+        [ 128, 32 ],
+        [ 0, 32 ]
+      ]
+    ]
+  },
+  "FLASK_FULL": {
+    "name": "FLASK_FULL",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_times": [ 1 ],
+    "frame_order": [ 0 ],
+    "texture_coordinants": [
+      [
+        [ 128, 0 ],
+        [ 256, 0 ],
+        [ 256, 32 ],
+        [ 128, 32 ]
+      ]
+    ]
   }
 }

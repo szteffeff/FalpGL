@@ -4,20 +4,71 @@
 
 
 Creature::Creature() {}
+void Creature::tick() {}
 
 
 
-
+/* Health_Bar */
 
 Health_Bar::Health_Bar(VertexBuffer* buffer)
 	: frame(buffer, loader->entities["HEALTH_BAR_FRAME"]),
 	red_bar(buffer, loader->entities["HEALTH_BAR_RED"]),
 	green_bar(buffer, loader->entities["HEALTH_BAR_GREEN"])
-{}
+{
+	/* move to very front of depth buffer */
+	frame.set_z(0.998);
+	red_bar.set_z(0.999);
+	green_bar.set_z(0.999);
+
+	/* move bar to line up with frame */
+	/* (42, -4), (30, -20) for double scale */
+	red_bar.translate(21, -2);
+	green_bar.translate(15, -10);
+
+	/* move everything to corner of screen */
+	frame.translate(x_offset, y_offset);
+	red_bar.translate(x_offset, y_offset);
+	green_bar.translate(x_offset, y_offset);
+
+	/* get and calculate values to map 0-100 to unknown bar size */
+	red_bar_min = red_bar.get_vertex_pos(0).x;
+	red_bar_max = red_bar.get_vertex_pos(1).x;
+	red_slope = (red_bar_max - red_bar_min) / player_max_val;
+
+	green_bar_min = green_bar.get_vertex_pos(0).x;
+	green_bar_max = green_bar.get_vertex_pos(1).x;
+	green_slope = (green_bar_max - green_bar_min) / player_max_val;
 
 
+	/* set to defaults */
+	set_health(100);
+	set_stamina(100);
+	set_level(frame_animations::full);
+}
 
+void Health_Bar::tick()
+{
+	frame.tick();
+}
 
+void Health_Bar::set_health(float h)
+{
+	red_bar.set_vertex_pos(red_bar_min + red_slope * h, red_bar.get_vertex_pos(1).y, 1);
+	red_bar.set_vertex_pos(red_bar_min + red_slope * h, red_bar.get_vertex_pos(2).y, 2);
+}
+
+void Health_Bar::set_stamina(float s)
+{
+	green_bar.set_vertex_pos(green_bar_min + green_slope * s, green_bar.get_vertex_pos(1).y, 1);
+	green_bar.set_vertex_pos(green_bar_min + green_slope * s, green_bar.get_vertex_pos(2).y, 2);
+}
+
+void Health_Bar::set_level(frame_animations level)
+{
+	frame.set_animation((int)level);
+}
+
+/* Player */
 
 Player::Player(VertexBuffer* vb)
 	: m_player(vb, loader->entities["PLAYER"])
@@ -32,8 +83,6 @@ void Player::walk(float direction, float magnitude)
 	momentum[0] += dx;
 	momentum[1] += dy;
 }
-
-
 
 void Player::tick()
 {
@@ -94,3 +143,5 @@ float Player::position_x()
 {
 	return position[0];
 }
+
+/* #### */

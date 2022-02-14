@@ -6,8 +6,13 @@
 class Creature {
 public:
 	static Json_loader* loader;
+
+public:
 	Creature();
+
+	virtual void tick();
 };
+
 
 
 
@@ -50,8 +55,27 @@ private:
 	Entity red_bar;
 	Entity green_bar;
 
+	const float player_max_val = 100;
+	const float x_offset = -450;
+	const float y_offset = -500;
+
+	float red_bar_max, green_bar_max;
+	float red_bar_min, green_bar_min;
+	float green_slope, red_slope;
+	
 public:
+	enum class frame_animations {
+			empty = 0,
+			quarter,
+			half,
+			three_quarters,
+			full
+	};
+
 	Health_Bar(VertexBuffer* buffer);
 
-	void tick(float health_level, float stamina_level, int flask_state);
+	void tick();
+	void set_health(float h);
+	void set_stamina(float s);
+	void set_level(frame_animations level);
 };

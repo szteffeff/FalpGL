@@ -24,6 +24,11 @@ Entity::Entity()
 	: active_animation(0), animation_count(0)
 {}
 
+Entity::~Entity()
+{
+	main_quad.~Quad();
+}
+
 void Entity::tick()
 {
 	animations[active_animation].tick();
@@ -43,4 +48,27 @@ void Entity::translate(float x, float y)
 	main_quad.translate(x, y);
 }
 
+void Entity::set_z(float z)
+{
+	main_quad.set_z(z);
+}
 
+void Entity::set_vertex_pos(float x, float y, int index)
+{
+	main_quad.set_vertex_pos(x, y, index);
+}
+
+void Entity::set_vertex_pos(Point p, int index)
+{
+	main_quad.set_vertex_pos(p, index);
+}
+
+Point Entity::get_vertex_pos(int index)
+{
+	return main_quad.get_vertex_pos(index);
+}
+
+Point Entity::center()
+{
+	return main_quad.center();
+}
