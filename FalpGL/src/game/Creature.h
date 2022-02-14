@@ -25,7 +25,7 @@ private:
 	float momentum[2], position[2];
 	float Health;
 
-	enum player_animations { // wrong
+	enum class player_animations {
 		IDLE = 0,
 		UP,
 		LEFT,
@@ -56,7 +56,7 @@ private:
 
 	const float player_max_val = 100;
 	const float x_offset = -450;
-	const float y_offset = -500;
+	const float y_offset = -450;
 
 	float red_bar_max, green_bar_max;
 	float red_bar_min, green_bar_min;
@@ -74,6 +74,7 @@ public:
 	Health_Bar(VertexBuffer* buffer);
 
 	void tick();
+	void tick(float h, float s, frame_animations level);
 	void set_health(float h);
 	void set_stamina(float s);
 	void set_level(frame_animations level);

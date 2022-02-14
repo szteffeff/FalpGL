@@ -7,19 +7,19 @@
   },
   "HEALTH_BAR_FRAME": {
     "name": "HEALTH_BAR_FRAME",
-    "size": [ 64, 256 ],
+    "size": [ 128, 512 ],
     "animation_count": 5,
     "animation_names": [ "FLASK_EMPTY", "FLASK_QUARTER", "FLASK_HALF", "FLASK_THREE_QUARTERS", "FLASK_FULL" ]
   },
   "HEALTH_BAR_RED": {
     "name": "HEALTH_BAR_RED",
-    "size": [ 8, 137.5 ],
+    "size": [ 16, 275 ],
     "animation_count": 1,
     "animation_names": [ "RED_BAR" ]
   },
   "HEALTH_BAR_GREEN": {
     "name": "HEALTH_BAR_GREEN",
-    "size": [ 4, 130 ],
+    "size": [ 8, 260 ],
     "animation_count": 1,
     "animation_names": [ "GREEN_BAR" ]
   }

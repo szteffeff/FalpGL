@@ -218,6 +218,8 @@ int main(void)
             ypos -= window_height / 2;
             ypos *= -1;
 
+
+
             /* Tick things that need to be ticked */
             ui.UI_Tick();
             hb.tick();
@@ -225,7 +227,7 @@ int main(void)
             main_map.shift(player.position_x(), player.position_y());
 
             //std::cout << "mouse: " << xpos << ", " << ypos << "\n";
-            main_map.tile_at_position(xpos, ypos);
+            //main_map.tile_at_position(xpos, ypos);
 
             /* Draw all the renderers */
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */

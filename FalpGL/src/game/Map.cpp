@@ -44,7 +44,13 @@ void Map::fill()
 		{
 
 			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
-			map_vector[i]->change_type(Tile_id((rand() % 20) + 1), loader);
+			if (i != width * height / 2 + width / 2) {
+				map_vector[i]->change_type(Tile_id::GRASS, loader);
+			}
+			else
+			{
+				map_vector[i]->change_type(Tile_id::COBBLESTONE_8, loader);
+			}
 			map_vector[i]->translate(x * 32.0f, y * 32.0f);
 			map_vector[i]->set_texture_index(0);
 			i++;
@@ -66,19 +72,23 @@ void Map::shift(float px, float py)
 
 	if ((px) < -16 + current_center[0] * 32) // left
 	{
+		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 - 1]->name << "\n";
 		shift_left();
 	}
 	else if ((px) > 16 + current_center[0] * 32) // right
 	{
+		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + 1]->name << "\n";
 		shift_right();
 	}
 
 	if ((py) < -16 + current_center[1] * 32) // down
 	{
+		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 - width]->name << "\n";
 		shift_down();
 	}
 	else if ((py) > 16 + current_center[1] * 32) // up
 	{
+		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + width]->name << "\n";
 		shift_up();
 	}
 
