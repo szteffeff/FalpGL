@@ -111,23 +111,27 @@ void Player::tick()
 		float dir = (atan2(momentum[1], momentum[0]));
 		if (dir < 0) { dir += 2 * 3.14159; }
 		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
-		
-		if (diri == 270) { m_player.set_animation((int)player_animations::DOWN); }
-		else if (diri == 90) { m_player.set_animation((int)player_animations::UP); }
-		else if (90 < diri < 270) { m_player.set_animation((int)player_animations::LEFT); }
-		else if (0 <= diri < 90 && 270 < diri <= 360) { m_player.set_animation((int)player_animations::RIGHT); }
+		float real_degrees = (dir * 180) / 3.14159;
+
+		std::cout << real_degrees << "\n";
+
+		if (real_degrees < 75 || real_degrees > 285) { m_player.set_animation((int)player_animations::RIGHT); }
+		else if (real_degrees > 80 && real_degrees < 100) { m_player.set_animation((int)player_animations::UP); }
+		else if (real_degrees > 108 && real_degrees < 255) { m_player.set_animation((int)player_animations::LEFT); }
+		else if (real_degrees > 260 && real_degrees < 280) { m_player.set_animation((int)player_animations::DOWN); }
 	}
 	else
 	{
 		m_player.set_animation(0);
 	}
 
+
+
 	momentum[0] = 0;
 	momentum[1] = 0;
 
 	m_player.tick();
 }
-
 float* Player::GetHealth()
 {
 	return &Health;
