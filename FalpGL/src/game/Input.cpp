@@ -30,7 +30,7 @@ void Input::set_matrix(glm::mat4* m)
 	zoom_matrix = m;
 }
 
-void Input::recive(int key, int scancode, int action, int mods) /* release = 0, press = 1, repeat = 2 */
+void Input::keys_recive(int key, int scancode, int action, int mods) /* release = 0, press = 1, repeat = 2 */
 {
 	if (action == 2) { return; }
 
@@ -84,6 +84,11 @@ void Input::recive(int key, int scancode, int action, int mods) /* release = 0, 
 		break;
 	}
 
+}
+
+void Input::mouse_recive(int button, int action, int mods)
+{
+	if (action != GLFW_PRESS) { return; }
 }
 
 void Input::tick()

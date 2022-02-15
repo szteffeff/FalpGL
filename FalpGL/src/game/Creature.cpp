@@ -111,11 +111,11 @@ void Player::tick()
 		float dir = (atan2(momentum[1], momentum[0]));
 		if (dir < 0) { dir += 2 * 3.14159; }
 		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
-
-		if (diri == 270) { m_player.set_animation(DOWN); }
-		else if (diri == 90) { m_player.set_animation(UP); }
-		else if (90 < diri < 270) { m_player.set_animation(LEFT); }
-		else if (0 <= diri < 90 && 270 < diri <= 360) { m_player.set_animation(RIGHT); }
+		
+		if (diri == 270) { m_player.set_animation((int)player_animations::DOWN); }
+		else if (diri == 90) { m_player.set_animation((int)player_animations::UP); }
+		else if (90 < diri < 270) { m_player.set_animation((int)player_animations::LEFT); }
+		else if (0 <= diri < 90 && 270 < diri <= 360) { m_player.set_animation((int)player_animations::RIGHT); }
 	}
 	else
 	{

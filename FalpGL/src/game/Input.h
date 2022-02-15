@@ -20,7 +20,9 @@ public:
 	void set_player(Player* p);
 	void set_matrix(glm::mat4* m);
 
-	void recive(int key, int scancode, int action, int mods);
+	void keys_recive(int key, int scancode, int action, int mods);
+	void mouse_recive(int button, int action, int mods);
+
 	void tick();
 
 private:
