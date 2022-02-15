@@ -59,7 +59,7 @@ void Animation::load(std::string name)
 	tex_coords.resize(length);
 	times.resize(length);
 
-	for (int i = 0; i < length; i++)
+	for (unsigned int i = 0; i < length; i++)
 	{
 		frame = j["frame_order"][i];
 
@@ -79,12 +79,12 @@ void Animation::load(std::string name)
 	}
 
 	m_quad->set_texture_coords(tex_coords[current_frame]);
-	m_quad->set_texture_index(atlas);
+	m_quad->set_texture_index((float)atlas);
 }
 
 void Animation::set()
 {
-	m_quad->set_texture_index(atlas);
+	m_quad->set_texture_index((float)atlas);
 	m_quad->set_texture_coords(tex_coords[current_frame]);
 	tick();
 }

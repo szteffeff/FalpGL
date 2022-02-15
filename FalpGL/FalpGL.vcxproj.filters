@@ -51,7 +51,7 @@
     <ClCompile Include="src\renderer\RendererIncludes.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\BatchRenderer.cpp">
+    <ClCompile Include="src\renderer\BatchRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\Point.cpp">
@@ -79,6 +79,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\game\Creature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1371,7 +1374,7 @@
     <ClInclude Include="src\game\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\BatchRenderer.h">
+    <ClInclude Include="src\renderer\BatchRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Entity.h">
@@ -1411,6 +1414,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game\Creature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Quad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,6 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
-#include "../types/TileTypes.h"
-#include "BatchRenderer.h" 
+#include "../types/TileTypes.h" 
 #include "Json.h"
 #include "Tile.h"
 #include <iostream>

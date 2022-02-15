@@ -4,9 +4,9 @@
 Map::~Map()
 {
 	int i = 0;
-	for (int x = 0.0f; x < width; x++)
+	for (int x = 0; x < width; x++)
 	{
-		for (int y = 0.0f; y < height; y++)
+		for (int y = 0; y < height; y++)
 		{
 			delete map_vector[i];
 			i++;
@@ -16,8 +16,8 @@ Map::~Map()
 
 Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 	: resolution{ res_x, res_y }, 
-	width((int)ceil(res_x / 32) % 2 == 1 ? ceil(res_x / 32) + 3 : ceil(res_x / 32) + 2), 
-	height((int)ceil(res_y / 32) % 2 == 1 ? ceil(res_y / 32) + 3 : ceil(res_y / 32) + 2),
+	width(((int)ceil(res_x / 32) % 2 == 1) ? (int)ceil(res_x / 32) + 3 : (int)ceil(res_x / 32) + 2),
+	height(((int)ceil(res_y / 32) % 2 == 1) ? (int)ceil(res_y / 32) + 3 : (int)ceil(res_y / 32) + 2),
 	renderer(BatchRenderer(width * height, "res/shaders/map.shader")), 
 	projection_matrix(pm), loader(l)
 {
@@ -29,7 +29,7 @@ Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 
 	std::cout << "Height/Width: " << height << ", " << width << "\n";
 
-	map_vector.resize((double)height * (double)width);
+	map_vector.resize((unsigned int)height * (unsigned int)width);
 
 	fill();
 }
@@ -104,7 +104,7 @@ void Map::shift_up()
 
 	for (int i = 0; i < width; i++)
 	{ /* Do tile things here */
-		map_vector[i]->translate(0, height * 32);
+		map_vector[i]->translate(0.0f, (float)height * 32.0f);
 		map_vector[i]->change_type(Tile_id((rand() % 20) + 1), loader);
 	}
 
@@ -119,7 +119,7 @@ void Map::shift_down()
 
 	for (int i = 0; i < width; i++)
 	{ /* Do tile things here */
-		map_vector[i]->translate(0, height * -32);
+		map_vector[i]->translate(0.0f, (float)height * -32.0f);
 		map_vector[i]->change_type(Tile_id((rand() % 20) + 1), loader);
 	}
 }
@@ -144,7 +144,7 @@ void Map::shift_left()
 
 		/* Do tile things here */
 
-		map_vector[left]->translate(width * -32, 0);
+		map_vector[left]->translate((float)(width * -32), 0.0f);
 		map_vector[left]->change_type(Tile_id((rand() % 20) + 1), loader);
 	}
 }
@@ -169,7 +169,7 @@ void Map::shift_right()
 
 		/* Do tile things here */
 
-		map_vector[right]->translate(width * 32, 0);
+		map_vector[right]->translate((float)(width * 32), 0.0f);
 		map_vector[right]->change_type(Tile_id((rand() % 20) + 1), loader);
 	}
 }
@@ -177,10 +177,10 @@ void Map::shift_right()
 
 void Map::tile_at_position(float x, float y)
 {
-	x = round((x + width * 32.0 * 0.5 + offset[0]) / 32);
-	y = round((y + height * 32.0 * 0.5 + offset[1]) / 32);
+	x = (float)round((x + width * 32.0 * 0.5 + offset[0]) / 32);
+	y = (float)round((y + height * 32.0 * 0.5 + offset[1]) / 32);
 
-	int index = x + y * width;
+	int index = (int)(x + y * width);
 
 	if (index < 0 || index > height * width) { return; }
 
@@ -201,7 +201,7 @@ void Map::draw(glm::mat4 tm)
 
 std::string Map::map_attack()
 {
-	std::string tile_attacking = map_vector[width * height / 2 + width / 2 - 1]->name;
+	std::string tile_attacking = map_vector[width * height / 2 + width / 2]->name;
 	return tile_attacking;
 }
 

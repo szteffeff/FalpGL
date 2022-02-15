@@ -2,12 +2,13 @@
 
 #include "GraphicsHeaders.h"
 
-#include "renderer.h"
-
-#include "VertexBuffer.h"
+#include "BatchRenderer.h"
 #include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "Shader.h"
-#include "VertexBufferLayout.h"
-#include "Texture.h"
 #include "Point.h"
+#include "Quad.h"
+#include "renderer.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "VertexBufferLayout.h"

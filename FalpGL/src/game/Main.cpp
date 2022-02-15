@@ -60,7 +60,7 @@ int main(void)
     int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
     double xpos, ypos;
     bool running = true;
-    const bool fullscreen = true;
+    const bool fullscreen = false;
     bool pause = false;
 
     glm::mat4 projection_matrix;
@@ -155,7 +155,7 @@ int main(void)
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_callback);
 
-    glfwSwapInterval(60000);
+    glfwSwapInterval(1);
 
     /* setup cursor */
     {

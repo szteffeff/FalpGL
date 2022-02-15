@@ -4,9 +4,8 @@
 #include <vector>
 #include <chrono>
 
-#include "../renderer/Texture.h"
-#include "BatchRenderer.h"
 #include "../types/AnimationTypes.h"
+#include "../renderer/RendererIncludes.h"
 #include "Json.h"
 
 class Animation {
@@ -23,7 +22,7 @@ public:
 private:
 	Quad* m_quad;
 	bool loop;
-	float atlas, length, current_frame;
+	unsigned int atlas, current_frame, length;
 	std::string name;
 	std::vector<float> times;
 	std::vector<tex_coord> tex_coords;

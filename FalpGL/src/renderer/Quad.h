@@ -1,11 +1,5 @@
 #pragma once
-
-#include "../renderer/RendererIncludes.h"
-
-
-struct tex_coord {
-	float coords[4][2];
-};
+#include "BatchRenderer.h"
 
 struct Quad
 {
@@ -15,12 +9,12 @@ private:
 
 	unsigned int buffer_index;
 	VertexBuffer* active_buffer;
-	
+
 protected:
 
 
 public:
-	Quad(VertexBuffer *vb, float height, float width, float size);
+	Quad(VertexBuffer* vb, float height, float width, float size);
 	Quad();
 
 	void remove();
@@ -45,27 +39,4 @@ public:
 	float get_x() const;
 
 	Point find_tile();
-};
-
-
-class BatchRenderer {
-public:
-	IndexBuffer index_buffer;
-	VertexBufferLayout layout;
-	
-	VertexArray vertex_array;
-
-	Shader shader;
-
-	int samplers[16] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-
-public:
-	VertexBuffer vertex_buffer;
-
-	BatchRenderer(int size, std::string shader_filepath);
-	BatchRenderer() {}
-
-	void add_layout(VertexBufferLayout &_layout);
-
-	void draw(glm::mat4 proj_matrix);
 };

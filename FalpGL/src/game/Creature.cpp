@@ -16,9 +16,9 @@ Health_Bar::Health_Bar(VertexBuffer* buffer)
 	green_bar(buffer, loader->entities["HEALTH_BAR_GREEN"])
 {
 	/* move to very front of depth buffer */
-	frame.set_z(0.998);
-	red_bar.set_z(0.999);
-	green_bar.set_z(0.999);
+	frame.set_z(0.998f);
+	red_bar.set_z(0.999f);
+	green_bar.set_z(0.999f);
 
 	/* move bar to line up with frame */
 	/* (42, -4), (30, -20) for double scale */
@@ -54,12 +54,16 @@ void Health_Bar::tick()
 
 void Health_Bar::set_health(float h)
 {
+	if (h > 100) { h = 100; }
+	if (h < 0) { h = 0; }
 	red_bar.set_vertex_pos(red_bar_min + red_slope * h, red_bar.get_vertex_pos(1).y, 1);
 	red_bar.set_vertex_pos(red_bar_min + red_slope * h, red_bar.get_vertex_pos(2).y, 2);
 }
 
 void Health_Bar::set_stamina(float s)
 {
+	if (s > 100) { s = 100; }
+	if (s < 0) { s = 0; }
 	green_bar.set_vertex_pos(green_bar_min + green_slope * s, green_bar.get_vertex_pos(1).y, 1);
 	green_bar.set_vertex_pos(green_bar_min + green_slope * s, green_bar.get_vertex_pos(2).y, 2);
 }
@@ -80,7 +84,7 @@ void Health_Bar::tick(float h, float s, frame_animations level)
 /* Player */
 
 Player::Player(VertexBuffer* vb)
-	: m_player(vb, loader->entities["PLAYER"])
+	: m_player(vb, loader->entities["PLAYER"]), momentum(), position()
 {}
 
 void Player::walk(float direction, float magnitude)
@@ -109,9 +113,9 @@ void Player::tick()
 	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)
 	{
 		float dir = (atan2(momentum[1], momentum[0]));
-		if (dir < 0) { dir += 2 * 3.14159; }
+		if (dir < 0) { dir += 2.0f * 3.14159f; }
 		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
-		float real_degrees = (dir * 180) / 3.14159;
+		float real_degrees = (dir * 180.0f) / 3.14159f;
 
 		std::cout << real_degrees << "\n";
 

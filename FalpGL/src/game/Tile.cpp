@@ -22,7 +22,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader)
 	tx.coords[3][1] = (loader->tiles["0"]["texture_coordinants"][3][1]) / 2048.0f;
 
 	set_texture_coords(tx);
-	set_z(-0.999);
+	set_z(-0.999f);
 }
 
 Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
@@ -43,7 +43,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 	tx.coords[3][1] = (loader->tiles[id]["texture_coordinants"][3][1]) / 2048.0f;
 
 	set_texture_coords(tx);
-	set_z(-0.9);
+	set_z(-0.9f);
 }
 
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
-#include "BatchRenderer.h"
 #include "Animation.h"
 #include <iostream>
 #include <math.h>

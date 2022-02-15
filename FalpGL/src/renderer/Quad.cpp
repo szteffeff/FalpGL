@@ -1,33 +1,8 @@
- #include "BatchRenderer.h"
-
-BatchRenderer::BatchRenderer(int size, std::string shader_filepath)
-	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * 10 * sizeof(float)) /* I don't know why size is multiplied by 10.                           */
-{}                                                                                               /* It seems like that is making it 10 times bigger than it needs to be. */
-																								 /* But weird things happen when that isn't there, so there it stays.     */
+#include "Quad.h"
 
 
-void BatchRenderer::add_layout(VertexBufferLayout &_layout)
-{
-	vertex_array.Bind();
-	vertex_buffer.Bind();
 
-	vertex_array.AddBuffer(vertex_buffer, _layout);
-}
-
-void BatchRenderer::draw(glm::mat4 proj_matrix)
-{
-	vertex_array.Bind();
-	shader.Bind();
-	index_buffer.Bind();
-
-
-	shader.SetUniformMat4f("u_MVP", proj_matrix);
-	shader.SetUniform1iv("u_Textures", 16, samplers);
-
-	GLCall(glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr))
-}
-
-Quad::Quad(VertexBuffer *vb, float h, float w, float size)
+Quad::Quad(VertexBuffer* vb, float h, float w, float size)
 	: buffer_index(0), active_buffer(vb)
 {
 
@@ -75,8 +50,8 @@ Quad::Quad(VertexBuffer *vb, float h, float w, float size)
 
 Point Quad::find_tile()
 {
-	float x_tile = quad_data[0] / 32 + 0.5;
-	float y_tile = quad_data[1] / 32 + 0.5;
+	float x_tile = quad_data[0] / 32.0f + 0.5f;
+	float y_tile = quad_data[1] / 32.0f + 0.5f;
 	return Point(x_tile, y_tile);
 }
 
@@ -250,7 +225,7 @@ void Quad::set_vertex_pos(float x, float y, int index)
 	{
 		throw "Index out of range";
 	}
-	quad_data[6 * index]     = round(x);
+	quad_data[6 * index] = round(x);
 	quad_data[6 * index + 1] = round(y);
 
 	update();
@@ -278,5 +253,3 @@ Point Quad::get_vertex_pos(int index)
 
 	return Point(quad_data[6 * index], quad_data[6 * index + 1]);
 }
-
-
