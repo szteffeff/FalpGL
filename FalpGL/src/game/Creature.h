@@ -23,8 +23,9 @@ private:
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
 	float offset[2] = { 0.0f, 0.0f };
 	float momentum[2], position[2];
-	float Health;
-	float Stamina;
+	float Health = 100;
+	float Stamina = 100;
+	int Potion = 4;
 
 	enum class player_animations {
 		IDLE = 0,
@@ -44,10 +45,12 @@ public:
 	void tick();
 	float* GetHealth();
 	float* GetStamina();
-
+	int* GetPotion();
+	void Take_Damage();
+	void Take_Damage_tile();
+	void Take_Heal();
+	//float Change_Health(float Damage, float Heal)
 };
-
-
 
 class Health_Bar : public Creature {
 private:

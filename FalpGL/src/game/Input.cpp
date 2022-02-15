@@ -80,6 +80,14 @@ void Input::recive(int key, int scancode, int action, int mods) /* release = 0, 
 		std::cout << "Pausing\n";
 		break;
 
+	case(GLFW_KEY_O):
+		player->Take_Damage();
+		break;
+
+	case(GLFW_KEY_P):
+		player->Take_Heal();
+		break;
+
 	default:
 		break;
 	}

@@ -142,6 +142,29 @@ float* Player::GetStamina()
 	return &Stamina;
 }
 
+int* Player::GetPotion()
+{
+	return &Potion;
+}
+
+void Player::Take_Damage()
+{
+	if (Health > 0) { Health -= 25; };
+}
+
+void Player::Take_Damage_tile()
+{
+	if (Health > 0) { Health -= 1; };
+}
+
+void Player::Take_Heal()
+{
+	if (Health < 100 && Potion != 0) {
+		Health += 25;
+		Potion -= 1;
+	};
+}
+
 glm::mat4* Player::get_trans_matrix()
 {
 	return(&player_transform_matrix);

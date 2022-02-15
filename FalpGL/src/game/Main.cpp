@@ -153,7 +153,7 @@ int main(void)
 
     glfwSetKeyCallback(window, key_callback);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(60000);
 
     /* setup cursor */
     {
@@ -191,16 +191,15 @@ int main(void)
         atlas_0.Bind(0);
         atlas_1.Bind(1);
         
-        UserInterface ui;
+        UserInterface ui(&interface_renderer.vertex_buffer);
 
         Player player(&player_render.vertex_buffer);
-
-        Health_Bar hb(&interface_renderer.vertex_buffer);
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
+        ui.SetPotion(player.GetPotion());
         controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -219,7 +218,10 @@ int main(void)
             ypos -= window_height / 2;
             ypos *= -1;
 
-
+            if (main_map.map_attack() == "FLOWER")
+            {
+                player.Take_Damage_tile();
+            }
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();

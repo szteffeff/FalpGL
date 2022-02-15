@@ -39,6 +39,7 @@ public:
 	void fill();
 	void draw();
 	void draw(glm::mat4 tm);
+	std::string map_attack();
 
 	void tile_at_position(float x, float y);
 

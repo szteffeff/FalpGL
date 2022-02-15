@@ -199,6 +199,12 @@ void Map::draw(glm::mat4 tm)
 	renderer.draw(*projection_matrix * transformation_matrix * tm);
 }
 
+std::string Map::map_attack()
+{
+	std::string tile_attacking = map_vector[width * height / 2 + width / 2 - 1]->name;
+	return tile_attacking;
+}
+
 
 
 glm::mat4* Map::get_trans_matrix()

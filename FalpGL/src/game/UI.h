@@ -8,20 +8,20 @@
 #include "Entity.h"
 #include "Creature.h"
 
-//health . ewapons, 
 class UserInterface {
 	float* Player_Health;
 	float* Player_Stamina;
-	Entity PlayerHealthbar;
-	Entity PlayerStaminaBar;
-
+	int* Player_Potion;
+	Health_Bar health_Bar;
+	
 public:
-	UserInterface();
+	UserInterface(VertexBuffer* buffer);
 	void SetHealth(float* H);
 	void SetStamina(float* S);
+	void SetPotion(int* P);
 	void UI_Tick();
 	void Placeholder_Health(float HP);
 	void Placeholder_Stamina(float SP);
-
+	void Placeholder_Potion(int P);
 };
 

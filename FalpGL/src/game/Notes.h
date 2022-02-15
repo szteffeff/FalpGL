@@ -73,8 +73,9 @@ for (int i = 0; i < width; i++)
 	map_vector[((width * height)) - width + i] = buffer[i];
 }
 
+
 // remove the Userinterface thingy, used to keep track of health and damage
-float UserInterface::Change_Health(float Damage, float Heal)
+float Change_Health(float Damage, float Heal)
 {
 	float Current_health;
 	if (Damage > 0) { Current_health = *Player_Health - Damage; };
