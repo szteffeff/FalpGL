@@ -26,6 +26,7 @@ std::string get_current_dir() {
 
 /* Declarations */
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void mouse_callback(GLFWwindow* window, int button, int action, int mods);
 Json_loader* Animation::loader;
 Json_loader* Creature::loader;
 
@@ -152,6 +153,7 @@ int main(void)
     glfwSetWindowSize(window, window_width, window_height);
 
     glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_callback);
 
     glfwSwapInterval(60000);
 
@@ -170,6 +172,21 @@ int main(void)
         GLFWcursor* cursor = glfwCreateCursor(&cursor_image, 0, 0);
 
         glfwSetCursor(window, cursor);
+    }
+
+    /* setup icon */
+    {
+        unsigned char* cursor_image_data;
+        int c_height, c_width, c_bpp;
+        cursor_image_data = stbi_load("res/gfx/textures/incon2.png", &c_height, &c_width, &c_bpp, 4);
+
+
+        GLFWimage cursor_image;
+        cursor_image.height = c_height;
+        cursor_image.width = c_width;
+        cursor_image.pixels = cursor_image_data;
+
+        glfwSetWindowIcon(window, 1, &cursor_image);
     }
     
     {
@@ -249,5 +266,11 @@ int main(void)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    controller.recive(key, scancode, action, mods);
+    controller.keys_recive(key, scancode, action, mods);
+}
+
+
+void mouse_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    controller.mouse_recive(button, action, mods);
 }
