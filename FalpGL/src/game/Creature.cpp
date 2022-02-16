@@ -93,8 +93,21 @@ void Player::walk(float direction, float magnitude)
 	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
 	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
-	momentum[0] += dx;
-	momentum[1] += dy;
+	momentum[0] += round(dx);
+	momentum[1] += round(dy);
+}
+
+void Player::sprint(float direction, float magnitude)
+{
+	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+
+	momentum[0] += round(1.5 * dx);
+	momentum[1] += round(1.5 * dy);
+
+	magnitude *= 3;
+
+	Stamina -= 0.1;
 }
 
 void Player::tick()
@@ -117,7 +130,7 @@ void Player::tick()
 		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
 		float real_degrees = (dir * 180.0f) / 3.14159f;
 
-		std::cout << real_degrees << "\n";
+		//std::cout << real_degrees << "\n";
 
 		if (real_degrees < 75 || real_degrees > 285) { m_player.set_animation((int)player_animations::RIGHT); }
 		else if (real_degrees > 80 && real_degrees < 100) { m_player.set_animation((int)player_animations::UP); }

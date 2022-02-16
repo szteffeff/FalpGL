@@ -22,5 +22,6 @@ public:
 	void Placeholder_Health(float HP);
 	void Placeholder_Stamina(float SP);
 	void Placeholder_Potion(int P);
+	void Imma_Keep_It_100();
 };
 

@@ -39,6 +39,7 @@ private:
 public:
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
+	void sprint(float direction, float magnitude);
 	glm::mat4* get_trans_matrix();
 	float position_x();
 	float position_y();

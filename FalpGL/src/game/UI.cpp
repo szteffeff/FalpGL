@@ -44,12 +44,24 @@ void UserInterface::Placeholder_Potion(int P)
 
 }
 
+void UserInterface::Imma_Keep_It_100()
+{
+	if (*Player_Health > 100) {
+		float bonus_health = *Player_Health - 100;
+		*Player_Health -= bonus_health;
+	}
+	if (*Player_Stamina > 100) {
+		float bonus_stamina = *Player_Stamina - 100;
+		*Player_Stamina -= bonus_stamina;
+	}
+}
 
 void UserInterface::UI_Tick()
 {
 	Placeholder_Health(*Player_Health);
 	Placeholder_Stamina(*Player_Stamina);
 	Placeholder_Potion(*Player_Potion);
+	Imma_Keep_It_100();
 	health_Bar.tick();
 }
 

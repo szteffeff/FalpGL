@@ -3,7 +3,7 @@
 
 Input::Input()
 {
-	keys.resize(4);
+	keys.resize(10);
 }
 
 Input::~Input()
@@ -58,6 +58,10 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 		std::cout << "stopping\n";
 		break;
 
+	case(GLFW_KEY_LEFT_SHIFT):
+		keys[4].held = action;
+		break;
+
 	default:
 		break;
 	}
@@ -105,22 +109,42 @@ void Input::tick()
 		return;
 	}
 
-	if (keys[0].held) {
-		player->walk(90, 1);
+	if (keys[4].held) {
+		if (keys[0].held) {
+			player->sprint(90, 1);
+		}
+
+		if (keys[1].held) {
+			player->sprint(180, 1);
+		}
+
+		if (keys[2].held) {
+			player->sprint(270, 1);
+		}
+
+		if (keys[3].held) {
+			player->sprint(0, 1);
+		}
 	}
 
-	if (keys[1].held) {
-		player->walk(180, 1);
-	}
+	else {
+		if (keys[0].held) {
+			player->walk(90, 1);
+		}
 
-	if (keys[2].held) {
-		player->walk(270, 1);
-	}
+		if (keys[1].held) {
+			player->walk(180, 1);
+		}
 
-	if (keys[3].held) {
-		player->walk(0, 1);
-	}
+		if (keys[2].held) {
+			player->walk(270, 1);
+		}
 
+		if (keys[3].held) {
+			player->walk(0, 1);
+		}
+	}
+	
 	if (!(keys[0].held || keys[1].held || keys[2].held || keys[3].held))
 	{
 	}
