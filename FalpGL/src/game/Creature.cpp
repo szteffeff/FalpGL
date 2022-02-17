@@ -95,19 +95,19 @@ void Player::walk(float direction, float magnitude)
 
 	momentum[0] += round(dx);
 	momentum[1] += round(dy);
+
+	Recover_Stamina();
 }
 
 void Player::sprint(float direction, float magnitude)
 {
+	magnitude *= 3;
 	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
 	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
 	momentum[0] += round(1.5 * dx);
 	momentum[1] += round(1.5 * dy);
-
-	magnitude *= 3;
-
-	Stamina -= 0.1;
+	
 }
 
 void Player::tick()
@@ -140,6 +140,7 @@ void Player::tick()
 	else
 	{
 		m_player.set_animation(0);
+		Recover_Stamina();
 	}
 
 
@@ -180,6 +181,16 @@ void Player::Take_Heal()
 		Health += 25;
 		Potion -= 1;
 	};
+}
+
+void Player::Recover_Stamina()
+{
+	Stamina += 0.05;
+}
+
+void Player::Lose_Stamina()
+{
+	Stamina -= 0.1;
 }
 
 glm::mat4* Player::get_trans_matrix()

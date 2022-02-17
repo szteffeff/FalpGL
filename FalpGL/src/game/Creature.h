@@ -50,6 +50,8 @@ public:
 	void Take_Damage();
 	void Take_Damage_tile();
 	void Take_Heal();
+	void Recover_Stamina();
+	void Lose_Stamina();
 	//float Change_Health(float Damage, float Heal)
 };
 
