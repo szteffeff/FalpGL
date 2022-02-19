@@ -1,10 +1,14 @@
  #include "BatchRenderer.h"
 
 BatchRenderer::BatchRenderer(int size, std::string shader_filepath)
-	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * 10 * sizeof(float)) /* I don't know why size is multiplied by 10.                           */
-{}                                                                                               /* It seems like that is making it 10 times bigger than it needs to be. */
-																								 /* But weird things happen when that isn't there, so there it stays.     */
-
+	: index_buffer(size), shader(shader_filepath), vertex_buffer(size * 24 * 10 * sizeof(float)) 
+{}
+																			 
+/* 
+* I don't know why size is multiplied by 10.                           
+* It seems like that is making it 10 times bigger than it needs to be. 
+* But weird things happen when that isn't there, so there it stays.    
+*/
 
 void BatchRenderer::add_layout(VertexBufferLayout &_layout)
 {
