@@ -164,6 +164,7 @@
     <ClCompile Include="src\game\Map.cpp" />
     <ClCompile Include="src\game\Tile.cpp" />
     <ClCompile Include="src\game\UI.cpp" />
+    <ClCompile Include="src\renderer\Framebuffer.cpp" />
     <ClCompile Include="src\renderer\Quad.cpp" />
     <ClCompile Include="src\types\TileTypes.h" />
     <ClCompile Include="src\renderer\Point.cpp" />
@@ -183,6 +184,7 @@
     <None Include="res\data\tiles.json" />
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
+    <None Include="res\shaders\frame.shader" />
     <None Include="res\shaders\map.shader" />
     <Text Include="res\data\animations.json">
       <FileType>Document</FileType>
@@ -329,6 +331,7 @@
     <ClInclude Include="src\game\Creature.h" />
     <ClInclude Include="src\game\Tile.h" />
     <ClInclude Include="src\game\UI.h" />
+    <ClInclude Include="src\renderer\Framebuffer.h" />
     <ClInclude Include="src\renderer\Quad.h" />
     <ClInclude Include="src\types\AnimationTypes.h" />
     <ClInclude Include="src\renderer\BatchRenderer.h" />

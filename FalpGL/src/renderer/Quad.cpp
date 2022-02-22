@@ -151,6 +151,7 @@ void Quad::translate(float delta_x, float delta_y)
 	quad_data[18] += delta_x;
 	quad_data[19] += delta_y;
 
+
 	quad_data[0] = round(quad_data[0]);
 	quad_data[1] = round(quad_data[1]);
 

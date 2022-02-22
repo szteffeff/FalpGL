@@ -25,6 +25,7 @@ std::string get_current_dir() {
 
 
 /* Declarations */
+void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void mouse_callback(GLFWwindow* window, int button, int action, int mods);
 Json_loader* Animation::loader;
@@ -54,13 +55,14 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_SAMPLES, 1);
 
 
     int window_width, window_height;
-    int resolution_x = 1920, resolution_y = 1080, window_scale = 2;
+    int resolution_x = 1920, resolution_y = 1080, window_scale = 1;
     double xpos, ypos;
     bool running = true;
-    const bool fullscreen = true;
+    const bool fullscreen = false;
     bool pause = false;
 
     glm::mat4 projection_matrix;
@@ -125,7 +127,6 @@ int main(void)
         return -1;
     }
 
-
     std::cout << glGetString(GL_VERSION) << " - ";
     std::cout << glGetString(GL_VENDOR) << " - ";
     std::cout << glGetString(GL_RENDERER) << " - ";
@@ -138,7 +139,10 @@ int main(void)
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glDepthFunc(GL_LEQUAL));
 
-    GLCall(glEnable(GL_MULTISAMPLE));
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, 0);
+
+    
 
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
     GLCall(glViewport(0, 0, window_width, window_height));
@@ -146,7 +150,7 @@ int main(void)
 
     glfwSetWindowTitle(window, "Test Text");
 
-    glfwWindowHint(GLFW_SAMPLES, 8);
+    GLCall(glEnable(GL_MULTISAMPLE));
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
@@ -176,21 +180,24 @@ int main(void)
 
     /* setup icon */
     {
-        unsigned char* cursor_image_data;
+        unsigned char* icon_image_data;
         int c_height, c_width, c_bpp;
-        cursor_image_data = stbi_load("res/gfx/textures/incon2.png", &c_height, &c_width, &c_bpp, 4);
+        icon_image_data = stbi_load("res/gfx/textures/incon2.png", &c_height, &c_width, &c_bpp, 4);
 
 
-        GLFWimage cursor_image;
-        cursor_image.height = c_height;
-        cursor_image.width = c_width;
-        cursor_image.pixels = cursor_image_data;
+        GLFWimage icon_image;
+        icon_image.height = c_height;
+        icon_image.width = c_width;
+        icon_image.pixels = icon_image_data;
 
-        glfwSetWindowIcon(window, 1, &cursor_image);
+        glfwSetWindowIcon(window, 1, &icon_image);
     }
     
-    {
-        /* Create all the things */
+    { /* OpenGL objects need to be created in this scope */
+        
+        Framebuffer framebuffer(resolution_x, resolution_y);
+        framebuffer.unbind();
+
         VertexBufferLayout layout;
         layout.Push<float>(3);
         layout.Push<float>(2);
@@ -202,8 +209,8 @@ int main(void)
         BatchRenderer interface_renderer(1000, "res/shaders/basic.shader");
         interface_renderer.add_layout(layout);
         
-        Texture atlas_0 = Texture("res/gfx/atlas0.png");
-        Texture atlas_1 = Texture("res/gfx/atlas1.png");
+        Texture atlas_0("res/gfx/atlas0.png");
+        Texture atlas_1("res/gfx/atlas1.png");
 
         atlas_0.Bind(0);
         atlas_1.Bind(1);
@@ -222,11 +229,12 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
         {
-            /* Clear buffers and other OpenGL stuff */
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
             /* Handle inputs */
             controller.tick();
 
@@ -247,10 +255,34 @@ int main(void)
                 main_map.shift(player.position_x(), player.position_y());
             }
            
-            /* Draw all the renderers */
+
+
+            /* Draw */
+
+            /* Bind and clear full resolution framebuffer */
+            framebuffer.bind();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            /* Resize viewport to full resolution */
+            glViewport(0, 0, resolution_x, resolution_y);
+            
+
+            /* Draw everything to framebuffer */
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix * *player.get_trans_matrix());
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
+
+            /* Bind and clear main buffer */
+            framebuffer.unbind();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            /* Resize viewport to window resolution */
+            glViewport(0, 0, window_width, window_height);
+
+            /* Draw to main buffer */
+            framebuffer.set_saturation(*player.GetHealth());
+            framebuffer.set_value(((*player.GetHealth() + 50) / 150.0f) * 100);
+            framebuffer.draw();
+
+
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
@@ -263,6 +295,21 @@ int main(void)
     return (0);
 }
 
+
+void GLAPIENTRY MessageCallback(GLenum source,
+    GLenum type,
+    GLuint id,
+    GLenum severity,
+    GLsizei length,
+    const GLchar* message,
+    const void* userParam)
+{
+    if (type != GL_DEBUG_TYPE_ERROR) { return; }
+
+    fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+        type, severity, message);
+}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
