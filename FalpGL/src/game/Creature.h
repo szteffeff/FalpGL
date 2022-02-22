@@ -9,6 +9,8 @@ public:
 
 public:
 	Creature();
+	bool Player_Detection_simple_horizontal(float* x, float* player_x);
+	bool Player_Detectoin_simple_vertical(float * y, float* player_y);
 
 	virtual void tick();
 };
@@ -53,6 +55,22 @@ public:
 	void Recover_Stamina();
 	void Lose_Stamina();
 	//float Change_Health(float Damage, float Heal)
+};
+
+class Red_Slime : public Creature {
+private:
+	Entity Red_slime;
+	glm::mat4 Red_Slime_transform_matrix = glm::mat4(1.0f);
+	float offset[2] = { 0.0f, 0.0f };
+	float momentum[2], position[2];
+	const float Health = 20;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+
+public:
+	void Get_player_position(float* x, float* y);
+	void Red_slime_tick();
 };
 
 class Health_Bar : public Creature {

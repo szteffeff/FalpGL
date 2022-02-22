@@ -4,6 +4,32 @@
 
 
 Creature::Creature() {}
+
+bool Creature::Player_Detection_simple_horizontal(float* x, float* player_x)
+{
+	if (x < player_x){ // if thing is left of player
+		return true;
+	}
+	else // if thing is to the left of player
+	{
+		return false;
+	}
+}
+
+bool Creature::Player_Detectoin_simple_vertical(float* y, float* player_y)
+{
+	if (y < player_y) { // if thing is underneath player
+		return true;
+	}
+	else // if thing is above player
+	{
+		return false;
+	}
+
+}
+
+
+
 void Creature::tick() {}
 
 
@@ -208,3 +234,9 @@ float Player::position_x()
 }
 
 /* #### */
+
+void Red_Slime::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
