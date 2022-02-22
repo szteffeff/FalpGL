@@ -127,7 +127,6 @@ void Player::tick()
 	{
 		float dir = (atan2(momentum[1], momentum[0]));
 		if (dir < 0) { dir += 2.0f * 3.14159f; }
-		unsigned int diri = (unsigned int)round(dir / 3.14159 * 2);
 		float real_degrees = (dir * 180.0f) / 3.14159f;
 
 		//std::cout << real_degrees << "\n";
