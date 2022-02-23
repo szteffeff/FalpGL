@@ -279,6 +279,7 @@ int main(void)
 
             /* Draw to main buffer */
             framebuffer.set_saturation(*player.GetHealth());
+            framebuffer.set_chroma(*player.GetHealth() / 50);
             framebuffer.set_value(((*player.GetHealth() + 50) / 150.0f) * 100);
             framebuffer.draw();
 

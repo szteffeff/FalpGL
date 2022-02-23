@@ -49,6 +49,9 @@ Framebuffer::Framebuffer(int width, int height)
 	s.SetUniform1f("hue", 0.0f);
 	s.SetUniform1f("sat", 100.0f);
 	s.SetUniform1f("val", 100.0f);
+	s.SetUniform1f("chroma", 100.0f);
+	s.SetUniform1f("resolution_x", width);
+	s.SetUniform1f("resolution_y", height);
 
 	/* Unbind framebuffer */
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
@@ -81,6 +84,12 @@ void Framebuffer::set_value(float val)
 {
 	s.Bind();
 	s.SetUniform1f("val", val);
+}
+
+void Framebuffer::set_chroma(float chroma)
+{
+	s.Bind();
+	s.SetUniform1f("chroma", chroma);
 }
 
 void Framebuffer::draw()

@@ -185,6 +185,7 @@
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
     <None Include="res\shaders\frame.shader" />
+    <None Include="res\shaders\hell.shader" />
     <None Include="res\shaders\map.shader" />
     <Text Include="res\data\animations.json">
       <FileType>Document</FileType>
