@@ -3,7 +3,7 @@
 #include "BatchRenderer.h"
 #include <iostream>
 
-class Framebuffer {
+class Framebuffer { /* Use color attachments instead of 2 framebuffers */
 private:
 	float vertices[24] = {
 		 1.0f, -1.0f,  1.0f, 0.0f,

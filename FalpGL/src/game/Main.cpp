@@ -67,7 +67,9 @@ int main(void)
 
     glm::mat4 projection_matrix;
 
-    if (fullscreen) // true = fulscreen, false = windowed
+
+    /* Create window and find resolution */
+    if (fullscreen)
         {
             const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -111,11 +113,17 @@ int main(void)
 
             std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
         }
+    /* Window size and resolution is now known */
 
+    controller.set_height_width(window_width, window_height);
 
+    /* Working directory for debug */
     std::cout << "working directory is: " << get_current_dir() << "\n";
 
+    /* Seed rand */
+    srand(time(NULL));
 
+    /* Start glew */
     glfwMakeContextCurrent(window);
     if (glewInit() == GLEW_OK)
     {
@@ -127,38 +135,51 @@ int main(void)
         return -1;
     }
 
+    /* OpenGL strings */
     std::cout << glGetString(GL_VERSION) << " - ";
     std::cout << glGetString(GL_VENDOR) << " - ";
     std::cout << glGetString(GL_RENDERER) << " - ";
     std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION);
     std::cout << "\n";
 
+    /* OpenGL functions */
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glDepthFunc(GL_LEQUAL));
-
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
-
     glEnable(GL_PROGRAM_POINT_SIZE);
-
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
     GLCall(glViewport(0, 0, window_width, window_height));
-
-
-    glfwSetWindowTitle(window, "Test Text");
-
     GLCall(glEnable(GL_MULTISAMPLE));
 
+    /* glfw functions */
+    std::string names[18] = {
+        "The Small Lands",
+        "A Rabbit's Journey",
+        "Splund",
+        "Stop the Dungeon",
+        "Catland",
+        "Evergrow",
+        "Unnamed Dungeon Game",
+        "Spooklands",
+        "Nowhere",
+        "Gloom",
+        "Live",
+        "Maghide",
+        "Inside the Dungeon",
+        "Don't Die",
+        "Bruh",
+        "Archworks",
+        "A Dungeon Story",
+        "Dungeon Dive"
+    };
+    glfwSetWindowTitle(window, names[(rand() % 18)].c_str());
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
     glfwSetWindowSize(window, window_width, window_height);
-
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_callback);
-
     glfwSwapInterval(1);
 
     /* setup cursor */
@@ -229,37 +250,29 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
-        float verticies[2] = {
-            0.0f, 0.0f
-        };
 
-        Shader shader("res/shaders/point.shader");
-        VertexArray vertex_array;
-        VertexBuffer vertex_buffer(2 * sizeof(float), &verticies);
-        VertexBufferLayout vertex_layout;
-        vertex_layout.Push<float>(2);
-        vertex_array.AddBuffer(vertex_buffer, vertex_layout);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
         {
             /* Handle inputs */
-            controller.tick();
-
             glfwGetCursorPos(window, &xpos, &ypos);
             xpos -= window_width / 2;
             ypos -= window_height / 2;
             ypos *= -1;
 
-            if (main_map.map_attack() == "FLOWER")
-            {
-                player.Take_Damage_tile();
-            }
+            controller.tick(xpos, ypos);
+
+            
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
             if (pause == false) {
+                if (main_map.map_attack() == "FLOWER")
+                {
+                    player.Take_Damage_tile();
+                }
                 player.tick();
                 main_map.shift(player.position_x(), player.position_y());
             }
@@ -287,23 +300,19 @@ int main(void)
             /* Draw between buffers */
             framebuffer.set_hue(0.0f);
             framebuffer.set_saturation(*player.GetHealth());
-            framebuffer.set_value(((*player.GetHealth() + 50) / 150.0f) * 100);
+            framebuffer.set_value(((*player.GetHealth() + 200) / 300.0f) * 100);
             framebuffer.draw();
 
 
             /* Setup main buffer */
             c_framebuffer.unbind();
-            c_framebuffer.set_chroma((100 - *player.GetHealth()) / 33.3f);
+            c_framebuffer.set_chroma((100 - *player.GetHealth()) / 33.3333f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, window_width, window_height);
 
             /* Draw processed image and UI */
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
-
-            shader.Bind();
-            vertex_array.Bind();
-            glDrawArrays(GL_POINTS, 0, 1);
 
 
             /* Swap front and back buffers */
