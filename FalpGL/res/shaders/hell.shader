@@ -51,9 +51,9 @@ vec3 hsv2rgb(vec3 c)
 
 float kernel[9] = float[]
 (
-    0, 0, 0,
-    0, 1, 0,
-    0, 0, 0
+    1, 1, 1,
+    1, -8, 1,
+    1, 1, 1
     );
 
 
@@ -73,7 +73,7 @@ void main()
 {
     vec3 ecolor = vec3(0.0f);
     for (int i = 0; i < 9; i++)
-        ecolor += vec3(texture(screenTexture, v_TexCoord + offsets[i])) * (kernel[i] / 1);
+        ecolor += vec3(texture(screenTexture, v_TexCoord + offsets[i])) * kernel[i];
 
     float colorr = texture(screenTexture, vec2(v_TexCoord.x - -chroma / 2 / 1080.0f, v_TexCoord.y)).r;
     float colorg = texture(screenTexture, vec2(v_TexCoord.x -      0      / 1080.0f, v_TexCoord.y)).g;
