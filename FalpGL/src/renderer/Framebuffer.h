@@ -31,4 +31,5 @@ public:
 	void draw();
 	void set_saturation(float sat);
 	void set_value(float sat);
+	void set_chroma(float chroma);
 };
