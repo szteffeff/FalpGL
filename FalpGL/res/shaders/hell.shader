@@ -8,8 +8,8 @@ out vec2 v_TexCoord;
 
 void main()
 {
-	gl_Position = vec4(position, 1.0, 1.0);
-	v_TexCoord = texCoord;
+    gl_Position = vec4(position, 1.0, 1.0);
+    v_TexCoord = texCoord;
 };
 
 
@@ -52,7 +52,7 @@ vec3 hsv2rgb(vec3 c)
 float kernel[9] = float[]
 (
     1, 1, 1,
-    1, -8, 1,
+    1, 1, 1,
     1, 1, 1
     );
 
@@ -71,19 +71,22 @@ vec2 offsets[9] = vec2[]
 
 void main()
 {
-    vec3 ecolor = vec3(0.0f);
-    for (int i = 0; i < 9; i++)
-        ecolor += vec3(texture(screenTexture, v_TexCoord + offsets[i])) * kernel[i];
+    float colorr;
+    float colorg;
+    float colorb;
 
-    float colorr = texture(screenTexture, vec2(v_TexCoord.x - -chroma / 2 / 1080.0f, v_TexCoord.y)).r;
-    float colorg = texture(screenTexture, vec2(v_TexCoord.x -      0      / 1080.0f, v_TexCoord.y)).g;
-    float colorb = texture(screenTexture, vec2(v_TexCoord.x -  chroma / 2 / 1080.0f, v_TexCoord.y)).b;
+    for (int i = 0; i < 9; i++)
+    {
+        colorr += texture(screenTexture, vec2((v_TexCoord.x - -chroma / 2 / 1080.0f), v_TexCoord.y) + offsets[i]).r * kernel[i];
+        colorg += texture(screenTexture, vec2((v_TexCoord.x - 0 / 1080.0f), v_TexCoord.y) + offsets[i]).g * kernel[i];
+        colorb += texture(screenTexture, vec2((v_TexCoord.x - chroma / 2 / 1080.0f), v_TexCoord.y) + offsets[i]).b * kernel[i];
+    }
+
+
     vec4 color = vec4(colorr, colorg, colorb, 1.0f);
     vec3 hsl = rgb2hsv(color.xyz);
     hsl.x += hue / 360.0f;
-    hsl.y = hsl.y * (sat  / 100.0f);
+    hsl.y = hsl.y * (sat / 100.0f);
     hsl.z = hsl.z * (val / 100.0f);
     frag_color = vec4(hsv2rgb(hsl), 1.0);
-
-    frag_color = vec4(ecolor, 1.0f);
 }

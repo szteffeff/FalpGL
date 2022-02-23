@@ -502,8 +502,11 @@
     <None Include="res\shaders\map.shader" />
     <None Include="res\data\entities.json" />
     <None Include="res\data\tiles.json" />
-    <None Include="res\shaders\frame.shader" />
+    <None Include="res\shaders\hsl.shader" />
     <None Include="res\shaders\hell.shader" />
+    <None Include="res\shaders\chroma.shader" />
+    <None Include="res\shaders\kernel.shader" />
+    <None Include="res\shaders\point.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\stb_image\stb_image.h">

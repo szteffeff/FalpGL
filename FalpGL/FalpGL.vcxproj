@@ -184,12 +184,15 @@
     <None Include="res\data\tiles.json" />
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
-    <None Include="res\shaders\frame.shader" />
+    <None Include="res\shaders\chroma.shader" />
+    <None Include="res\shaders\hsl.shader" />
     <None Include="res\shaders\hell.shader" />
+    <None Include="res\shaders\kernel.shader" />
     <None Include="res\shaders\map.shader" />
     <Text Include="res\data\animations.json">
       <FileType>Document</FileType>
     </Text>
+    <None Include="res\shaders\point.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />

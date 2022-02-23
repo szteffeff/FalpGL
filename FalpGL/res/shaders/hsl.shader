@@ -23,9 +23,6 @@ layout(location = 0) out vec4 frag_color;
 in vec2 v_TexCoord;
 
 uniform sampler2D screenTexture;
-uniform float resolution_x;
-uniform float resolution_y;
-uniform float chroma;
 uniform float hue;
 uniform float sat;
 uniform float val;
@@ -49,41 +46,12 @@ vec3 hsv2rgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
-float kernel[9] = float[]
-(
-    0, 0, 0,
-    0, 1, 0,
-    0, 0, 0
-    );
-
-
-float offset_x = 1.0f / resolution_x;
-float offset_y = 1.0f / resolution_y;
-
-
-vec2 offsets[9] = vec2[]
-(
-    vec2(-offset_x, offset_y), vec2(0.0f, offset_y), vec2(offset_x, offset_y),
-    vec2(-offset_x, 0.0f), vec2(0.0f, 0.0f), vec2(offset_x, 0.0f),
-    vec2(-offset_x, -offset_y), vec2(0.0f, -offset_y), vec2(offset_x, -offset_y)
-    );
-
-
 void main()
 {
-    vec3 ecolor = vec3(0.0f);
-    for (int i = 0; i < 9; i++)
-        ecolor += vec3(texture(screenTexture, v_TexCoord + offsets[i])) * (kernel[i] / 1);
-
-    float colorr = texture(screenTexture, vec2(v_TexCoord.x - -chroma / 2 / 1080.0f, v_TexCoord.y)).r;
-    float colorg = texture(screenTexture, vec2(v_TexCoord.x -      0      / 1080.0f, v_TexCoord.y)).g;
-    float colorb = texture(screenTexture, vec2(v_TexCoord.x -  chroma / 2 / 1080.0f, v_TexCoord.y)).b;
-    vec4 color = vec4(colorr, colorg, colorb, 1.0f);
+    vec4 color = texture(screenTexture, v_TexCoord);
     vec3 hsl = rgb2hsv(color.xyz);
     hsl.x += hue / 360.0f;
     hsl.y = hsl.y * (sat  / 100.0f);
     hsl.z = hsl.z * (val / 100.0f);
     frag_color = vec4(hsv2rgb(hsl), 1.0);
-
-    frag_color = vec4(ecolor, 1.0f);
 }
