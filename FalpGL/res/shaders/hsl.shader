@@ -51,7 +51,7 @@ void main()
     vec4 color = texture(screenTexture, v_TexCoord);
     vec3 hsl = rgb2hsv(color.xyz);
     hsl.x += hue / 360.0f;
-    hsl.y = hsl.y * (sat / 100.0f);
+    hsl.y = hsl.y * (sat  / 100.0f);
     hsl.z = hsl.z * (val / 100.0f);
     frag_color = vec4(hsv2rgb(hsl), 1.0);
 }

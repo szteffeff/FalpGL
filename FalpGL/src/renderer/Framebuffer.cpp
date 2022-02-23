@@ -1,8 +1,9 @@
 #include "Framebuffer.h"
 
 
-Framebuffer::Framebuffer(int width, int height)
-	: m_width(width), m_height(height), s("res/shaders/frame.shader"), va(), vb(24 * sizeof(float), &vertices), vbl()
+Framebuffer::Framebuffer(int width, int height, std::string shader_filepath, int texture_unit)
+	: m_width(width), m_height(height), shader(shader_filepath), screen_texture(texture_unit),
+	framebuffer_vertex_array(), framebuffer_vertex_buffer(24 * sizeof(float), &vertices), framebuffer_vertex_layout()
 {
 	/* Generate framebuffer object */
 	GLCall(glGenFramebuffers(1, &framebuffer_id));
@@ -11,7 +12,7 @@ Framebuffer::Framebuffer(int width, int height)
 	/* Generater texture */
 	GLCall(glGenTextures(1, &texture_id));
 
-	GLCall(glActiveTexture(GL_TEXTURE16));
+	GLCall(glActiveTexture(GL_TEXTURE0 + screen_texture));
 	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
 
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
@@ -40,18 +41,15 @@ Framebuffer::Framebuffer(int width, int height)
 	}
 
 	/* Setup renderer */
-	vbl.Push<float>(2);
-	vbl.Push<float>(2);
+	framebuffer_vertex_layout.Push<float>(2);
+	framebuffer_vertex_layout.Push<float>(2);
 
-	va.AddBuffer(vb, vbl);
+	framebuffer_vertex_array.AddBuffer(framebuffer_vertex_buffer, framebuffer_vertex_layout);
 
-	s.Bind();
-	s.SetUniform1f("hue", 0.0f);
-	s.SetUniform1f("sat", 100.0f);
-	s.SetUniform1f("val", 100.0f);
+	shader.Bind();
 
 	/* Unbind framebuffer */
-	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+	unbind();
 }
 
 Framebuffer::~Framebuffer()
@@ -61,7 +59,7 @@ Framebuffer::~Framebuffer()
 
 void Framebuffer::bind()
 {
-	GLCall(glActiveTexture(GL_TEXTURE16));
+	GLCall(glActiveTexture(GL_TEXTURE0 + screen_texture));
 	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id));
 }
@@ -71,23 +69,60 @@ void Framebuffer::unbind()
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 }
 
-void Framebuffer::set_saturation(float sat)
-{
-	s.Bind();
-	s.SetUniform1f("sat", sat);
-}
 
-void Framebuffer::set_value(float val)
-{
-	s.Bind();
-	s.SetUniform1f("val", val);
-}
 
 void Framebuffer::draw()
 {
-	va.Bind();
-	s.Bind();
-	s.SetUniform1i("screenTexture", 16);
+	framebuffer_vertex_array.Bind();
 
+	shader.Bind();
+	shader.SetUniform1i("screenTexture", screen_texture);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+
+
+/* ##### HSL_Frambuffer ##### */
+
+HSL_Framebuffer::HSL_Framebuffer(int width, int height, int texture_unit)
+	: Framebuffer(width, height, "res/shaders/hsl.shader", texture_unit)
+{
+	shader.SetUniform1f("hue", 0.0f);
+	shader.SetUniform1f("sat", 100.0f);
+	shader.SetUniform1f("val", 100.0f);
+}
+
+void HSL_Framebuffer::set_saturation(float sat)
+{
+	shader.Bind();
+	shader.SetUniform1f("sat", sat);
+}
+
+void HSL_Framebuffer::set_value(float val)
+{
+	shader.Bind();
+	shader.SetUniform1f("val", val);
+}
+
+void HSL_Framebuffer::set_hue(float hue)
+{
+	shader.Bind();
+	shader.SetUniform1f("hue", hue);
+}
+
+/* ##### Chroma_Frambuffer ##### */
+
+Chroma_Framebuffer::Chroma_Framebuffer(int width, int height, int texture_unit)
+	: Framebuffer(width, height, "res/shaders/chroma.shader", texture_unit)
+{
+	shader.Bind();
+	shader.SetUniform1f("chroma", 1.0f);
+	shader.SetUniform1f("resolution_x", width);
+	shader.SetUniform1f("resolution_y", height);
+}
+
+void Chroma_Framebuffer::set_chroma(float chroma)
+{
+	shader.Bind();
+	shader.SetUniform1f("chroma", chroma);
 }

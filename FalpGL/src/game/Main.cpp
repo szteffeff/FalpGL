@@ -142,7 +142,7 @@ int main(void)
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
 
-    
+    glEnable(GL_PROGRAM_POINT_SIZE);
 
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
     GLCall(glViewport(0, 0, window_width, window_height));
@@ -195,8 +195,8 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
         
-        Framebuffer framebuffer(resolution_x, resolution_y);
-        framebuffer.unbind();
+        HSL_Framebuffer framebuffer(resolution_x, resolution_y, 15);
+        Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 16);
 
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -232,7 +232,16 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+        float verticies[2] = {
+            0.0f, 0.0f
+        };
 
+        Shader shader("res/shaders/point.shader");
+        VertexArray vertex_array;
+        VertexBuffer vertex_buffer(2 * sizeof(float), &verticies);
+        VertexBufferLayout vertex_layout;
+        vertex_layout.Push<float>(2);
+        vertex_array.AddBuffer(vertex_buffer, vertex_layout);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -261,31 +270,44 @@ int main(void)
            
 
 
-            /* Draw */
+            /* ##### Draw ##### */
 
-            /* Bind and clear full resolution framebuffer */
+            /* Setup hsl framebuffer */
             framebuffer.bind();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            /* Resize viewport to full resolution */
             glViewport(0, 0, resolution_x, resolution_y);
             
 
-            /* Draw everything to framebuffer */
+            /* Draw everything but ui to framebuffer */
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
             player_render.draw(projection_matrix * *player.get_trans_matrix());
-            interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
+            
 
-            /* Bind and clear main buffer */
-            framebuffer.unbind();
+            /* Setup chromatic aberration framebuffer */
+            c_framebuffer.bind();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            /* Resize viewport to window resolution */
-            glViewport(0, 0, window_width, window_height);
+            glViewport(0, 0, resolution_x, resolution_y);
 
-            /* Draw to main buffer */
+            /* Draw between buffers */
+            framebuffer.set_hue(0.0f);
             framebuffer.set_saturation(*player.GetHealth());
             framebuffer.set_value(((*player.GetHealth() + 50) / 150.0f) * 100);
             framebuffer.draw();
 
+
+            /* Setup main buffer */
+            c_framebuffer.unbind();
+            c_framebuffer.set_chroma((100 - *player.GetHealth()) / 33.3f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glViewport(0, 0, window_width, window_height);
+
+            /* Draw processed image and UI */
+            c_framebuffer.draw();
+            interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
+
+            shader.Bind();
+            vertex_array.Bind();
+            glDrawArrays(GL_POINTS, 0, 1);
 
 
             /* Swap front and back buffers */
