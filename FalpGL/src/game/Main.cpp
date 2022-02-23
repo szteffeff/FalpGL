@@ -239,6 +239,9 @@ int main(void)
         UserInterface ui(&interface_renderer.vertex_buffer);
 
         Player player(&player_render.vertex_buffer);
+        Red_Slime red_slime(&player_render.vertex_buffer);
+
+        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
@@ -275,6 +278,7 @@ int main(void)
                 }
                 player.tick();
                 main_map.shift(player.position_x(), player.position_y());
+                red_slime.tick();
             }
            
 
