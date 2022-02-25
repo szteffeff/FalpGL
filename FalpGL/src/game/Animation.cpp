@@ -19,7 +19,7 @@ Animation::Animation()
 	current_frame = 0;
 }
 
-bool Animation::tick()
+animation_state Animation::tick()
 {
 	if ((std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now()
 		- last_time).count() > times[current_frame]))
@@ -29,7 +29,8 @@ bool Animation::tick()
 			if (loop)
 				current_frame = 0;
 			else
-				return false;
+				current_frame = 0;
+				return animation_state::ended;
 		}
 		else
 		{
@@ -39,10 +40,10 @@ bool Animation::tick()
 		m_quad->set_texture_coords(tex_coords[current_frame]);
 
 		last_time = std::chrono::high_resolution_clock::now();
-
+		return animation_state::advanced_frame;
 	}
 
-	return true;
+	return animation_state::none;
 }
 
 void Animation::load(std::string name)

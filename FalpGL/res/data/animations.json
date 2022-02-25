@@ -453,7 +453,7 @@
     "loop": true,
     "length": 3,
     "frame_order": [ 0, 1, 2 ],
-    "frame_times": [ 200, 200, 200],
+    "frame_times": [ 250, 250, 250],
     "texture_coordinants": [
       [
         [ 256, 0 ],

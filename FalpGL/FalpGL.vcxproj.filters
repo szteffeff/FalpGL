@@ -1430,6 +1430,9 @@
     <ClInclude Include="src\renderer\Framebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\NewMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\data\animations.json" />

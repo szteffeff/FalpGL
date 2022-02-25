@@ -333,6 +333,7 @@
   <ItemGroup>
     <ClInclude Include="src\game\Animation.h" />
     <ClInclude Include="src\game\Creature.h" />
+    <ClInclude Include="src\game\NewMap.h" />
     <ClInclude Include="src\game\Tile.h" />
     <ClInclude Include="src\game\UI.h" />
     <ClInclude Include="src\renderer\Framebuffer.h" />

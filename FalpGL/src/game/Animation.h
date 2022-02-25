@@ -8,6 +8,13 @@
 #include "../renderer/RendererIncludes.h"
 #include "Json.h"
 
+
+enum class animation_state {
+	none = 0,
+	advanced_frame,
+	ended
+ };
+
 class Animation {
 public:
 
@@ -16,7 +23,7 @@ public:
 
 	static Json_loader* loader;
 
-	bool tick();
+	animation_state tick();
 	void set();
 
 private:

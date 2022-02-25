@@ -1,5 +1,8 @@
 #include "Entity.h"
 
+entity_return::entity_return(animation_state s)
+	: anim_state(s) {}
+
 Entity::Entity(VertexBuffer* a, json load) /* takes loader already scoped to full entity */
 	: active_animation(0)
 {
@@ -29,9 +32,9 @@ Entity::~Entity()
 	main_quad.~Quad();
 }
 
-void Entity::tick()
+entity_return Entity::tick()
 {
-	animations[active_animation].tick();
+	return entity_return(animations[active_animation].tick());
 }
 
 

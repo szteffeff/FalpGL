@@ -4,7 +4,12 @@
 #include <iostream>
 #include <math.h>
 
+struct entity_return
+{
+	animation_state anim_state;
 
+	entity_return(animation_state s);
+};
 
 class Entity {
 protected:
@@ -19,7 +24,7 @@ public:
 	~Entity();
 
 public:
-	virtual void tick();
+	entity_return tick();
 	void set_animation(int id);
 	void translate(float x, float y);
 	void set_z(float z);

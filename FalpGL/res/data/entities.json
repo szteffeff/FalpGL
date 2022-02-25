@@ -25,7 +25,7 @@
   },
   "Red_Slime": {
     "name": "Red_Slime",
-    "size": [ 32, 32 ],
+    "size": [ 64, 64 ],
     "animation_count": 1,
     "animation_names": ["Red_Slime"]
   }

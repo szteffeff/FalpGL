@@ -269,21 +269,29 @@ void Red_Slime::Get_player_position(float* x, float* y)
 
 void Red_Slime::tick()
 {
-	Red_slime.tick();
-	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
-	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	static int frame = 0;
 
-	if (horizontal == true) { momentum[0] = 1; }
-	else if (horizontal == false) { momentum[0] = -1; }
+	entity_return tick_state = Red_slime.tick();
+	bool horizontal = Player_Detection_simple_horizontal(position[0] + momentum[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1] + momentum[1], player_position_y);
 
-	if (vertical == false) { momentum[1] = -1; }
-	else if (vertical == true) { momentum[1] = 1; }
+	if (horizontal == true) { momentum[0] += 1; }
+	else if (horizontal == false) { momentum[0] += -1; }
 
-	position[0] += momentum[0];
-	position[1] += momentum[1];
+	if (vertical == false) { momentum[1] += -1; }
+	else if (vertical == true) { momentum[1] += 1; }
 
-	Red_slime.translate(momentum[0], momentum[1]);
+	if (tick_state.anim_state == animation_state::advanced_frame)
+	{
+		if (frame++ % 3 == 0)
+		{
+			position[0] += momentum[0];
+			position[1] += momentum[1];
 
-	momentum[0] = 0;
-	momentum[1] = 0;
+			Red_slime.translate(momentum[0], momentum[1]);
+			
+			momentum[0] = 0;
+			momentum[1] = 0;
+		}
+	}
 }

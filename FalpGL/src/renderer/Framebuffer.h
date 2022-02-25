@@ -3,7 +3,11 @@
 #include "BatchRenderer.h"
 #include <iostream>
 
-class Framebuffer { /* Use color attachments instead of 2 framebuffers */
+class Framebuffer { 
+	/* Use color attachments instead of 2 framebuffers - multiple textures + shaders
+	*  Render to half scale texture, only upscale on final draw
+	*  bloom
+	*/
 private:
 	float vertices[24] = {
 		 1.0f, -1.0f,  1.0f, 0.0f,
