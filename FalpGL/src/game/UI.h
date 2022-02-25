@@ -7,6 +7,28 @@
 #include "Entity.h"
 #include "Creature.h"
 
+enum class button_function {
+	nothing = 0,
+	resume,
+	quit
+};
+
+
+class Button{
+	/*
+	* Just a entity and collision box for clicks
+	* takes inputs from -1 to 1 so buttons are put in the right place on different resolution screens
+	*/
+private:
+	Entity button_enitiy;
+	Point bottom_left;
+	Point top_right;
+
+public:
+	Button(VertexBuffer* buffer, Point _bottom_left, Point size, Point resolution, nlohmann::json loader);
+	button_function pressed(float x, float y);
+};
+
 class UserInterface {
 	float* Player_Health;
 	float* Player_Stamina;

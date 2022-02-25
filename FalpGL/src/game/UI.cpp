@@ -65,6 +65,14 @@ void UserInterface::UI_Tick()
 	health_Bar.tick();
 }
 
+Button::Button(VertexBuffer* buffer, Point _bottom_left, Point size, Point resolution, nlohmann::json loader)
+	: button_enitiy(buffer, loader), top_right(0, 0), bottom_left(0, 0)
+{
+	//
 
+}
 
-
+button_function Button::pressed(float x, float y)
+{
+	return button_function();
+}

@@ -5,9 +5,9 @@
 
 Creature::Creature() {}
 
-bool Creature::Player_Detection_simple_horizontal(float* x, float* player_x)
+bool Creature::Player_Detection_simple_horizontal(float x, float* player_x)
 {
-	if (x < player_x){ // if thing is left of player
+	if (x < *player_x){ // if thing is left of player
 		return true;
 	}
 	else // if thing is to the left of player
@@ -16,9 +16,9 @@ bool Creature::Player_Detection_simple_horizontal(float* x, float* player_x)
 	}
 }
 
-bool Creature::Player_Detectoin_simple_vertical(float* y, float* player_y)
+bool Creature::Player_Detectoin_simple_vertical(float y, float* player_y)
 {
-	if (y < player_y) { // if thing is underneath player
+	if (y < *player_y) { // if thing is underneath player
 		return true;
 	}
 	else // if thing is above player
@@ -26,6 +26,16 @@ bool Creature::Player_Detectoin_simple_vertical(float* y, float* player_y)
 		return false;
 	}
 
+}
+
+void Creature::walk(float direction, float magnitude)
+{
+	magnitude *= 3;
+	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+
+	momentum[0] += round(dx);
+	momentum[1] += round(dy);
 }
 
 
@@ -228,6 +238,16 @@ float Player::position_y()
 	return position[1];
 }
 
+float* Player::get_position_x()
+{
+	return &position[0];
+}
+
+float* Player::get_position_y()
+{
+	return &position[1];
+}
+
 float Player::position_x()
 {
 	return position[0];
@@ -235,8 +255,35 @@ float Player::position_x()
 
 /* #### */
 
+Red_Slime::Red_Slime(VertexBuffer* vb)
+	: Red_slime(vb, loader->entities["Red_Slime"]), momentum(), position()
+{
+	Red_slime.set_animation(0);
+}
+
 void Red_Slime::Get_player_position(float* x, float* y)
 {
 	player_position_x = x;
 	player_position_y = y;
+}
+
+void Red_Slime::tick()
+{
+	Red_slime.tick();
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+
+	if (horizontal == true) { momentum[0] = 1; }
+	else if (horizontal == false) { momentum[0] = -1; }
+
+	if (vertical == false) { momentum[1] = -1; }
+	else if (vertical == true) { momentum[1] = 1; }
+
+	position[0] += momentum[0];
+	position[1] += momentum[1];
+
+	Red_slime.translate(momentum[0], momentum[1]);
+
+	momentum[0] = 0;
+	momentum[1] = 0;
 }

@@ -6,11 +6,13 @@
 class Creature {
 public:
 	static Json_loader* loader;
+	float momentum[2], position[2];
 
 public:
 	Creature();
-	bool Player_Detection_simple_horizontal(float* x, float* player_x);
-	bool Player_Detectoin_simple_vertical(float * y, float* player_y);
+	virtual bool Player_Detection_simple_horizontal(float x, float* player_x);
+	virtual bool Player_Detectoin_simple_vertical(float  y, float* player_y);
+	virtual void walk(float direction, float magnitude);
 
 	virtual void tick();
 };
@@ -45,6 +47,8 @@ public:
 	glm::mat4* get_trans_matrix();
 	float position_x();
 	float position_y();
+	float* get_position_x();
+	float* get_position_y();
 	void tick();
 	float* GetHealth();
 	float* GetStamina();
@@ -60,8 +64,6 @@ public:
 class Red_Slime : public Creature {
 private:
 	Entity Red_slime;
-	glm::mat4 Red_Slime_transform_matrix = glm::mat4(1.0f);
-	float offset[2] = { 0.0f, 0.0f };
 	float momentum[2], position[2];
 	const float Health = 20;
 	const float Damage = 10;
@@ -69,8 +71,9 @@ private:
 	float* player_position_y;
 
 public:
+	Red_Slime(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
-	void Red_slime_tick();
+	void tick();
 };
 
 class Health_Bar : public Creature {
