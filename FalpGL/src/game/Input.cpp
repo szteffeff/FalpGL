@@ -30,6 +30,12 @@ void Input::set_matrix(glm::mat4* m)
 	zoom_matrix = m;
 }
 
+void Input::set_height_width(float w, float h)
+{
+	window_height = h;
+	window_width = w;
+}
+
 void Input::keys_recive(int key, int scancode, int action, int mods) /* release = 0, press = 1, repeat = 2 */
 {
 	if (action == 2) { return; }
@@ -101,10 +107,23 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 void Input::mouse_recive(int button, int action, int mods)
 {
 	if (action != GLFW_PRESS) { return; }
+
+	if (mouse_x > 0)
+	{
+		*pause_menu = false;
+	}
+
+	if (mouse_x < 0)
+	{
+		*pause_menu = true;
+	}
 }
 
-void Input::tick()
+void Input::tick(float mx, float my)
 {
+	mouse_x = mx;
+	mouse_y = my;
+
 	if (*pause_menu == true) {
 		return;
 	}

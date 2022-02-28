@@ -19,15 +19,19 @@ public:
 	void set_keepalive(bool* keepalive);
 	void set_player(Player* p);
 	void set_matrix(glm::mat4* m);
+	void set_height_width(float w, float h);
 
 	void keys_recive(int key, int scancode, int action, int mods);
 	void mouse_recive(int button, int action, int mods);
 
-	void tick();
+	void tick(float mx, float my);
 
 private:
 
 	std::vector<key> keys;
+
+	float mouse_x, mouse_y;
+	float window_width, window_height;
 
 	Player* player;
 	Map* map;
