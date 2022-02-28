@@ -159,7 +159,7 @@ int main(void)
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_callback);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(2);
 
     /* setup cursor */
     {
