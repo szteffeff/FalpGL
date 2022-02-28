@@ -2,7 +2,7 @@
 
 
 Framebuffer::Framebuffer(int width, int height, std::string shader_filepath, int texture_unit)
-	: m_width(width), m_height(height), shader(shader_filepath), screen_texture(texture_unit),
+	: m_width(width), m_height(height), shader(shader_filepath), screen_0_texture(texture_unit),
 	framebuffer_vertex_array(), framebuffer_vertex_buffer(24 * sizeof(float), &vertices), framebuffer_vertex_layout()
 {
 	/* Generate framebuffer object */
@@ -10,10 +10,10 @@ Framebuffer::Framebuffer(int width, int height, std::string shader_filepath, int
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id));
 
 	/* Generater texture */
-	GLCall(glGenTextures(1, &texture_id));
+	GLCall(glGenTextures(1, &texture_0_id));
 
-	GLCall(glActiveTexture(GL_TEXTURE0 + screen_texture));
-	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
+	GLCall(glActiveTexture(GL_TEXTURE0 + screen_0_texture));
+	GLCall(glBindTexture(GL_TEXTURE_2D, texture_0_id));
 
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
@@ -23,7 +23,7 @@ Framebuffer::Framebuffer(int width, int height, std::string shader_filepath, int
 	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL));
 	
 	/* Attach texture to framebuffer*/
-	GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture_id, 0));
+	GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture_0_id, 0));
 
 	/* Generate renderbuffer */
 	GLCall(glGenRenderbuffers(1, &renderbuffer_id));
@@ -39,7 +39,7 @@ Framebuffer::Framebuffer(int width, int height, std::string shader_filepath, int
 	{
 		std::cout << "Framebuffer error: " << status << "\n";
 	}
-
+	
 	/* Setup renderer */
 	framebuffer_vertex_layout.Push<float>(2);
 	framebuffer_vertex_layout.Push<float>(2);
@@ -59,8 +59,8 @@ Framebuffer::~Framebuffer()
 
 void Framebuffer::bind()
 {
-	GLCall(glActiveTexture(GL_TEXTURE0 + screen_texture));
-	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
+	GLCall(glActiveTexture(GL_TEXTURE0 + screen_0_texture));
+	GLCall(glBindTexture(GL_TEXTURE_2D, texture_0_id));
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id));
 }
 
@@ -76,7 +76,7 @@ void Framebuffer::draw()
 	framebuffer_vertex_array.Bind();
 
 	shader.Bind();
-	shader.SetUniform1i("screenTexture", screen_texture);
+	shader.SetUniform1i("screenTexture", screen_0_texture);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 

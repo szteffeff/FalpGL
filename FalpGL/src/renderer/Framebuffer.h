@@ -5,7 +5,6 @@
 
 class Framebuffer { 
 	/* Use color attachments instead of 2 framebuffers - multiple textures + shaders
-	*  Render to half scale texture, only upscale on final draw
 	*  bloom
 	*/
 private:
@@ -20,8 +19,8 @@ private:
 	};
 
 protected:
-	unsigned int framebuffer_id, texture_id, renderbuffer_id;
-	int m_width, m_height, screen_texture;
+	unsigned int framebuffer_id, texture_0_id, texture_1_id, renderbuffer_id;
+	int m_width, m_height, screen_0_texture, screen_1_texture;
 
 
 	Shader shader;
