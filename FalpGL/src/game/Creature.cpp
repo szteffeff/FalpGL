@@ -327,3 +327,37 @@ void Red_Slime::tick()
 	momentum[0] = 0;
 	momentum[1] = 0;
 }
+
+Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
+	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position()
+{
+	Enemy_ghost.set_animation(0);
+}
+
+void Enemy_Ghost::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Enemy_Ghost::tick()
+{
+	Enemy_ghost.tick();
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+
+	if (horizontal == true) { momentum[0] = 1; } // right
+	else if (horizontal == false) { momentum[0] = -1; }  //left
+
+	if (vertical == false) { momentum[1] = -1; }  // down
+	else if (vertical == true) { momentum[1] = 1; } // up
+
+	position[0] += momentum[0];
+	position[1] += momentum[1];
+
+
+	Enemy_ghost.translate(momentum[0], momentum[1]);
+
+	momentum[0] = 0;
+	momentum[1] = 0;
+}

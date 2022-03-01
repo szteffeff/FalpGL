@@ -76,6 +76,21 @@ public:
 	void tick();
 };
 
+class Enemy_Ghost : public Creature {
+private:
+	Entity Enemy_ghost;
+	float momentum[2], position[2];
+	const float Health = 20;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+
+public:
+	Enemy_Ghost(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void tick();
+};
+
 class Health_Bar : public Creature {
 private:
 	Entity frame;

@@ -475,8 +475,8 @@
       ]
     ]
   },
-  "Enemy_ghost": {
-    "name": "Enemy_ghost",
+  "Enemy_Ghost": {
+    "name": "Enemy_Ghost",
     "atlas": 0,
     "loop": true,
     "length": 4,
@@ -508,12 +508,12 @@
         [ 544, 64 ]
       ]
     ],
-    "Enemy_ghost_teleporting": {
-      "name": "Enemy_ghost_teleporting",
+    "Enemy_Ghost_teleporting": {
+      "name": "Enemy_Ghost_teleporting",
       "atlas": 0,
-      "loop": true,
+      "loop":  true,
       "length": 12,
-      "frame_order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10, 11 ],
+      "frame_order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ],
       "frame_times": [ 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60 ],
       "texture_coordinants": [
         [
@@ -588,5 +588,7 @@
           [ 1376, 64 ],
           [ 1312, 64 ]
         ]
+      ]
     }
   }
+}

@@ -224,7 +224,7 @@ int main(void)
         layout.Push<float>(2);
         layout.Push<float>(1);
 
-        BatchRenderer player_render(10, "res/shaders/basic.shader");
+        BatchRenderer player_render(100, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
         BatchRenderer interface_renderer(1000, "res/shaders/basic.shader");
@@ -240,8 +240,10 @@ int main(void)
 
         Player player(&player_render.vertex_buffer);
         Red_Slime red_slime(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
 
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
@@ -279,6 +281,8 @@ int main(void)
                 player.tick();
                 main_map.shift(player.position_x(), player.position_y());
                 red_slime.tick();
+                enemy_ghost.tick();
+
             }
            
 

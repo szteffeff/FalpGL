@@ -28,5 +28,11 @@
     "size": [ 32, 32 ],
     "animation_count": 1,
     "animation_names": [ "Red_Slime" ]
+  },
+  "Enemy_Ghost": {
+    "name": "Enemy_Ghost",
+    "size": [ 128, 128],
+    "animation_count": 1,
+    "animation_names": [ "Enemy_Ghost" ]
   }
 }
