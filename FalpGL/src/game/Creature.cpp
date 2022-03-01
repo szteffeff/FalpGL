@@ -269,35 +269,95 @@ void Red_Slime::Get_player_position(float* x, float* y)
 
 void Red_Slime::tick()
 {
-	static int frame = 0;
+	Red_slime.tick();
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	
+	/*
+	float distance_x = abs(*player_position_x - position[0]);
+	float distance_y = abs(*player_position_y - position[1]);
 
-	entity_return tick_state = Red_slime.tick();
-	bool horizontal = Player_Detection_simple_horizontal(position[0] + momentum[0], player_position_x);
-	bool vertical = Player_Detectoin_simple_vertical(position[1] + momentum[1], player_position_y);
+	float direction = asinf(distance_x / distance_y);
+	float dx = 0, dy = 0;
+	float magnitude = 1;
 
-
-	if (tick_state.anim_state == animation_state::advanced_frame)
-	{
-		frame++;
-		if (frame >= 3)
-			frame = 0;
+	if (horizontal == true) { 
+		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+	}
+	else if (horizontal == false) {
+		float dx = (float)(-cos(direction * 3.14159 / 180)) * magnitude;
 	}
 
-	if (frame == 2)
-	{
-		int magnitude = 2;
-		if (horizontal == true) { momentum[0] += magnitude; }
-		else if (horizontal == false) { momentum[0] += -magnitude; }
-
-		if (vertical == false) { momentum[1] += -magnitude; }
-		else if (vertical == true) { momentum[1] += magnitude; }
-
-		position[0] += momentum[0];
-		position[1] += momentum[1];
-
-		Red_slime.translate(momentum[0], momentum[1]);
-
-		momentum[0] = 0;
-		momentum[1] = 0;
+	if (vertical == false) {
+		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 	}
+	else if (vertical == true) { 
+		float dy = (float)(-sin(direction * 3.14159 / 180)) * magnitude;
+	}
+
+	momentum[0] += round(dx);
+	momentum[1] += round(dy);
+	*/
+
+	/* 
+	float dir = (atan2(*player_position_x- position[0], *player_position_y - position[0]));
+	if (dir < 0) { dir += 2.0f * 3.14159f; }
+	float real_degrees = ((dir * 180.0f) / 3.14159f);
+
+	float magnitude = 1;
+	float dx = (float)(cos(real_degrees * 3.14159 / 180)) * magnitude;
+	float dy = (float)(sin(real_degrees * 3.14159 / 180)) * magnitude;
+
+	momentum[0] += round(dx);
+	momentum[1] += round(dy);
+	*/
+	
+	if (horizontal == true) { momentum[0] = 1; } // right
+	else if (horizontal == false) { momentum[0] = -1; }  //left
+
+	if (vertical == false) { momentum[1] = -1; }  // down
+	else if (vertical == true) { momentum[1] = 1; } // up
+
+	position[0] += momentum[0];
+	position[1] += momentum[1];
+	
+
+	Red_slime.translate(momentum[0], momentum[1]);
+
+	momentum[0] = 0;
+	momentum[1] = 0;
+}
+
+Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
+	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position()
+{
+	Enemy_ghost.set_animation(0);
+}
+
+void Enemy_Ghost::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Enemy_Ghost::tick()
+{
+	Enemy_ghost.tick();
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+
+	if (horizontal == true) { momentum[0] = 1; } // right
+	else if (horizontal == false) { momentum[0] = -1; }  //left
+
+	if (vertical == false) { momentum[1] = -1; }  // down
+	else if (vertical == true) { momentum[1] = 1; } // up
+
+	position[0] += momentum[0];
+	position[1] += momentum[1];
+
+
+	Enemy_ghost.translate(momentum[0], momentum[1]);
+
+	momentum[0] = 0;
+	momentum[1] = 0;
 }
