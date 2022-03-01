@@ -53,6 +53,9 @@
 *	X Y Z TX TY TI
 * 
 * 
+* 	width(((int)ceil(res_x / 32) % 2 == 1) ? (int)ceil(res_x / 32) + 3 : (int)ceil(res_x / 32) + 2),
+	height(((int)ceil(res_y / 32) % 2 == 1) ? (int)ceil(res_y / 32) + 3 : (int)ceil(res_y / 32) + 2),
+* 
 */
 
 

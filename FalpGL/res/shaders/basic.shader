@@ -39,6 +39,8 @@ void main()
 
 	float depth = (d0 < d1 ? d0 : d1) < d2 ? (d0 < d1 ? d0 : d1) : d2;
 
+	depth = clamp(depth, -1.0f, 1.0f);
+
 	gl_Position = vec4(gl_in[0].gl_Position.xy, depth, gl_in[0].gl_Position.w);
 	f_TexCoord = v_TexCoord[0];
 	f_Texture = v_Texture[0];

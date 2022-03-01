@@ -11,19 +11,17 @@ void main()
 #shader geometry
 #version 330 core
 layout(points) in;
-layout(triangle_strip, max_vertices = 5) out;
+layout(line_strip, max_vertices = 4) out;
 
 void build_house(vec4 position)
 {
-    gl_Position = position + vec4(-0.1, -0.2, 0.0, 0.0);    
+    gl_Position = position + vec4(-0.1, -0.1, 0.0, 0.0);    
     EmitVertex();
-    gl_Position = position + vec4(0.1, -0.2, 0.0, 0.0);    
+    gl_Position = position + vec4(0.1, -0.1, 0.0, 0.0);    
     EmitVertex();
-    gl_Position = position + vec4(-0.2, 0.2, 0.0, 0.0);    
+    gl_Position = position + vec4(-0.1, 0.1, 0.0, 0.0);    
     EmitVertex();
-    gl_Position = position + vec4(0.2, 0.2, 0.0, 0.0);    
-    EmitVertex();
-    gl_Position = position + vec4(0.0, 0.4, 0.0, 0.0);
+    gl_Position = position + vec4(0.1, 0.1, 0.0, 0.0);    
     EmitVertex();
     EndPrimitive();
 }
@@ -38,5 +36,5 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(0.0, 1.0, 0.0, 0.5);
+    FragColor = vec4(0.5, 0.0, 1.0, 1.0);
 }

@@ -198,7 +198,7 @@ int main(void)
 
         glfwSetCursor(window, cursor);
     }
-
+    
     /* setup icon */
     {
         unsigned char* icon_image_data;
@@ -307,7 +307,10 @@ int main(void)
             
 
             /* Draw everything but ui to framebuffer */
+            glDepthMask(false);
             main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
+            glDepthMask(true);
+
             player_render.draw(projection_matrix * *player.get_trans_matrix());
             
 

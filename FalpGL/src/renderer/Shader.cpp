@@ -88,6 +88,7 @@ ShaderProgramSource Shader::parseShader(const std::string& filepath)
     std::string line;
     while (getline(stream, line))
     {
+        /* Determine what shader type is currently being parsed */
         if (line.find("#shader") != std::string::npos)
         {
             if (line.find("vertex") != std::string::npos)
@@ -102,34 +103,41 @@ ShaderProgramSource Shader::parseShader(const std::string& filepath)
             {
                 type = shaderType::GEOMETRY;
             }
+
+            /* Don't write type to source */
+            continue;
         }
-        else if (line.find("//") != std::string::npos)
+
+
+        /* Remove all data after a comment */
+        if (line.find("//") != std::string::npos)
         {
-            /* Comment, do nothing */
+            line.erase(line.find("//"));
         }
-        else
+        
+        
+        /* Write line to appropriate shader source */
+        switch (type)
         {
-            switch (type)
-            {
-            case shaderType::NONE:
-                break;
+        case shaderType::NONE:
+            break;
 
-            case shaderType::VERTEX:
-                source.VertexSource.append(std::string("\n").append(line));
-                break;
+        case shaderType::VERTEX:
+            source.VertexSource.append(std::string("\n").append(line));
+            break;
 
-            case shaderType::FRAGMENT:
-                source.FragmentSource.append(std::string("\n").append(line));
-                break;
+        case shaderType::FRAGMENT:
+            source.FragmentSource.append(std::string("\n").append(line));
+            break;
 
-            case shaderType::GEOMETRY:
-                source.GeometrySource.append(std::string("\n").append(line));
-                break;
+        case shaderType::GEOMETRY:
+            source.GeometrySource.append(std::string("\n").append(line));
+            break;
 
-            default:
-                break;
-            }
+        default:
+            break;
         }
+        
 
     }
 
