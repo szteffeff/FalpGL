@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 	: resolution{ res_x, res_y }, 
-	width(64*3), height(64*3),
+	width(64), height(64),
 	renderer(BatchRenderer(width * height, "res/shaders/map.shader")), 
 	projection_matrix(pm), loader(l)
 {
