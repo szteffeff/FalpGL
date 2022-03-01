@@ -215,7 +215,22 @@ int main(void)
     }
     
     { /* OpenGL objects need to be created in this scope */
-        
+
+        const float vertex_data[8] = { 
+            -0.5f,  0.5f, // top-left
+             0.5f,  0.5f, // top-right
+             0.5f, -0.5f, // bottom-right
+            -0.5f, -0.5f  // bottom-left
+        };
+
+        VertexArray va;
+        VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
+        VertexBufferLayout vbl;
+        vbl.Push<float>(2);
+        va.AddBuffer(vb, vbl);
+        Shader s("res/shaders/point.shader");
+
+
         HSL_Framebuffer framebuffer(resolution_x, resolution_y, 15);
         Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 16);
 
@@ -227,7 +242,7 @@ int main(void)
         BatchRenderer player_render(10, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
-        BatchRenderer interface_renderer(1000, "res/shaders/basic.shader");
+        BatchRenderer interface_renderer(1000, "res/shaders/ui.shader");
         interface_renderer.add_layout(layout);
         
         Texture atlas_0("res/gfx/atlas0.png");
@@ -318,6 +333,9 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
 
+            //va.Bind();
+            //s.Bind();
+            //glDrawArrays(GL_POINTS, 0, 4);
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

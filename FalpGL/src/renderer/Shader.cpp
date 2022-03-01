@@ -10,7 +10,7 @@ Shader::Shader(const std::string& filepath)
 	: m_filepath(filepath), m_renderer_id(0)
 {
     ShaderProgramSource source = parseShader(filepath);
-    m_renderer_id = createShader(source.VertexSource, source.FragmentSource);
+    m_renderer_id = createShader(source);
 
 }
 
@@ -79,12 +79,12 @@ ShaderProgramSource Shader::parseShader(const std::string& filepath)
     std::ifstream stream(filepath);
 
     enum class shaderType {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
+        NONE = -1, VERTEX = GL_VERTEX_SHADER, FRAGMENT = GL_FRAGMENT_SHADER, GEOMETRY = GL_GEOMETRY_SHADER
     };
 
     shaderType type = shaderType::NONE;
 
-    std::stringstream ss[2];
+    ShaderProgramSource source;
     std::string line;
     while (getline(stream, line))
     {
@@ -98,15 +98,42 @@ ShaderProgramSource Shader::parseShader(const std::string& filepath)
             {
                 type = shaderType::FRAGMENT;
             }
+            else if (line.find("geometry") != std::string::npos)
+            {
+                type = shaderType::GEOMETRY;
+            }
+        }
+        else if (line.find("//") != std::string::npos)
+        {
+            /* Comment, do nothing */
         }
         else
         {
-            ss[(int)type] << line << "\n";
+            switch (type)
+            {
+            case shaderType::NONE:
+                break;
+
+            case shaderType::VERTEX:
+                source.VertexSource.append(std::string("\n").append(line));
+                break;
+
+            case shaderType::FRAGMENT:
+                source.FragmentSource.append(std::string("\n").append(line));
+                break;
+
+            case shaderType::GEOMETRY:
+                source.GeometrySource.append(std::string("\n").append(line));
+                break;
+
+            default:
+                break;
+            }
         }
 
     }
 
-    return { ss[0].str(), ss[1].str() };
+    return source;
 }
 
 unsigned int Shader::compileShader(unsigned int type, const std::string& source)
@@ -124,11 +151,25 @@ unsigned int Shader::compileShader(unsigned int type, const std::string& source)
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
         char* message = (char*)_malloca(length * sizeof(char));
         glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader '" << m_filepath << "':" << message << std::endl;
+
+        switch (type)
+        {
+        case (GL_VERTEX_SHADER):
+            std::cout << "Failed to compile " << "vertex" << " shader '" << m_filepath << "':" << message << std::endl;
+            break;
+        case (GL_FRAGMENT_SHADER):
+            std::cout << "Failed to compile " << "fragment" << " shader '" << m_filepath << "':" << message << std::endl;
+            break;
+        case (GL_GEOMETRY_SHADER):
+            std::cout << "Failed to compile " << "geometry" << " shader '" << m_filepath << "':" << message << std::endl;
+            break;
+        default:
+            break;
+        }
+        
         glDeleteShader(id);
         return 0;
     }
-    std::cout << (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment") << " shader '" << m_filepath << "' compiled succesfully!" << std::endl;
     return id;
 }
 
@@ -147,6 +188,70 @@ unsigned int Shader::createShader(const std::string& vertexShader, const std::st
 
     glDeleteShader(vs);
     glDeleteShader(fs);
+
+    return program;
+}
+
+
+unsigned int Shader::createShader(ShaderProgramSource source)
+{
+    unsigned int program = glCreateProgram();
+    unsigned int fs = 0, vs = 0, gs = 0;
+    bool geometry = false;
+
+    if (source.VertexSource != "")
+    {
+        vs = compileShader(GL_VERTEX_SHADER, source.VertexSource);
+    }
+    else
+    {
+        std::cout << "No vertex shader source provided for shader: " << m_filepath << "!" << "\n";
+    }
+
+    if (source.FragmentSource != "")
+    {
+        fs = compileShader(GL_FRAGMENT_SHADER, source.FragmentSource);
+    }
+    else
+    {
+        std::cout << "No fragment shader source provided for shader: " << m_filepath << "!" << "\n";
+    }
+
+    if (source.GeometrySource != "")
+    {
+        gs = compileShader(GL_GEOMETRY_SHADER, source.GeometrySource);
+        geometry = true;
+    }
+        
+
+    if (vs)
+        std::cout << "Vertex";
+
+    if (fs)
+        std::cout << " + Fragment";
+
+    if (geometry && gs)
+        std::cout << " + Geometry";
+    
+    if (vs || fs || (geometry && gs))
+        std::cout << " shader " << m_filepath << " compiled successfuly!\n";
+
+    glAttachShader(program, vs);
+    glAttachShader(program, fs);
+    if (geometry) 
+    {
+        glAttachShader(program, gs);
+    }
+
+    glLinkProgram(program);
+    glValidateProgram(program);
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+    if (geometry)
+    {
+        glDeleteShader(gs);
+    }
 
     return program;
 }
