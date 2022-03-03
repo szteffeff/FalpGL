@@ -192,6 +192,7 @@
     <Text Include="res\data\animations.json">
       <FileType>Document</FileType>
     </Text>
+    <None Include="res\shaders\newmap.shader" />
     <None Include="res\shaders\point.shader" />
     <None Include="res\shaders\ui.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />

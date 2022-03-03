@@ -11,7 +11,7 @@ void main()
 #shader geometry
 #version 330 core
 layout(points) in;
-layout(line_strip, max_vertices = 4) out;
+layout(triangle_strip, max_vertices = 4) out;
 
 void build_house(vec4 position)
 {
