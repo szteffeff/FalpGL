@@ -28,7 +28,7 @@ Map::Map(glm::mat4* pm, Json_loader* l, int res_x, int res_y)
 
 	std::cout << "Height/Width: " << height << ", " << width << "\n";
 
-	map_vector.resize((unsigned int)height * (unsigned int)width);
+	map_vector.resize((size_t)height * (size_t)width);
 
 	fill();
 }
@@ -66,6 +66,7 @@ void Map::fill()
 
 void Map::shift(float px, float py)
 {
+	static int i;
 	offset[0] = px - current_center[0] * 32;
 	offset[1] = py - current_center[1] * 32;
 
@@ -87,7 +88,8 @@ void Map::shift(float px, float py)
 	}
 	else if ((py) > 16 + current_center[1] * 32) // up
 	{
-		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + width]->name << "\n";
+		//std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + width]->name << "\n";
+		std::cout << i++ << "\n";
 		shift_up();
 	}
 

@@ -291,7 +291,7 @@ int main(void)
             if (pause == false) {
                 if (main_map.map_attack() == "FLOWER")
                 {
-                    player.Take_Damage_tile();
+                    //player.Take_Damage_tile();
                 }
                 player.tick();
                 main_map.shift(player.position_x(), player.position_y());
