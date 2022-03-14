@@ -511,7 +511,7 @@
     "Enemy_Ghost_teleporting": {
       "name": "Enemy_Ghost_teleporting",
       "atlas": 0,
-      "loop":  true,
+      "loop": true,
       "length": 12,
       "frame_order": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ],
       "frame_times": [ 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60 ],
@@ -590,5 +590,843 @@
         ]
       ]
     }
+  },
+  "Button": {
+    "name": "Button",
+    "atlas": 1,
+    "loop": true,
+    "length": 2,
+    "frame_order": [ 0, 1 ],
+    "frame_times": [ 60, 60 ],
+    "texture_coordinants": [
+      [
+        [ 0, 160 ],
+        [ 64, 160 ],
+        [ 64, 192 ],
+        [ 0, 192 ]
+      ],
+      [
+        [ 0, 160 ],
+        [ 64, 160 ],
+        [ 64, 128 ],
+        [ 0, 128 ]
+      ]
+    ]
+  },
+  "A_good": {
+    "name": "A_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 512, 0 ],
+        [ 520, 0 ],
+        [ 520, 8 ],
+        [ 512, 0 ]
+      ]
+    ]
+  },
+  "B_good": {
+    "name": "B_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 520, 0 ],
+        [ 528, 0 ],
+        [ 528, 8 ],
+        [ 520, 8 ]
+      ]
+    ]
+  },
+  "C_good": {
+    "name": "C_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 528, 0 ],
+        [ 536, 0 ],
+        [ 536, 8 ],
+        [ 528, 8 ]
+      ]
+    ]
+  },
+  "D_good": {
+    "name": "D_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 536, 0 ],
+        [ 544, 0 ],
+        [ 544, 8 ],
+        [ 536, 8 ]
+      ]
+    ]
+  },
+  "E_good": {
+    "name": "E_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 544, 0 ],
+        [ 552, 0 ],
+        [ 552, 8 ],
+        [ 544, 8 ]
+      ]
+    ]
+  },
+  "F_good": {
+    "name": "F_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 552, 0 ],
+        [ 560, 0 ],
+        [ 560, 8 ],
+        [ 552, 8 ]
+      ]
+    ]
+  },
+  "G_good": {
+    "name": "G_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 560, 0 ],
+        [ 568, 0 ],
+        [ 568, 8 ],
+        [ 560, 8 ]
+      ]
+    ]
+  },
+  "H_good": {
+    "name": "H_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 568, 0 ],
+        [ 576, 0 ],
+        [ 576, 8 ],
+        [ 568, 8 ]
+      ]
+    ]
+  },
+  "I_good": {
+    "name": "I_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 576, 0 ],
+        [ 584, 0 ],
+        [ 584, 8 ],
+        [ 576, 8 ]
+      ]
+    ]
+  },
+  "J_good": {
+    "name": "J_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 584, 0 ],
+        [ 592, 0 ],
+        [ 592, 8 ],
+        [ 584, 8 ]
+      ]
+    ]
+  },
+  "K_good": {
+    "name": "K_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 592, 0 ],
+        [ 600, 0 ],
+        [ 600, 8 ],
+        [ 592, 8 ]
+      ]
+    ]
+  },
+  "L_good": {
+    "name": "L_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 600, 0 ],
+        [ 608, 0 ],
+        [ 608, 8 ],
+        [ 600, 8 ]
+      ]
+    ]
+  },
+  "M_good": {
+    "name": "M_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 608, 0 ],
+        [ 616, 0 ],
+        [ 616, 8 ],
+        [ 608, 8 ]
+      ]
+    ]
+  },
+  "N_good": {
+    "name": "N_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 616, 0 ],
+        [ 624, 0 ],
+        [ 624, 8 ],
+        [ 616, 8 ]
+      ]
+    ]
+  },
+  "O_good": {
+    "name": "O_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 624, 0 ],
+        [ 632, 0 ],
+        [ 632, 8 ],
+        [ 624, 8 ]
+      ]
+    ]
+  },
+  "P_good": {
+    "name": "P_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 632, 0 ],
+        [ 640, 0 ],
+        [ 640, 8 ],
+        [ 632, 8 ]
+      ]
+    ]
+  },
+  "Q_good": {
+    "name": "Q_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 640, 0 ],
+        [ 648, 0 ],
+        [ 648, 8 ],
+        [ 640, 8 ]
+      ]
+    ]
+  },
+  "R_good": {
+    "name": "R_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 648, 0 ],
+        [ 656, 0 ],
+        [ 656, 8 ],
+        [ 648, 8 ]
+      ]
+    ]
+  },
+  "S_good": {
+    "name": "S_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 656, 0 ],
+        [ 664, 0 ],
+        [ 664, 8 ],
+        [ 656, 8 ]
+      ]
+    ]
+  },
+  "T_good": {
+    "name": "T_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 664, 0 ],
+        [ 672, 0 ],
+        [ 672, 8 ],
+        [ 664, 8 ]
+      ]
+    ]
+  },
+  "U_good": {
+    "name": "U_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 672, 0 ],
+        [ 680, 0 ],
+        [ 680, 8 ],
+        [ 672, 8 ]
+      ]
+    ]
+  },
+  "W_good": {
+    "name": "W_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 688, 0 ],
+        [ 696, 0 ],
+        [ 696, 8 ],
+        [ 688, 8 ]
+      ]
+    ]
+  },
+  "X_good": {
+    "name": "X_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 696, 0 ],
+        [ 704, 0 ],
+        [ 704, 8 ],
+        [ 696, 8 ]
+      ]
+    ]
+  },
+  "Y_good": {
+    "name": "Y_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 704, 0 ],
+        [ 712, 0 ],
+        [ 712, 8 ],
+        [ 704, 8 ]
+      ]
+    ]
+  },
+  "Z_good": {
+    "name": "Z_good",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 712, 0 ],
+        [ 720, 0 ],
+        [ 720, 8 ],
+        [ 712, 8 ]
+      ]
+    ]
+  },
+  "A_bad": {
+    "name": "A_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1888 ],
+        [ 768, 1888 ],
+        [ 768, 1920 ],
+        [ 736, 1920 ]
+      ]
+    ]
+  },
+  "B_bad": {
+    "name": "B_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 768, 1888 ],
+        [ 800, 1888 ],
+        [ 800, 1920 ],
+        [ 768, 1920 ]
+      ]
+    ]
+  },
+  "C_bad": {
+    "name": "C_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 800, 1888 ],
+        [ 832, 1888 ],
+        [ 832, 1920 ],
+        [ 800, 1920 ]
+      ]
+    ]
+  },
+  "D_bad": {
+    "name": "D_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 832, 1888 ],
+        [ 864, 1888 ],
+        [ 864, 1920 ],
+        [ 832, 1920 ]
+      ]
+    ]
+  },
+  "E_bad": {
+    "name": "E_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 864, 1888 ],
+        [ 896, 1888 ],
+        [ 896, 1920 ],
+        [ 864, 1920 ]
+      ]
+    ]
+  },
+  "F_bad": {
+    "name": "F_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1856 ],
+        [ 768, 1856 ],
+        [ 768, 1888 ],
+        [ 736, 1888 ]
+      ]
+    ]
+  },
+  "G_bad": {
+    "name": "G_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 768, 1856 ],
+        [ 800, 1856 ],
+        [ 800, 1888 ],
+        [ 768, 1888 ]
+      ]
+    ]
+  },
+  "H_bad": {
+    "name": "H_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 800, 1856 ],
+        [ 832, 1856 ],
+        [ 832, 1888 ],
+        [ 800, 1888 ]
+      ]
+    ]
+  },
+  "I_bad": {
+    "name": "I_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 832, 1856 ],
+        [ 864, 1856 ],
+        [ 864, 1888 ],
+        [ 832, 1888 ]
+      ]
+    ]
+  },
+  "J_bad": {
+    "name": "J_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 864, 1856 ],
+        [ 896, 1856 ],
+        [ 896, 1888 ],
+        [ 864, 1888 ]
+      ]
+    ]
+  },
+  "K_bad": {
+    "name": "K_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1824 ],
+        [ 768, 1824 ],
+        [ 768, 1856 ],
+        [ 736, 1856 ]
+      ]
+    ]
+  },
+  "L_bad": {
+    "name": "L_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 768, 1824 ],
+        [ 800, 1824 ],
+        [ 800, 1856 ],
+        [ 768, 1856 ]
+      ]
+    ]
+  },
+  "M_bad": {
+    "name": "M_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 800, 1824 ],
+        [ 832, 1824 ],
+        [ 832, 1856 ],
+        [ 800, 1856 ]
+      ]
+    ]
+  },
+  "N_bad": {
+    "name": "N_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 832, 1824 ],
+        [ 864, 1824 ],
+        [ 864, 1856 ],
+        [ 832, 1856 ]
+      ]
+    ]
+  },
+  "O_bad": {
+    "name": "O_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 864, 1824 ],
+        [ 896, 1824 ],
+        [ 896, 1856 ],
+        [ 864, 1856 ]
+      ]
+    ]
+  },
+  "P_bad": {
+    "name": "P_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1792 ],
+        [ 768, 1792 ],
+        [ 768, 1824 ],
+        [ 736, 1824 ]
+      ]
+    ]
+  },
+  "Q_bad": {
+    "name": "Q_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 768, 1792 ],
+        [ 800, 1792 ],
+        [ 800, 1824 ],
+        [ 768, 1824 ]
+      ]
+    ]
+  },
+  "R_bad": {
+    "name": "R_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 800, 1792 ],
+        [ 832, 1792 ],
+        [ 832, 1824 ],
+        [ 800, 1824 ]
+      ]
+    ]
+  },
+  "S_bad": {
+    "name": "S_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 832, 1792 ],
+        [ 864, 1792 ],
+        [ 864, 1824 ],
+        [ 832, 1824 ]
+      ]
+    ]
+  },
+  "T_bad": {
+    "name": "T_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 864, 1792 ],
+        [ 896, 1792 ],
+        [ 896, 1824 ],
+        [ 864, 1824 ]
+      ]
+    ]
+  },
+  "U_bad": {
+    "name": "U_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1760 ],
+        [ 768, 1760 ],
+        [ 768, 1792 ],
+        [ 736, 1792 ]
+      ]
+    ]
+  },
+  "V_bad": {
+    "name": "V_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 768, 1760 ],
+        [ 800, 1760 ],
+        [ 800, 1792 ],
+        [ 768, 1792 ]
+      ]
+    ]
+  },
+  "W_bad": {
+    "name": "W_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 800, 1760 ],
+        [ 832, 1760 ],
+        [ 832, 1792 ],
+        [ 800, 1792 ]
+      ]
+    ]
+  },
+  "X_bad": {
+    "name": "X_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 832, 1760 ],
+        [ 864, 1760 ],
+        [ 864, 1792 ],
+        [ 832, 1792 ]
+      ]
+    ]
+  },
+  "Y_bad": {
+    "name": "Y_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 864, 1760 ],
+        [ 896, 1760 ],
+        [ 896, 1792 ],
+        [ 864, 1792 ]
+      ]
+    ]
+  },
+  "Z_bad": {
+    "name": "Z_bad",
+    "atlas": 1,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 736, 1728 ],
+        [ 768, 1728 ],
+        [ 768, 1760 ],
+        [ 736, 1760 ]
+      ]
+    ]
   }
 }
