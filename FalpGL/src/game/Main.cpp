@@ -223,6 +223,7 @@ int main(void)
             -0.5f, -0.5f  // bottom-left
         };
 
+
         VertexArray va;
         VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
         VertexBufferLayout vbl;

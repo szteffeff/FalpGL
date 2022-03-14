@@ -18,6 +18,8 @@ public:
 	void modify_quad(const void* data, unsigned int index, int count = 1);
 	void delete_quad(unsigned int index, int count = 1);
 
+	void buffer_data(int offset, std::size_t size, const void* data);
+
 	void Bind() const;
 	void Unbind() const;
 };
