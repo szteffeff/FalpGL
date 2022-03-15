@@ -51,5 +51,20 @@ bool Json_loader::init()
 		return false;
 	}
 
+	try
+	{
+		std::ifstream file(map_filepath);
+		std::stringstream buf;
+		buf << file.rdbuf();
+		std::string file_string(buf.str());
+		map = json::parse(file_string);
+		file.close();
+	}
+	catch (json::exception)
+	{
+		std::cout << "error parsing map json!\n";
+		return false;
+	}
+
 	return true;
 }

@@ -71,3 +71,10 @@ void VertexBuffer::delete_quad(unsigned int index, int count)
 
     std::sort(free_indexes.begin(), free_indexes.end());
 }
+
+
+void VertexBuffer::buffer_data(int offset, std::size_t size, const void* data)
+{
+    Bind();
+    glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+}

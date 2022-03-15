@@ -223,6 +223,7 @@ int main(void)
             -0.5f, -0.5f  // bottom-left
         };
 
+
         VertexArray va;
         VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
         VertexBufferLayout vbl;
@@ -304,31 +305,34 @@ int main(void)
 
             /* ##### Draw ##### */
 
-            /* Setup hsl framebuffer */
-            framebuffer.bind();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, resolution_x, resolution_y);
-            
+            if (!pause)
+            {
+                /* Setup hsl framebuffer */
+                framebuffer.bind();
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glViewport(0, 0, resolution_x, resolution_y);
 
-            /* Draw everything but ui to framebuffer */
-            glDepthMask(false);
-            main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
-            glDepthMask(true);
 
-            player_render.draw(projection_matrix * *player.get_trans_matrix());
-            
+                /* Draw everything but ui to framebuffer */
+                glDepthMask(false);
+                main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
+                glDepthMask(true);
 
-            /* Setup chromatic aberration framebuffer */
-            c_framebuffer.bind();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, resolution_x, resolution_y);
+                player_render.draw(projection_matrix * *player.get_trans_matrix());
 
-            /* Draw between buffers */
-            framebuffer.set_hue(0.0f);
-            framebuffer.set_saturation(*player.GetHealth());
-            framebuffer.set_value(((*player.GetHealth() + 200) / 300.0f) * 100);
-            framebuffer.draw();
 
+                /* Setup chromatic aberration framebuffer */
+                c_framebuffer.bind();
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glViewport(0, 0, resolution_x, resolution_y);
+
+                /* Draw between buffers */
+                framebuffer.set_hue(0.0f);
+                framebuffer.set_saturation(*player.GetHealth());
+                framebuffer.set_value(((*player.GetHealth() + 200) / 300.0f) * 100);
+                framebuffer.draw();
+
+            }
 
             /* Setup main buffer */
             c_framebuffer.unbind();

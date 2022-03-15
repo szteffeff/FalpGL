@@ -87,7 +87,11 @@
     <ClCompile Include="src\renderer\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\game\SoundDevice.cpp">
+=======
+    <ClCompile Include="src\game\NewMap.cpp">
+>>>>>>> 1931fcabde6c85d9ec4c60f20776e711bbbe833a
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
