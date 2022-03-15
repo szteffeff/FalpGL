@@ -88,8 +88,7 @@ void Map::shift(float px, float py)
 	}
 	else if ((py) > 16 + current_center[1] * 32) // up
 	{
-		//std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + width]->name << "\n";
-		std::cout << i++ << "\n";
+		std::cout << "player is on: " << map_vector[width * height / 2 + width / 2 + width]->name << "\n";
 		shift_up();
 	}
 
