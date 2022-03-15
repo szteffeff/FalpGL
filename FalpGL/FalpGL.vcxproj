@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\game\Animation.cpp" />
+    <ClCompile Include="src\game\NewMap.cpp" />
     <ClCompile Include="src\renderer\BatchRenderer.cpp" />
     <ClCompile Include="src\game\Creature.cpp" />
     <ClCompile Include="src\game\Entity.cpp" />

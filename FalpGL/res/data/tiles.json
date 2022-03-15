@@ -2,6 +2,7 @@
   "0": {
     "name": "BLANK",
     "id": 0,
+    "collision": true,
     "texture_coordinants": [
       [ 0, 0 ],
       [ 0, 0 ],
@@ -12,6 +13,7 @@
   "1": {
     "name": "FLOWER",
     "id": 1,
+    "collision": false,
     "texture_coordinants": [
       [ 96, 928 ],
       [ 64, 928 ],
@@ -22,6 +24,7 @@
   "2": {
     "name": "GRASS",
     "id": 2,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 896 ],
       [ 32, 896 ],
@@ -32,6 +35,7 @@
   "3": {
     "name": "COBBLESTONE_1",
     "id": 3,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 1120 ],
       [ 32, 1120 ],
@@ -42,6 +46,7 @@
   "4": {
     "name": "COBBLESTONE_2",
     "id": 4,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 1120 ],
       [ 64, 1120 ],
@@ -52,6 +57,7 @@
   "5": {
     "name": "COBBLESTONE_3",
     "id": 5,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 1088 ],
       [ 32, 1088 ],
@@ -62,6 +68,7 @@
   "6": {
     "name": "COBBLESTONE_4",
     "id": 6,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 1088 ],
       [ 64, 1088 ],
@@ -72,6 +79,7 @@
   "7": {
     "name": "COBBLESTONE_5",
     "id": 7,
+    "collision": false,
     "texture_coordinants": [
       [ 64, 1088 ],
       [ 96, 1088 ],
@@ -82,6 +90,7 @@
   "8": {
     "name": "OUTERCORNER_TOPRIGHT",
     "id": 8,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 1056 ],
       [ 32, 1056 ],
@@ -92,6 +101,7 @@
   "9": {
     "name": "OUTERCORNER_TOPLEFT",
     "id": 9,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 1056 ],
       [ 64, 1056 ],
@@ -102,6 +112,7 @@
   "10": {
     "name": "BRICKCORNER_TOPRIGHT",
     "id": 10,
+    "collision": false,
     "texture_coordinants": [
       [ 64, 1056 ],
       [ 96, 1056 ],
@@ -112,6 +123,7 @@
   "11": {
     "name": "OUTERCORNER_BOTTOMLEFT",
     "id": 11,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 1024 ],
       [ 32, 1024 ],
@@ -122,6 +134,7 @@
   "12": {
     "name": "OUTERCORNER_BOTTOMRIGHT",
     "id": 12,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 1024 ],
       [ 64, 1024 ],
@@ -132,6 +145,7 @@
   "13": {
     "name": "BRICKCORNER_TOPLEFT",
     "id": 13,
+    "collision": false,
     "texture_coordinants": [
       [ 64, 1024 ],
       [ 96, 1024 ],
@@ -142,6 +156,7 @@
   "14": {
     "name": "SLANTBRICK_RIGHT",
     "id": 14,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 992 ],
       [ 32, 992 ],
@@ -152,6 +167,7 @@
   "15": {
     "name": "SLANTBRICK_TOP",
     "id": 15,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 992 ],
       [ 64, 992 ],
@@ -162,6 +178,7 @@
   "16": {
     "name": "BRICK_THICKTOP",
     "id": 16,
+    "collision": false,
     "texture_coordinants": [
       [ 64, 992 ],
       [ 96, 992 ],
@@ -172,6 +189,7 @@
   "17": {
     "name": "SLANTBRICK_LEFT",
     "id": 17,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 960 ],
       [ 32, 960 ],
@@ -182,6 +200,7 @@
   "18": {
     "name": "SLANTBRICK_BOTTOM",
     "id": 18,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 960 ],
       [ 64, 960 ],
@@ -192,6 +211,7 @@
   "19": {
     "name": "COBBLESTONE_6",
     "id": 19,
+    "collision": false,
     "texture_coordinants": [
       [ 64, 960 ],
       [ 96, 960 ],
@@ -202,6 +222,7 @@
   "20": {
     "name": "COBBLESTONE_7",
     "id": 20,
+    "collision": false,
     "texture_coordinants": [
       [ 0, 928 ],
       [ 32, 928 ],
@@ -212,11 +233,694 @@
   "21": {
     "name": "COBBLESTONE_8",
     "id": 21,
+    "collision": false,
     "texture_coordinants": [
       [ 32, 928 ],
       [ 64, 928 ],
       [ 64, 960 ],
       [ 32, 960 ]
+    ]
+  },
+  "22": {
+    "name": "Grass_0",
+    "id": 22,
+    "collision": false,
+    "texture_coordinants": [
+      [ 0, 2016 ],
+      [ 32, 2016 ],
+      [ 32, 2048 ],
+      [ 0, 2048 ]
+    ]
+  },
+  "23": {
+    "name": "Grass_1",
+    "id": 23,
+    "collision": false,
+    "texture_coordinants": [
+      [ 32, 2016 ],
+      [ 64, 2016 ],
+      [ 64, 2048 ],
+      [ 32, 2048 ]
+    ]
+  },
+  "24": {
+    "name": "Grass_2",
+    "id": 24,
+    "collision": false,
+    "texture_coordinants": [
+      [ 64, 2016 ],
+      [ 96, 2016 ],
+      [ 96, 2048 ],
+      [ 64, 2048 ]
+    ]
+  },
+  "25": {
+    "name": "Grass_3",
+    "id": 25,
+    "collision": false,
+    "texture_coordinants": [
+      [ 96, 2016 ],
+      [ 128, 2016 ],
+      [ 128, 2048 ],
+      [ 96, 2048 ]
+    ]
+  },
+  "26": {
+    "name": "Path_0",
+    "id": 26,
+    "collision": false,
+    "texture_coordinants": [
+      [ 128, 2016 ],
+      [ 160, 2016 ],
+      [ 160, 2048 ],
+      [ 128, 2048 ]
+    ]
+  },
+  "27": {
+    "name": "Path_1",
+    "id": 27,
+    "collision": false,
+    "texture_coordinants": [
+      [ 160, 2016 ],
+      [ 192, 2016 ],
+      [ 192, 2048 ],
+      [ 160, 2048 ]
+    ]
+  },
+  "28": {
+    "name": "Path_2",
+    "id": 28,
+    "collision": false,
+    "texture_coordinants": [
+      [ 192, 2016 ],
+      [ 224, 2016 ],
+      [ 224, 2048 ],
+      [ 192, 2048 ]
+    ]
+  },
+  "29": {
+    "name": "Path_3",
+    "id": 29,
+    "collision": false,
+    "texture_coordinants": [
+      [ 224, 2016 ],
+      [ 256, 2016 ],
+      [ 256, 2048 ],
+      [ 224, 2048 ]
+    ]
+  },
+  "30": {
+    "name": "Path_4",
+    "id": 30,
+    "collision": false,
+    "texture_coordinants": [
+      [ 256, 2016 ],
+      [ 288, 2016 ],
+      [ 288, 2048 ],
+      [ 256, 2048 ]
+    ]
+  },
+  "31": {
+    "name": "Path_5",
+    "id": 31,
+    "collision": false,
+    "texture_coordinants": [
+      [ 288, 2016 ],
+      [ 320, 2016 ],
+      [ 320, 2048 ],
+      [ 288, 2048 ]
+    ]
+  },
+  "32": {
+    "name": "Path_6",
+    "id": 32,
+    "collision": false,
+    "texture_coordinants": [
+      [ 320, 2016 ],
+      [ 352, 2016 ],
+      [ 352, 2048 ],
+      [ 320, 2048 ]
+    ]
+  },
+  "33": {
+    "name": "Path_7",
+    "id": 33,
+    "collision": false,
+    "texture_coordinants": [
+      [ 352, 2016 ],
+      [ 384, 2016 ],
+      [ 384, 2048 ],
+      [ 352, 2048 ]
+    ]
+  },
+  "34": {
+    "name": "Path_8",
+    "id": 34,
+    "collision": false,
+    "texture_coordinants": [
+      [ 384, 2016 ],
+      [ 416, 2016 ],
+      [ 416, 2048 ],
+      [ 384, 2048 ]
+    ]
+  },
+  "35": {
+    "name": "Path_9",
+    "id": 35,
+    "collision": false,
+    "texture_coordinants": [
+      [ 416, 2016 ],
+      [ 448, 2016 ],
+      [ 448, 2048 ],
+      [ 416, 2048 ]
+    ]
+  },
+  "36": {
+    "name": "Path_10",
+    "id": 36,
+    "collision": false,
+    "texture_coordinants": [
+      [ 448, 2016 ],
+      [ 480, 2016 ],
+      [ 480, 2048 ],
+      [ 448, 2048 ]
+    ]
+  },
+  "37": {
+    "name": "Path_11",
+    "id": 37,
+    "collision": false,
+    "texture_coordinants": [
+      [ 480, 2016 ],
+      [ 512, 2016 ],
+      [ 512, 2048 ],
+      [ 480, 2048 ]
+    ]
+  },
+  "38": {
+    "name": "Path_12",
+    "id": 38,
+    "collision": false,
+    "texture_coordinants": [
+      [ 512, 2016 ],
+      [ 544, 2016 ],
+      [ 544, 2048 ],
+      [ 512, 2048 ]
+    ]
+  },
+  "39": {
+    "name": "Path_13",
+    "id": 39,
+    "collision": false,
+    "texture_coordinants": [
+      [ 544, 2016 ],
+      [ 576, 2016 ],
+      [ 576, 2048 ],
+      [ 544, 2048 ]
+    ]
+  },
+  "40": {
+    "name": "Path_14",
+    "id": 40,
+    "collision": false,
+    "texture_coordinants": [
+      [ 576, 2016 ],
+      [ 608, 2016 ],
+      [ 608, 2048 ],
+      [ 576, 2048 ]
+    ]
+  },
+  "41": {
+    "name": "Path_15",
+    "id": 41,
+    "collision": false,
+    "texture_coordinants": [
+      [ 608, 2016 ],
+      [ 640, 2016 ],
+      [ 640, 2048 ],
+      [ 608, 2048 ]
+    ]
+  },
+  "42": {
+    "name": "Path_16",
+    "id": 42,
+    "collision": false,
+    "texture_coordinants": [
+      [ 640, 2016 ],
+      [ 672, 2016 ],
+      [ 672, 2048 ],
+      [ 640, 2048 ]
+    ]
+  },
+  "43": {
+    "name": "Path_17",
+    "id": 43,
+    "collision": false,
+    "texture_coordinants": [
+      [ 672, 2016 ],
+      [ 704, 2016 ],
+      [ 704, 2048 ],
+      [ 672, 2048 ]
+    ]
+  },
+  "44": {
+    "name": "Path_18",
+    "id": 44,
+    "collision": false,
+    "texture_coordinants": [
+      [ 704, 2016 ],
+      [ 736, 2016 ],
+      [ 736, 2048 ],
+      [ 704, 2048 ]
+    ]
+  },
+  "45": {
+    "name": "Path_19",
+    "id": 45,
+    "collision": false,
+    "texture_coordinants": [
+      [ 736, 2016 ],
+      [ 768, 2016 ],
+      [ 768, 2048 ],
+      [ 736, 2048 ]
+    ]
+  },
+  "46": {
+    "name": "Path_20",
+    "id": 46,
+    "collision": false,
+    "texture_coordinants": [
+      [ 768, 2016 ],
+      [ 800, 2016 ],
+      [ 800, 2048 ],
+      [ 768, 2048 ]
+    ]
+  },
+  "47": {
+    "name": "Path_21",
+    "id": 47,
+    "collision": false,
+    "texture_coordinants": [
+      [ 800, 2016 ],
+      [ 832, 2016 ],
+      [ 832, 2048 ],
+      [ 800, 2048 ]
+    ]
+  },
+  "48": {
+    "name": "Stairs_0",
+    "id": 48,
+    "collision": false,
+    "texture_coordinants": [
+      [ 832, 2016 ],
+      [ 864, 2016 ],
+      [ 864, 2048 ],
+      [ 832, 2048 ]
+    ]
+  },
+  "49": {
+    "name": "Stairs_1",
+    "id": 49,
+    "collision": false,
+    "texture_coordinants": [
+      [ 864, 2016 ],
+      [ 896, 2016 ],
+      [ 896, 2048 ],
+      [ 864, 2048 ]
+    ]
+  },
+  "50": {
+    "name": "Stairs_2",
+    "id": 50,
+    "collision": false,
+    "texture_coordinants": [
+      [ 896, 2016 ],
+      [ 928, 2016 ],
+      [ 928, 2048 ],
+      [ 896, 2048 ]
+    ]
+  },
+  "51": {
+    "name": "Stairs_3",
+    "id": 51,
+    "collision": false,
+    "texture_coordinants": [
+      [ 928, 2016 ],
+      [ 960, 2016 ],
+      [ 960, 2048 ],
+      [ 928, 2048 ]
+    ]
+  },
+  "52": {
+    "name": "Stairs_4",
+    "id": 52,
+    "collision": false,
+    "texture_coordinants": [
+      [ 960, 2016 ],
+      [ 992, 2016 ],
+      [ 992, 2048 ],
+      [ 960, 2048 ]
+    ]
+  },
+  "53": {
+    "name": "Stairs_5",
+    "id": 53,
+    "collision": false,
+    "texture_coordinants": [
+      [ 992, 2016 ],
+      [ 1024, 2016 ],
+      [ 1024, 2048 ],
+      [ 992, 2048 ]
+    ]
+  },
+  "54": {
+    "name": "Stairs_6",
+    "id": 54,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1024, 2016 ],
+      [ 1056, 2016 ],
+      [ 1056, 2048 ],
+      [ 1024, 2048 ]
+    ]
+  },
+  "55": {
+    "name": "Stairs_7",
+    "id": 55,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1056, 2016 ],
+      [ 1088, 2016 ],
+      [ 1088, 2048 ],
+      [ 1056, 2048 ]
+    ]
+  },
+  "56": {
+    "name": "Stairs_8",
+    "id": 56,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1088, 2016 ],
+      [ 1120, 2016 ],
+      [ 1120, 2048 ],
+      [ 1088, 2048 ]
+    ]
+  },
+  "57": {
+    "name": "Stairs_9",
+    "id": 56,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1120, 2016 ],
+      [ 1152, 2016 ],
+      [ 1152, 2048 ],
+      [ 1120, 2048 ]
+    ]
+  },
+  "58": {
+    "name": "Dirt_cliff_0",
+    "id": 58,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1152, 2016 ],
+      [ 1184, 2016 ],
+      [ 1184, 2048 ],
+      [ 1152, 2048 ]
+    ]
+  },
+  "59": {
+    "name": "Dirt_cliff_1",
+    "id": 59,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1184, 2016 ],
+      [ 1216, 2016 ],
+      [ 1216, 2048 ],
+      [ 1184, 2048 ]
+    ]
+  },
+  "60": {
+    "name": "Dirt_cliff_2",
+    "id": 60,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1216, 2016 ],
+      [ 1248, 2016 ],
+      [ 1248, 2048 ],
+      [ 1216, 2048 ]
+    ]
+  },
+  "61": {
+    "name": "Dirt_cliff_3",
+    "id": 61,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1248, 2016 ],
+      [ 1280, 2016 ],
+      [ 1280, 2048 ],
+      [ 1248, 2048 ]
+    ]
+  },
+  "62": {
+    "name": "Dirt_cliff_4",
+    "id": 62,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1280, 2016 ],
+      [ 1312, 2016 ],
+      [ 1312, 2048 ],
+      [ 1280, 2048 ]
+    ]
+  },
+  "63": {
+    "name": "Dirt_cliff_5",
+    "id": 63,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1312, 2016 ],
+      [ 1344, 2016 ],
+      [ 1344, 2048 ],
+      [ 1312, 2048 ]
+    ]
+  },
+  "64": {
+    "name": "Dirt_cliff_6",
+    "id": 64,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1344, 2016 ],
+      [ 1376, 2016 ],
+      [ 1376, 2048 ],
+      [ 1344, 2048 ]
+    ]
+  },
+  "65": {
+    "name": "Dirt_cliff_7",
+    "id": 65,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1376, 2016 ],
+      [ 1408, 2016 ],
+      [ 1408, 2048 ],
+      [ 1376, 2048 ]
+    ]
+  },
+  "66": {
+    "name": "Dirt_cliff_8",
+    "id": 66,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1408, 2016 ],
+      [ 1440, 2016 ],
+      [ 1440, 2048 ],
+      [ 1408, 2048 ]
+    ]
+  },
+  "67": {
+    "name": "Dirt_cliff_9",
+    "id": 67,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1440, 2016 ],
+      [ 1472, 2016 ],
+      [ 1472, 2048 ],
+      [ 1440, 2048 ]
+    ]
+  },
+  "68": {
+    "name": "Dirt_cliff_10",
+    "id": 68,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1472, 2016 ],
+      [ 1504, 2016 ],
+      [ 1504, 2048 ],
+      [ 1472, 2048 ]
+    ]
+  },
+  "69": {
+    "name": "Dirt_cliff_11",
+    "id": 69,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1504, 2016 ],
+      [ 1536, 2016 ],
+      [ 1536, 2048 ],
+      [ 1504, 2048 ]
+    ]
+  },
+  "70": {
+    "name": "Dirt_cliff_12",
+    "id": 70,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1536, 2016 ],
+      [ 1568, 2016 ],
+      [ 1568, 2048 ],
+      [ 1536, 2048 ]
+    ]
+  },
+  "71": {
+    "name": "Dirt_cliff_13",
+    "id": 71,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1568, 2016 ],
+      [ 1600, 2016 ],
+      [ 1600, 2048 ],
+      [ 1568, 2048 ]
+    ]
+  },
+  "72": {
+    "name": "Dirt_cliff_14",
+    "id": 72,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1600, 2016 ],
+      [ 1632, 2016 ],
+      [ 1632, 2048 ],
+      [ 1600, 2048 ]
+    ]
+  },
+  "73": {
+    "name": "Dirt_cliff_14",
+    "id": 58,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1632, 2016 ],
+      [ 1664, 2016 ],
+      [ 1164, 2048 ],
+      [ 1632, 2048 ]
+    ]
+  },
+  "74": {
+    "name": "Dirt_cliff_15",
+    "id": 74,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1664, 2016 ],
+      [ 1696, 2016 ],
+      [ 1696, 2048 ],
+      [ 1664, 2048 ]
+    ]
+  },
+  "75": {
+    "name": "Dirt_cliff_16",
+    "id": 75,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1696, 2016 ],
+      [ 1728, 2016 ],
+      [ 1728, 2048 ],
+      [ 1696, 2048 ]
+    ]
+  },
+  "76": {
+    "name": "Dirt_cliff_18",
+    "id": 76,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1728, 2016 ],
+      [ 1760, 2016 ],
+      [ 1760, 2048 ],
+      [ 1728, 2048 ]
+    ]
+  },
+  "77": {
+    "name": "Dirt_cliff_19",
+    "id": 77,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1760, 2016 ],
+      [ 1792, 2016 ],
+      [ 1792, 2048 ],
+      [ 1760, 2048 ]
+    ]
+  },
+  "78": {
+    "name": "Forest_Dungeon_Tile_mid",
+    "id": 78,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1856, 2016 ],
+      [ 1888, 2016 ],
+      [ 1888, 2048 ],
+      [ 1856, 2048 ]
+    ]
+  },
+  "79": {
+    "name": "Forest_Dungeon_Tile_right",
+    "id": 78,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1888, 2016 ],
+      [ 1920, 2016 ],
+      [ 1920, 2048 ],
+      [ 1888, 2048 ]
+    ]
+  },
+  "80": {
+    "name": "Forest_Dungeon_Tile_left",
+    "id": 80,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1920, 2016 ],
+      [ 1952, 2016 ],
+      [ 1952, 2048 ],
+      [ 1920, 2048 ]
+    ]
+  },
+  "81": {
+    "name": "Forest_Dungeon_Tile_shadedbottom_mid",
+    "id": 81,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1952, 2016 ],
+      [ 1984, 2016 ],
+      [ 1984, 2048 ],
+      [ 1952, 2048 ]
+    ]
+  },
+  "82": {
+    "name": "Forest_Dungeon_Tile_shadedbottom_left",
+    "id": 82,
+    "collision": false,
+    "texture_coordinants": [
+      [ 1984, 2016 ],
+      [ 2016, 2016 ],
+      [ 2016, 2048 ],
+      [ 1984, 2048 ]
+    ]
+  },
+  "83": {
+    "name": "Forest_Dungeon_Tile_shadedbottom_right",
+    "id": 83,
+    "collision": false,
+    "texture_coordinants": [
+      [ 2016, 2016 ],
+      [ 2048, 2016 ],
+      [ 2048, 2048 ],
+      [ 2016, 2048 ]
     ]
   }
 }
