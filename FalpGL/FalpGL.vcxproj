@@ -129,8 +129,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;OpenAL32.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)FalpGL\Dependencies\Open_AL;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\SoundDevice.cpp" />
     <ClCompile Include="src\game\Animation.cpp" />
     <ClCompile Include="src\renderer\BatchRenderer.cpp" />
     <ClCompile Include="src\game\Creature.cpp" />
@@ -333,6 +334,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\SoundDevice.h" />
     <ClInclude Include="src\game\Animation.h" />
     <ClInclude Include="src\game\Creature.h" />
     <ClInclude Include="src\game\NewMap.h" />
