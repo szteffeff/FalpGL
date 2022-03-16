@@ -14,6 +14,7 @@
 #include "Entity.h"
 #include "Json.h"
 #include "UI.h"
+#include "NewMap.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -157,7 +158,7 @@ int main(void)
     /* glfw functions */
     std::string names[18] = {
         "The Small Lands",
-        "A Rabbit's Journey",
+        "A Hobbit's Journey",
         "Splund",
         "Stop the Dungeon",
         "Catland",
@@ -223,6 +224,8 @@ int main(void)
             -0.5f, -0.5f  // bottom-left
         };
 
+        New_Map nmap;
+        nmap.init();
 
         VertexArray va;
         VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
@@ -271,8 +274,6 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
-
-
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
@@ -315,7 +316,8 @@ int main(void)
 
                 /* Draw everything but ui to framebuffer */
                 glDepthMask(false);
-                main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
+                //main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
+                nmap.draw(projection_matrix * *player.get_trans_matrix());
                 glDepthMask(true);
 
                 player_render.draw(projection_matrix * *player.get_trans_matrix());

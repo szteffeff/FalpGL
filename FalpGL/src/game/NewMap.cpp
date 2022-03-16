@@ -8,16 +8,16 @@ inline int idx(float x, float y)
 
 inline Point index_to_coord_64(int index)
 {
-	return { index % 64, index - (index % 64) };
+	return { (float)(index % 64), (float)(index - (index % 64)) };
 }
 
 
 New_Map::New_Map()
 	: 
-	map_shader("res/shader/newmap.shader"),
+	map_shader("res/shaders/newmap.shader"),
 	map_vertex_array(),
-	map_vertex_buffer(sizeof(Tile) * 64 * 64 * 9),
-	map_index_buffer(64 * 64 * 9)
+	map_vertex_buffer(sizeof(n_Tile) * 64 * 64),
+	map_index_buffer(64 * 64)
 {
 	VertexBufferLayout layout;
 	layout.Push<float>(2);
@@ -25,11 +25,12 @@ New_Map::New_Map()
 
 	map_vertex_array.AddBuffer(map_vertex_buffer, layout);
 
+	map_shader.Bind();
 	map_shader.SetUniform1iv("u_Textures", 16, samplers);
-	map_shader.SetUniform1f("f_Texture", texture_index);
+	map_shader.SetUniform1f("u_Texture", texture_index);
 	map_shader.SetUniformMat4f("u_MVP", glm::mat4(1.0f));
 
-	chunks.resize(64 * 64);
+	chunks.resize(1);
 }
 
 bool New_Map::init()
@@ -45,7 +46,7 @@ bool New_Map::init()
 	}
 	catch (json::exception)
 	{
-		std::cout << "error parsing animation json!\n";
+		std::cout << "error parsing map json!\n";
 		return false;
 	}
 
@@ -60,7 +61,7 @@ bool New_Map::init()
 	}
 	catch (json::exception)
 	{
-		std::cout << "error parsing animation json!\n";
+		std::cout << "error parsing tile json!\n";
 		return false;
 	}
 
@@ -68,7 +69,14 @@ bool New_Map::init()
 	for (auto chunk : chunks)
 	{
 		chunk = Chunk(index_to_coord_64(index).x, index_to_coord_64(index).y, &chunk_json, &tile_json);
+		chunk.load();
+
+		map_vertex_buffer.buffer_data(0, sizeof(n_Tile) * 64 * 64, chunk.vertex_data());
+
+		std::cout << "loaded chunk: " << index++ << "\n";
 	}
+
+	
 }
 
 void New_Map::draw(glm::mat4 matrix)
@@ -77,8 +85,9 @@ void New_Map::draw(glm::mat4 matrix)
 	map_index_buffer.Bind();
 	map_shader.Bind();
 
+	map_shader.SetUniformMat4f("u_MVP", matrix);
 	glDepthMask(false);
-	glDrawElements(GL_TRIANGLES, map_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr);
+	GLCall(glDrawElements(GL_TRIANGLES, map_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
 	glDepthMask(true);
 }
 
@@ -94,19 +103,7 @@ Point New_Map::collision_line_delta(Point origin, Point delta, float collision_r
 
 void New_Map::chunk_to_buffer(Chunk* c)
 {
-	int free_index = -1;
 
-	for (int i = 0; i < 9; i++)
-	{
-		if (loaded_chunks[i] == 0)
-		{
-			free_index = i;
-			loaded_chunks[i] = c->get_id();
-			break;
-		}
-	}
-
-	map_vertex_buffer.buffer_data(free_index * 64 * 64 * sizeof(Tile), 64 * 64 * sizeof(Tile), c->vertex_data());
 }
 
 
@@ -128,6 +125,7 @@ Chunk::Chunk()
 	: loaded(false), position(), chunk_json(), tile_json()
 {
 	tiles.resize(64 * 64);
+	tiles.clear();
 
 	id = -1;
 }
@@ -140,7 +138,9 @@ void Chunk::load()
 	{
 		for (int tile_y = 0; tile_y < chunk_size; tile_y++)
 		{
-			tiles[idx(tile_x, tile_y)] = Tile(tile_x, tile_y, tile_json[chunk_json[std::to_string(idx(tile_x, tile_y))]]);
+			int tile_index = (*chunk_json)["layers"][0]["chunks"][0]["data"][idx(63 - tile_y, tile_x)];
+			tile_index = (tile_index > 83) ? tile_index - 82 : tile_index;
+			tiles[idx(tile_x, tile_y)] = n_Tile(tile_x + (position[0] * 64), tile_y + (position[1] * 64), (*tile_json)[std::to_string(tile_index)]);
 		}
 	}
 
@@ -169,36 +169,41 @@ const int Chunk::get_id() const
 }
 
 
-Tile::Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid)
+n_Tile::n_Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid)
 {
 }
 
-Tile::Tile(float position_x, float position_y, nlohmann::json tile_json)
+n_Tile::n_Tile(float position_x, float position_y, nlohmann::json tile_json)
 {
-	quad_data[0];  //X
-	quad_data[0];  //Y
+	quad_data[0] = position_x * 32;  //X
+	quad_data[1] = position_y * 32;  //Y
 
-	quad_data[0];  //S
-	quad_data[0];  //T
-
-
-	quad_data[0];  //X
-	quad_data[0];  //Y
-
-	quad_data[0];  //S
-	quad_data[0];  //T
+	quad_data[2] = (tile_json["texture_coordinants"][0][0]) / 2048.0f;  //S
+	quad_data[3] = (tile_json["texture_coordinants"][0][1]) / 2048.0f;  //T
 
 
-	quad_data[0];  //X
-	quad_data[0];  //Y
+	quad_data[4] = position_x * 32 + 32;  //X
+	quad_data[5] = position_y * 32;  //Y
 
-	quad_data[0];  //S
-	quad_data[0];  //T
+	quad_data[6] = (tile_json["texture_coordinants"][1][0]) / 2048.0f;  //S
+	quad_data[7] = (tile_json["texture_coordinants"][1][1]) / 2048.0f;  //T
 
 
-	quad_data[0];  //X
-	quad_data[0];  //Y
+	quad_data[8] = position_x * 32 + 32;  //X
+	quad_data[9] = position_y * 32 + 32;  //Y
 
-	quad_data[0];  //S
-	quad_data[0];  //T
+	quad_data[10] = (tile_json["texture_coordinants"][2][0]) / 2048.0f;  //S
+	quad_data[11] = (tile_json["texture_coordinants"][2][1]) / 2048.0f;  //T
+
+
+	quad_data[12] = position_x * 32;  //X
+	quad_data[13] = position_y * 32 + 32;  //Y
+
+	quad_data[14] = (tile_json["texture_coordinants"][3][0]) / 2048.0f;  //S
+	quad_data[15] = (tile_json["texture_coordinants"][3][1]) / 2048.0f;  //T
+}
+
+n_Tile::n_Tile()
+{
+
 }

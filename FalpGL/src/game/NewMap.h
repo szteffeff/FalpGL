@@ -39,7 +39,7 @@
 int idx(float x, float y);
 Point index_to_coord_64(float idx);
 
-struct Tile {
+struct n_Tile {
 	/*
 	* X  Y  S  T
 	* X  Y  S  T
@@ -55,18 +55,18 @@ private:
 	float quad_data[16];
 
 public:
-	Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid);
-	Tile(float position_x, float position_y, nlohmann::json tile_json);
-	Tile();
+	n_Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid);
+	n_Tile(float position_x, float position_y, nlohmann::json tile_json);
+	n_Tile();
 };
 
 class Chunk {
 private:
 	bool loaded;
-	const int chunk_size = 64;
+	int chunk_size = 64;
 	float position[2];
 	int id;
-	std::vector<Tile> tiles;
+	std::vector<n_Tile> tiles;
 	std::vector<std::vector<bool>> collision_map;
 
 	/* json containing what tile should be at what position - scoped to specific chunk */
