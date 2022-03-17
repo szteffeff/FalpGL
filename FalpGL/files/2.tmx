@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="left-down" width="64" height="64" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#ff00ff" nextlayerid="2" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="left-down" width="64" height="64" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#ff00ff" nextlayerid="2" nextobjectid="1">
  <editorsettings>
   <chunksize width="64" height="64"/>
   <export target="../../source/repos/szteffeff/FalpGL/FalpGL/res/data/map.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" source="tileset0.tsx"/>
+ <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Tile Layer 1" width="64" height="64">
   <data encoding="csv">
    <chunk x="0" y="0" width="64" height="64">

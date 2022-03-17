@@ -140,6 +140,11 @@ void Chunk::load()
 		{
 			int tile_index = (*chunk_json)["layers"][0]["chunks"][0]["data"][idx(63 - tile_y, tile_x)];
 			tile_index = (tile_index > 83) ? tile_index - 82 : tile_index;
+
+			if (idx(63 - tile_y, tile_x) > 116)
+				tile_index = 0;
+
+
 			tiles[idx(tile_x, tile_y)] = n_Tile(tile_x + (position[0] * 64), tile_y + (position[1] * 64), (*tile_json)[std::to_string(tile_index)]);
 		}
 	}
