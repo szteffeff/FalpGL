@@ -496,6 +496,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
     <None Include="res\data\map.json" />
     <None Include="res\data\tileset.json" />
+    <None Include="res\shaders\tile.shader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\data\animations.json" />

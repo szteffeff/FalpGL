@@ -17,7 +17,8 @@ New_Map::New_Map()
 	map_shader("res/shaders/newmap.shader"),
 	map_vertex_array(),
 	map_vertex_buffer(sizeof(n_Tile) * 64 * 64),
-	map_index_buffer(64 * 64)
+	map_index_buffer(64 * 64),
+	set("res/data/tileset.json", 0)
 {
 	VertexBufferLayout layout;
 	layout.Push<float>(2);
@@ -69,7 +70,7 @@ bool New_Map::init()
 	for (auto chunk : chunks)
 	{
 		chunk = Chunk(index_to_coord_64(index).x, index_to_coord_64(index).y, &chunk_json, &tile_json);
-		chunk.load();
+		chunk.load(set);
 
 		map_vertex_buffer.buffer_data(0, sizeof(n_Tile) * 64 * 64, chunk.vertex_data());
 
@@ -81,9 +82,12 @@ bool New_Map::init()
 
 void New_Map::draw(glm::mat4 matrix)
 {
+
 	map_vertex_array.Bind();
 	map_index_buffer.Bind();
 	map_shader.Bind();
+
+	set.bind_texture(4.0f);
 
 	map_shader.SetUniformMat4f("u_MVP", matrix);
 	glDepthMask(false);
@@ -130,7 +134,7 @@ Chunk::Chunk()
 	id = -1;
 }
 
-void Chunk::load()
+void Chunk::load(Tileset& set)
 {
 	/* all json chunk names tbd*/
 
@@ -138,14 +142,10 @@ void Chunk::load()
 	{
 		for (int tile_y = 0; tile_y < chunk_size; tile_y++)
 		{
-			int tile_index = (*chunk_json)["layers"][0]["chunks"][0]["data"][idx(63 - tile_y, tile_x)];
-			tile_index = (tile_index > 83) ? tile_index - 82 : tile_index;
+			int tile_index = (*chunk_json)["layers"][0]["chunks"][0]["data"][idx(63 - tile_y, tile_x)] - 1;
 
-			if (idx(63 - tile_y, tile_x) > 116)
-				tile_index = 0;
-
-
-			tiles[idx(tile_x, tile_y)] = n_Tile(tile_x + (position[0] * 64), tile_y + (position[1] * 64), (*tile_json)[std::to_string(tile_index)]);
+			float position[2] = { tile_x, tile_y };
+			tiles[idx(tile_x, tile_y)] = n_Tile(set[tile_index], position);
 		}
 	}
 
@@ -174,8 +174,34 @@ const int Chunk::get_id() const
 }
 
 
-n_Tile::n_Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid)
+n_Tile::n_Tile(Tile& tile, float position[2])
 {
+	quad_data[0] = position[0] * 32;  //X
+	quad_data[1] = position[1] * 32;  //Y
+
+	quad_data[2] = tile.texture_coord[0];  //S
+	quad_data[3] = tile.texture_coord[1];  //T
+
+
+	quad_data[4] = position[0] * 32 + 32;  //X
+	quad_data[5] = position[1] * 32;  //Y
+
+	quad_data[6] = tile.texture_coord[0] + 0.015625f;  //S
+	quad_data[7] = tile.texture_coord[1];  //T
+
+
+	quad_data[8] = position[0] * 32 + 32;  //X
+	quad_data[9] = position[1] * 32 + 32;  //Y
+
+	quad_data[10] = tile.texture_coord[0] + 0.015625f;  //S
+	quad_data[11] = tile.texture_coord[1] + 0.015625f;  //T
+
+
+	quad_data[12] = position[0] * 32;  //X
+	quad_data[13] = position[1] * 32 + 32;  //Y
+
+	quad_data[14] = tile.texture_coord[0];  //S
+	quad_data[15] = tile.texture_coord[1] + 0.015625f;  //T
 }
 
 n_Tile::n_Tile(float position_x, float position_y, nlohmann::json tile_json)

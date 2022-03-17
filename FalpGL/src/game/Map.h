@@ -10,8 +10,8 @@
 class Map {
 private:
 	Json_loader* loader;
-	std::vector<Tile*> map_vector;
-	std::vector<Tile*> map_vector_static;
+	std::vector<Old_Tile*> map_vector;
+	std::vector<Old_Tile*> map_vector_static;
 
 	
 

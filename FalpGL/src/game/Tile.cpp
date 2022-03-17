@@ -1,10 +1,10 @@
 #include "Tile.h"
 
 
-Tile::Tile()
+Old_Tile::Old_Tile()
 {}
 
-Tile::Tile(VertexBuffer* vb, Json_loader* loader)
+Old_Tile::Old_Tile(VertexBuffer* vb, Json_loader* loader)
 	: Quad(vb, 32, 32, 0.0f)
 {
 	tex_coord tx;
@@ -25,7 +25,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader)
 	set_z(-0.999f);
 }
 
-Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
+Old_Tile::Old_Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 	: Quad(vb, 32, 32, 0.0f)
 {
 	tex_coord tx;
@@ -47,7 +47,7 @@ Tile::Tile(VertexBuffer* vb, Json_loader* loader, std::string id)
 }
 
 
-void Tile::change_type(Tile_id id, Json_loader* loader)
+void Old_Tile::change_type(Tile_id id, Json_loader* loader)
 {
 	tex_coord tx;
 	std::string _id = std::to_string((int)id);

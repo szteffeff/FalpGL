@@ -199,6 +199,7 @@
     </Text>
     <None Include="res\shaders\newmap.shader" />
     <None Include="res\shaders\point.shader" />
+    <None Include="res\shaders\tile.shader" />
     <None Include="res\shaders\ui.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />

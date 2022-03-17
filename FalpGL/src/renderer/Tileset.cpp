@@ -1,9 +1,52 @@
 #include "Tileset.h"
 #include "renderer.h"
 
+Tile::Tile(float in_id, std::string image, float origin[2], float tex_origin[2])
+{
+	id = in_id;
+
+	position[0] = origin[0];
+	position[1] = origin[1];
+
+	texture_coord[0] = tex_origin[0];
+	texture_coord[1] = tex_origin[1];
+
+	filename = std::string("files/") + image;
+}
+
 Tile_Quad::Tile_Quad()
 	: quad_data()
 {}
+
+Tile_Quad::Tile_Quad(Tile& tile)
+{
+	quad_data[0] = tile.position[0] * 32;  //X
+	quad_data[1] = tile.position[1] * 32;  //Y
+
+	quad_data[2] = tile.texture_coord[0];  //S
+	quad_data[3] = tile.texture_coord[1];  //T
+
+
+	quad_data[4] = tile.position[0] * 32 + 32;  //X
+	quad_data[5] = tile.position[1] * 32;  //Y
+
+	quad_data[6] = tile.texture_coord[0] + 0.015625f;  //S
+	quad_data[7] = tile.texture_coord[1];  //T
+
+
+	quad_data[8] = tile.position[0] * 32 + 32;  //X
+	quad_data[9] = tile.position[1] * 32 + 32;  //Y
+
+	quad_data[10] = tile.texture_coord[0] + 0.015625f;  //S
+	quad_data[11] = tile.texture_coord[1] + 0.015625f;  //T
+
+
+	quad_data[12] = tile.position[0] * 32;  //X
+	quad_data[13] = tile.position[1] * 32 + 32;  //Y
+
+	quad_data[14] = tile.texture_coord[0];  //S
+	quad_data[15] = tile.texture_coord[1] + 0.015625f;  //T
+}
 
 void Tile_Quad::operator=(Tile& tile_in)
 {
@@ -40,13 +83,42 @@ Tile_Quad::Tile_Quad(float qd[16])
 	memcpy(&quad_data, &qd, sizeof(quad_data));
 }
 
+void Tile_Quad::whole_texture()
+{
+	quad_data[2] = 0;
+	quad_data[3] = 0;
+
+	quad_data[6] = 1;
+	quad_data[7] = 0;
+
+	quad_data[10] = 1;
+	quad_data[11] = 1;
+
+	quad_data[14] = 0;
+	quad_data[15] = 1;
+}
+
+Tile& Tileset::operator[](int index)
+{
+	return tileset_tiles[index];
+}
 
 Tileset::Tileset(std::string Tileset_path, int texture_unit)
 	: shader("res/shaders/tile.shader"),
 	vertex_array(),
-	vertex_buffer(24 * sizeof(float)),
-	max_tiles(size / 32)
+	vertex_buffer(sizeof(Tile_Quad)),
+	max_tiles((size / 32) * (size / 32)),
+	index_buffer(1),
+	tileset_filepath(Tileset_path)
 {
+	projection_matrix = glm::ortho(
+		round(-0.5f * size),
+		round(0.5f * size),
+		round(-0.5f * size),
+		round(0.5f * size),
+		-1.0f, 1.0f);
+
+
 	VertexBufferLayout vbl;
 	vbl.Push<float>(2);
 	vbl.Push<float>(2);
@@ -107,25 +179,64 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 		/* crash lol */
 	}
 
+
+	float position[2] = { 0, 0 };
+	float tex_coords[2] = { 0, 0 };
+	int index = 0;
+
 	for (auto tile = tileset_json["tiles"].begin(); tile != tileset_json["tiles"].end(); tile++)
 	{
-		tileset_tiles.push_back(Tile());
-		/*
-		push back tile
-		setup to draw tile to buffer
-			pick image
-				load texture
+		tileset_tiles.push_back(Tile((*tile)["id"], (*tile)["image"], position, tex_coords));
 
-			set coords
-				array access
+		Tile_Quad quad = tileset_tiles[index];
+		quad.whole_texture();
 
-		draw
-		*/
+		position[0] += 32;
+		if (position[0] > size)
+		{
+			position[0] = 0;
+			position[1] += 32;
+		}
+
+		tex_coords[0] += 0.015625;
+		if (tex_coords[0] > 1.0f)
+		{
+			tex_coords[0] = 0;
+			tex_coords[1] += 0.015625;
+		}
+
+		active_tile_texture.reload(tileset_tiles[index].filename);
+		active_tile_texture.Bind();
+
+		stitch_tile(quad);
+
+		index++;
 	}
+
+	GLCall(glActiveTexture(GL_TEXTURE0 + texture_unit));
+	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
 }
 
 
-void Tileset::stitch_tile(Tile data)
+void Tileset::stitch_tile(Tile_Quad quad)
 {
+	GLCall(glActiveTexture(GL_TEXTURE0 + 4));
+	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
+	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id));
 
+	shader.Bind();
+	vertex_array.Bind();
+	index_buffer.Bind();
+
+	vertex_buffer.buffer_data(0, sizeof(Tile_Quad), &quad);
+
+	glDrawElements(GL_TRIANGLES, index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr);
+
+	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+}
+
+void Tileset::bind_texture(unsigned int unit)
+{
+	GLCall(glActiveTexture(GL_TEXTURE0 + unit));
+	GLCall(glBindTexture(GL_TEXTURE_2D, texture_id));
 }

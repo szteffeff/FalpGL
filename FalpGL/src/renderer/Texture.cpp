@@ -22,6 +22,24 @@ Texture::Texture(const std::string& filepath)
 	}
 }
 
+void Texture::reload(std::string& filepath)
+{
+	m_filepath = filepath;
+
+	stbi_set_flip_vertically_on_load(1);
+	m_local_buffer = stbi_load(filepath.c_str(), &m_width, &m_height, &m_BPP, 4);
+
+	GLCall(glGenTextures(1, &m_renderer_id));
+	GLCall(glBindTexture(GL_TEXTURE_2D, m_renderer_id));
+
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_local_buffer));
+	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+
+	if (m_local_buffer) {
+		stbi_image_free(m_local_buffer);
+	}
+}
+
 Texture::~Texture()
 {
 	GLCall(glDeleteTextures(1, &m_renderer_id));
