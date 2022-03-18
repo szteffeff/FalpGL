@@ -170,6 +170,7 @@
     <ClCompile Include="src\game\UI.cpp" />
     <ClCompile Include="src\renderer\Framebuffer.cpp" />
     <ClCompile Include="src\renderer\Quad.cpp" />
+    <ClCompile Include="src\renderer\Tileset.cpp" />
     <ClCompile Include="src\types\TileTypes.h" />
     <ClCompile Include="src\renderer\Point.cpp" />
     <ClCompile Include="src\renderer\RendererIncludes.h" />
@@ -185,7 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\data\entities.json" />
+    <None Include="res\data\map.json" />
     <None Include="res\data\tiles.json" />
+    <None Include="res\data\tileset.json" />
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
     <None Include="res\shaders\chroma.shader" />
@@ -198,6 +201,8 @@
     </Text>
     <None Include="res\shaders\newmap.shader" />
     <None Include="res\shaders\point.shader" />
+    <None Include="res\shaders\quad.shader" />
+    <None Include="res\shaders\tile.shader" />
     <None Include="res\shaders\ui.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
@@ -349,6 +354,7 @@
     <ClInclude Include="src\game\UI.h" />
     <ClInclude Include="src\renderer\Framebuffer.h" />
     <ClInclude Include="src\renderer\Quad.h" />
+    <ClInclude Include="src\renderer\Tileset.h" />
     <ClInclude Include="src\types\AnimationTypes.h" />
     <ClInclude Include="src\renderer\BatchRenderer.h" />
     <ClInclude Include="src\game\Entity.h" />

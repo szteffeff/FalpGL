@@ -39,7 +39,7 @@
 int idx(float x, float y);
 Point index_to_coord_64(float idx);
 
-struct Tile {
+struct n_Tile {
 	/*
 	* X  Y  S  T
 	* X  Y  S  T
@@ -55,19 +55,21 @@ private:
 	float quad_data[16];
 
 public:
-	Tile(float position_x, float position_y, float texture_x, float texture_y, bool solid);
-	Tile(float position_x, float position_y, nlohmann::json tile_json);
-	Tile();
+	n_Tile(Tile& tile_in, float position[2]);
+	n_Tile(float position_x, float position_y, nlohmann::json tile_json);
+	n_Tile();
 };
 
 class Chunk {
 private:
 	bool loaded;
-	const int chunk_size = 64;
+	int chunk_size = 64;
 	float position[2];
 	int id;
-	std::vector<Tile> tiles;
+	std::vector<n_Tile> tiles;
 	std::vector<std::vector<bool>> collision_map;
+
+	
 
 	/* json containing what tile should be at what position - scoped to specific chunk */
 	nlohmann::json *chunk_json;
@@ -79,7 +81,7 @@ public:
 	Chunk(float x, float y, nlohmann::json* c_json, nlohmann::json* t_json);
 	Chunk();
 
-	void load();
+	void load(Tileset& set);
 	void unload();
 
 	bool collision_at(float x, float y);
@@ -102,12 +104,17 @@ private:
 	nlohmann::json tile_json;
 
 	int samplers[16] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-	float texture_index = 0.0f;
+	float texture_index = 4.0f;
 	int loaded_chunks[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	std::vector<Chunk> chunks;
 
+	Tileset set;
+
+private:
 	void chunk_to_buffer(Chunk* c);
+
+
 public:
 	New_Map();
 

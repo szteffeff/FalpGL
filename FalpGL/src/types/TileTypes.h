@@ -24,4 +24,3 @@ enum class Tile_id {
 	COBBLESTONE_7,
 	COBBLESTONE_8,
 };
-

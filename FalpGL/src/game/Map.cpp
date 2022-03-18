@@ -42,7 +42,7 @@ void Map::fill()
 		for (int x = -width / 2; x < width / 2; x++)
 		{
 
-			map_vector[i] = new Tile(&renderer.vertex_buffer, loader, "2");
+			map_vector[i] = new Old_Tile(&renderer.vertex_buffer, loader, "2");
 			if (i != width * height / 2 + width / 2) {
 				map_vector[i]->change_type(Tile_id::GRASS, loader);
 			}
@@ -126,7 +126,7 @@ void Map::shift_down()
 
 void Map::shift_left()
 {
-	std::vector<Tile*> buffer;
+	std::vector<Old_Tile*> buffer;
 	current_center[0] -= 1;
 
 	for (int left = 0; left < height * width; left += width)
@@ -151,7 +151,7 @@ void Map::shift_left()
 
 void Map::shift_right()
 {
-	std::vector<Tile*> buffer;
+	std::vector<Old_Tile*> buffer;
 	current_center[0] += 1;
 
 	for (int left = 0; left < height * width; left += width)

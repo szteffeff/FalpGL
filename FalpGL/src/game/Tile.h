@@ -10,15 +10,15 @@
 
 
 
-struct Tile : public Quad {
+struct Old_Tile : public Quad {
 private:
 	bool solid;
 
 public:
 	std::string name;
-	Tile();
-	Tile(VertexBuffer* vb, Json_loader* loader);
-	Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
+	Old_Tile();
+	Old_Tile(VertexBuffer* vb, Json_loader* loader);
+	Old_Tile(VertexBuffer* vb, Json_loader* loader, std::string id);
 
 	void change_type(Tile_id _id, Json_loader* loader);
 	bool is_solid() const;
