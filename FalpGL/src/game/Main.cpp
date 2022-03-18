@@ -217,26 +217,32 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
-        const float vertex_data[8] = { 
-            -0.5f,  0.5f, // top-left
-             0.5f,  0.5f, // top-right
-             0.5f, -0.5f, // bottom-right
-            -0.5f, -0.5f  // bottom-left
+        float vertices[24] = {
+             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
+            -0.7 * 0.5f, -1.0f * 0.5f,  0.0f, 0.0f,
+            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f,
+
+             0.7 * 0.5f,  1.0f * 0.5f,  1.0f, 1.0f,
+             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
+            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f
         };
 
         New_Map nmap;
         nmap.init();
 
         VertexArray va;
-        VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
+        VertexBuffer vb = VertexBuffer(sizeof(vertices), &vertices);
         VertexBufferLayout vbl;
         vbl.Push<float>(2);
+        vbl.Push<float>(2);
         va.AddBuffer(vb, vbl);
-        Shader s("res/shaders/point.shader");
+        Shader s("res/shaders/quad.shader");
+        s.Bind();
+        s.SetUniform1i("u_Texture", 4);
 
 
-        HSL_Framebuffer framebuffer(resolution_x, resolution_y, 15);
-        Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 16);
+        HSL_Framebuffer framebuffer(resolution_x, resolution_y, 14);
+        Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 15);
 
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -348,7 +354,7 @@ int main(void)
 
             //va.Bind();
             //s.Bind();
-            //glDrawArrays(GL_POINTS, 0, 4);
+            //glDrawArrays(GL_TRIANGLES, 0, 6);
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
