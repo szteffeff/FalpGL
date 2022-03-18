@@ -14,6 +14,9 @@
 #include "Entity.h"
 #include "Json.h"
 #include "UI.h"
+#include "SoundBuffer.h"
+#include "SoundSource.h"
+#include "SoundDevice.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -263,6 +266,13 @@ int main(void)
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
+        /*Sound crap*/
+        SoundDevice* mysounddevice = SoundDevice::get();
+
+        uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
+
+        SoundSource myspeaker;
+
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
         ui.SetPotion(player.GetPotion());
@@ -285,7 +295,8 @@ int main(void)
 
             controller.tick(xpos, ypos);
 
-            
+            /*SOUND THINGY*/
+            myspeaker.Play(walking);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
