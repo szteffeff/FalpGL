@@ -165,7 +165,7 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 
 
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id);
-	glClearColor(1.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 
@@ -251,7 +251,6 @@ void Tileset::stitch_tile(Tile_Quad quad)
 
 
 	vertex_buffer.buffer_data(0, sizeof(Tile_Quad), &vertices);
-	vertices[0] += 0.01;
 
 	shader.Bind();
 	shader.SetUniformMat4f("u_MVP", glm::mat4(1.0f));

@@ -217,14 +217,15 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
+        float scale = 0.8f;
         float vertices[24] = {
-             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
-            -0.7 * 0.5f, -1.0f * 0.5f,  0.0f, 0.0f,
-            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f,
+             0.5625 * scale, -1.0f * scale,  1.0f, 0.0f,
+            -0.5625 * scale, -1.0f * scale,  0.0f, 0.0f,
+            -0.5625 * scale,  1.0f * scale,  0.0f, 1.0f,
 
-             0.7 * 0.5f,  1.0f * 0.5f,  1.0f, 1.0f,
-             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
-            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f
+             0.5625 * scale,  1.0f * scale,  1.0f, 1.0f,
+             0.5625 * scale, -1.0f * scale,  1.0f, 0.0f,
+            -0.5625 * scale,  1.0f * scale,  0.0f, 1.0f
         };
 
         New_Map nmap;
@@ -352,9 +353,12 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
 
-            //va.Bind();
-            //s.Bind();
-            //glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            glDisable(GL_DEPTH_TEST);
+            va.Bind();
+            s.Bind();
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glEnable(GL_DEPTH_TEST);
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
