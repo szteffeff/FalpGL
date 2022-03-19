@@ -14,7 +14,9 @@
 #include "Entity.h"
 #include "Json.h"
 #include "UI.h"
-#include "NewMap.h"
+#include "SoundBuffer.h"
+#include "SoundSource.h"
+#include "SoundDevice.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -217,26 +219,33 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
-        const float vertex_data[8] = { 
-            -0.5f,  0.5f, // top-left
-             0.5f,  0.5f, // top-right
-             0.5f, -0.5f, // bottom-right
-            -0.5f, -0.5f  // bottom-left
+        float scale = 0.8f;
+        float vertices[24] = {
+             0.5625 * scale, -1.0f * scale,  1.0f, 0.0f,
+            -0.5625 * scale, -1.0f * scale,  0.0f, 0.0f,
+            -0.5625 * scale,  1.0f * scale,  0.0f, 1.0f,
+
+             0.5625 * scale,  1.0f * scale,  1.0f, 1.0f,
+             0.5625 * scale, -1.0f * scale,  1.0f, 0.0f,
+            -0.5625 * scale,  1.0f * scale,  0.0f, 1.0f
         };
 
         New_Map nmap;
         nmap.init();
 
         VertexArray va;
-        VertexBuffer vb = VertexBuffer(sizeof(vertex_data), &vertex_data);
+        VertexBuffer vb = VertexBuffer(sizeof(vertices), &vertices);
         VertexBufferLayout vbl;
         vbl.Push<float>(2);
+        vbl.Push<float>(2);
         va.AddBuffer(vb, vbl);
-        Shader s("res/shaders/point.shader");
+        Shader s("res/shaders/quad.shader");
+        s.Bind();
+        s.SetUniform1i("u_Texture", 4);
 
 
-        HSL_Framebuffer framebuffer(resolution_x, resolution_y, 15);
-        Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 16);
+        HSL_Framebuffer framebuffer(resolution_x, resolution_y, 14);
+        Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 15);
 
         VertexBufferLayout layout;
         layout.Push<float>(3);
@@ -266,6 +275,13 @@ int main(void)
 
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
+        /*Sound crap*/
+        SoundDevice* mysounddevice = SoundDevice::get();
+
+        uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
+
+        SoundSource myspeaker;
+
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
         ui.SetPotion(player.GetPotion());
@@ -286,7 +302,8 @@ int main(void)
 
             controller.tick(xpos, ypos);
 
-            
+            /*SOUND THINGY*/
+            myspeaker.Play(walking);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
@@ -346,9 +363,12 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
 
-            //va.Bind();
-            //s.Bind();
-            //glDrawArrays(GL_POINTS, 0, 4);
+
+            glDisable(GL_DEPTH_TEST);
+            va.Bind();
+            s.Bind();
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glEnable(GL_DEPTH_TEST);
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
