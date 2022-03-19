@@ -129,8 +129,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;OpenAL32.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)FalpGL\Dependencies\Open_AL;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;OpenAL32.lib;sndfile.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)FalpGL\Dependencies\Open_AL;$(SolutionDir)FalpGL\Dependencies\sndfile;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\SoundBuffer.cpp" />
+    <ClCompile Include="src\game\SoundSource.cpp" />
     <ClCompile Include="src\game\SoundDevice.cpp" />
     <ClCompile Include="src\game\Animation.cpp" />
     <ClCompile Include="src\game\NewMap.cpp" />
@@ -340,6 +342,10 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\sndfile\include\sndfile.h" />
+    <ClInclude Include="Dependencies\sndfile\include\sndfile.hh" />
+    <ClInclude Include="src\game\SoundBuffer.h" />
+    <ClInclude Include="src\game\SoundSource.h" />
     <ClInclude Include="src\game\SoundDevice.h" />
     <ClInclude Include="src\game\Animation.h" />
     <ClInclude Include="src\game\Creature.h" />
@@ -649,6 +655,8 @@
     <ClInclude Include="src\vendor\glm\vec4.hpp" />
     <ClInclude Include="src\vendor\glm\vector_relational.hpp" />
     <ClInclude Include="src\vendor\nlohmann_json\json.hpp" />
+    <ClInclude Include="src\vendor\sndfile\sndfile.h" />
+    <ClInclude Include="src\vendor\sndfile\sndfile.hh" />
     <ClInclude Include="src\vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
