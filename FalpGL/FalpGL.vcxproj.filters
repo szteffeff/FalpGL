@@ -29,6 +29,7 @@
     <ClCompile Include="src\vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="src\game\SoundSource.cpp" />
     <ClCompile Include="src\game\SoundBuffer.cpp" />
+    <ClCompile Include="src\renderer\Tileset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />
@@ -346,6 +347,7 @@
     <ClInclude Include="Dependencies\sndfile\include\sndfile.hh" />
     <ClInclude Include="src\vendor\sndfile\sndfile.h" />
     <ClInclude Include="src\vendor\sndfile\sndfile.hh" />
+    <ClInclude Include="src\renderer\Tileset.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\gfx\atlas0.png" />
@@ -500,6 +502,10 @@
     <None Include="src\vendor\glm\gtx\vector_angle.inl" />
     <None Include="src\vendor\glm\gtx\vector_query.inl" />
     <None Include="src\vendor\glm\gtx\wrap.inl" />
+    <None Include="res\data\map.json" />
+    <None Include="res\data\tileset.json" />
+    <None Include="res\shaders\quad.shader" />
+    <None Include="res\shaders\tile.shader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\data\animations.json" />

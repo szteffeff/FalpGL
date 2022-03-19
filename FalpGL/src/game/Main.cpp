@@ -17,6 +17,7 @@
 #include "SoundBuffer.h"
 #include "SoundSource.h"
 #include "SoundDevice.h"
+#include "NewMap.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -219,7 +220,7 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
-        float scale = 0.8f;
+        float scale = 0.5f;
         float vertices[24] = {
              0.5625 * scale, -1.0f * scale,  1.0f, 0.0f,
             -0.5625 * scale, -1.0f * scale,  0.0f, 0.0f,
@@ -276,11 +277,11 @@ int main(void)
         Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
 
         /*Sound crap*/
-        SoundDevice* mysounddevice = SoundDevice::get();
+        //SoundDevice* mysounddevice = SoundDevice::get();
 
-        uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
+        //uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
 
-        SoundSource myspeaker;
+        //SoundSource myspeaker;
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -303,7 +304,7 @@ int main(void)
             controller.tick(xpos, ypos);
 
             /*SOUND THINGY*/
-            myspeaker.Play(walking);
+            //myspeaker.Play(walking);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();

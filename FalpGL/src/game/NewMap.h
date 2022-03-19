@@ -55,7 +55,7 @@ private:
 	float quad_data[16];
 
 public:
-	n_Tile(Tile& tile_in, float position[2]);
+	n_Tile(Prototype_Tile& tile_in, float position[2]);
 	n_Tile(float position_x, float position_y, nlohmann::json tile_json);
 	n_Tile();
 };

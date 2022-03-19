@@ -174,7 +174,7 @@ const int Chunk::get_id() const
 }
 
 
-n_Tile::n_Tile(Tile& tile, float position[2])
+n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
 {
 	quad_data[0] = position[0] * 32;  //X
 	quad_data[1] = position[1] * 32;  //Y
@@ -186,22 +186,22 @@ n_Tile::n_Tile(Tile& tile, float position[2])
 	quad_data[4] = position[0] * 32 + 32;  //X
 	quad_data[5] = position[1] * 32;  //Y
 
-	quad_data[6] = tile.texture_coord[0] + 0.015625f;  //S
-	quad_data[7] = tile.texture_coord[1];  //T
+	quad_data[6] = tile.texture_coord[2];  //S
+	quad_data[7] = tile.texture_coord[3];  //T
 
 
 	quad_data[8] = position[0] * 32 + 32;  //X
 	quad_data[9] = position[1] * 32 + 32;  //Y
 
-	quad_data[10] = tile.texture_coord[0] + 0.015625f;  //S
-	quad_data[11] = tile.texture_coord[1] + 0.015625f;  //T
+	quad_data[10] = tile.texture_coord[4];  //S
+	quad_data[11] = tile.texture_coord[5];  //T
 
 
 	quad_data[12] = position[0] * 32;  //X
 	quad_data[13] = position[1] * 32 + 32;  //Y
 
-	quad_data[14] = tile.texture_coord[0];  //S
-	quad_data[15] = tile.texture_coord[1] + 0.015625f;  //T
+	quad_data[14] = tile.texture_coord[6];  //S
+	quad_data[15] = tile.texture_coord[7];  //T
 }
 
 n_Tile::n_Tile(float position_x, float position_y, nlohmann::json tile_json)
