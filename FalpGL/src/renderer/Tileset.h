@@ -45,14 +45,11 @@ private:
 	std::string tileset_filepath;
 	std::string tile_image_filepath;
 
-	float vertices[24] = {
-	 1.0f, -1.0f,  1.0f, 0.0f,
-	-1.0f, -1.0f,  0.0f, 0.0f,
-	-1.0f,  1.0f,  0.0f, 1.0f,
-
-	 1.0f,  1.0f,  1.0f, 1.0f,
-	 1.0f, -1.0f,  1.0f, 0.0f,
-	-1.0f,  1.0f,  0.0f, 1.0f
+	float vertices[16] = {
+	 -1.0f * 0.5f, -1.0f * 0.5f, 0.0f, 0.0f,
+	  1.0f * 0.5f, -1.0f * 0.5f, 1.0f, 0.0f,
+	  1.0f * 0.5f,  1.0f * 0.5f, 1.0f, 1.0f,
+	 -1.0f * 0.5f,  1.0f * 0.5f, 0.0f, 1.0f
 	};
 
 	std::vector<Tile> tileset_tiles;
