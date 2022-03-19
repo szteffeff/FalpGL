@@ -17,7 +17,12 @@ Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[
 	texture_coord[6] = tex_origin[0];
 	texture_coord[7] = tex_origin[1] + (32.0f / atlas_size);
 
-	filepath = std::string("files/") + image;
+	if (image.rfind("/") != std::string::npos) 
+	{
+		image = image.substr(image.rfind("/") + 1);
+	}
+
+	filepath = std::string("files/tiles/") + image;
 }
 
 Prototype_Tile& Tileset::operator[](int index)
