@@ -61,7 +61,7 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 
 	case(GLFW_KEY_Q):
 		*running = false;
-		std::cout << "stopping\n";
+		std::cout << "[INFO]: stopping!\n";
 		break;
 
 	case(GLFW_KEY_LEFT_SHIFT):

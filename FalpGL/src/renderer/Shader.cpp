@@ -64,7 +64,7 @@ int Shader::GetUnifromLocation(const std::string& name)
     GLCall(int location = glGetUniformLocation(m_renderer_id, name.c_str()));
     if (location == -1)
     {
-        std::cout << "[WARN] uniform '" << name << "' does not exist" << std::endl;
+        std::cout << "[SHADER]: uniform '" << name << "' does not exist in shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "\n";
     } 
 
      m_uniform_location_cache[name] = location;
@@ -163,18 +163,18 @@ unsigned int Shader::compileShader(unsigned int type, const std::string& source)
         switch (type)
         {
         case (GL_VERTEX_SHADER):
-            std::cout << "Failed to compile " << "vertex" << " shader '" << m_filepath << "':" << message << std::endl;
+            std::cout << "[SHADER]: Failed to compile " << "vertex" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
             break;
         case (GL_FRAGMENT_SHADER):
-            std::cout << "Failed to compile " << "fragment" << " shader '" << m_filepath << "':" << message << std::endl;
+            std::cout << "[SHADER]: Failed to compile " << "fragment" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
             break;
         case (GL_GEOMETRY_SHADER):
-            std::cout << "Failed to compile " << "geometry" << " shader '" << m_filepath << "':" << message << std::endl;
+            std::cout << "[SHADER]: Failed to compile " << "geometry" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
             break;
         default:
             break;
         }
-        
+
         glDeleteShader(id);
         return 0;
     }
@@ -213,7 +213,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        std::cout << "No vertex shader source provided for shader: " << m_filepath << "!" << "\n";
+        std::cout << "[SHADER]: No vertex shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!" << "\n";
     }
 
     if (source.FragmentSource != "")
@@ -222,7 +222,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        std::cout << "No fragment shader source provided for shader: " << m_filepath << "!" << "\n";
+        std::cout << "[SHADER]: No fragment shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!" << "\n";
     }
 
     if (source.GeometrySource != "")
@@ -230,10 +230,10 @@ unsigned int Shader::createShader(ShaderProgramSource source)
         gs = compileShader(GL_GEOMETRY_SHADER, source.GeometrySource);
         geometry = true;
     }
-        
+
 
     if (vs)
-        std::cout << "Vertex";
+        std::cout << "[SHADER]: Vertex";
 
     if (fs)
         std::cout << " + Fragment";
@@ -242,7 +242,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
         std::cout << " + Geometry";
     
     if (vs || fs || (geometry && gs))
-        std::cout << " shader " << m_filepath << " compiled successfuly!\n";
+        std::cout << " shader " << m_filepath.substr(m_filepath.rfind("/") + 1) << " compiled successfuly!\n";
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
