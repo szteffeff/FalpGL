@@ -24,70 +24,44 @@
 *      y2 = lowest y coord for every quad
 */
 
-
 /*
-* 330 tiles/min
-* 
-* 
-*  3 * 3 loaded and rendering
-*  5 * 5 loaded
-*  
-* 
+* TODO: use embedded tileset
 */
-
 
 int idx(float x, float y);
 Point index_to_coord_64(float idx);
 
 struct n_Tile {
-	/*
-	* X  Y  S  T
-	* X  Y  S  T
-	* X  Y  S  T
-	* X  Y  S  T
-	* 
-	* 0  1  2  3
-	* 4  5  6  7
-	* 8  9  10 11
-	* 12 13 14 15
-	*/
 private:
 	float quad_data[16];
 
 public:
 	n_Tile(Prototype_Tile& tile_in, float position[2]);
-	n_Tile(float position_x, float position_y, nlohmann::json tile_json);
 	n_Tile();
 };
 
 class Chunk {
 private:
 	bool loaded;
-	int chunk_size = 64;
+	size_t chunk_size[2];
 	float position[2];
-	int id;
+
 	std::vector<n_Tile> tiles;
-	std::vector<std::vector<bool>> collision_map;
-
+	std::vector<int> chunk_data;
 	
+	Tileset& tileset;
 
-	/* json containing what tile should be at what position - scoped to specific chunk */
-	nlohmann::json *chunk_json;
-
-	/* json with texture coords for each tile */
-	nlohmann::json *tile_json;
-	
 public:
-	Chunk(float x, float y, nlohmann::json* c_json, nlohmann::json* t_json);
-	Chunk();
+	Chunk(Tileset& set, std::vector<int>& data, float position_x, float position_y, int size_x, int size_y);
 
-	void load(Tileset& set);
+
+	void load();
 	void unload();
 
-	bool collision_at(float x, float y);
+
 
 	const void* vertex_data() const;
-	const int get_id() const;
+
 };
 
 class New_Map {
@@ -97,11 +71,9 @@ private:
 	VertexBuffer map_vertex_buffer;
 	IndexBuffer map_index_buffer;
 
-	const std::string chunk_json_filename = "res/data/map.json";
-	const std::string tile_json_filename = "res/data/tiles.json";
+	const std::string map_json_filename = "res/data/map2.json";
 
-	nlohmann::json chunk_json;
-	nlohmann::json tile_json;
+	nlohmann::json map_json;
 
 	int samplers[16] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 	float texture_index = 4.0f;

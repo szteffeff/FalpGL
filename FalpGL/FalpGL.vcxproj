@@ -187,6 +187,7 @@
   <ItemGroup>
     <None Include="res\data\entities.json" />
     <None Include="res\data\map.json" />
+    <None Include="res\data\map2.json" />
     <None Include="res\data\tiles.json" />
     <None Include="res\data\tileset.json" />
     <None Include="res\shaders\basic.shader" />

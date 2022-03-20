@@ -4,7 +4,7 @@
 #include <algorithm>
 
 VertexBuffer::VertexBuffer(unsigned int size, const void* data) // static buffer
-    : current_index(0), size(size)
+    : current_index(0), size(size), exists(true)
 {
     GLCall(glGenBuffers(1, &m_renderer_id));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
@@ -12,7 +12,7 @@ VertexBuffer::VertexBuffer(unsigned int size, const void* data) // static buffer
 }
 
 VertexBuffer::VertexBuffer(unsigned int size) // dynamic buffer / size doesn't account for buffers other that 24 floats
-    : current_index(0), size(size)
+    : current_index(0), size(size), exists(true)
 {
     GLCall(glGenBuffers(1, &m_renderer_id));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
@@ -77,4 +77,18 @@ void VertexBuffer::buffer_data(int offset, std::size_t size, const void* data)
 {
     Bind();
     GLCall(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
+}
+
+void VertexBuffer::init(unsigned int _size)
+{
+    if (!exists)
+    {
+        size = _size;
+        current_index = 0;
+
+        GLCall(glGenBuffers(1, &m_renderer_id));
+        GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_renderer_id));
+        GLCall(glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW));
+        exists = true;
+    }
 }

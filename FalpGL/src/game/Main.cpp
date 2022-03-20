@@ -243,6 +243,7 @@ int main(void)
         Shader s("res/shaders/quad.shader");
         s.Bind();
         s.SetUniform1i("u_Texture", 4);
+        s.SetUniform1f("u_alpha", 0.5f);
 
 
         HSL_Framebuffer framebuffer(resolution_x, resolution_y, 14);
@@ -364,12 +365,15 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
 
-
+            if (false)
+            {
             glDisable(GL_DEPTH_TEST);
             va.Bind();
             s.Bind();
             glDrawArrays(GL_TRIANGLES, 0, 6);
             glEnable(GL_DEPTH_TEST);
+            }
+
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

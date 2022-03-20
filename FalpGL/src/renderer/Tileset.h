@@ -49,6 +49,8 @@ private:
 
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
+	Tileset(nlohmann::json set_json, int texture_unit);
+	Tileset();
 
 	/* Bind framebuffer's texture to specific texture unit */
 	void bind_texture(unsigned int unit);
