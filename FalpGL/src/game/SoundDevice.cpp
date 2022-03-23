@@ -10,11 +10,11 @@ SoundDevice* SoundDevice::get()
 
 SoundDevice::SoundDevice()
 {
-	p_ALCDevice = alcOpenDevice(nullptr); // nullptr = get default device
+	p_ALCDevice = alcOpenDevice(nullptr); // nullptr = get default device doesnt work?
 	if (!p_ALCDevice)
 		throw ("failed to get sound device");
 
-	p_ALCContext = alcCreateContext(p_ALCDevice, nullptr);
+	p_ALCContext = alcCreateContext(p_ALCDevice, nullptr); // problem child
 	if (!p_ALCContext)
 		throw("Failed to get  sound context");
 
