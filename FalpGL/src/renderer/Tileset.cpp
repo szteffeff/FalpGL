@@ -32,6 +32,14 @@ Prototype_Tile& Tileset::operator[](int index)
 
 
 Tileset::Tileset()
+	: shader("res/shaders/tile.shader"),
+	vertex_array(),
+	vertex_buffer(sizeof(float) * 16),
+	size(0),
+	index_buffer(1),
+	tileset_filepath(""),
+	loaded(false),
+	active_texture_unit(0)
 {}
 
 
@@ -41,106 +49,12 @@ Tileset::Tileset(nlohmann::json set_json, int texture_unit)
 	vertex_buffer(sizeof(float) * 16),
 	size(0),
 	index_buffer(1),
-	tileset_filepath("")
+	tileset_filepath(""),
+	loaded(true),
+	active_texture_unit(texture_unit),
+	tileset_json(set_json)
 {
-
-	/* Load tilset json */
-	tileset_json = set_json;
-
-
-	/* Calculate minimun texture size to fit all tiles in set - maximum 4096 pixels */
-	int tilecount = tileset_json["tilecount"];
-	for (int test_size_level = 5; test_size_level < 12; test_size_level++)
-	{
-		if (pow(pow(2, test_size_level), 2) / (32.0 * 32.0) > tilecount)
-		{
-			size = pow(2, test_size_level);
-			break;
-		}
-	}
-
-	/* Create framebuffer - same as framebuffer.cpp */
-	GLCall(glGenFramebuffers(1, &gl_framebuffer_id));
-	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id));
-	GLCall(glGenTextures(1, &gl_texture_id));
-	GLCall(glActiveTexture(GL_TEXTURE0 + texture_unit));
-	GLCall(glBindTexture(GL_TEXTURE_2D, gl_texture_id));
-	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size, size, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL));
-	GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gl_texture_id, 0));
-	GLCall(glGenRenderbuffers(1, &gl_renderbuffer_id));
-	GLCall(glBindRenderbuffer(GL_RENDERBUFFER, gl_renderbuffer_id));
-	GLCall(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, size, size));
-	GLCall(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, gl_renderbuffer_id));
-	auto status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if (status != GL_FRAMEBUFFER_COMPLETE)
-	{
-		std::cout << "Framebuffer error: " << status << " | " << __FILE__ << ":" << __LINE__ << "\n";
-	}
-
-	/* Bind and clear framebuffer */
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id);
-	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-	/* Setup openGL objects */
-	VertexBufferLayout vbl;
-	vbl.Push<float>(2);
-	vbl.Push<float>(2);
-
-	vertex_array.AddBuffer(vertex_buffer, vbl);
-	shader.Bind();
-	shader.SetUniform1i("u_Texture", 0);
-
-	/* Keep track of where a tile is being drawn to */
-	float tex_coords[2] = { 0, 0 };
-
-	/* Create dummy tile to for id 0 */
-	{
-		/* Generate new tile protype and add it to the vector */
-		Prototype_Tile new_tile(0, "blank.png", tex_coords, size);
-		tileset_tiles.push_back(new_tile);
-
-		/* Advance to the next open space on the atlas */
-		tex_coords[0] += (32.0f / size);
-
-		/* Load texture image */
-		Texture working_texture(new_tile.filepath);
-		working_texture.Bind(0);
-
-		/* Draw tile to atlas */
-		stitch_tile(new_tile);
-	}
-
-
-	/* Loop through all tiles in tileset file */
-	for (auto tile = tileset_json["tiles"].begin(); tile != tileset_json["tiles"].end(); tile++)
-	{
-		/* Generate new tile protype and add it to the vector */
-		Prototype_Tile new_tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size);
-		tileset_tiles.push_back(new_tile);
-
-		/* Advance to the next open space on the atlas */
-		tex_coords[0] += (32.0f / size);
-		if (tex_coords[0] >= 1.0f)
-		{
-			/* If the end of a row is hit, go back to the start of the next row up */
-			tex_coords[0] = 0;
-			tex_coords[1] += (32.0f / size);
-		}
-
-		/* Load texture image */
-		Texture working_texture(new_tile.filepath);
-		working_texture.Bind(0);
-
-		/* Draw tile to atlas */
-		stitch_tile(new_tile);
-	}
-
-	bind_texture(texture_unit);
+	create_atlas();
 }
 
 Tileset::Tileset(std::string Tileset_path, int texture_unit)
@@ -149,7 +63,9 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 	vertex_buffer(sizeof(float) * 16),
 	size(0),
 	index_buffer(1),
-	tileset_filepath(Tileset_path)
+	tileset_filepath(Tileset_path),
+	loaded(true),
+	active_texture_unit(texture_unit)
 {
 
 	/* Load and parse tilset json */
@@ -168,6 +84,44 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 	}
 
 
+	create_atlas();
+}
+
+
+void Tileset::init(nlohmann::json set_json, int texture_unit)
+{
+	if (loaded) return;
+
+	tileset_json = set_json;
+	active_texture_unit = texture_unit;
+	create_atlas();
+}
+
+void Tileset::init(std::string Tileset_path, int texture_unit)
+{
+	if (loaded) return;
+
+	/* Load and parse tilset json */
+	try
+	{
+		std::ifstream file(tileset_filepath);
+		std::stringstream buf;
+		buf << file.rdbuf();
+		std::string file_string(buf.str());
+		tileset_json = json::parse(file_string);
+		file.close();
+	}
+	catch (json::exception)
+	{
+		std::cout << "error parsing map json!\n";
+	}
+
+	active_texture_unit = texture_unit;
+	create_atlas();
+}
+
+void Tileset::create_atlas()
+{
 	/* Calculate minimun texture size to fit all tiles in set - maximum 4096 pixels */
 	int tilecount = tileset_json["tilecount"];
 	for (int test_size_level = 5; test_size_level < 12; test_size_level++)
@@ -183,7 +137,7 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 	GLCall(glGenFramebuffers(1, &gl_framebuffer_id));
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id));
 	GLCall(glGenTextures(1, &gl_texture_id));
-	GLCall(glActiveTexture(GL_TEXTURE0 + texture_unit));
+	GLCall(glActiveTexture(GL_TEXTURE0 + active_texture_unit));
 	GLCall(glBindTexture(GL_TEXTURE_2D, gl_texture_id));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
@@ -260,7 +214,10 @@ Tileset::Tileset(std::string Tileset_path, int texture_unit)
 		stitch_tile(new_tile);
 	}
 
-	bind_texture(texture_unit);
+	/* Bind atlas */
+	bind_texture(active_texture_unit);
+
+	loaded = true;
 }
 
 

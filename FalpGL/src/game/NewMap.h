@@ -29,7 +29,7 @@
 */
 
 int idx(float x, float y);
-Point index_to_coord_64(float idx);
+Point index_to_coord_64(int idx);
 
 struct n_Tile {
 private:
