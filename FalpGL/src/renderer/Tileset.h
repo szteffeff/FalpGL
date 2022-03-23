@@ -3,63 +3,58 @@
 #include "../vendor/nlohmann_json/json.hpp"
 #include "Texture.h"
 #include <fstream>
+#include <math.h>
 
+/* Contains data needed to construct specific tiles */
+struct Prototype_Tile {
 
-struct Tile {
-	float position[2];
-	float texture_coord[2];
+	/* Texture coordinants of tile's texture on an atlas */
+	float texture_coord[8];
+
+	/* Unique id */
 	float id;
 
-	std::string filename;
+	/* Filepath to texture's image file */
+	std::string filepath;
 
-	Tile(float in_id, std::string image, float origin[2], float tex_origin[2]);
+	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size);
 };
 
-struct Tile_Quad {
-	float quad_data[16];
 
-	Tile_Quad(Tile &tile);
-	Tile_Quad(float qd[16]);
-	Tile_Quad();
-
-	void operator=(Tile& tile_in);
-
-	void whole_texture();
-};
 
 class Tileset {
 private:
+	/* OpenGL objects */
 	Shader shader;
 	VertexArray vertex_array;
 	VertexBuffer vertex_buffer;
 	IndexBuffer index_buffer;
 
-	glm::mat4 projection_matrix;
+	/* OpenGL ids*/
+	GLuint gl_framebuffer_id, gl_texture_id, gl_renderbuffer_id;
 
-	Texture active_tile_texture;
+	/* Side length of atlas, Maximum number of tiles that can fit on atlas */
+	unsigned int size, max_tiles;
 
-	unsigned int framebuffer_id, texture_id, renderbuffer_id;
-	unsigned int size = 2048, loaded_tile, max_tiles;
-
+	/* Tilset json object and filepath */
 	nlohmann::json tileset_json;
 	std::string tileset_filepath;
-	std::string tile_image_filepath;
 
-	float vertices[16] = {
-	 -1.0f * 0.5f, -1.0f * 0.5f, 0.0f, 0.0f,
-	  1.0f * 0.5f, -1.0f * 0.5f, 1.0f, 0.0f,
-	  1.0f * 0.5f,  1.0f * 0.5f, 1.0f, 1.0f,
-	 -1.0f * 0.5f,  1.0f * 0.5f, 0.0f, 1.0f
-	};
+	/* Vector of constructed prototype tiles */
+	std::vector<Prototype_Tile> tileset_tiles;
 
-	std::vector<Tile> tileset_tiles;
 
-	void stitch_tile(Tile_Quad quad);
+	/* Render tile to atlas */
+	void stitch_tile(Prototype_Tile tile_to_stich);
 
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
+	Tileset(nlohmann::json set_json, int texture_unit);
+	Tileset();
 
+	/* Bind framebuffer's texture to specific texture unit */
 	void bind_texture(unsigned int unit);
 
-	Tile& operator[](int index);
+	/* Access prototype tiles like an array */
+	Prototype_Tile& operator[](int index);
 };

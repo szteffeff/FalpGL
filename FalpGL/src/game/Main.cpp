@@ -18,6 +18,7 @@
 #include "SoundSource.h"
 #include "SoundDevice.h"
 #include "NewMap.h"
+#include "../renderer/Log.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -42,11 +43,16 @@ Input controller;
 
 int main(void)
 {
+    console_log("[INFO]: Started clock");
+
+
     Json_loader loader;
     if (!loader.init()) { return -1; }
 
+    /* Set static variables */
     Animation::loader = &loader;
     Creature::loader = &loader;
+    
 
     /* Setup the window */
     GLFWwindow* window;
@@ -60,7 +66,6 @@ int main(void)
 
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 1);
-
 
     int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 1;
@@ -115,14 +120,14 @@ int main(void)
                 round(0.5f * window_height * window_scale),
                 -1.0f, 1.0f);
 
-            std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
+            //std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
         }
     /* Window size and resolution is now known */
 
     controller.set_height_width(window_width, window_height);
 
     /* Working directory for debug */
-    std::cout << "working directory is: " << get_current_dir() << "\n";
+    console_log("[INFO]: working directory is: " + get_current_dir());
 
     /* Seed rand */
     srand(time(NULL));
@@ -131,20 +136,25 @@ int main(void)
     glfwMakeContextCurrent(window);
     if (glewInit() == GLEW_OK)
     {
-        std::cout << "GLEW ok\n";
+        console_log("[INFO]: GLEW ok");
     }
     else
     {
-        std::cout << "GLEW init fail!\n";
+        console_log("[INFO]: GLEW init fail!");
         return -1;
     }
 
     /* OpenGL strings */
-    std::cout << glGetString(GL_VERSION) << " - ";
-    std::cout << glGetString(GL_VENDOR) << " - ";
-    std::cout << glGetString(GL_RENDERER) << " - ";
-    std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION);
-    std::cout << "\n";
+    {
+        std::stringstream glstrings;
+        glstrings << "[INFO]: ";
+        glstrings << glGetString(GL_VERSION) << " - ";
+        glstrings << glGetString(GL_VENDOR) << " - ";
+        glstrings << glGetString(GL_RENDERER) << " - ";
+        glstrings << glGetString(GL_SHADING_LANGUAGE_VERSION);
+        console_log(glstrings.str());
+    }
+
 
     /* OpenGL functions */
     GLCall(glEnable(GL_BLEND));
@@ -220,18 +230,16 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
+
         float vertices[24] = {
-             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
-            -0.7 * 0.5f, -1.0f * 0.5f,  0.0f, 0.0f,
-            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f,
+             1.0f, -1.0f,  1.0f, 0.0f,
+            -1.0f, -1.0f,  0.0f, 0.0f,
+            -1.0f,  1.0f,  0.0f, 1.0f,
 
-             0.7 * 0.5f,  1.0f * 0.5f,  1.0f, 1.0f,
-             0.7 * 0.5f, -1.0f * 0.5f,  1.0f, 0.0f,
-            -0.7 * 0.5f,  1.0f * 0.5f,  0.0f, 1.0f
+             1.0f,  1.0f,  1.0f, 1.0f,
+             1.0f, -1.0f,  1.0f, 0.0f,
+            -1.0f,  1.0f,  0.0f, 1.0f
         };
-
-        New_Map nmap;
-        nmap.init();
 
         VertexArray va;
         VertexBuffer vb = VertexBuffer(sizeof(vertices), &vertices);
@@ -241,8 +249,28 @@ int main(void)
         va.AddBuffer(vb, vbl);
         Shader s("res/shaders/quad.shader");
         s.Bind();
-        s.SetUniform1i("u_Texture", 4);
+        s.SetUniform1i("u_Texture", 0);
+        s.SetUniform1f("u_alpha", 1.0f);
 
+        Texture loading_screen("res/gfx/textures/loading.jpeg");
+        loading_screen.Bind();
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glDisable(GL_DEPTH_TEST);
+        va.Bind();
+        s.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glEnable(GL_DEPTH_TEST);
+        glfwSwapBuffers(window);
+
+        Sleep(3000);
+
+
+        console_log("[INFO]: Started constructing map");
+        New_Map nmap;
+        console_log("[INFO]: Finished constructing map");
 
         HSL_Framebuffer framebuffer(resolution_x, resolution_y, 14);
         Chroma_Framebuffer c_framebuffer(resolution_x, resolution_y, 15);
@@ -273,14 +301,12 @@ int main(void)
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
 
-        Map main_map(&projection_matrix, &loader, resolution_x, resolution_y);
-
         /*Sound crap*/
-        SoundDevice* mysounddevice = SoundDevice::get();
+        //SoundDevice* mysounddevice = SoundDevice::get();
 
-        uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
+        //uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
 
-        SoundSource myspeaker;
+        //SoundSource myspeaker;
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -303,17 +329,12 @@ int main(void)
             controller.tick(xpos, ypos);
 
             /*SOUND THINGY*/
-            myspeaker.Play(walking);
+            //myspeaker.Play(walking);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
             if (pause == false) {
-                if (main_map.map_attack() == "FLOWER")
-                {
-                    //player.Take_Damage_tile();
-                }
                 player.tick();
-                main_map.shift(player.position_x(), player.position_y());
                 red_slime.tick();
                 enemy_ghost.tick();
 
@@ -333,7 +354,6 @@ int main(void)
 
                 /* Draw everything but ui to framebuffer */
                 glDepthMask(false);
-                //main_map.draw(*player.get_trans_matrix()); /* Has pointer to projection_matrix */
                 nmap.draw(projection_matrix * *player.get_trans_matrix());
                 glDepthMask(true);
 
@@ -361,11 +381,10 @@ int main(void)
 
             /* Draw processed image and UI */
             c_framebuffer.draw();
-            interface_renderer.draw(projection_matrix * *main_map.get_trans_matrix());
+            interface_renderer.draw(projection_matrix);
 
-            //va.Bind();
-            //s.Bind();
-            //glDrawArrays(GL_TRIANGLES, 0, 6);
+
+
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
