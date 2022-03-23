@@ -13,4 +13,3 @@ void console_log(std::string message)
 
 	std::cout << "[" << std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch() - start_time) << "]" << message << "\n";
 }
-

@@ -64,7 +64,9 @@ int Shader::GetUnifromLocation(const std::string& name)
     GLCall(int location = glGetUniformLocation(m_renderer_id, name.c_str()));
     if (location == -1)
     {
-        std::cout << "[SHADER]: uniform '" << name << "' does not exist in shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "\n";
+        std::stringstream stream;
+        stream << "[SHADER]! uniform '" << name << "' does not exist in shader: " << m_filepath.substr(m_filepath.rfind("/") + 1);
+        console_log(stream.str());
     } 
 
      m_uniform_location_cache[name] = location;
@@ -160,20 +162,31 @@ unsigned int Shader::compileShader(unsigned int type, const std::string& source)
         char* message = (char*)_malloca(length * sizeof(char));
         glGetShaderInfoLog(id, length, &length, message);
 
+        std::stringstream stream;
         switch (type)
         {
         case (GL_VERTEX_SHADER):
-            std::cout << "[SHADER]: Failed to compile " << "vertex" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
+            stream << "[SHADER]! Failed to compile " << "vertex" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message;
+            console_log(stream.str());
+            stream.clear();
             break;
+
         case (GL_FRAGMENT_SHADER):
-            std::cout << "[SHADER]: Failed to compile " << "fragment" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
+            stream << "[SHADER]! Failed to compile " << "fragment" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message;
+            console_log(stream.str());
+            stream.clear();
             break;
+
         case (GL_GEOMETRY_SHADER):
-            std::cout << "[SHADER]: Failed to compile " << "geometry" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message << std::endl;
+            stream << "[SHADER]! Failed to compile " << "geometry" << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "':" << message;
+            console_log(stream.str());
+            stream.clear();
             break;
+
         default:
             break;
         }
+        
 
         glDeleteShader(id);
         return 0;
@@ -206,6 +219,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     unsigned int program = glCreateProgram();
     unsigned int fs = 0, vs = 0, gs = 0;
     bool geometry = false;
+    std::stringstream stream;
 
     if (source.VertexSource != "")
     {
@@ -213,7 +227,9 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        std::cout << "[SHADER]: No vertex shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!" << "\n";
+        stream << "[SHADER]! No vertex shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!";
+        console_log(stream.str());
+        stream.clear();
     }
 
     if (source.FragmentSource != "")
@@ -222,7 +238,9 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        std::cout << "[SHADER]: No fragment shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!" << "\n";
+        stream << "[SHADER]! No fragment shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!";
+        console_log(stream.str());
+        stream.clear();
     }
 
     if (source.GeometrySource != "")
@@ -233,16 +251,18 @@ unsigned int Shader::createShader(ShaderProgramSource source)
 
 
     if (vs)
-        std::cout << "[SHADER]: Vertex";
+        stream << "[SHADER]: Vertex";
 
     if (fs)
-        std::cout << " + Fragment";
+        stream << " + Fragment";
 
     if (geometry && gs)
-        std::cout << " + Geometry";
+        stream << " + Geometry";
     
     if (vs || fs || (geometry && gs))
-        std::cout << " shader " << m_filepath.substr(m_filepath.rfind("/") + 1) << " compiled successfuly!\n";
+        stream << " shader " << m_filepath.substr(m_filepath.rfind("/") + 1) << " compiled successfuly!";
+
+    console_log(stream.str());
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);

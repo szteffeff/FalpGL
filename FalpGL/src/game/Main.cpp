@@ -265,7 +265,7 @@ int main(void)
         glEnable(GL_DEPTH_TEST);
         glfwSwapBuffers(window);
 
-        Sleep(30000);
+        Sleep(3000);
 
 
         console_log("[INFO]: Started constructing map");
