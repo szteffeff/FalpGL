@@ -63,7 +63,7 @@ ALuint SoundBuffer::addSoundEffect(const char* filename)
 	membuf = static_cast<short*>(malloc((size_t)(sfinfo.frames * sfinfo.channels) * sizeof(short)));
 
 	num_frames = sf_readf_short(sndfile, membuf, sfinfo.frames);
-	if (num_frames < 1);
+	if (num_frames < 1)
 	{
 		free(membuf);
 		sf_close(sndfile);

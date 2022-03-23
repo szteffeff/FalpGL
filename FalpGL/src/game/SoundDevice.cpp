@@ -18,7 +18,7 @@ SoundDevice::SoundDevice()
 	if (!p_ALCContext)
 		throw("Failed to get  sound context");
 
-	if (!alcMakeContextCurrent(p_ALCContext));
+	if (!alcMakeContextCurrent(p_ALCContext))
 		throw("Failed to make context current");
 
 	const ALCchar* name = nullptr;

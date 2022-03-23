@@ -265,8 +265,6 @@ int main(void)
         glEnable(GL_DEPTH_TEST);
         glfwSwapBuffers(window);
 
-        Sleep(3000);
-
 
         console_log("[INFO]: Started constructing map");
         New_Map nmap;
@@ -302,11 +300,13 @@ int main(void)
         enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
-        //SoundDevice* mysounddevice = SoundDevice::get();
+        SoundDevice* mysounddevice = SoundDevice::get();
 
-        //uint32_t walking = SoundBuffer::get()->addSoundEffect("C:\Program Files (x86)\OpenAL 1.1 SDK\samples");
+        uint32_t walking = SoundBuffer::get()->addSoundEffect("files/intro.wav");
 
-        //SoundSource myspeaker;
+        SoundSource myspeaker;
+
+        myspeaker.Play(walking);
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -329,7 +329,7 @@ int main(void)
             controller.tick(xpos, ypos);
 
             /*SOUND THINGY*/
-            //myspeaker.Play(walking);
+            
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
