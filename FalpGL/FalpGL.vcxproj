@@ -130,7 +130,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib; Gdi32.lib;Shell32.lib;glew32.lib;OpenAL32.lib;sndfile.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)FalpGL\Dependencies\Open_AL;$(SolutionDir)FalpGL\Dependencies\sndfile;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)FalpGL\Dependencies\GLFW\lib-vc2019;$(SolutionDir)FalpGL\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)FalpGL\Dependencies\Open_AL;$(SolutionDir)FalpGL\Dependencies\sndfile\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

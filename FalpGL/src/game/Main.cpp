@@ -17,6 +17,7 @@
 #include "SoundBuffer.h"
 #include "SoundSource.h"
 #include "SoundDevice.h"
+#include "NewMap.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
