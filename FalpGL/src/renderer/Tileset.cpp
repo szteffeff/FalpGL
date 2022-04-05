@@ -242,7 +242,7 @@ void Tileset::stitch_tile(Prototype_Tile tile_to_stich)
 	 -1.0f,  1.0f, 0.0f, 1.0f
 	};
 
-	/* set vertex positions to texture coordinants on atlas */
+	/* Set vertex positions to texture coordinants on atlas */
 	vertices[0] = (tile_to_stich.texture_coord[0] * 2.0f) - 1.0f;
 	vertices[1] = (tile_to_stich.texture_coord[1] * 2.0f) - 1.0f;
 

@@ -227,7 +227,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        stream << "[SHADER]! No vertex shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!";
+        stream << "[SHADER]! No vertex shader source provided for shader: '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "'!";
         console_log(stream.str());
         stream.clear();
     }
@@ -238,7 +238,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
     }
     else
     {
-        stream << "[SHADER]! No fragment shader source provided for shader: " << m_filepath.substr(m_filepath.rfind("/") + 1) << "!";
+        stream << "[SHADER]! No fragment shader source provided for shader: '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "'!";
         console_log(stream.str());
         stream.clear();
     }
@@ -260,7 +260,7 @@ unsigned int Shader::createShader(ShaderProgramSource source)
         stream << " + Geometry";
     
     if (vs || fs || (geometry && gs))
-        stream << " shader " << m_filepath.substr(m_filepath.rfind("/") + 1) << " compiled successfuly!";
+        stream << " shader '" << m_filepath.substr(m_filepath.rfind("/") + 1) << "' compiled successfuly!";
 
     console_log(stream.str());
 

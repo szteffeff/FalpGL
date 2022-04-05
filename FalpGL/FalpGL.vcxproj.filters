@@ -346,6 +346,7 @@
     <ClInclude Include="src\vendor\sndfile\sndfile.hh" />
     <ClInclude Include="src\renderer\Tileset.h" />
     <ClInclude Include="src\renderer\Log.h" />
+    <ClInclude Include="src\renderer\Fireflies.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\gfx\atlas0.png" />
