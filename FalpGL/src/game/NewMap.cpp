@@ -69,14 +69,19 @@ New_Map::New_Map()
 	/* Loop through all chunks in map */
 	for (auto json_chunk : map_json["layers"][0]["chunks"])
 	{
+		static int index = 0;
+
 		/* Loop through all 4096 tile IDs. I couldn't find a better way to do this. Whatever */
 		for (int i = 0; i < chunk_area; i++)
 		{
 			temp_chunk_data[i] = json_chunk["data"][i];
+			//temp_chunk_data[i] = index;
 		}
 
 		/* Construct new chunk in vector of chunks. Use emplace_back so constructed chunk is not copied, but this probably doesn't matter */
 		chunks.emplace_back(set, temp_chunk_data, json_chunk["x"], (json_chunk["y"] * -1) - 64, chunksize[0], chunksize[1]);
+
+		index++;
 	}
 
 	/* Initalize OpenGL buffers. This can't be done in initalizer list because the size of the map is not known */
@@ -126,6 +131,19 @@ void New_Map::draw(glm::mat4 matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, map_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
 	glDepthMask(true);
 }
+
+
+int New_Map::tile_at(float x, float y)
+{
+	return 0;
+}
+
+int New_Map::tile_at(glm::vec2 position)
+{
+	
+	return 0;
+}
+
 
 Point New_Map::collision_line_desination(Point origin, Point desination, float collision_radius)
 {

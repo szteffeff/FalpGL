@@ -96,6 +96,11 @@ public:
 
 	bool init();
 
+
+	int tile_at(float x, float y);
+	int tile_at(glm::vec2 position);
+
+	/* reference 2d vector with proper layout */
 };
 
 
