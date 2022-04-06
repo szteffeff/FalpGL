@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\SFX.cpp" />
     <ClCompile Include="src\game\SoundBuffer.cpp" />
     <ClCompile Include="src\game\SoundSource.cpp" />
     <ClCompile Include="src\game\SoundDevice.cpp" />
@@ -344,6 +345,7 @@
   <ItemGroup>
     <ClInclude Include="Dependencies\sndfile\include\sndfile.h" />
     <ClInclude Include="Dependencies\sndfile\include\sndfile.hh" />
+    <ClInclude Include="src\game\SFX.h" />
     <ClInclude Include="src\game\SoundBuffer.h" />
     <ClInclude Include="src\game\SoundSource.h" />
     <ClInclude Include="src\game\SoundDevice.h" />

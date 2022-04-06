@@ -133,7 +133,19 @@ void Player::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 
 	Recover_Stamina();
+	walk_noise();
 }
+
+void Player::walk_noise()
+{
+	ALint state = false;
+	if (state != AL_PLAYING) {
+		//alSourcei(walking, AL_LOOPING, AL_TRUE);
+		creaturesound.Play(walking);
+		console_log("Playing walking noise");
+	}
+}
+
 
 void Player::sprint(float direction, float magnitude)
 {
@@ -143,6 +155,8 @@ void Player::sprint(float direction, float magnitude)
 
 	momentum[0] += round(1.5 * dx);
 	momentum[1] += round(1.5 * dy);
+
+	Lose_Stamina();
 	
 }
 
@@ -174,11 +188,11 @@ void Player::tick()
 	}
 	else
 	{
+		//stop_walknoise();
 		m_player.set_animation(0);
 		Recover_Stamina();
-	}
-
-
+		creaturesound.Stop();
+	}	
 
 	momentum[0] = 0;
 	momentum[1] = 0;

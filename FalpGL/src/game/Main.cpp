@@ -301,11 +301,11 @@ int main(void)
         /*Sound crap*/
         SoundDevice* mysounddevice = SoundDevice::get();
 
-        uint32_t walking = SoundBuffer::get()->addSoundEffect("files/intro.wav");
+        uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
 
         SoundSource myspeaker;
 
-        myspeaker.Play(walking);
+        myspeaker.Play(intro);
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -331,6 +331,7 @@ int main(void)
 
             /*SOUND THINGY*/
             
+            //myspeaker.Play(intro);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();

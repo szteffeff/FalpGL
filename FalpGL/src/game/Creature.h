@@ -1,5 +1,8 @@
 #pragma once
 #include "Entity.h"
+#include "SoundBuffer.h"
+#include "SoundSource.h"
+#include "SoundDevice.h"
 
 
 
@@ -7,6 +10,7 @@ class Creature {
 public:
 	static Json_loader* loader;
 	float momentum[2], position[2];
+	SoundDevice* creaturesound = SoundDevice::get();
 
 public:
 	Creature();
@@ -23,8 +27,10 @@ public:
 
 class Player : public Creature {
 private:
+	SoundSource creaturesound;
 	Entity m_player;
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
+	uint32_t walking = SoundBuffer::get()->addSoundEffect("files/SFX/Footsteps(better).wav");
 	float offset[2] = { 0.0f, 0.0f };
 	float momentum[2], position[2];
 	float Health = 100;
@@ -43,6 +49,8 @@ private:
 public:
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
+	void walk_noise();
+	void stop_walknoise();
 	void sprint(float direction, float magnitude);
 	glm::mat4* get_trans_matrix();
 	float position_x();
