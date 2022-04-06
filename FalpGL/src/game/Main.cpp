@@ -315,6 +315,8 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
@@ -339,7 +341,7 @@ int main(void)
 
             }
            
-
+            std::cout << xpos + *player.get_position_x() << "\n";
 
             /* ##### Draw ##### */
 
