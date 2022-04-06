@@ -47,14 +47,21 @@ private:
 	/* Render tile to atlas */
 	void stitch_tile(Prototype_Tile tile_to_stich);
 
+	bool loaded;
+	unsigned int active_texture_unit;
+	void create_atlas();
+
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
 	Tileset(nlohmann::json set_json, int texture_unit);
 	Tileset();
 
+	void init(nlohmann::json set_json, int texture_unit);
+	void init(std::string Tileset_path, int texture_unit);
+
 	/* Bind framebuffer's texture to specific texture unit */
 	void bind_texture(unsigned int unit);
 
-	/* Access prototype tiles like an array */
+	/* Array-like access to prototype tiles */
 	Prototype_Tile& operator[](int index);
 };

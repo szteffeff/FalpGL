@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include "Map.h"
 #include "Creature.h"
 
 struct key {
@@ -34,7 +33,6 @@ private:
 	float window_width, window_height;
 
 	Player* player;
-	Map* map;
 	glm::mat4* zoom_matrix;
 
 	bool* running;

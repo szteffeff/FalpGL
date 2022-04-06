@@ -9,7 +9,6 @@
 #include <random>
 
 #include "../renderer/RendererIncludes.h"
-#include "Map.h"
 #include "Input.h"
 #include "Entity.h"
 #include "Json.h"
@@ -230,41 +229,41 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
+        { /* Loading screen */
+            float vertices[24] = {
+                 1.0f, -1.0f,  1.0f, 0.0f,
+                -1.0f, -1.0f,  0.0f, 0.0f,
+                -1.0f,  1.0f,  0.0f, 1.0f,
 
-        float vertices[24] = {
-             1.0f, -1.0f,  1.0f, 0.0f,
-            -1.0f, -1.0f,  0.0f, 0.0f,
-            -1.0f,  1.0f,  0.0f, 1.0f,
+                 1.0f,  1.0f,  1.0f, 1.0f,
+                 1.0f, -1.0f,  1.0f, 0.0f,
+                -1.0f,  1.0f,  0.0f, 1.0f
+            };
 
-             1.0f,  1.0f,  1.0f, 1.0f,
-             1.0f, -1.0f,  1.0f, 0.0f,
-            -1.0f,  1.0f,  0.0f, 1.0f
-        };
+            VertexArray va;
+            VertexBuffer vb = VertexBuffer(sizeof(vertices), &vertices);
+            VertexBufferLayout vbl;
+            vbl.Push<float>(2);
+            vbl.Push<float>(2);
+            va.AddBuffer(vb, vbl);
+            Shader s("res/shaders/quad.shader");
+            s.Bind();
+            s.SetUniform1i("u_Texture", 0);
+            s.SetUniform1f("u_alpha", 1.0f);
 
-        VertexArray va;
-        VertexBuffer vb = VertexBuffer(sizeof(vertices), &vertices);
-        VertexBufferLayout vbl;
-        vbl.Push<float>(2);
-        vbl.Push<float>(2);
-        va.AddBuffer(vb, vbl);
-        Shader s("res/shaders/quad.shader");
-        s.Bind();
-        s.SetUniform1i("u_Texture", 0);
-        s.SetUniform1f("u_alpha", 1.0f);
+            Texture loading_screen("res/gfx/textures/loading.jpeg");
+            loading_screen.Bind();
 
-        Texture loading_screen("res/gfx/textures/loading.jpeg");
-        loading_screen.Bind();
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glDisable(GL_DEPTH_TEST);
-        va.Bind();
-        s.Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glEnable(GL_DEPTH_TEST);
-        glfwSwapBuffers(window);
-
+            glDisable(GL_DEPTH_TEST);
+            va.Bind();
+            s.Bind();
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glEnable(GL_DEPTH_TEST);
+            glfwSwapBuffers(window);
+        }
 
         console_log("[INFO]: Started constructing map");
         New_Map nmap;
@@ -316,6 +315,8 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
@@ -341,7 +342,7 @@ int main(void)
 
             }
            
-
+            std::cout << xpos + *player.get_position_x() << "\n";
 
             /* ##### Draw ##### */
 

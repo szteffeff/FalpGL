@@ -166,8 +166,6 @@
     <ClCompile Include="src\game\Input.cpp" />
     <ClCompile Include="src\game\Json.cpp" />
     <ClCompile Include="src\game\Main.cpp" />
-    <ClCompile Include="src\game\Map.cpp" />
-    <ClCompile Include="src\game\Tile.cpp" />
     <ClCompile Include="src\game\UI.cpp" />
     <ClCompile Include="src\renderer\Framebuffer.cpp" />
     <ClCompile Include="src\renderer\Log.cpp" />
@@ -354,8 +352,8 @@
     <ClInclude Include="src\game\Animation.h" />
     <ClInclude Include="src\game\Creature.h" />
     <ClInclude Include="src\game\NewMap.h" />
-    <ClInclude Include="src\game\Tile.h" />
     <ClInclude Include="src\game\UI.h" />
+    <ClInclude Include="src\renderer\Fireflies.h" />
     <ClInclude Include="src\renderer\Framebuffer.h" />
     <ClInclude Include="src\renderer\Log.h" />
     <ClInclude Include="src\renderer\Quad.h" />
@@ -364,7 +362,6 @@
     <ClInclude Include="src\renderer\BatchRenderer.h" />
     <ClInclude Include="src\game\Entity.h" />
     <ClInclude Include="src\game\Json.h" />
-    <ClInclude Include="src\game\Map.h" />
     <ClInclude Include="src\game\Input.h" />
     <ClInclude Include="src\game\Notes.h" />
     <ClInclude Include="src\renderer\GraphicsHeaders.h" />

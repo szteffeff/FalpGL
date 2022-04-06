@@ -29,7 +29,7 @@
 */
 
 int idx(float x, float y);
-Point index_to_coord_64(float idx);
+Point index_to_coord_64(int idx);
 
 struct n_Tile {
 private:
@@ -96,6 +96,11 @@ public:
 
 	bool init();
 
+
+	int tile_at(float x, float y);
+	int tile_at(glm::vec2 position);
+
+	/* reference 2d vector with proper layout */
 };
 
 
