@@ -31,6 +31,7 @@
     <ClCompile Include="src\game\SoundBuffer.cpp" />
     <ClCompile Include="src\renderer\Tileset.cpp" />
     <ClCompile Include="src\renderer\Log.cpp" />
+    <ClCompile Include="src\game\SFX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />
@@ -350,6 +351,7 @@
     <ClInclude Include="src\vendor\sndfile\sndfile.hh" />
     <ClInclude Include="src\renderer\Tileset.h" />
     <ClInclude Include="src\renderer\Log.h" />
+    <ClInclude Include="src\game\SFX.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\gfx\atlas0.png" />
