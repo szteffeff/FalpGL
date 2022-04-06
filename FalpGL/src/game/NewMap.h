@@ -81,6 +81,8 @@ private:
 
 	std::vector<Chunk> chunks;
 
+	std::vector<std::vector<Chunk*>> chunks_ordered;
+
 	Tileset set;
 
 private:
@@ -89,6 +91,7 @@ private:
 
 public:
 	New_Map();
+	~New_Map();
 
 	void draw(glm::mat4 matrix);
 	Point collision_line_desination(Point origin, Point desination, float collision_radius);

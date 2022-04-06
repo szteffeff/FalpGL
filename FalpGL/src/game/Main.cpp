@@ -341,7 +341,7 @@ int main(void)
 
             }
            
-            std::cout << xpos + *player.get_position_x() << "\n";
+            //std::cout << xpos + *player.get_position_x() << "\n";
 
             /* ##### Draw ##### */
 

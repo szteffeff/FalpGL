@@ -47,6 +47,8 @@ New_Map::New_Map()
 		tileset_filepath = std::string("res/data/") + tileset_filepath;
 
 		set.init(tileset_filepath, 0);
+
+		console_log(std::string("[INFO]: Using tileset: ") + tileset_filepath);
 	}
 	else
 	{
@@ -67,21 +69,41 @@ New_Map::New_Map()
 	temp_chunk_data.resize(chunk_area);
 
 	/* Loop through all chunks in map */
+
+	int index = 0;
+
 	for (auto json_chunk : map_json["layers"][0]["chunks"])
 	{
-		static int index = 0;
-
 		/* Loop through all 4096 tile IDs. I couldn't find a better way to do this. Whatever */
-		for (int i = 0; i < chunk_area; i++)
+		/* Correct for y flip and rotation */
+		for (int x = 0; x < chunksize[0]; x++)
 		{
-			temp_chunk_data[i] = json_chunk["data"][i];
-			//temp_chunk_data[i] = index;
+			for (int y = 0; y < chunksize[1]; y++)
+			{
+				temp_chunk_data[idx(x, y)] = json_chunk["data"][idx(63 - y, x)];
+				temp_chunk_data[idx(x, y)] = index;
+			}
 		}
 
 		/* Construct new chunk in vector of chunks. Use emplace_back so constructed chunk is not copied, but this probably doesn't matter */
 		chunks.emplace_back(set, temp_chunk_data, json_chunk["x"], (json_chunk["y"] * -1) - 64, chunksize[0], chunksize[1]);
 
 		index++;
+	}
+
+
+	/* Setup vector of chunk references with proper layout */
+	int map_height = map_json["layers"][0]["height"] % chunksize[0];
+	int map_width = map_json["layers"][0]["width"] % chunksize[1];
+
+	chunks_ordered.resize(map_width);
+
+	for (int x = 0; x < map_height; x++)
+	{
+		for (int y = 0; y < map_width; y++)
+		{
+			chunks_ordered[x].push_back(&chunks[(x * map_width + y)]);
+		}
 	}
 
 	/* Initalize OpenGL buffers. This can't be done in initalizer list because the size of the map is not known */
@@ -162,6 +184,11 @@ void New_Map::chunk_to_buffer(Chunk* c)
 
 }
 
+New_Map::~New_Map() 
+{
+	chunks_ordered.clear();
+}
+
 /* Chunk */
 
 Chunk::Chunk(Tileset& set, std::vector<int>& data, float position_x, float position_y, int size_x, int size_y)
@@ -188,12 +215,9 @@ void Chunk::load()
 	{
 		for (int tile_y = 0; tile_y < chunk_size[1]; tile_y++)
 		{
-			/* Tiled exports with an inverted y axis and different rotation to what we want, correct for that */
-			int tile_index = chunk_data[idx(63 - tile_y, tile_x)];
-
 			/* Find tile's absolute position and create it */
 			float tile_position[2] = { tile_x + position[0], tile_y + position[1] };
-			tiles[idx(tile_x, tile_y)] = n_Tile(tileset[tile_index], tile_position);
+			tiles[idx(tile_x, tile_y)] = n_Tile(tileset[chunk_data[idx(tile_x, tile_y)]], tile_position);
 		}
 	}
 
