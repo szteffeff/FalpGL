@@ -6,6 +6,11 @@ inline int idx(float x, float y)
 	return (x * 64 + y);
 }
 
+inline int idx(int x, int y)
+{
+	return (x * 64 + y);
+}
+
 Point index_to_coord_64(int index)
 {
 	return { (float)(index % 64), (float)(index - (index % 64)) };
@@ -81,7 +86,7 @@ New_Map::New_Map()
 			for (int y = 0; y < chunksize[1]; y++)
 			{
 				temp_chunk_data[idx(x, y)] = json_chunk["data"][idx(63 - y, x)];
-				temp_chunk_data[idx(x, y)] = index;
+				//temp_chunk_data[idx(x, y)] = index; /* Set tile to index of chunk */
 			}
 		}
 
@@ -93,16 +98,24 @@ New_Map::New_Map()
 
 
 	/* Setup vector of chunk references with proper layout */
-	int map_height = map_json["layers"][0]["height"] % chunksize[0];
-	int map_width = map_json["layers"][0]["width"] % chunksize[1];
+	map_height = map_json["layers"][0]["height"] / chunksize[0];
+	map_width = map_json["layers"][0]["width"] / chunksize[1];
+
+	if (map_height * map_width != chunks.size())
+	{
+		throw "Fix the map";
+		/* Currently, map needs to have border on a chunks border and every chunk needs at least one tile */
+	}
 
 	chunks_ordered.resize(map_width);
 
-	for (int x = 0; x < map_height; x++)
+	for (int x = 0; x < map_width; x++)
 	{
-		for (int y = 0; y < map_width; y++)
+		for (int y = 0; y < map_height; y++)
 		{
-			chunks_ordered[x].push_back(&chunks[(x * map_width + y)]);
+			/* Transform to corect for load order - inverse and flip y */
+
+			chunks_ordered[x].push_back(&chunks[(((map_height - 1) - y)) * map_width + x]);
 		}
 	}
 
@@ -157,13 +170,34 @@ void New_Map::draw(glm::mat4 matrix)
 
 int New_Map::tile_at(float x, float y)
 {
-	return 0;
+	x += (map_width * 32 * 64) / 2;
+	y += (map_height * 32 * 64) / 2;
+
+	int chunk_x = (int)ceil(x / (32 * 64)) - 1;
+	int chunk_y = (int)ceil(y / (32 * 64)) - 1;
+
+	int tile_x = 63 - (((chunk_x + 1) * 64) - ceil(x / 32));
+	int tile_y = 63 - (((chunk_y + 1) * 64) - ceil(y / 32));
+
+	//std::stringstream stream;
+	//stream << "[INFO]: Chunk:" << chunk_x << ", " << chunk_y << ". Tile: " << tile_x << ", " << tile_y << ".\n";
+
+	//console_log(stream.str());
+
+	return chunks_ordered[chunk_x][chunk_y]->tile_at(tile_x, tile_y);
 }
 
-int New_Map::tile_at(glm::vec2 position)
-{
-	
-	return 0;
+bool New_Map::collision_at(float x, float y)
+{ /* Returns true on collision*/
+
+	/* Position on tile. 0 - 32 */
+	float local_x = fmod(x, 32.0f);
+	float local_y = fmod(y, 32.0f);
+
+	if (local_x < 0.0f) { local_x += 32.0f; }
+	if (local_y < 0.0f) { local_y += 32.0f; }
+
+	return set[tile_at(x, y)].collides(local_x, local_y);
 }
 
 
@@ -225,6 +259,8 @@ void Chunk::load()
 	loaded = true;
 }
 
+
+
 void Chunk::unload()
 {
 	loaded = false;
@@ -235,6 +271,11 @@ const void* Chunk::vertex_data() const
 {
 	/* Return pointer to array of tiles for writing to vertex buffer */
 	return tiles.data();
+}
+
+int Chunk::tile_at(int x, int y)
+{
+	return chunk_data[idx(x, y)];
 }
 
 n_Tile::n_Tile(Prototype_Tile& tile, float position[2])

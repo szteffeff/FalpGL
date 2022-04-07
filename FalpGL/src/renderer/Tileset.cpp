@@ -1,7 +1,45 @@
 #include "Tileset.h"
 #include "renderer.h"
 
-Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size)
+
+Collision_Box::Collision_Box(float offset_x, float offset_y, float size_x, float size_y)
+	: valid(true)
+{
+	/* Change y origin from top to bottom */
+	offset[0] = offset_x;
+	offset[1] = 32.0f - (offset_y + size_y);
+
+	size[0] = size_x;
+	size[1] = size_y;
+
+	/* Test if box is a quad not a line */
+	if (size[0] == 0.0f || size[1] == 0.0f)
+	{
+		/* If it is a line, disable it */
+		valid = false;
+	}
+}
+
+bool Collision_Box::collides(float x, float y)
+{
+	if ((x >= offset[0] && x <= offset[0] + size[0]) && (y >= offset[1] && y <= offset[1] + size[1]))
+	{	/* Point is inside box*/
+		
+		return true;
+	}
+
+	/* Point is outside box */
+	return false;
+}
+
+ /* #### Tile ####*/
+
+Prototype_Tile::Prototype_Tile()
+{
+}
+
+Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxs)
+	: collisions(boxs)
 {
 	id = in_id;
 
@@ -24,6 +62,24 @@ Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[
 
 	filepath = std::string("files/tiles/") + image;
 }
+
+bool Prototype_Tile::collides(float x, float y)
+{
+	for (auto box : collisions)
+	{ /* Loop through all collision boxes*/
+		if (box.collides(x, y))
+		{ /* Return if any box hits*/
+			return true;
+		}
+	}
+
+	/* No collisions occured */
+	return false;
+}
+
+
+
+/* #### Tileset #### */
 
 Prototype_Tile& Tileset::operator[](int index)
 {
@@ -175,7 +231,7 @@ void Tileset::create_atlas()
 	/* Create dummy tile to for id 0 */
 	{
 		/* Generate new tile protype and add it to the vector */
-		Prototype_Tile new_tile(0, "blank.png", tex_coords, size);
+		Prototype_Tile new_tile(0, "blank.png", tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)));
 		tileset_tiles.push_back(new_tile);
 
 		/* Advance to the next open space on the atlas */
@@ -193,9 +249,29 @@ void Tileset::create_atlas()
 	/* Loop through all tiles in tileset file */
 	for (auto tile = tileset_json["tiles"].begin(); tile != tileset_json["tiles"].end(); tile++)
 	{
-		/* Generate new tile protype and add it to the vector */
-		Prototype_Tile new_tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size);
-		tileset_tiles.push_back(new_tile);
+		/* Generate new tile protype */
+		Prototype_Tile new_tile;
+
+		/* If tile has collisions, use them*/
+		if ((*tile).contains("objectgroup"))
+		{
+			std::vector<Collision_Box> boxes;
+
+			for (auto box = (*tile)["objectgroup"]["objects"].begin(); box != (*tile)["objectgroup"]["objects"].end(); box++)
+			{
+				boxes.push_back(Collision_Box((*box)["x"], (*box)["y"], (*box)["width"], (*box)["height"]));
+			}
+
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes);
+			tileset_tiles.push_back(new_tile);
+		}
+		else
+		{
+			/* Else provide empty box*/
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)));
+			tileset_tiles.push_back(new_tile);
+		}
+
 
 		/* Advance to the next open space on the atlas */
 		tex_coords[0] += (32.0f / size);

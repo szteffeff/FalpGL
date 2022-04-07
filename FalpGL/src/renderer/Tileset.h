@@ -5,6 +5,24 @@
 #include <fstream>
 #include <math.h>
 
+
+
+/* Bounding box and offset */
+struct Collision_Box {
+private:
+	float offset[2];
+	float size[2];
+
+	bool valid;
+
+public:
+	Collision_Box(float offset_x, float offset_y, float size_x, float size_y);
+
+	bool collides(float x, float y);
+};
+
+
+
 /* Contains data needed to construct specific tiles */
 struct Prototype_Tile {
 
@@ -17,7 +35,13 @@ struct Prototype_Tile {
 	/* Filepath to texture's image file */
 	std::string filepath;
 
-	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size);
+	/* Vector of collision boxes*/
+	std::vector<Collision_Box> collisions;
+
+	bool collides(float x, float y);
+
+	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes);
+	Prototype_Tile();
 };
 
 

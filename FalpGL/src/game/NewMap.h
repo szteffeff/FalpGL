@@ -29,6 +29,7 @@
 */
 
 int idx(float x, float y);
+int idx(int x, int y);
 Point index_to_coord_64(int idx);
 
 struct n_Tile {
@@ -52,13 +53,16 @@ private:
 	Tileset& tileset;
 
 public:
+	Point get_position() const;
+
 	Chunk(Tileset& set, std::vector<int>& data, float position_x, float position_y, int size_x, int size_y);
 
 
 	void load();
+
 	void unload();
 
-
+	int tile_at(int x, int y);
 
 	const void* vertex_data() const;
 
@@ -85,9 +89,12 @@ private:
 
 	Tileset set;
 
+	int map_height, map_width;
 private:
 	void chunk_to_buffer(Chunk* c);
+	Chunk* chunk_at_pixel(float x, float y);
 
+	struct { bool a; } test();
 
 public:
 	New_Map();
@@ -101,7 +108,7 @@ public:
 
 
 	int tile_at(float x, float y);
-	int tile_at(glm::vec2 position);
+	bool collision_at(float x, float y);
 
 	/* reference 2d vector with proper layout */
 };

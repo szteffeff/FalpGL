@@ -160,17 +160,40 @@ void Player::sprint(float direction, float magnitude)
 	
 }
 
+void Player::set_active_map(New_Map* map)
+{
+	active_map = map;
+}
+
 void Player::tick()
 {
 	offset[0] = 0.0f;
 	offset[1] = 0.0f;
 
-	position[0] += momentum[0];
-	position[1] += momentum[1];
+	if (active_map)
+	{
+		if (active_map->collision_at(position[0] + momentum[0], position[1] + momentum[1]))
+		{} /* If collision, do nothing */
+		else
+		{
+			position[0] += momentum[0];
+			position[1] += momentum[1];
 
-	m_player.translate(momentum[0], momentum[1]);
+			m_player.translate(momentum[0], momentum[1]);
 
-	player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+			player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+		}
+	}
+	else
+	{
+		position[0] += momentum[0];
+		position[1] += momentum[1];
+
+		m_player.translate(momentum[0], momentum[1]);
+
+		player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+	}
+
 
 
 	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)

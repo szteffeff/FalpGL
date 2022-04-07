@@ -292,11 +292,11 @@ int main(void)
         UserInterface ui(&interface_renderer.vertex_buffer);
 
         Player player(&player_render.vertex_buffer);
-        Red_Slime red_slime(&player_render.vertex_buffer);
-        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
+        //Red_Slime red_slime(&player_render.vertex_buffer);
+        //Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
 
-        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
-        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
+        //red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
+        //enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
         SoundDevice* mysounddevice = SoundDevice::get();
@@ -315,6 +315,7 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+        player.set_active_map(&nmap);
 
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -337,12 +338,17 @@ int main(void)
             ui.UI_Tick();
             if (pause == false) {
                 player.tick();
-                red_slime.tick();
-                enemy_ghost.tick();
+                //red_slime.tick();
+                //enemy_ghost.tick();
 
             }
            
-            //std::cout << xpos + *player.get_position_x() << "\n";
+            //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
+
+            if (nmap.collision_at(*player.get_position_x() + xpos, *player.get_position_y() + ypos))
+            {
+                console_log("[INFO]: Hit!");
+            }
 
             /* ##### Draw ##### */
 
