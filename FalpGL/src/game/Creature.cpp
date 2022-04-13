@@ -172,7 +172,7 @@ void Player::tick()
 
 	if (active_map)
 	{
-		if (active_map->collision_at(position[0] + momentum[0], position[1] + momentum[1]))
+		if (active_map->collision_circle(position[0] + momentum[0], position[1] + momentum[1] - 47, 100))
 		{} /* If collision, do nothing */
 		else
 		{

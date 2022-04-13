@@ -20,7 +20,7 @@ Collision_Box::Collision_Box(float offset_x, float offset_y, float size_x, float
 	}
 }
 
-bool Collision_Box::collides(float x, float y)
+bool Collision_Box::collides_at(float x, float y)
 {
 	if ((x >= offset[0] && x <= offset[0] + size[0]) && (y >= offset[1] && y <= offset[1] + size[1]))
 	{	/* Point is inside box*/
@@ -31,6 +31,23 @@ bool Collision_Box::collides(float x, float y)
 	/* Point is outside box */
 	return false;
 }
+
+bool Collision_Box::collision_circle(float x, float y, float radius)
+{
+	if (!valid) { return false; }
+
+	/* Find closest point of rectangle to circle */
+	float closest_x = std::clamp(x, offset[0], offset[0] + size[0]);
+	float closest_y = std::clamp(y, offset[1], offset[1] + size[1]);
+
+	if (abs(closest_x - x) < radius || abs(closest_y - y) < radius)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 
  /* #### Tile ####*/
 
@@ -67,7 +84,7 @@ bool Prototype_Tile::collides(float x, float y)
 {
 	for (auto box : collisions)
 	{ /* Loop through all collision boxes*/
-		if (box.collides(x, y))
+		if (box.collides_at(x, y))
 		{ /* Return if any box hits*/
 			return true;
 		}
@@ -77,6 +94,19 @@ bool Prototype_Tile::collides(float x, float y)
 	return false;
 }
 
+bool Prototype_Tile::collision_circle(float x, float y, float radius)
+{
+	for (auto box : collisions)
+	{ /* Loop through all collision boxes*/
+		if (box.collision_circle(x, y, radius))
+		{ /* Return if any box hits*/
+			return true;
+		}
+	}
+
+	/* No collisions occured */
+	return false;
+}
 
 
 /* #### Tileset #### */

@@ -109,6 +109,7 @@ public:
 
 	int tile_at(float x, float y);
 	bool collision_at(float x, float y);
+	bool collision_circle(float x, float y, float radius);
 
 	/* reference 2d vector with proper layout */
 };

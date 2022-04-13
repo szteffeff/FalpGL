@@ -188,7 +188,7 @@ int New_Map::tile_at(float x, float y)
 }
 
 bool New_Map::collision_at(float x, float y)
-{ /* Returns true on collision*/
+{ /* Returns true on collision */
 
 	/* Position on tile. 0 - 32 */
 	float local_x = fmod(x, 32.0f);
@@ -200,6 +200,29 @@ bool New_Map::collision_at(float x, float y)
 	return set[tile_at(x, y)].collides(local_x, local_y);
 }
 
+bool New_Map::collision_circle(float x, float y, float radius)
+{
+	std::stringstream stream;
+	stream << "[INFO]: Testing tiles:\n";
+
+	for (float test_x = x - radius; test_x <= x + radius; test_x += 32)
+	{
+		for (float test_y = y - radius; test_y <= y + radius; test_y += 32)
+		{
+			stream << tile_at(test_x, test_y) << " ";
+
+			if (set[tile_at(x, y)].collision_circle(test_x, test_y, radius))
+			{
+				return true;
+			}
+		}
+		stream << "\n";
+	}
+
+	console_log(stream.str());
+
+	return false;
+}
 
 Point New_Map::collision_line_desination(Point origin, Point desination, float collision_radius)
 {

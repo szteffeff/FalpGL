@@ -65,6 +65,7 @@ int main(void)
 
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 1);
+    glfwSwapInterval(1);
 
     int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 1;
@@ -118,8 +119,6 @@ int main(void)
                 round(-0.5f * window_height * window_scale),
                 round(0.5f * window_height * window_scale),
                 -1.0f, 1.0f);
-
-            //std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
         }
     /* Window size and resolution is now known */
 
@@ -193,7 +192,6 @@ int main(void)
     glfwSetWindowSize(window, window_width, window_height);
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_callback);
-    glfwSwapInterval(1);
 
     /* setup cursor */
     {
@@ -344,11 +342,6 @@ int main(void)
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
-
-            if (nmap.collision_at(*player.get_position_x() + xpos, *player.get_position_y() + ypos))
-            {
-                console_log("[INFO]: Hit!");
-            }
 
             /* ##### Draw ##### */
 

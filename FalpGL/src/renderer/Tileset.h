@@ -18,7 +18,8 @@ private:
 public:
 	Collision_Box(float offset_x, float offset_y, float size_x, float size_y);
 
-	bool collides(float x, float y);
+	bool collides_at(float x, float y);
+	bool collision_circle(float x, float y, float radius);
 };
 
 
@@ -39,6 +40,7 @@ struct Prototype_Tile {
 	std::vector<Collision_Box> collisions;
 
 	bool collides(float x, float y);
+	bool collision_circle(float x, float y, float radius);
 
 	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes);
 	Prototype_Tile();
