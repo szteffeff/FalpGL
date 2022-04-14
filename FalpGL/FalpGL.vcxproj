@@ -353,7 +353,7 @@
     <ClInclude Include="src\game\Creature.h" />
     <ClInclude Include="src\game\NewMap.h" />
     <ClInclude Include="src\game\UI.h" />
-    <ClInclude Include="src\renderer\Fireflies.h" />
+    <ClInclude Include="src\renderer\Particles.h" />
     <ClInclude Include="src\renderer\Framebuffer.h" />
     <ClInclude Include="src\renderer\Log.h" />
     <ClInclude Include="src\renderer\Quad.h" />

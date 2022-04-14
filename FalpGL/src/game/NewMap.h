@@ -111,29 +111,44 @@ public:
 
 };
 
+/* #### Decoration stuff #### */
 
 class Decoration {
-private:
+protected:
 	float vertex_data[20];
 	int buffer_index;
 	int id;
 
 public:
-	Decoration(float x, float y, float size_x, float size_y); 
+	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile); 
 
 	void fade(float opacity = 1.0f);
 };
 
-class Static_Entity {
-private:
-	float vertex_data[20];
-	int buffer_index;
-	int id;
-
+class Static_Entity : public Decoration {
 public:
-	Static_Entity(float x, float y, float size_x, float size_y);
+	Static_Entity(float x, float y, float size_x, float size_y, Prototype_Tile tile);
 
 	virtual void tick();
 	virtual void interact();
-	virtual void hit():
+	virtual void hit();
+};
+
+
+
+class Decoration_Renderer {
+private:
+	Shader map_shader;
+	VertexArray map_vertex_array;
+	VertexBuffer map_vertex_buffer;
+	IndexBuffer map_index_buffer;
+
+	Tileset decoration_set;
+
+
+	std::vector<Decoration> decorations;
+
+public:
+	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json tiles);
+
 };

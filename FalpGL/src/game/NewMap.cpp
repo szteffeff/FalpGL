@@ -334,3 +334,32 @@ n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
 n_Tile::n_Tile()
 	: quad_data()
 {}
+
+
+
+Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile)
+{
+	vertex_data[0] = x;                        /* x */
+	vertex_data[1] = y;                        /* y */
+	vertex_data[2] = tile.texture_coord[0];    /* s */
+	vertex_data[3] = tile.texture_coord[1];    /* t */
+	vertex_data[4] = 1.0f;                     /* opacity */
+
+	vertex_data[5] = x + size_x;
+	vertex_data[6] = y;
+	vertex_data[7] = tile.texture_coord[2];
+	vertex_data[8] = tile.texture_coord[3];
+	vertex_data[9] = 1.0f;
+
+	vertex_data[10] = x + size_x;
+	vertex_data[11] = y + size_y;
+	vertex_data[12] = tile.texture_coord[4];
+	vertex_data[13] = tile.texture_coord[5];
+	vertex_data[14] = 1.0f;
+
+	vertex_data[15] = x;
+	vertex_data[16] = y = size_y;
+	vertex_data[17] = tile.texture_coord[6];
+	vertex_data[18] = tile.texture_coord[7];
+	vertex_data[19] = 1.0f;
+}
