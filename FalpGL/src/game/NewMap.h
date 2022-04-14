@@ -94,8 +94,6 @@ private:
 	void chunk_to_buffer(Chunk* c);
 	Chunk* chunk_at_pixel(float x, float y);
 
-	struct { bool a; } test();
-
 public:
 	New_Map();
 	~New_Map();
@@ -111,18 +109,31 @@ public:
 	bool collision_at(float x, float y);
 	bool collision_circle(float x, float y, float radius);
 
-	/* reference 2d vector with proper layout */
 };
 
 
-class decoration {
-	/*
-	* for things that you can walk behind but don't interact with
-	*/
+class Decoration {
+private:
+	float vertex_data[20];
+	int buffer_index;
+	int id;
+
+public:
+	Decoration(float x, float y, float size_x, float size_y); 
+
+	void fade(float opacity = 1.0f);
 };
 
-class placeholder_active_object {
-	/*
-	* for things that you can walk behind and interact with
-	*/
+class Static_Entity {
+private:
+	float vertex_data[20];
+	int buffer_index;
+	int id;
+
+public:
+	Static_Entity(float x, float y, float size_x, float size_y);
+
+	virtual void tick();
+	virtual void interact();
+	virtual void hit():
 };

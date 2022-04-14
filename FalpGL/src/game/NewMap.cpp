@@ -238,7 +238,6 @@ Point New_Map::collision_line_delta(Point origin, Point delta, float collision_r
 
 void New_Map::chunk_to_buffer(Chunk* c)
 {
-
 }
 
 New_Map::~New_Map() 

@@ -74,6 +74,7 @@ void main()
 	color = texture(u_Textures[index], f_TexCoord);
 	if (color.a == 0)
 		discard;
+
 }
 
 
