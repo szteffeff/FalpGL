@@ -47,6 +47,7 @@ animation_state Animation::tick()
 }
 
 void Animation::load(std::string name)
+
 {
 	json j;
 	j = loader->animations[name];
