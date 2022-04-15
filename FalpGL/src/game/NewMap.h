@@ -29,6 +29,7 @@
 */
 
 int idx(float x, float y);
+int idx(int x, int y);
 Point index_to_coord_64(int idx);
 
 struct n_Tile {
@@ -52,13 +53,16 @@ private:
 	Tileset& tileset;
 
 public:
+	Point get_position() const;
+
 	Chunk(Tileset& set, std::vector<int>& data, float position_x, float position_y, int size_x, int size_y);
 
 
 	void load();
+
 	void unload();
 
-
+	int tile_at(int x, int y);
 
 	const void* vertex_data() const;
 
@@ -81,14 +85,18 @@ private:
 
 	std::vector<Chunk> chunks;
 
+	std::vector<std::vector<Chunk*>> chunks_ordered;
+
 	Tileset set;
 
+	int map_height, map_width;
 private:
 	void chunk_to_buffer(Chunk* c);
-
+	Chunk* chunk_at_pixel(float x, float y);
 
 public:
 	New_Map();
+	~New_Map();
 
 	void draw(glm::mat4 matrix);
 	Point collision_line_desination(Point origin, Point desination, float collision_radius);
@@ -98,20 +106,49 @@ public:
 
 
 	int tile_at(float x, float y);
-	int tile_at(glm::vec2 position);
+	bool collision_at(float x, float y);
+	bool collision_circle(float x, float y, float radius);
 
-	/* reference 2d vector with proper layout */
+};
+
+/* #### Decoration stuff #### */
+
+class Decoration {
+protected:
+	float vertex_data[20];
+	int buffer_index;
+	int id;
+
+public:
+	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile); 
+
+	void fade(float opacity = 1.0f);
+};
+
+class Static_Entity : public Decoration {
+public:
+	Static_Entity(float x, float y, float size_x, float size_y, Prototype_Tile tile);
+
+	virtual void tick();
+	virtual void interact();
+	virtual void hit();
 };
 
 
-class decoration {
-	/*
-	* for things that you can walk behind but don't interact with
-	*/
-};
 
-class placeholder_active_object {
-	/*
-	* for things that you can walk behind and interact with
-	*/
+class Decoration_Renderer {
+private:
+	Shader map_shader;
+	VertexArray map_vertex_array;
+	VertexBuffer map_vertex_buffer;
+	IndexBuffer map_index_buffer;
+
+	Tileset decoration_set;
+
+
+	std::vector<Decoration> decorations;
+
+public:
+	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json tiles);
+
 };

@@ -3,7 +3,7 @@
 #include "SoundBuffer.h"
 #include "SoundSource.h"
 #include "SoundDevice.h"
-#include "SFX.h"
+#include "NewMap.h"
 
 
 class Creature {
@@ -42,8 +42,12 @@ private:
 		RIGHT
 	};
 
+	New_Map* active_map = nullptr;
 
 public:
+	void set_active_map(New_Map* map = nullptr);
+
+
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
 	void sprint(float direction, float magnitude);

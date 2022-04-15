@@ -6,6 +6,11 @@ inline int idx(float x, float y)
 	return (x * 64 + y);
 }
 
+inline int idx(int x, int y)
+{
+	return (x * 64 + y);
+}
+
 Point index_to_coord_64(int index)
 {
 	return { (float)(index % 64), (float)(index - (index % 64)) };
@@ -47,6 +52,8 @@ New_Map::New_Map()
 		tileset_filepath = std::string("res/data/") + tileset_filepath;
 
 		set.init(tileset_filepath, 0);
+
+		console_log(std::string("[INFO]: Using tileset: ") + tileset_filepath);
 	}
 	else
 	{
@@ -67,21 +74,49 @@ New_Map::New_Map()
 	temp_chunk_data.resize(chunk_area);
 
 	/* Loop through all chunks in map */
+
+	int index = 0;
+
 	for (auto json_chunk : map_json["layers"][0]["chunks"])
 	{
-		static int index = 0;
-
 		/* Loop through all 4096 tile IDs. I couldn't find a better way to do this. Whatever */
-		for (int i = 0; i < chunk_area; i++)
+		/* Correct for y flip and rotation */
+		for (int x = 0; x < chunksize[0]; x++)
 		{
-			temp_chunk_data[i] = json_chunk["data"][i];
-			//temp_chunk_data[i] = index;
+			for (int y = 0; y < chunksize[1]; y++)
+			{
+				temp_chunk_data[idx(x, y)] = json_chunk["data"][idx(63 - y, x)];
+				//temp_chunk_data[idx(x, y)] = index; /* Set tile to index of chunk */
+			}
 		}
 
 		/* Construct new chunk in vector of chunks. Use emplace_back so constructed chunk is not copied, but this probably doesn't matter */
 		chunks.emplace_back(set, temp_chunk_data, json_chunk["x"], (json_chunk["y"] * -1) - 64, chunksize[0], chunksize[1]);
 
 		index++;
+	}
+
+
+	/* Setup vector of chunk references with proper layout */
+	map_height = map_json["layers"][0]["height"] / chunksize[0];
+	map_width = map_json["layers"][0]["width"] / chunksize[1];
+
+	if (map_height * map_width != chunks.size())
+	{
+		throw "Fix the map";
+		/* Currently, map needs to have border on a chunks border and every chunk needs at least one tile */
+	}
+
+	chunks_ordered.resize(map_width);
+
+	for (int x = 0; x < map_width; x++)
+	{
+		for (int y = 0; y < map_height; y++)
+		{
+			/* Transform to corect for load order - inverse and flip y */
+
+			chunks_ordered[x].push_back(&chunks[(((map_height - 1) - y)) * map_width + x]);
+		}
 	}
 
 	/* Initalize OpenGL buffers. This can't be done in initalizer list because the size of the map is not known */
@@ -135,15 +170,59 @@ void New_Map::draw(glm::mat4 matrix)
 
 int New_Map::tile_at(float x, float y)
 {
-	return 0;
+	x += (map_width * 32 * 64) / 2;
+	y += (map_height * 32 * 64) / 2;
+
+	int chunk_x = (int)ceil(x / (32 * 64)) - 1;
+	int chunk_y = (int)ceil(y / (32 * 64)) - 1;
+
+	int tile_x = 63 - (((chunk_x + 1) * 64) - ceil(x / 32));
+	int tile_y = 63 - (((chunk_y + 1) * 64) - ceil(y / 32));
+
+	//std::stringstream stream;
+	//stream << "[INFO]: Chunk:" << chunk_x << ", " << chunk_y << ". Tile: " << tile_x << ", " << tile_y << ".\n";
+
+	//console_log(stream.str());
+
+	return chunks_ordered[chunk_x][chunk_y]->tile_at(tile_x, tile_y);
 }
 
-int New_Map::tile_at(glm::vec2 position)
+bool New_Map::collision_at(float x, float y)
+{ /* Returns true on collision */
+
+	/* Position on tile. 0 - 32 */
+	float local_x = fmod(x, 32.0f);
+	float local_y = fmod(y, 32.0f);
+
+	if (local_x < 0.0f) { local_x += 32.0f; }
+	if (local_y < 0.0f) { local_y += 32.0f; }
+
+	return set[tile_at(x, y)].collides(local_x, local_y);
+}
+
+bool New_Map::collision_circle(float x, float y, float radius)
 {
-	
-	return 0;
-}
+	std::stringstream stream;
+	stream << "[INFO]: Testing tiles:\n";
 
+	for (float test_x = x - radius; test_x <= x + radius; test_x += 32)
+	{
+		for (float test_y = y - radius; test_y <= y + radius; test_y += 32)
+		{
+			stream << tile_at(test_x, test_y) << " ";
+
+			if (set[tile_at(x, y)].collision_circle(test_x, test_y, radius))
+			{
+				return true;
+			}
+		}
+		stream << "\n";
+	}
+
+	console_log(stream.str());
+
+	return false;
+}
 
 Point New_Map::collision_line_desination(Point origin, Point desination, float collision_radius)
 {
@@ -159,7 +238,11 @@ Point New_Map::collision_line_delta(Point origin, Point delta, float collision_r
 
 void New_Map::chunk_to_buffer(Chunk* c)
 {
+}
 
+New_Map::~New_Map() 
+{
+	chunks_ordered.clear();
 }
 
 /* Chunk */
@@ -188,18 +271,17 @@ void Chunk::load()
 	{
 		for (int tile_y = 0; tile_y < chunk_size[1]; tile_y++)
 		{
-			/* Tiled exports with an inverted y axis and different rotation to what we want, correct for that */
-			int tile_index = chunk_data[idx(63 - tile_y, tile_x)];
-
 			/* Find tile's absolute position and create it */
 			float tile_position[2] = { tile_x + position[0], tile_y + position[1] };
-			tiles[idx(tile_x, tile_y)] = n_Tile(tileset[tile_index], tile_position);
+			tiles[idx(tile_x, tile_y)] = n_Tile(tileset[chunk_data[idx(tile_x, tile_y)]], tile_position);
 		}
 	}
 
 	/* Chunk is now loaded */
 	loaded = true;
 }
+
+
 
 void Chunk::unload()
 {
@@ -211,6 +293,11 @@ const void* Chunk::vertex_data() const
 {
 	/* Return pointer to array of tiles for writing to vertex buffer */
 	return tiles.data();
+}
+
+int Chunk::tile_at(int x, int y)
+{
+	return chunk_data[idx(x, y)];
 }
 
 n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
@@ -247,3 +334,32 @@ n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
 n_Tile::n_Tile()
 	: quad_data()
 {}
+
+
+
+Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile)
+{
+	vertex_data[0] = x;                        /* x */
+	vertex_data[1] = y;                        /* y */
+	vertex_data[2] = tile.texture_coord[0];    /* s */
+	vertex_data[3] = tile.texture_coord[1];    /* t */
+	vertex_data[4] = 1.0f;                     /* opacity */
+
+	vertex_data[5] = x + size_x;
+	vertex_data[6] = y;
+	vertex_data[7] = tile.texture_coord[2];
+	vertex_data[8] = tile.texture_coord[3];
+	vertex_data[9] = 1.0f;
+
+	vertex_data[10] = x + size_x;
+	vertex_data[11] = y + size_y;
+	vertex_data[12] = tile.texture_coord[4];
+	vertex_data[13] = tile.texture_coord[5];
+	vertex_data[14] = 1.0f;
+
+	vertex_data[15] = x;
+	vertex_data[16] = y = size_y;
+	vertex_data[17] = tile.texture_coord[6];
+	vertex_data[18] = tile.texture_coord[7];
+	vertex_data[19] = 1.0f;
+}

@@ -66,6 +66,7 @@ int main(void)
 
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 1);
+    glfwSwapInterval(1);
 
     int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 1;
@@ -119,8 +120,6 @@ int main(void)
                 round(-0.5f * window_height * window_scale),
                 round(0.5f * window_height * window_scale),
                 -1.0f, 1.0f);
-
-            //std::cout << "matrix x/y: " << (-0.5f * window_width * window_scale) << " , " << (-0.5f * window_height * window_scale) << "\n";
         }
     /* Window size and resolution is now known */
 
@@ -194,7 +193,6 @@ int main(void)
     glfwSetWindowSize(window, window_width, window_height);
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_callback);
-    glfwSwapInterval(1);
 
     /* setup cursor */
     {
@@ -321,6 +319,9 @@ int main(void)
         controller.set_keepalive(&running);
         controller.set_matrix(&projection_matrix);
 
+        player.set_active_map(&nmap);
+
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) && running)
@@ -350,7 +351,7 @@ int main(void)
                 Chompy_slime.tick();
             }
            
-            std::cout << xpos + *player.get_position_x() << "\n";
+            //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
 
             /* ##### Draw ##### */
 
