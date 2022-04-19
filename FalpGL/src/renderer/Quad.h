@@ -24,6 +24,8 @@ public:
 	void set_texture_index(float index);
 	void set_vertex_pos(float x, float y, int index);
 	void set_vertex_pos(Point p, int index);
+	void teleport(float new_x, float new_y);
+
 	Point get_vertex_pos(int index);
 
 	void rotate(float degrees, Point point, bool radians = false);

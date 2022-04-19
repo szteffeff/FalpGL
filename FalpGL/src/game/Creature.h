@@ -3,35 +3,35 @@
 #include "SoundBuffer.h"
 #include "SoundSource.h"
 #include "SoundDevice.h"
+#include "SFX.h"
 #include "NewMap.h"
-
 
 
 class Creature {
 public:
 	static Json_loader* loader;
 	float momentum[2], position[2];
-	SoundDevice* creaturesound = SoundDevice::get();
 
 public:
 	Creature();
 	virtual bool Player_Detection_simple_horizontal(float x, float* player_x);
 	virtual bool Player_Detectoin_simple_vertical(float  y, float* player_y);
+	virtual float Player_Detection_distance_Horizontal(float x, float* player_x);
+	virtual float Player_Detection_distance_Vertical(float y, float* player_y);
+	virtual float Player_Detetion_distance(float horizontal, float vertical);
 	virtual void walk(float direction, float magnitude);
 
 	virtual void tick();
 };
 
-
-
-
-
 class Player : public Creature {
 private:
-	SoundSource creaturesound;
 	Entity m_player;
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
+	SFX walking_sound;
 	uint32_t walking = SoundBuffer::get()->addSoundEffect("files/SFX/Footsteps(better).wav");
+	SFX hurt_sound;
+	uint32_t hurt = SoundBuffer::get()->addSoundEffect("files/SFX/hurt_noise.wav");
 	float offset[2] = { 0.0f, 0.0f };
 	float momentum[2], position[2];
 	float Health = 100;
@@ -54,8 +54,6 @@ public:
 
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
-	void walk_noise();
-	void stop_walknoise();
 	void sprint(float direction, float magnitude);
 	glm::mat4* get_trans_matrix();
 	float position_x();
@@ -92,6 +90,46 @@ public:
 class Enemy_Ghost : public Creature {
 private:
 	Entity Enemy_ghost;
+	Entity Wizard_pink_bullet;
+
+	float momentum[2], position[2];
+	const float Health = 20;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+	SFX Ghost_move_sound;
+	uint32_t Ghost_move = SoundBuffer::get()->addSoundEffect("files/SFX/ghost-moving-sound.wav");
+
+public:
+	Enemy_Ghost(VertexBuffer* vb);
+	void Shoot_magic();
+	void Get_player_position(float* x, float* y);
+	void tick();
+};
+
+class Garfield : public Creature {
+private:
+	Entity garfield;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Garfield(VertexBuffer* vb);
+	void tick();
+};
+
+class Bush_Boi : public Creature {
+private:
+	Entity Bush_boi;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Bush_Boi(VertexBuffer* vb);
+	void tick();
+};
+
+class Chompy_Slime : public Creature {
+private:
+	Entity Chompy_slime;
 	float momentum[2], position[2];
 	const float Health = 20;
 	const float Damage = 10;
@@ -99,7 +137,7 @@ private:
 	float* player_position_y;
 
 public:
-	Enemy_Ghost(VertexBuffer* vb);
+	Chompy_Slime(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void tick();
 };

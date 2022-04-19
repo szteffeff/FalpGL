@@ -18,6 +18,7 @@
 #include "SoundDevice.h"
 #include "NewMap.h"
 #include "../renderer/Log.h"
+#include "SFX.h"
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
@@ -290,20 +291,23 @@ int main(void)
         UserInterface ui(&interface_renderer.vertex_buffer);
 
         Player player(&player_render.vertex_buffer);
-        //Red_Slime red_slime(&player_render.vertex_buffer);
-        //Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
+        Red_Slime red_slime(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
+        Garfield garfield(&player_render.vertex_buffer);
+        Bush_Boi Bush_boi(&player_render.vertex_buffer);
+        Chompy_Slime Chompy_slime(&player_render.vertex_buffer);
 
-        //red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
-        //enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
+        Chompy_slime.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
-        SoundDevice* mysounddevice = SoundDevice::get();
-
+        SFX Sound_player;
         uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
-
-        SoundSource myspeaker;
-
-        myspeaker.Play(intro);
+        Sound_player.Play_sound(intro);
+        SFX Sound_song;
+        SFX Background_sound;
+        uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -330,15 +334,19 @@ int main(void)
 
             /*SOUND THINGY*/
             
+            Background_sound.Play_sound(background);
+
             //myspeaker.Play(intro);
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
             if (pause == false) {
                 player.tick();
-                //red_slime.tick();
-                //enemy_ghost.tick();
-
+                red_slime.tick();
+                enemy_ghost.tick();
+                garfield.tick();
+                Bush_boi.tick();
+                Chompy_slime.tick();
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));

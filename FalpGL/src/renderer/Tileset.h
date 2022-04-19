@@ -26,6 +26,7 @@ public:
 
 /* Contains data needed to construct specific tiles */
 struct Prototype_Tile {
+	int size_x, size_y;
 
 	/* Texture coordinants of tile's texture on an atlas */
 	float texture_coord[8];
@@ -41,8 +42,9 @@ struct Prototype_Tile {
 
 	bool collides(float x, float y);
 	bool collision_circle(float x, float y, float radius);
+	bool has_collision();
 
-	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes);
+	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, int size_x = 32, int size_y = 32);
 	Prototype_Tile();
 };
 

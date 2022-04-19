@@ -48,6 +48,10 @@ bool Collision_Box::collision_circle(float x, float y, float radius)
 	return false;
 }
 
+bool Prototype_Tile::has_collision()
+{
+	return (!collisions.empty());
+}
 
  /* #### Tile ####*/
 
@@ -55,8 +59,8 @@ Prototype_Tile::Prototype_Tile()
 {
 }
 
-Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxs)
-	: collisions(boxs)
+Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, int size_x, int size_y)
+	: collisions(boxes)
 {
 	id = in_id;
 
@@ -292,13 +296,13 @@ void Tileset::create_atlas()
 				boxes.push_back(Collision_Box((*box)["x"], (*box)["y"], (*box)["width"], (*box)["height"]));
 			}
 
-			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes);
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes, (*tile)["imageheight"], (*tile)["imagewidth"]);
 			tileset_tiles.push_back(new_tile);
 		}
 		else
 		{
 			/* Else provide empty box*/
-			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)));
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)), (*tile)["imageheight"], (*tile)["imagewidth"]);
 			tileset_tiles.push_back(new_tile);
 		}
 

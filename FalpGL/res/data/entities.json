@@ -31,8 +31,32 @@
   },
   "Enemy_Ghost": {
     "name": "Enemy_Ghost",
-    "size": [ 128, 128],
+    "size": [ 128, 128 ],
     "animation_count": 1,
     "animation_names": [ "Enemy_Ghost" ]
+  },
+  "Garfield": {
+    "name": "Garfield",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Garfield" ]
+  },
+  "Bush_Boi": {
+    "name": "Bush_Boi",
+    "size": [ 128, 128 ],
+    "animation_count": 2,
+    "animation_names": [ "Bush_Boi", "Bush_Boi_Back" ]
+  },
+  "Chompy_Slime": {
+    "name": "Chompy_Slime",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Chompy_Slime" ]
+  },
+  "Wizard_Pink_bullet": {
+    "name": "Wizard_Pink_bullet",
+    "size": [ 32, 32 ],
+    "animation_count": 1,
+    "animation_names": [ "Wizard_Pink_bullet" ]
   }
 }

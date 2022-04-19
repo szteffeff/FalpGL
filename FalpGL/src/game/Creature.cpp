@@ -28,6 +28,40 @@ bool Creature::Player_Detectoin_simple_vertical(float y, float* player_y)
 
 }
 
+float Creature::Player_Detection_distance_Horizontal(float x, float* player_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, player_x);
+	float horizontal;
+
+	if (direction == true) {
+		horizontal = *player_x - x;
+	}
+	else {
+		horizontal = x - *player_x;
+	}
+	return horizontal;
+}
+
+float Creature::Player_Detection_distance_Vertical(float y, float* player_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, player_y);
+	float vertical;
+
+	if (direction == true) {
+		vertical = *player_y - y;
+	}
+	else {
+		vertical = y - *player_y;
+	}
+	return vertical;
+}
+
+float Creature::Player_Detetion_distance(float horizontal, float vertical)
+{
+	float distance = sqrt(pow(horizontal, 2) + pow(vertical, 2));
+	return distance;
+}
+
 void Creature::walk(float direction, float magnitude)
 {
 	magnitude *= 3;
@@ -38,11 +72,7 @@ void Creature::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 }
 
-
-
 void Creature::tick() {}
-
-
 
 /* Health_Bar */
 
@@ -133,19 +163,9 @@ void Player::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 
 	Recover_Stamina();
-	walk_noise();
+	//walk_noise();
+	//walking_sound.Play_sound(walking);
 }
-
-void Player::walk_noise()
-{
-	ALint state = false;
-	if (state != AL_PLAYING) {
-		//alSourcei(walking, AL_LOOPING, AL_TRUE);
-		creaturesound.Play(walking);
-		console_log("Playing walking noise");
-	}
-}
-
 
 void Player::sprint(float direction, float magnitude)
 {
@@ -156,7 +176,7 @@ void Player::sprint(float direction, float magnitude)
 	momentum[0] += round(1.5 * dx);
 	momentum[1] += round(1.5 * dy);
 
-	Lose_Stamina();
+	//Lose_Stamina();
 	
 }
 
@@ -211,10 +231,9 @@ void Player::tick()
 	}
 	else
 	{
-		//stop_walknoise();
 		m_player.set_animation(0);
 		Recover_Stamina();
-		creaturesound.Stop();
+		//walking_sound.Stop_sound(walking);
 	}	
 
 	momentum[0] = 0;
@@ -240,6 +259,7 @@ int* Player::GetPotion()
 void Player::Take_Damage()
 {
 	if (Health > 0) { Health -= 25; };
+	hurt_sound.Play_sound(hurt);
 }
 
 void Player::Take_Damage_tile()
@@ -311,45 +331,6 @@ void Red_Slime::tick()
 
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
-	
-	/*
-	float distance_x = abs(*player_position_x - position[0]);
-	float distance_y = abs(*player_position_y - position[1]);
-
-	float direction = asinf(distance_x / distance_y);
-	float dx = 0, dy = 0;
-	float magnitude = 1;
-
-	if (horizontal == true) { 
-		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	}
-	else if (horizontal == false) {
-		float dx = (float)(-cos(direction * 3.14159 / 180)) * magnitude;
-	}
-
-	if (vertical == false) {
-		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
-	}
-	else if (vertical == true) { 
-		float dy = (float)(-sin(direction * 3.14159 / 180)) * magnitude;
-	}
-
-	momentum[0] += round(dx);
-	momentum[1] += round(dy);
-	*/
-
-	/* 
-	float dir = (atan2(*player_position_x- position[0], *player_position_y - position[0]));
-	if (dir < 0) { dir += 2.0f * 3.14159f; }
-	float real_degrees = ((dir * 180.0f) / 3.14159f);
-
-	float magnitude = 1;
-	float dx = (float)(cos(real_degrees * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(real_degrees * 3.14159 / 180)) * magnitude;
-
-	momentum[0] += round(dx);
-	momentum[1] += round(dy);
-	*/
 
 	if (tick_state.anim_state == animation_state::advanced_frame)
 	{
@@ -378,9 +359,15 @@ void Red_Slime::tick()
 }
 
 Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
-	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position()
+	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position(), Wizard_pink_bullet(vb, loader->entities["Wizard_Pink_bullet"])
 {
 	Enemy_ghost.set_animation(0);
+	Wizard_pink_bullet.teleport(10000000, 10000000);
+}
+
+void Enemy_Ghost::Shoot_magic()
+{
+
 }
 
 void Enemy_Ghost::Get_player_position(float* x, float* y)
@@ -394,19 +381,93 @@ void Enemy_Ghost::tick()
 	Enemy_ghost.tick();
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	
+	static int frames = 0;
 
-	if (horizontal == true) { momentum[0] = 1; } // right
-	else if (horizontal == false) { momentum[0] = -1; }  //left
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
+		
+		if (frames++ == 60 * 3) {
+			int random = 1 + (rand() % 2);
 
-	if (vertical == false) { momentum[1] = -1; }  // down
-	else if (vertical == true) { momentum[1] = 1; } // up
+			if (random == 1) {
+				std::cout << "not moving" << std::endl;
+			}
+			else {
+				position[0] = *player_position_x + (rand() % 1000) - 500;
+				position[1] = *player_position_y + (rand() % 1000) - 500;
+				Ghost_move_sound.Play_sound(Ghost_move);
+				std::cout << "moving" << std::endl;
+			}
+			frames = 0;
+			Enemy_ghost.teleport(position[0], position[1]);
+		}
+}
 
-	position[0] += momentum[0];
-	position[1] += momentum[1];
+Garfield::Garfield(VertexBuffer* vb)
+	: garfield(vb, loader->entities["Garfield"])
+{
+	garfield.set_animation(0);
+}
+void Garfield::tick()
+{
+	garfield.tick();
+	garfield.teleport(-100, -100);
+}
 
+Bush_Boi::Bush_Boi(VertexBuffer* vb)
+	: Bush_boi(vb, loader->entities["Bush_Boi"])
+{
+	Bush_boi.set_animation(0);
+	Bush_boi.teleport(100, 100);
+}
 
-	Enemy_ghost.translate(momentum[0], momentum[1]);
+void Bush_Boi::tick()
+{
+	Bush_boi.tick();
+}
 
-	momentum[0] = 0;
-	momentum[1] = 0;
+Chompy_Slime::Chompy_Slime(VertexBuffer* vb)
+	: Chompy_slime(vb, loader->entities["Chompy_Slime"]), momentum(), position()
+{
+	Chompy_slime.set_animation(0);
+}
+
+void Chompy_Slime::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Chompy_Slime::tick()
+{
+	static int frame;
+	entity_return tick_state = Chompy_slime.tick();
+
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+
+	if (tick_state.anim_state == animation_state::advanced_frame)
+	{
+		frame++;
+		if (frame >= 3)
+			frame = 0;
+	}
+
+	if (frame == 2)
+	{
+		int magnitude = 2;
+		if (horizontal == true) { momentum[0] += magnitude; }
+		else if (horizontal == false) { momentum[0] += -magnitude; }
+
+		if (vertical == false) { momentum[1] += -magnitude; }
+		else if (vertical == true) { momentum[1] += magnitude; }
+
+		position[0] += momentum[0];
+		position[1] += momentum[1];
+
+		Chompy_slime.translate(momentum[0], momentum[1]);
+
+		momentum[0] = 0;
+		momentum[1] = 0;
+	}
 }
