@@ -37,7 +37,10 @@ entity_return Entity::tick()
 	return entity_return(animations[active_animation].tick());
 }
 
-
+void Entity::teleport(float new_x, float new_y)
+{
+	main_quad.teleport(new_x, new_y);
+}
 
 void Entity::set_animation(int id)
 {
