@@ -164,7 +164,7 @@ void Player::walk(float direction, float magnitude)
 
 	Recover_Stamina();
 	//walk_noise();
-	//walking_sound.Play_sound(walking);
+	walking_sound.Play_sound(walking);
 }
 
 void Player::sprint(float direction, float magnitude)
@@ -367,6 +367,12 @@ Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
 
 void Enemy_Ghost::Shoot_magic()
 {
+	float magnitude = 3;
+	float direction = atan(Player_Detection_distance_Vertical(position[1], player_position_y) / Player_Detection_distance_Horizontal(position[0], player_position_x));
+	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+
+	Wizard_pink_bullet.translate(dx, dy);
 
 }
 
@@ -383,24 +389,40 @@ void Enemy_Ghost::tick()
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
 	
 	static int frames = 0;
+	static int frames_magic = 0;
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
-		
-		if (frames++ == 60 * 3) {
+	
+		if (frames++ == 60 * 6) {
 			int random = 1 + (rand() % 2);
 
 			if (random == 1) {
 				std::cout << "not moving" << std::endl;
 			}
 			else {
-				position[0] = *player_position_x + (rand() % 1000) - 500;
-				position[1] = *player_position_y + (rand() % 1000) - 500;
+				//position[0] = *player_position_x + (rand() % 1000) - 500;
+				//position[1] = *player_position_y + (rand() % 1000) - 500;
 				Ghost_move_sound.Play_sound(Ghost_move);
 				std::cout << "moving" << std::endl;
 			}
 			frames = 0;
-			Enemy_ghost.teleport(position[0], position[1]);
+			//Enemy_ghost.teleport(position[0], position[1]);
 		}
+	
+	static float dx = 0, dy = 0;
+	if (frames_magic++ == 60 * 4) {
+		Wizard_pink_bullet.teleport(position[0], position[1]);
+		std::cout << "Yeet thy bullet" << std::endl;
+		frames_magic = 0;
+		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[1], position[1]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 3;
+		dy = (float)(sin(direction)) * 3;
+	}
+
+	Wizard_pink_bullet.translate(dx, dy);
+	std::cout << "Yeet thy bullet" << std::endl;
 }
 
 Garfield::Garfield(VertexBuffer* vb)

@@ -5,6 +5,7 @@
 #include "SoundDevice.h"
 #include "SFX.h"
 #include "NewMap.h"
+#include <math.h>
 
 
 class Creature {
