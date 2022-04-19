@@ -41,6 +41,7 @@ struct Prototype_Tile {
 
 	bool collides(float x, float y);
 	bool collision_circle(float x, float y, float radius);
+	bool has_collision();
 
 	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes);
 	Prototype_Tile();

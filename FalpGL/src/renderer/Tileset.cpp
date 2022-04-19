@@ -48,6 +48,10 @@ bool Collision_Box::collision_circle(float x, float y, float radius)
 	return false;
 }
 
+bool Prototype_Tile::has_collision()
+{
+	return (!collisions.empty());
+}
 
  /* #### Tile ####*/
 

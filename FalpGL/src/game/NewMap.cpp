@@ -224,6 +224,11 @@ bool New_Map::collision_circle(float x, float y, float radius)
 	return false;
 }
 
+bool New_Map::collision_tile(float x, float y)
+{
+	return set[tile_at(x, y)].has_collision();
+}
+
 Point New_Map::collision_line_desination(Point origin, Point desination, float collision_radius)
 {
 	/* not written yet */
