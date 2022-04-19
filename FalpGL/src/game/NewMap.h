@@ -151,6 +151,6 @@ private:
 	std::vector<Decoration> decorations;
 
 public:
-	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json tiles);
+	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations);
 
 };
