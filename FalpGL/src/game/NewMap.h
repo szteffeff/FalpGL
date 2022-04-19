@@ -109,6 +109,8 @@ public:
 	bool collision_at(float x, float y);
 	bool collision_circle(float x, float y, float radius);
 
+	bool collision_tile(float x, float y);
+
 };
 
 /* #### Decoration stuff #### */
