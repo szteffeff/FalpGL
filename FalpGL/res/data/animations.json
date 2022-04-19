@@ -1558,5 +1558,21 @@
         [ 480, 160 ]
       ]
     ]
+  },
+  "Wizard_Pink_bullet": {
+    "name": "Wizard_Pink_bullet",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 300 ],
+    "texture_coordinants": [
+      [
+        [ 304, 32 ],
+        [ 320, 32 ],
+        [ 320, 48 ],
+        [ 304, 48 ]
+      ]
+    ]
   }
 }

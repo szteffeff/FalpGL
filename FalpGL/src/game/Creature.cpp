@@ -359,9 +359,15 @@ void Red_Slime::tick()
 }
 
 Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
-	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position()
+	: Enemy_ghost(vb, loader->entities["Enemy_Ghost"]), momentum(), position(), Wizard_pink_bullet(vb, loader->entities["Wizard_Pink_bullet"])
 {
 	Enemy_ghost.set_animation(0);
+	Wizard_pink_bullet.teleport(10000000, 10000000);
+}
+
+void Enemy_Ghost::Shoot_magic()
+{
+
 }
 
 void Enemy_Ghost::Get_player_position(float* x, float* y)
@@ -389,35 +395,12 @@ void Enemy_Ghost::tick()
 			else {
 				position[0] = *player_position_x + (rand() % 1000) - 500;
 				position[1] = *player_position_y + (rand() % 1000) - 500;
+				Ghost_move_sound.Play_sound(Ghost_move);
 				std::cout << "moving" << std::endl;
 			}
 			frames = 0;
+			Enemy_ghost.teleport(position[0], position[1]);
 		}
-		/*
-		if (position[0]-*player_position_x != 0 or position[1]- *player_position_y != 0) {
-
-			if (horizontal == true) { momentum[0] = 1; } // right
-			else if (horizontal == false) { momentum[0] = -1; }  //left
-
-			if (vertical == false) { momentum[1] = -1; }  // down
-			else if (vertical == true) { momentum[1] = 1; } // up
-
-			position[0] += momentum[0];
-			position[1] += momentum[1];
-
-			Enemy_ghost.translate(momentum[0], momentum[1]);
-
-			momentum[0] = 0;
-			momentum[1] = 0;
-
-			Ghost_move_sound.Play_sound(Ghost_move);
-
-		}
-		else
-		{
-			Ghost_move_sound.Stop_sound(Ghost_move);
-		}
-		*/
 }
 
 Garfield::Garfield(VertexBuffer* vb)
@@ -428,12 +411,14 @@ Garfield::Garfield(VertexBuffer* vb)
 void Garfield::tick()
 {
 	garfield.tick();
+	garfield.teleport(-100, -100);
 }
 
 Bush_Boi::Bush_Boi(VertexBuffer* vb)
 	: Bush_boi(vb, loader->entities["Bush_Boi"])
 {
 	Bush_boi.set_animation(0);
+	Bush_boi.teleport(100, 100);
 }
 
 void Bush_Boi::tick()

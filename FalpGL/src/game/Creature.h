@@ -90,6 +90,8 @@ public:
 class Enemy_Ghost : public Creature {
 private:
 	Entity Enemy_ghost;
+	Entity Wizard_pink_bullet;
+
 	float momentum[2], position[2];
 	const float Health = 20;
 	const float Damage = 10;
@@ -100,6 +102,7 @@ private:
 
 public:
 	Enemy_Ghost(VertexBuffer* vb);
+	void Shoot_magic();
 	void Get_player_position(float* x, float* y);
 	void tick();
 };
