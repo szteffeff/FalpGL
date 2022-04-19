@@ -90,6 +90,7 @@ private:
 	Tileset set;
 
 	int map_height, map_width;
+
 private:
 	void chunk_to_buffer(Chunk* c);
 	Chunk* chunk_at_pixel(float x, float y);

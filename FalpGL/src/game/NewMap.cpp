@@ -143,6 +143,14 @@ New_Map::New_Map()
 		map_vertex_buffer.buffer_data(sizeof(n_Tile) * 64 * 64 * i, sizeof(n_Tile) * 64 * 64, chunks[i].vertex_data());
 	}
 
+
+	if (map_json["layers"].size() > 1)
+	{ // has object layer
+		for (auto object : map_json["layers"][1]["objects"])
+		{ // x y sx sy tile
+			Decoration placeholder = Decoration(object["x"], object["y"], object["width"], object["height"], set[object["gid"]]);
+		}
+	}
 }
 
 bool New_Map::init()
@@ -343,6 +351,7 @@ n_Tile::n_Tile()
 
 
 Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile)
+	: buffer_index(-1), id(-1)
 {
 	vertex_data[0] = x;                        /* x */
 	vertex_data[1] = y;                        /* y */
