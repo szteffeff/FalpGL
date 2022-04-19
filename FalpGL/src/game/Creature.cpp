@@ -28,6 +28,40 @@ bool Creature::Player_Detectoin_simple_vertical(float y, float* player_y)
 
 }
 
+float Creature::Player_Detection_distance_Horizontal(float x, float* player_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, player_x);
+	float horizontal;
+
+	if (direction == true) {
+		horizontal = *player_x - x;
+	}
+	else {
+		horizontal = x - *player_x;
+	}
+	return horizontal;
+}
+
+float Creature::Player_Detection_distance_Vertical(float y, float* player_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, player_y);
+	float vertical;
+
+	if (direction == true) {
+		vertical = *player_y - y;
+	}
+	else {
+		vertical = y - *player_y;
+	}
+	return vertical;
+}
+
+float Creature::Player_Detetion_distance(float horizontal, float vertical)
+{
+	float distance = sqrt(pow(horizontal, 2) + pow(vertical, 2));
+	return distance;
+}
+
 void Creature::walk(float direction, float magnitude)
 {
 	magnitude *= 3;
@@ -38,11 +72,7 @@ void Creature::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 }
 
-
-
 void Creature::tick() {}
-
-
 
 /* Health_Bar */
 
@@ -134,7 +164,7 @@ void Player::walk(float direction, float magnitude)
 
 	Recover_Stamina();
 	//walk_noise();
-	walking_sound.Play_sound(walking);
+	//walking_sound.Play_sound(walking);
 }
 
 void Player::sprint(float direction, float magnitude)
@@ -203,7 +233,7 @@ void Player::tick()
 	{
 		m_player.set_animation(0);
 		Recover_Stamina();
-		walking_sound.Stop_sound(walking);
+		//walking_sound.Stop_sound(walking);
 	}	
 
 	momentum[0] = 0;
@@ -301,45 +331,6 @@ void Red_Slime::tick()
 
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
-	
-	/*
-	float distance_x = abs(*player_position_x - position[0]);
-	float distance_y = abs(*player_position_y - position[1]);
-
-	float direction = asinf(distance_x / distance_y);
-	float dx = 0, dy = 0;
-	float magnitude = 1;
-
-	if (horizontal == true) { 
-		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	}
-	else if (horizontal == false) {
-		float dx = (float)(-cos(direction * 3.14159 / 180)) * magnitude;
-	}
-
-	if (vertical == false) {
-		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
-	}
-	else if (vertical == true) { 
-		float dy = (float)(-sin(direction * 3.14159 / 180)) * magnitude;
-	}
-
-	momentum[0] += round(dx);
-	momentum[1] += round(dy);
-	*/
-
-	/* 
-	float dir = (atan2(*player_position_x- position[0], *player_position_y - position[0]));
-	if (dir < 0) { dir += 2.0f * 3.14159f; }
-	float real_degrees = ((dir * 180.0f) / 3.14159f);
-
-	float magnitude = 1;
-	float dx = (float)(cos(real_degrees * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(real_degrees * 3.14159 / 180)) * magnitude;
-
-	momentum[0] += round(dx);
-	momentum[1] += round(dy);
-	*/
 
 	if (tick_state.anim_state == animation_state::advanced_frame)
 	{
@@ -384,20 +375,33 @@ void Enemy_Ghost::tick()
 	Enemy_ghost.tick();
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
-	 
-	if (position[0]-*player_position_x != 0 or position[1]- *player_position_y != 0) {
+	
+	static int frames = 0;
 
-		if (horizontal == true) { momentum[0] = 1; } // right
-		else if (horizontal == false) { momentum[0] = -1; }  //left
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
+		
+		if (frames++ == 60 * 3) {
+			int random = 1 + (rand() % 2);
 
-		if (vertical == false) { momentum[1] = -1; }  // down
-		else if (vertical == true) { momentum[1] = 1; } // up
+			if (random == 1) {
+				std::cout << "not moving" << std::endl;
+			}
+			else {
+				position[0] = *player_position_x + (rand() % 1000) - 500;
+				position[1] = *player_position_y + (rand() % 1000) - 500;
+				std::cout << "moving" << std::endl;
+			}
+			frames = 0;
+		}
+		/*
+		if (position[0]-*player_position_x != 0 or position[1]- *player_position_y != 0) {
 
-		static int frame = 0;
+			if (horizontal == true) { momentum[0] = 1; } // right
+			else if (horizontal == false) { momentum[0] = -1; }  //left
 
-		if (frame++ > 120)
-		{
-			frame = 0;
+			if (vertical == false) { momentum[1] = -1; }  // down
+			else if (vertical == true) { momentum[1] = 1; } // up
+
 			position[0] += momentum[0];
 			position[1] += momentum[1];
 
@@ -407,13 +411,13 @@ void Enemy_Ghost::tick()
 			momentum[1] = 0;
 
 			Ghost_move_sound.Play_sound(Ghost_move);
-		}
 
-	}
-	else
-	{
-		Ghost_move_sound.Stop_sound(Ghost_move);
-	}
+		}
+		else
+		{
+			Ghost_move_sound.Stop_sound(Ghost_move);
+		}
+		*/
 }
 
 Garfield::Garfield(VertexBuffer* vb)

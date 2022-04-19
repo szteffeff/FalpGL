@@ -16,6 +16,9 @@ public:
 	Creature();
 	virtual bool Player_Detection_simple_horizontal(float x, float* player_x);
 	virtual bool Player_Detectoin_simple_vertical(float  y, float* player_y);
+	virtual float Player_Detection_distance_Horizontal(float x, float* player_x);
+	virtual float Player_Detection_distance_Vertical(float y, float* player_y);
+	virtual float Player_Detetion_distance(float horizontal, float vertical);
 	virtual void walk(float direction, float magnitude);
 
 	virtual void tick();

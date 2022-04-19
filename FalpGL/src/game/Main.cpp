@@ -302,14 +302,14 @@ int main(void)
         Chompy_slime.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
-        SFX Sound_player;
-        uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
-        Sound_player.Play_sound(intro);
+       // SFX Sound_player;
+        //uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
+        //Sound_player.Play_sound(intro);
         //SFX Sound_song;
         //uint32_t song = SoundBuffer::get()->addSoundEffect("files/SFX/red-test.wav");
         //Sound_song.Play_sound(song);
-        SFX Background_sound;
-        uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
+       // SFX Background_sound;
+       // uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -336,7 +336,7 @@ int main(void)
 
             /*SOUND THINGY*/
             
-            Background_sound.Play_sound(background);
+            //Background_sound.Play_sound(background);
 
             //myspeaker.Play(intro);
 
