@@ -28,6 +28,7 @@ public:
 	void set_animation(int id);
 	void translate(float x, float y);
 	void set_z(float z);
+	void teleport(float new_x, float new_y);
 	Point center();
 	void set_vertex_pos(float x, float y, int index);
 	void set_vertex_pos(Point p, int index);

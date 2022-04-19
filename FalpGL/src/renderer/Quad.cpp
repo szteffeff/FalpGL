@@ -89,6 +89,24 @@ void Quad::update()
 	active_buffer->modify_quad(quad_data, buffer_index);
 }
 
+void Quad::teleport(float new_x, float new_y)
+{
+	Point p = center();
+	quad_data[0] = (new_x)+(quad_data[0] - p.x);
+	quad_data[1] = (new_y)+(quad_data[1] - p.y);
+
+	quad_data[6] = (new_x)+(quad_data[6] - p.x);
+	quad_data[7] = (new_y)+(quad_data[7] - p.y);
+
+	quad_data[12] = (new_x)+(quad_data[12] - p.x);
+	quad_data[13] = (new_y)+(quad_data[13] - p.y);
+
+	quad_data[18] = (new_x)+(quad_data[18] - p.x);
+	quad_data[19] = (new_y)+(quad_data[19] - p.y);
+
+	update();
+}
+
 
 void Quad::rotate(float degrees, Point point, bool radians)
 {
