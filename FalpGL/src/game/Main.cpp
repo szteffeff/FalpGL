@@ -305,9 +305,7 @@ int main(void)
         SFX Sound_player;
         uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
         Sound_player.Play_sound(intro);
-        //SFX Sound_song;
-        //uint32_t song = SoundBuffer::get()->addSoundEffect("files/SFX/red-test.wav");
-        //Sound_song.Play_sound(song);
+        SFX Sound_song;
         SFX Background_sound;
         uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
 
@@ -344,7 +342,7 @@ int main(void)
             ui.UI_Tick();
             if (pause == false) {
                 player.tick();
-                //red_slime.tick();
+                red_slime.tick();
                 enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();

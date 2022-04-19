@@ -16,6 +16,9 @@ public:
 	Creature();
 	virtual bool Player_Detection_simple_horizontal(float x, float* player_x);
 	virtual bool Player_Detectoin_simple_vertical(float  y, float* player_y);
+	virtual float Player_Detection_distance_Horizontal(float x, float* player_x);
+	virtual float Player_Detection_distance_Vertical(float y, float* player_y);
+	virtual float Player_Detetion_distance(float horizontal, float vertical);
 	virtual void walk(float direction, float magnitude);
 
 	virtual void tick();
@@ -87,6 +90,8 @@ public:
 class Enemy_Ghost : public Creature {
 private:
 	Entity Enemy_ghost;
+	Entity Wizard_pink_bullet;
+
 	float momentum[2], position[2];
 	const float Health = 20;
 	const float Damage = 10;
@@ -97,6 +102,7 @@ private:
 
 public:
 	Enemy_Ghost(VertexBuffer* vb);
+	void Shoot_magic();
 	void Get_player_position(float* x, float* y);
 	void tick();
 };
