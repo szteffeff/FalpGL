@@ -1497,13 +1497,47 @@
       ]
     ]
   },
+  "Bush_Boi_Back": {
+    "name": "Bush_Boi_Back",
+    "atlas": 0,
+    "loop": true,
+    "length": 4,
+    "frame_order": [ 0, 1, 2, 3 ],
+    "frame_times": [ 300, 300, 300, 300 ],
+    "texture_coordinants": [
+      [
+        [ 352, 192 ],
+        [ 416, 192 ],
+        [ 416, 256 ],
+        [ 352, 256 ]
+      ],
+      [
+        [ 416, 192 ],
+        [ 480, 192 ],
+        [ 480, 256 ],
+        [ 416, 256 ]
+      ],
+      [
+        [ 352, 256 ],
+        [ 416, 256 ],
+        [ 416, 320 ],
+        [ 352, 320 ]
+      ],
+      [
+        [ 416, 256 ],
+        [ 480, 256 ],
+        [ 480, 320 ],
+        [ 416, 320 ]
+      ]
+    ]
+  },
   "Chompy_Slime": {
     "name": "Chompy_Slime",
     "atlas": 0,
     "loop": true,
     "length": 3,
     "frame_order": [ 0, 1, 2 ],
-    "frame_times": [ 300, 300, 300],
+    "frame_times": [ 300, 300, 300 ],
     "texture_coordinants": [
       [
         [ 480, 64 ],
