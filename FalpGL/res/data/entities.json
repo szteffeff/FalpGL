@@ -44,8 +44,8 @@
   "Bush_Boi": {
     "name": "Bush_Boi",
     "size": [ 128, 128 ],
-    "animation_count": 1,
-    "animation_names": [ "Bush_Boi" ]
+    "animation_count": 2,
+    "animation_names": [ "Bush_Boi", "Bush_Boi_Back" ]
   },
   "Chompy_Slime": {
     "name": "Chompy_Slime",

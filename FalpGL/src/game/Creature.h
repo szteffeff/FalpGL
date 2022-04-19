@@ -3,6 +3,7 @@
 #include "SoundBuffer.h"
 #include "SoundSource.h"
 #include "SoundDevice.h"
+#include "SFX.h"
 #include "NewMap.h"
 
 
