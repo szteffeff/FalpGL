@@ -33,7 +33,7 @@
     "name": "Enemy_Ghost",
     "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Enemy_Ghost" ]
+    "animation_names": [ "Enemy_Ghost_teleporting" ]
   },
   "Garfield": {
     "name": "Garfield",

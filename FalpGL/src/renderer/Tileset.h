@@ -79,6 +79,8 @@ protected:
 	unsigned int active_texture_unit;
 	virtual void create_atlas();
 
+	size_t first_gid;
+
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
 	Tileset(nlohmann::json set_json, int texture_unit);
@@ -92,9 +94,4 @@ public:
 
 	/* Array-like access to prototype tiles */
 	Prototype_Tile& operator[](int index);
-};
-
-
-class Decoation_Set : public Tileset {
-
 };
