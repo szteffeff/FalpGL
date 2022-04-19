@@ -26,6 +26,7 @@ public:
 
 /* Contains data needed to construct specific tiles */
 struct Prototype_Tile {
+	int size_x, size_y;
 
 	/* Texture coordinants of tile's texture on an atlas */
 	float texture_coord[8];
@@ -43,14 +44,14 @@ struct Prototype_Tile {
 	bool collision_circle(float x, float y, float radius);
 	bool has_collision();
 
-	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes);
+	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, int size_x = 32, int size_y = 32);
 	Prototype_Tile();
 };
 
 
 
 class Tileset {
-private:
+protected:
 	/* OpenGL objects */
 	Shader shader;
 	VertexArray vertex_array;
@@ -72,23 +73,28 @@ private:
 
 
 	/* Render tile to atlas */
-	void stitch_tile(Prototype_Tile tile_to_stich);
+	virtual void stitch_tile(Prototype_Tile tile_to_stich);
 
 	bool loaded;
 	unsigned int active_texture_unit;
-	void create_atlas();
+	virtual void create_atlas();
 
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
 	Tileset(nlohmann::json set_json, int texture_unit);
 	Tileset();
 
-	void init(nlohmann::json set_json, int texture_unit);
-	void init(std::string Tileset_path, int texture_unit);
+	virtual void init(nlohmann::json set_json, int texture_unit);
+	virtual void init(std::string Tileset_path, int texture_unit);
 
 	/* Bind framebuffer's texture to specific texture unit */
 	void bind_texture(unsigned int unit);
 
 	/* Array-like access to prototype tiles */
 	Prototype_Tile& operator[](int index);
+};
+
+
+class Decoation_Set : public Tileset {
+
 };

@@ -169,6 +169,7 @@
     <ClCompile Include="src\game\UI.cpp" />
     <ClCompile Include="src\renderer\Framebuffer.cpp" />
     <ClCompile Include="src\renderer\Log.cpp" />
+    <ClCompile Include="src\renderer\Particles.cpp" />
     <ClCompile Include="src\renderer\Quad.cpp" />
     <ClCompile Include="src\renderer\Tileset.cpp" />
     <ClCompile Include="src\types\TileTypes.h" />

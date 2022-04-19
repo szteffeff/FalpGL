@@ -30,6 +30,7 @@
     <ClCompile Include="src\renderer\Tileset.cpp" />
     <ClCompile Include="src\renderer\Log.cpp" />
     <ClCompile Include="src\game\SFX.cpp" />
+    <ClCompile Include="src\renderer\Particles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />

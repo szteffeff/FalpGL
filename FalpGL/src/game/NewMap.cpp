@@ -368,3 +368,11 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 	vertex_data[18] = tile.texture_coord[7];
 	vertex_data[19] = 1.0f;
 }
+
+
+
+
+
+Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations)
+{
+}
