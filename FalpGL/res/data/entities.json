@@ -32,8 +32,8 @@
   "Enemy_Ghost": {
     "name": "Enemy_Ghost",
     "size": [ 128, 128 ],
-    "animation_count": 1,
-    "animation_names": [ "Enemy_Ghost_teleporting" ]
+    "animation_count": 3,
+    "animation_names": [ "Enemy_Ghost", "Enemy_Ghost_teleporting", "Enemy_Ghost_teleporting_reverese" ]
   },
   "Garfield": {
     "name": "Garfield",
@@ -44,8 +44,8 @@
   "Bush_Boi": {
     "name": "Bush_Boi",
     "size": [ 128, 128 ],
-    "animation_count": 2,
-    "animation_names": [ "Bush_Boi", "Bush_Boi_Back" ]
+    "animation_count": 3,
+    "animation_names": [ "Bush_Boi", "Bush_Boi_Back", "Bush_Boi_Back" ]
   },
   "Chompy_Slime": {
     "name": "Chompy_Slime",
@@ -58,5 +58,11 @@
     "size": [ 32, 32 ],
     "animation_count": 1,
     "animation_names": [ "Wizard_Pink_bullet" ]
+  },
+  "Player_Bow": {
+    "name": "Player_Bow",
+    "size": [ 32, 146 ],
+    "animation_count": 1,
+    "animation_names": [ "Player_Bow" ]
   }
 }

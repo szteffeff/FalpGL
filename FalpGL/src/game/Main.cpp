@@ -35,6 +35,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void mouse_callback(GLFWwindow* window, int button, int action, int mods);
 Json_loader* Animation::loader;
 Json_loader* Creature::loader;
+float* Creature::curser_x;
+float* Creature::curser_y;
 
 
 
@@ -70,7 +72,9 @@ int main(void)
 
     int window_width, window_height;
     int resolution_x = 1920, resolution_y = 1080, window_scale = 1;
-    double xpos, ypos;
+    float xpos, ypos;
+    Creature::curser_x = &xpos;
+    Creature::curser_y = &ypos;
     bool running = true;
     const bool fullscreen = false;
     bool pause = false;
@@ -328,7 +332,13 @@ int main(void)
         while (!glfwWindowShouldClose(window) && running)
         {
             /* Handle inputs */
-            glfwGetCursorPos(window, &xpos, &ypos);
+            {
+                double tempx, tempy;
+                glfwGetCursorPos(window, &tempx, &tempy);
+                xpos = (float)tempx;
+                ypos = (float)tempy;
+            }
+            
             xpos -= window_width / 2;
             ypos -= window_height / 2;
             ypos *= -1;
@@ -349,7 +359,7 @@ int main(void)
                 //enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();
-                Chompy_slime.tick();
+                //Chompy_slime.tick();
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));

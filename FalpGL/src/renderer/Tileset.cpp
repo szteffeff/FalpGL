@@ -117,7 +117,7 @@ bool Prototype_Tile::collision_circle(float x, float y, float radius)
 
 Prototype_Tile& Tileset::operator[](int index)
 {
-	return tileset_tiles[index - first_gid + 1];
+	return tileset_tiles[index];
 }
 
 

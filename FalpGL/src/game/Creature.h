@@ -13,6 +13,8 @@ public:
 	static Json_loader* loader;
 	float momentum[2], position[2];
 	float* player_health;
+	static float* curser_x;
+	static float* curser_y;
 
 public:
 	Creature();
@@ -30,6 +32,9 @@ public:
 class Player : public Creature {
 private:
 	Entity m_player;
+	Entity Player_bow;
+	Entity Wizard_pink_bullet;
+
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
 	SFX walking_sound;
 	uint32_t walking = SoundBuffer::get()->addSoundEffect("files/SFX/Footsteps(better).wav");

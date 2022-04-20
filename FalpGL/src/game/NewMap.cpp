@@ -148,7 +148,7 @@ New_Map::New_Map()
 	{ // has object layer
 		for (auto object : map_json["layers"][1]["objects"])
 		{ // x y sx sy tile
-			Decoration placeholder = Decoration(object["x"], object["y"], object["width"], object["height"], set[object["gid"]]);
+			//Decoration placeholder = Decoration(object["x"], object["y"], object["width"], object["height"], set[object["gid"]]);
 		}
 	}
 }
