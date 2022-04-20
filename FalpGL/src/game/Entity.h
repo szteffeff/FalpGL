@@ -32,6 +32,7 @@ public:
 	Point center();
 	void set_vertex_pos(float x, float y, int index);
 	void set_vertex_pos(Point p, int index);
+	void advance_frame();
 	Point get_vertex_pos(int index);
 
 };

@@ -117,7 +117,7 @@ bool Prototype_Tile::collision_circle(float x, float y, float radius)
 
 Prototype_Tile& Tileset::operator[](int index)
 {
-	return tileset_tiles[index];
+	return tileset_tiles[index - first_gid + 1];
 }
 
 
@@ -214,9 +214,12 @@ void Tileset::create_atlas()
 {
 	/* Calculate minimun texture size to fit all tiles in set - maximum 4096 pixels */
 	int tilecount = tileset_json["tilecount"];
+	int tilesize_x = tileset_json["tileheight"];
+	int tilesize_y = tileset_json["tilewidth"];
+
 	for (int test_size_level = 5; test_size_level < 12; test_size_level++)
 	{
-		if (pow(pow(2, test_size_level), 2) / (32.0 * 32.0) > tilecount)
+		if (pow(pow(2, test_size_level), 2) / (tilesize_x * tilesize_y) > tilecount)
 		{
 			size = pow(2, test_size_level);
 			break;
@@ -261,6 +264,8 @@ void Tileset::create_atlas()
 
 	/* Keep track of where a tile is being drawn to */
 	float tex_coords[2] = { 0, 0 };
+
+	first_gid = tileset_json["firstgid"];
 
 	/* Create dummy tile to for id 0 */
 	{

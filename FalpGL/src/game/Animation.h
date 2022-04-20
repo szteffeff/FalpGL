@@ -25,6 +25,7 @@ public:
 
 	animation_state tick();
 	void set();
+	void advance_frame();
 
 private:
 	Quad* m_quad;

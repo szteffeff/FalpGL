@@ -1,6 +1,8 @@
 #include "SoundSource.h"
 #include <iostream>
 
+// Leo's got a BANGING ENCEPHALON!
+
 SoundSource::SoundSource()
 {
 	alGenSources(1, &p_Source);
