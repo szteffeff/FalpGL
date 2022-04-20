@@ -62,6 +62,11 @@ float Creature::Player_Detetion_distance(float horizontal, float vertical)
 	return distance;
 }
 
+void Creature::Player_Health(float* health)
+{
+	player_health = health;
+}
+
 void Creature::walk(float direction, float magnitude)
 {
 	magnitude *= 3;
@@ -233,7 +238,7 @@ void Player::tick()
 	{
 		m_player.set_animation(0);
 		Recover_Stamina();
-		//walking_sound.Stop_sound(walking);
+		walking_sound.Stop_sound(walking);
 	}	
 
 	momentum[0] = 0;
@@ -356,6 +361,25 @@ void Red_Slime::tick()
 		momentum[0] = 0;
 		momentum[1] = 0;
 	}
+	
+	if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+		*player_health -= 1;
+		
+		float dx = 0, dy = 0;
+
+		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[1], position[1]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 10;
+		dy = (float)(sin(direction)) * 10;
+
+		position[0] += -dx;
+		position[1] += -dy;
+
+		Red_slime.translate(-dx, -dy);
+		frame = 0;
+		
+	}
 }
 
 Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
@@ -363,17 +387,6 @@ Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
 {
 	Enemy_ghost.set_animation(0);
 	Wizard_pink_bullet.teleport(10000000, 10000000);
-}
-
-void Enemy_Ghost::Shoot_magic()
-{
-	float magnitude = 3;
-	float direction = atan(Player_Detection_distance_Vertical(position[1], player_position_y) / Player_Detection_distance_Horizontal(position[0], player_position_x));
-	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
-
-	Wizard_pink_bullet.translate(dx, dy);
-
 }
 
 void Enemy_Ghost::Get_player_position(float* x, float* y)
@@ -400,13 +413,13 @@ void Enemy_Ghost::tick()
 				std::cout << "not moving" << std::endl;
 			}
 			else {
-				//position[0] = *player_position_x + (rand() % 1000) - 500;
-				//position[1] = *player_position_y + (rand() % 1000) - 500;
+				position[0] = *player_position_x + (rand() % 1000) - 500;
+				position[1] = *player_position_y + (rand() % 1000) - 500;
 				Ghost_move_sound.Play_sound(Ghost_move);
 				std::cout << "moving" << std::endl;
 			}
 			frames = 0;
-			//Enemy_ghost.teleport(position[0], position[1]);
+			Enemy_ghost.teleport(position[0], position[1]);
 		}
 	
 	static float dx = 0, dy = 0;
@@ -422,7 +435,11 @@ void Enemy_Ghost::tick()
 	}
 
 	Wizard_pink_bullet.translate(dx, dy);
-	std::cout << "Yeet thy bullet" << std::endl;
+
+	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
+		*player_health -= 1;
+		std::cout << "IVE BEEN HIT" << std::endl;
+	}
 }
 
 Garfield::Garfield(VertexBuffer* vb)
@@ -491,5 +508,24 @@ void Chompy_Slime::tick()
 
 		momentum[0] = 0;
 		momentum[1] = 0;
+	}
+
+	if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+		*player_health -= 1;
+
+		float dx = 0, dy = 0;
+
+		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[1], position[1]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 10;
+		dy = (float)(sin(direction)) * 10;
+
+		position[0] += -dx;
+		position[1] += -dy;
+
+		Chompy_slime.translate(-dx, -dy);
+		frame = 0;
+
 	}
 }

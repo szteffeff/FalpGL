@@ -312,6 +312,9 @@ int main(void)
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
         ui.SetPotion(player.GetPotion());
+        enemy_ghost.Player_Health(player.GetHealth());
+        red_slime.Player_Health(player.GetHealth());
+        Chompy_slime.Player_Health(player.GetHealth());
         controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -342,8 +345,8 @@ int main(void)
             ui.UI_Tick();
             if (pause == false) {
                 player.tick();
-                red_slime.tick();
-                enemy_ghost.tick();
+                //red_slime.tick();
+                //enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();
                 Chompy_slime.tick();
