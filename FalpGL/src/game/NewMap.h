@@ -91,6 +91,8 @@ private:
 
 	int map_height, map_width;
 
+	Decoration_Renderer dec_renderer; // needs own header file
+
 private:
 	void chunk_to_buffer(Chunk* c);
 	Chunk* chunk_at_pixel(float x, float y);
@@ -104,7 +106,7 @@ public:
 	Point collision_line_delta(Point origin, Point delta, float collision_radius);
 
 	bool init();
-
+	void spawn_creatures();
 
 	int tile_at(float x, float y);
 	bool collision_at(float x, float y);
@@ -126,6 +128,7 @@ public:
 	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile); 
 
 	void fade(float opacity = 1.0f);
+	float* data();
 };
 
 class Static_Entity : public Decoration {
@@ -141,17 +144,24 @@ public:
 
 class Decoration_Renderer {
 private:
-	Shader map_shader;
-	VertexArray map_vertex_array;
-	VertexBuffer map_vertex_buffer;
-	IndexBuffer map_index_buffer;
+	Shader dec_shader;
+	VertexArray dec_vertex_array;
+	VertexBuffer dec_vertex_buffer;
+	IndexBuffer dec_index_buffer;
 
 	Tileset decoration_set;
 
 
 	std::vector<Decoration> decorations;
+	std::vector<float> vertex_data;
 
 public:
 	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations);
+	Decoration_Renderer();
 
+	void init(nlohmann::json tileset_json, nlohmann::json decorations);
+
+	void add_decoration(Decoration d);
+
+	void draw(glm::mat4 projection_matrix);
 };

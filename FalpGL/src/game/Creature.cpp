@@ -400,13 +400,13 @@ void Enemy_Ghost::tick()
 				std::cout << "not moving" << std::endl;
 			}
 			else {
-				//position[0] = *player_position_x + (rand() % 1000) - 500;
-				//position[1] = *player_position_y + (rand() % 1000) - 500;
+				position[0] = *player_position_x + (rand() % 1000) - 500;
+				position[1] = *player_position_y + (rand() % 1000) - 500;
 				Ghost_move_sound.Play_sound(Ghost_move);
 				std::cout << "moving" << std::endl;
 			}
 			frames = 0;
-			//Enemy_ghost.teleport(position[0], position[1]);
+			Enemy_ghost.teleport(position[0], position[1]);
 		}
 	
 	static float dx = 0, dy = 0;
@@ -414,7 +414,7 @@ void Enemy_Ghost::tick()
 		Wizard_pink_bullet.teleport(position[0], position[1]);
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;
-		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[1], position[1]);
+		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[0], position[1]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		dx = (float)(cos(direction)) * 3;

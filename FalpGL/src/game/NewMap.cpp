@@ -145,11 +145,8 @@ New_Map::New_Map()
 
 
 	if (map_json["layers"].size() > 1)
-	{ // has object layer
-		for (auto object : map_json["layers"][1]["objects"])
-		{ // x y sx sy tile
-			Decoration placeholder = Decoration(object["x"], object["y"], object["width"], object["height"], set[object["gid"]]);
-		}
+	{ // decorations
+		dec_renderer.init(map_json["tilesets"][1], map_json["layers"][1]);
 	}
 }
 
@@ -383,5 +380,53 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 
 
 Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations)
+	: decoration_set(tileset_json, 5), dec_shader("res/shaders/basic.shader"), dec_vertex_array()
 {
+	int amount = decorations["objects"].size();
+	dec_vertex_buffer.init(amount * 20);
+	dec_index_buffer.init(amount);
+
+	for (auto d : decorations["objects"])
+	{
+		add_decoration(Decoration(d["x"], d["y"], d["width"], d["height"], decoration_set[d["gid"]]));
+	}
+
+	VertexBufferLayout layout;
+	layout.Push<float>(2);
+	layout.Push<float>(2);
+	layout.Push<float>(1);
+
+	dec_vertex_buffer.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
+	dec_vertex_array.AddBuffer(dec_vertex_buffer, layout);
+}
+
+void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decorations)
+{
+	int amount = decorations["objects"].size();
+	dec_vertex_buffer.init(amount * 20);
+	dec_index_buffer.init(amount);
+
+	for (auto d : decorations["objects"])
+	{
+		add_decoration(Decoration(d["x"], d["y"], d["width"], d["height"], decoration_set[d["gid"]]));
+	}
+
+	VertexBufferLayout layout;
+	layout.Push<float>(2);
+	layout.Push<float>(2);
+	layout.Push<float>(1);
+
+	dec_vertex_buffer.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
+	dec_vertex_array.AddBuffer(dec_vertex_buffer, layout);
+}
+
+
+void Decoration_Renderer::add_decoration(Decoration d)
+{
+	decorations.push_back(d);
+	for (int i = 0; i < 20; i++)
+	{
+		vertex_data.push_back(*(d.data() + i));
+	}
+
 }

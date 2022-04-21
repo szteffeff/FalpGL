@@ -53,7 +53,6 @@ animation_state Animation::tick()
 				current_frame = 0;
 				return animation_state::ended;
 			}
-				
 		}
 		else
 		{
