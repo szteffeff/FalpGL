@@ -454,10 +454,13 @@ void Enemy_Ghost::tick()
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
 	entity_return tick_state = Enemy_ghost.tick();
+	entity_return tick_bullet = Wizard_pink_bullet.tick();
+	
 	
 	static int frames = 0;
 	static int frames_magic = 0;
 	static int teleporting = 0;
+	static int dmg_control = 0;
 	bool pewpew = false;
 
 	if (tick_state.anim_state == animation_state::ended) {
@@ -475,6 +478,7 @@ void Enemy_Ghost::tick()
 			}
 			else {
 				Enemy_ghost.set_animation(1);
+				Ghost_move_sound.Play_sound(Ghost_move);
 				teleporting += 1;
 				pewpew = false;
 				
@@ -484,6 +488,7 @@ void Enemy_Ghost::tick()
 
 	if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
 		Enemy_ghost.set_animation(0);
+		Ghost_move_sound.Stop_sound(Ghost_move);
 		teleporting = 0;
 	}
 
@@ -492,16 +497,17 @@ void Enemy_Ghost::tick()
 			Enemy_ghost.set_animation(2);
 			position[0] = *player_position_x + (rand() % 1000) - 500;
 			position[1] = *player_position_y + (rand() % 1000) - 500;
-			Ghost_move_sound.Play_sound(Ghost_move);
 			std::cout << "moving" << std::endl;
 			Enemy_ghost.teleport(position[0], position[1]);
 			teleporting++;
 		}
 	}
-	
+
 	static float dx = 0, dy = 0;
 	if (frames_magic++ == 60 * 4 and pewpew == false) {
+		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(position[0], position[1]);
+		dmg_control = 0;
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;
 		float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
@@ -513,9 +519,21 @@ void Enemy_Ghost::tick()
 
 	Wizard_pink_bullet.translate(dx, dy);
 
+
 	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
-		*player_health -= 1;
+		dx = 0;
+		dy = 0;
+		Wizard_pink_bullet.set_animation(1);
+		if (dmg_control < 10) {
+			*player_health -= 1;
+			dmg_control++;
+		}
+		
 		std::cout << "IVE BEEN HIT" << std::endl;
+		if (tick_bullet.anim_state == animation_state::ended)
+		{
+			Wizard_pink_bullet.teleport(1000000000, 100000000);
+		}
 	}
 }
 

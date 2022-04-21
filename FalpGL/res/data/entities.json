@@ -69,13 +69,13 @@
     "name": "Player_Arrow",
     "size": [ 90, 8 ],
     "animation_count": 1,
-    "animation_names": [ "Player_Bow" ]
+    "animation_names": [ "Player_Arrow" ]
   },
   "Player_Spear": {
     "name": "Player_Spear",
     "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Player_Bow" ]
+    "animation_names": [ "Player_Spear" ]
   },
   "Player_Dagger": {
     "name": "Player_Dagger",
@@ -85,7 +85,7 @@
   },
   "Player_Shatter_Axe": {
     "name": "Player_Shatter_Axe",
-    "size": [ 92, 128 ],
+    "size": [ 128, 94 ],
     "animation_count": 1,
     "animation_names": [ "Player_Shatter_Axe" ]
   }

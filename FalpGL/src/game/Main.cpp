@@ -280,7 +280,7 @@ int main(void)
         layout.Push<float>(2);
         layout.Push<float>(1);
 
-        BatchRenderer player_render(100, "res/shaders/basic.shader");
+        BatchRenderer player_render(1000, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
         BatchRenderer interface_renderer(1000, "res/shaders/ui.shader");
@@ -356,7 +356,7 @@ int main(void)
             if (pause == false) {
                 player.tick();
                 //red_slime.tick();
-                //enemy_ghost.tick();
+                enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();
                 //Chompy_slime.tick();
