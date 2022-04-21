@@ -62,6 +62,11 @@ float Creature::Player_Detetion_distance(float horizontal, float vertical)
 	return distance;
 }
 
+void Creature::Player_Health(float* health)
+{
+	player_health = health;
+}
+
 void Creature::walk(float direction, float magnitude)
 {
 	magnitude *= 3;
@@ -150,8 +155,10 @@ void Health_Bar::tick(float h, float s, frame_animations level)
 /* Player */
 
 Player::Player(VertexBuffer* vb)
-	: m_player(vb, loader->entities["PLAYER"]), momentum(), position()
-{}
+	: m_player(vb, loader->entities["PLAYER"]), momentum(), position(), Player_bow(vb, loader->entities["Player_Bow"])
+{
+	Player_bow.teleport(200000, 2000000);
+}
 
 void Player::walk(float direction, float magnitude)
 {
@@ -233,7 +240,7 @@ void Player::tick()
 	{
 		m_player.set_animation(0);
 		Recover_Stamina();
-		//walking_sound.Stop_sound(walking);
+		walking_sound.Stop_sound(walking);
 	}	
 
 	momentum[0] = 0;
@@ -341,20 +348,60 @@ void Red_Slime::tick()
 
 	if (frame == 2)
 	{
-		int magnitude = 2;
-		if (horizontal == true) { momentum[0] += magnitude; }
-		else if (horizontal == false) { momentum[0] += -magnitude; }
 
-		if (vertical == false) { momentum[1] += -magnitude; }
-		else if (vertical == true) { momentum[1] += magnitude; }
+		static int frame;
+		static int bops;
+		static int bops_frame;
+		entity_return tick_state = Red_slime.tick();
 
-		position[0] += momentum[0];
-		position[1] += momentum[1];
+		bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+		bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
 
-		Red_slime.translate(momentum[0], momentum[1]);
+		if (tick_state.anim_state == animation_state::advanced_frame)
+		{
+			frame++;
+			if (frame >= 3)
+				frame = 0;
+		}
 
-		momentum[0] = 0;
-		momentum[1] = 0;
+		if (frame == 2)
+		{
+			float magnitude = 2;
+			if (bops < 3) {
+				if (horizontal == true) { momentum[0] += magnitude; }
+				else if (horizontal == false) { momentum[0] += -magnitude; }
+
+				if (vertical == false) { momentum[1] += -magnitude; }
+				else if (vertical == true) { momentum[1] += magnitude; }
+
+			}
+			else if (bops > 3) {
+				magnitude = 2;
+				if (horizontal == true) { momentum[0] += -magnitude; }
+				else if (horizontal == false) { momentum[0] += magnitude; }
+
+				if (vertical == false) { momentum[1] += magnitude; }
+				else if (vertical == true) { momentum[1] += -magnitude; }
+				bops_frame += 1;
+			}
+			if (bops_frame > 60 * 2) {
+				bops_frame = 0;
+				bops = 0;
+			}
+
+			position[0] += round(momentum[0]);
+			position[1] += round(momentum[1]);
+
+			Red_slime.translate(round(momentum[0]), round(momentum[1]));
+
+			momentum[0] = 0;
+			momentum[1] = 0;
+		}
+
+		if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+			*player_health -= 1;
+			bops += 1;
+		}
 	}
 }
 
@@ -365,17 +412,6 @@ Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
 	Wizard_pink_bullet.teleport(10000000, 10000000);
 }
 
-void Enemy_Ghost::Shoot_magic()
-{
-	float magnitude = 3;
-	float direction = atan(Player_Detection_distance_Vertical(position[1], player_position_y) / Player_Detection_distance_Horizontal(position[0], player_position_x));
-	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
-
-	Wizard_pink_bullet.translate(dx, dy);
-
-}
-
 void Enemy_Ghost::Get_player_position(float* x, float* y)
 {
 	player_position_x = x;
@@ -384,37 +420,57 @@ void Enemy_Ghost::Get_player_position(float* x, float* y)
 
 void Enemy_Ghost::tick()
 {
-	Enemy_ghost.tick();
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	entity_return tick_state = Enemy_ghost.tick();
 	
 	static int frames = 0;
 	static int frames_magic = 0;
+	static int teleporting = 0;
+
+	if (tick_state.anim_state == animation_state::ended) {
+		Enemy_ghost.set_animation(0);
+	}
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
-	
+
 		if (frames++ == 60 * 6) {
 			int random = 1 + (rand() % 2);
 
-			if (random == 1) {
+			if (random == 1 and teleporting > 0) {
 				std::cout << "not moving" << std::endl;
 			}
 			else {
-				position[0] = *player_position_x + (rand() % 1000) - 500;
-				position[1] = *player_position_y + (rand() % 1000) - 500;
-				Ghost_move_sound.Play_sound(Ghost_move);
-				std::cout << "moving" << std::endl;
+				Enemy_ghost.set_animation(1);
+				teleporting += 1;
+				
 			}
 			frames = 0;
-			Enemy_ghost.teleport(position[0], position[1]);
 		}
+
+	if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
+		Enemy_ghost.set_animation(0);
+		teleporting = 0;
+	}
+
+	if (teleporting > 0) {
+		if (tick_state.anim_state == animation_state::ended) {
+			Enemy_ghost.set_animation(2);
+			position[0] = *player_position_x + (rand() % 1000) - 500;
+			position[1] = *player_position_y + (rand() % 1000) - 500;
+			Ghost_move_sound.Play_sound(Ghost_move);
+			std::cout << "moving" << std::endl;
+			Enemy_ghost.teleport(position[0], position[1]);
+			teleporting++;
+		}
+	}
 	
 	static float dx = 0, dy = 0;
-	if (frames_magic++ == 60 * 4) {
+	if (frames_magic++ == 60 * 4 and not teleporting) {
 		Wizard_pink_bullet.teleport(position[0], position[1]);
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;
-		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[0], position[1]);
+		float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		dx = (float)(cos(direction)) * 3;
@@ -422,7 +478,11 @@ void Enemy_Ghost::tick()
 	}
 
 	Wizard_pink_bullet.translate(dx, dy);
-	std::cout << "Yeet thy bullet" << std::endl;
+
+	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
+		*player_health -= 1;
+		std::cout << "IVE BEEN HIT" << std::endl;
+	}
 }
 
 Garfield::Garfield(VertexBuffer* vb)
@@ -463,6 +523,8 @@ void Chompy_Slime::Get_player_position(float* x, float* y)
 void Chompy_Slime::tick()
 {
 	static int frame;
+	static int bops;
+	static int bops_frame;
 	entity_return tick_state = Chompy_slime.tick();
 
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
@@ -477,19 +539,57 @@ void Chompy_Slime::tick()
 
 	if (frame == 2)
 	{
-		int magnitude = 2;
-		if (horizontal == true) { momentum[0] += magnitude; }
-		else if (horizontal == false) { momentum[0] += -magnitude; }
+		float magnitude = 2;
+		if (bops < 3) {
+			if (horizontal == true) { momentum[0] += magnitude; }
+			else if (horizontal == false) { momentum[0] += -magnitude; }
 
-		if (vertical == false) { momentum[1] += -magnitude; }
-		else if (vertical == true) { momentum[1] += magnitude; }
+			if (vertical == false) { momentum[1] += -magnitude; }
+			else if (vertical == true) { momentum[1] += magnitude; }
 
-		position[0] += momentum[0];
-		position[1] += momentum[1];
+		}
+		else if (bops > 3) {
+			magnitude = 2;
+			if (horizontal == true) { momentum[0] += -magnitude; }
+			else if (horizontal == false) { momentum[0] += magnitude; }
 
-		Chompy_slime.translate(momentum[0], momentum[1]);
+			if (vertical == false) { momentum[1] += magnitude; }
+			else if (vertical == true) { momentum[1] += -magnitude; }
+			bops_frame += 1;
+		}
+		if (bops_frame > 60 * 2) {
+			bops_frame = 0;
+			bops = 0;
+		}
+		
+		position[0] += round(momentum[0]);
+		position[1] += round(momentum[1]);
+
+		Chompy_slime.translate(round(momentum[0]), round(momentum[1]));
 
 		momentum[0] = 0;
 		momentum[1] = 0;
+	}
+
+	if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+		*player_health -= 1;
+
+		bops += 1;
+
+		/*
+		float dx = 0, dy = 0;
+
+		float direction = atan2(*player_position_y, *player_position_x) - atan2(position[1], position[1]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 10;
+		dy = (float)(sin(direction)) * 10;
+
+		position[0] += -dx;
+		position[1] += -dy;
+
+		Chompy_slime.teleport(position[0], position[1]);
+		frame = 0;
+		*/
 	}
 }
