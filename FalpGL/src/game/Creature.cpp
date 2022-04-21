@@ -427,6 +427,7 @@ void Enemy_Ghost::tick()
 	static int frames = 0;
 	static int frames_magic = 0;
 	static int teleporting = 0;
+	bool pewpew = false;
 
 	if (tick_state.anim_state == animation_state::ended) {
 		Enemy_ghost.set_animation(0);
@@ -434,15 +435,17 @@ void Enemy_Ghost::tick()
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
 
-		if (frames++ == 60 * 6) {
+		if (frames++ == 60 * 12) {
 			int random = 1 + (rand() % 2);
 
 			if (random == 1 and teleporting > 0) {
 				std::cout << "not moving" << std::endl;
+				pewpew = true;
 			}
 			else {
 				Enemy_ghost.set_animation(1);
 				teleporting += 1;
+				pewpew = false;
 				
 			}
 			frames = 0;
@@ -466,7 +469,7 @@ void Enemy_Ghost::tick()
 	}
 	
 	static float dx = 0, dy = 0;
-	if (frames_magic++ == 60 * 4 and not teleporting) {
+	if (frames_magic++ == 60 * 4 and pewpew == false) {
 		Wizard_pink_bullet.teleport(position[0], position[1]);
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;

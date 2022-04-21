@@ -23,6 +23,10 @@ Entity::Entity(VertexBuffer* a, json load) /* takes loader already scoped to ful
 	animations[active_animation].tick();
 }
 
+int Entity::get_animation()
+{
+	return active_animation;
+}
 
 void Entity::advance_frame()
 {

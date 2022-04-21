@@ -57,12 +57,36 @@
     "name": "Wizard_Pink_bullet",
     "size": [ 32, 32 ],
     "animation_count": 1,
-    "animation_names": [ "Wizard_Pink_bullet" ]
+    "animation_names": [ "Wizard_Pink_bullet", "Wizard_Pink_bullet_boom" ]
   },
   "Player_Bow": {
     "name": "Player_Bow",
     "size": [ 32, 146 ],
     "animation_count": 1,
     "animation_names": [ "Player_Bow" ]
+  },
+  "Player_Arrow": {
+    "name": "Player_Arrow",
+    "size": [ 90, 8 ],
+    "animation_count": 1,
+    "animation_names": [ "Player_Bow" ]
+  },
+  "Player_Spear": {
+    "name": "Player_Spear",
+    "size": [ 128, 128 ],
+    "animation_count": 1,
+    "animation_names": [ "Player_Bow" ]
+  },
+  "Player_Dagger": {
+    "name": "Player_Dagger",
+    "size": [ 128, 128 ],
+    "animation_count": 1,
+    "animation_names": [ "Player_Dagger" ]
+  },
+  "Player_Shatter_Axe": {
+    "name": "Player_Shatter_Axe",
+    "size": [ 92, 128 ],
+    "animation_count": 1,
+    "animation_names": [ "Player_Shatter_Axe" ]
   }
 }
