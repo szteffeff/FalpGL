@@ -108,6 +108,7 @@ void Animation::load(std::string name)
 
 void Animation::set()
 {
+	current_frame = 0;
 	m_quad->set_texture_index((float)atlas);
 	m_quad->set_texture_coords(tex_coords[current_frame]);
 	tick();

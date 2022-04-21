@@ -1694,10 +1694,10 @@
   "Wizard_Pink_bullet_boom": {
     "name": "Wizard_Pink_bullet_boom",
     "atlas": 0,
-    "loop": true,
+    "loop": false,
     "length": 5,
     "frame_order": [ 0, 1, 2, 3, 4 ],
-    "frame_times": [ 30, 30, 30, 30, 30 ],
+    "frame_times": [ 150, 150, 150, 150, 150 ],
     "texture_coordinants": [
       [
         [ 544, 128 ],
