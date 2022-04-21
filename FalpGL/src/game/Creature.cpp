@@ -157,11 +157,11 @@ void Health_Bar::tick(float h, float s, frame_animations level)
 Player::Player(VertexBuffer* vb)
 	: m_player(vb, loader->entities["PLAYER"]), momentum(), position(), Player_bow(vb, loader->entities["Player_Bow"]), Player_arrow(vb, loader->entities["Player_Arrow"]), Player_spear(vb, loader->entities["Player_Spear"]), Player_dagger(vb, loader->entities["Player_Dagger"]), Player_Shatter_axe(vb, loader->entities["Player_Shatter_Axe"])
 {
-	Player_bow.teleport(0, 100);
-	Player_arrow.teleport(0, 100);
-	Player_dagger.teleport(0, 150);
-	Player_spear.teleport(0, 200);
-	Player_Shatter_axe.teleport(0, 250);
+	Player_bow.teleport(100, -100);
+	Player_arrow.teleport(200, -100);
+	Player_dagger.teleport(300, -100);
+	Player_spear.teleport(400, -100);
+	Player_Shatter_axe.teleport(500, -100);
 }
 
 void Player::walk(float direction, float magnitude)
@@ -225,8 +225,6 @@ void Player::tick()
 		player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
 	}
 
-
-
 	if (sqrt(momentum[0] * momentum[0] + momentum[1] * momentum[1]) > 0.75)
 	{
 		float dir = (atan2(momentum[1], momentum[0]));
@@ -247,23 +245,22 @@ void Player::tick()
 		walking_sound.Stop_sound(walking);
 	}	
 
-
-
 	momentum[0] = 0;
 	momentum[1] = 0;
 
 	static float dx = 0, dy = 0;
 	static int frames_magic = 0;
 
-	if (shoot_bow == true) {
-		
-		
+	//shoot_bow == true
+	/*
+	if (frames_magic++ == 60 * 10000000) {
 		
 		Player_arrow.teleport(position[0], position[1]);
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;
-		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] , position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		
 		std::cout << direction << std::endl;
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
@@ -271,7 +268,41 @@ void Player::tick()
 		shoot_bow == false;
 	}
 	Player_arrow.translate(dx, dy);
+	*/
 
+	static int frames_dagger = 0;
+	static int dagger_frame = 0;
+	static int dagger_start = 0;
+	static int dagger_end = 0;
+
+	if (light_dagger == true) {
+		Player_dagger.teleport(position[0], position[1]);
+		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1], position[0]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 3;
+		dy = (float)(sin(direction)) * 3;
+		dagger_start = 1;
+	}
+	if (dagger_start > 0 and dagger_frame < 20) {
+		Player_dagger.translate(dx, dy);
+		dagger_frame++;
+	}
+	else if (dagger_start > 0 and dagger_frame == 20 and dagger_end < 20) {
+		Player_dagger.translate(-dx, -dy);
+		dagger_end++;
+	}
+	else if (dagger_start > 0 and dagger_frame == 20 and dagger_end == 20) {
+		Player_dagger.teleport(100000, 100000);
+		dagger_end = 0;
+		dagger_frame = 0;
+		dagger_start = 0;
+		frames_dagger = 0;
+		light_dagger = false;
+	}
+
+	Player_arrow.tick();
+	Player_dagger.tick();
 	m_player.tick();
 }
 float* Player::GetHealth()
@@ -322,6 +353,12 @@ void Player::Shoot_bow()
 {
 	shoot_bow = true;
 }
+
+void Player::Dagger_light()
+{
+	light_dagger = true;
+}
+
 
 glm::mat4* Player::get_trans_matrix()
 {

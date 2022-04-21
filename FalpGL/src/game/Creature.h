@@ -49,6 +49,7 @@ private:
 	float Stamina = 100;
 	int Potion = 4;
 	bool shoot_bow = false;
+	bool light_dagger = false;
 
 	enum class player_animations {
 		IDLE = 0,
@@ -82,6 +83,7 @@ public:
 	void Recover_Stamina();
 	void Lose_Stamina();
 	void Shoot_bow();
+	void Dagger_light();
 	//float Change_Health(float Damage, float Heal)
 };
 
