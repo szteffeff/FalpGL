@@ -92,7 +92,7 @@ private:
 
 	int map_height, map_width;
 
-	Decoration_Renderer dec_renderer; // needs own header file
+	Decoration_Renderer dec_renderer;
 
 private:
 	void chunk_to_buffer(Chunk* c);
@@ -103,6 +103,8 @@ public:
 	~New_Map();
 
 	void draw(glm::mat4 matrix);
+	void draw_extras(glm::mat4 matrix);
+
 	Point collision_line_desination(Point origin, Point desination, float collision_radius);
 	Point collision_line_delta(Point origin, Point delta, float collision_radius);
 
@@ -115,4 +117,5 @@ public:
 
 	bool collision_tile(float x, float y);
 
+	void tick();
 };

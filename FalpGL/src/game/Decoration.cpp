@@ -31,6 +31,10 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 
 void Decoration::fade(float opacity)
 {
+	vertex_data[4] = opacity;
+	vertex_data[9] = opacity;
+	vertex_data[14] = opacity;
+	vertex_data[19] = opacity;
 }
 
 float* Decoration::data()
@@ -113,4 +117,20 @@ void Decoration_Renderer::draw(glm::mat4 projection_matrix)
 
 
 	GLCall(glDrawElements(GL_TRIANGLES, dec_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
+}
+
+void Decoration_Renderer::tick(float pos_x, float pos_y)
+{
+	vertex_data.clear();
+
+	for (auto d : decorations)
+	{
+		d.fade((rand() % 100) / 100.0f);
+		for (int i = 0; i < 20; i++)
+		{
+			vertex_data.push_back(*(d.data() + i));
+		}
+	}
+
+	dec_vertex_buffer.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
 }
