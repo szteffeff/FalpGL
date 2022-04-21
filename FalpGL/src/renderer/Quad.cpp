@@ -280,40 +280,17 @@ void Quad::reset()
 	quad_data[1] = -height / 2;
 	quad_data[2] = 0.0f;
 
-	quad_data[3] = 0.0f;
-	quad_data[4] = 0.0f;
-
-	quad_data[5] = 0.0f;
-
-
 	quad_data[6] = width / 2;
 	quad_data[7] = -height / 2;
 	quad_data[8] = 0.0f;
-
-	quad_data[9] = 1.0f;
-	quad_data[10] = 0.0f;
-
-	quad_data[11] = 0.0f;
-
 
 	quad_data[12] = width / 2;
 	quad_data[13] = height / 2;
 	quad_data[14] = 0.0f;
 
-	quad_data[15] = 1.0f;
-	quad_data[16] = 1.0f;
-
-	quad_data[17] = 0.0f;
-
-
 	quad_data[18] = -width / 2;
 	quad_data[19] = height / 2;
 	quad_data[20] = 0.0f;
-
-	quad_data[21] = 0.0f;
-	quad_data[22] = 1.0f;
-
-	quad_data[23] = 0.0f;
 
 	update();
 }

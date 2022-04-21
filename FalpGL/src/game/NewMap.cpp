@@ -235,7 +235,7 @@ bool New_Map::collision_circle(float x, float y, float radius)
 		stream << "\n";
 	}
 
-	console_log(stream.str());
+	//console_log(stream.str());
 
 	return false;
 }

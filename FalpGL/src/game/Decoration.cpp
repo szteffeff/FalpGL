@@ -125,7 +125,7 @@ void Decoration_Renderer::tick(float pos_x, float pos_y)
 
 	for (auto d : decorations)
 	{
-		d.fade((rand() % 100) / 100.0f);
+		d.fade(0.5);
 		for (int i = 0; i < 20; i++)
 		{
 			vertex_data.push_back(*(d.data() + i));

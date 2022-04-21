@@ -65,6 +65,11 @@ void Entity::rotate(float degrees, Point point, bool radians)
 	main_quad.rotate(degrees, point, radians);
 }
 
+void Entity::reset()
+{
+	main_quad.reset();
+}
+
 void Entity::translate(float x, float y)
 {
 	main_quad.translate(x, y);

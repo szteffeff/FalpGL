@@ -31,6 +31,7 @@ public:
 	void set_z(float z);
 	void teleport(float new_x, float new_y);
 	void rotate(float degrees, Point point, bool radians = false);
+	void reset();
 	Point center();
 	void set_vertex_pos(float x, float y, int index);
 	void set_vertex_pos(Point p, int index);
