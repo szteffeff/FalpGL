@@ -67,14 +67,14 @@ Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[
 	texture_coord[0] = tex_origin[0];
 	texture_coord[1] = tex_origin[1];
 
-	texture_coord[2] = tex_origin[0] + (32.0f / atlas_size);
+	texture_coord[2] = tex_origin[0] + ((float)size_x / atlas_size);
 	texture_coord[3] = tex_origin[1];
 
-	texture_coord[4] = tex_origin[0] + (32.0f / atlas_size);
-	texture_coord[5] = tex_origin[1] + (32.0f / atlas_size);
+	texture_coord[4] = tex_origin[0] + ((float)size_x / atlas_size);
+	texture_coord[5] = tex_origin[1] + ((float)size_y / atlas_size);
 
 	texture_coord[6] = tex_origin[0];
-	texture_coord[7] = tex_origin[1] + (32.0f / atlas_size);
+	texture_coord[7] = tex_origin[1] + ((float)size_y / atlas_size);
 
 	if (image.rfind("/") != std::string::npos) 
 	{
@@ -117,7 +117,7 @@ bool Prototype_Tile::collision_circle(float x, float y, float radius)
 
 Prototype_Tile& Tileset::operator[](int index)
 {
-	return tileset_tiles[index + first_gid - 1];
+	return tileset_tiles[index - first_gid + 1];
 }
 
 
@@ -214,8 +214,8 @@ void Tileset::create_atlas()
 {
 	/* Calculate minimun texture size to fit all tiles in set - maximum 4096 pixels */
 	int tilecount = tileset_json["tilecount"];
-	int tilesize_x = tileset_json["tileheight"];
-	int tilesize_y = tileset_json["tilewidth"];
+	tilesize_x = tileset_json["tileheight"];
+	tilesize_y = tileset_json["tilewidth"];
 
 	for (int test_size_level = 5; test_size_level < 12; test_size_level++)
 	{
@@ -250,7 +250,7 @@ void Tileset::create_atlas()
 
 	/* Bind and clear framebuffer */
 	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id);
-	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+	glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	/* Setup openGL objects */
@@ -274,7 +274,7 @@ void Tileset::create_atlas()
 		tileset_tiles.push_back(new_tile);
 
 		/* Advance to the next open space on the atlas */
-		tex_coords[0] += (32.0f / size);
+		tex_coords[0] += ((float)tilesize_x / size);
 
 		/* Load texture image */
 		Texture working_texture(new_tile.filepath);
@@ -313,12 +313,12 @@ void Tileset::create_atlas()
 
 
 		/* Advance to the next open space on the atlas */
-		tex_coords[0] += (32.0f / size);
+		tex_coords[0] += ((float)tilesize_x / (float)size);
 		if (tex_coords[0] >= 1.0f)
 		{
 			/* If the end of a row is hit, go back to the start of the next row up */
 			tex_coords[0] = 0;
-			tex_coords[1] += (32.0f / size);
+			tex_coords[1] += ((float)tilesize_y / (float)size);
 		}
 
 		/* Load texture image */
@@ -361,14 +361,14 @@ void Tileset::stitch_tile(Prototype_Tile tile_to_stich)
 	vertices[0] = (tile_to_stich.texture_coord[0] * 2.0f) - 1.0f;
 	vertices[1] = (tile_to_stich.texture_coord[1] * 2.0f) - 1.0f;
 
-	vertices[4] = ((tile_to_stich.texture_coord[0] + (32.0f / size)) * 2.0f) - 1.0f;
-	vertices[5] = (tile_to_stich.texture_coord[1] * 2.0f) - 1.0f;
+	vertices[4] = (tile_to_stich.texture_coord[2] * 2.0f) - 1.0f;
+	vertices[5] = (tile_to_stich.texture_coord[3] * 2.0f) - 1.0f;
 
-	vertices[8] = ((tile_to_stich.texture_coord[0] + (32.0f / size)) * 2.0f) - 1.0f;
-	vertices[9] = ((tile_to_stich.texture_coord[1] + (32.0f / size)) * 2.0f) - 1.0f;
+	vertices[8] = (tile_to_stich.texture_coord[4] * 2.0f) - 1.0f;
+	vertices[9] = (tile_to_stich.texture_coord[5] * 2.0f) - 1.0f;
 
-	vertices[12] = (tile_to_stich.texture_coord[0] * 2.0f) - 1.0f;
-	vertices[13] = ((tile_to_stich.texture_coord[1] + (32.0f / size)) * 2.0f) - 1.0f;
+	vertices[12] = (tile_to_stich.texture_coord[6] * 2.0f) - 1.0f;
+	vertices[13] = (tile_to_stich.texture_coord[7] * 2.0f) - 1.0f;
 
 
 	/* Write vertex data to buffer */

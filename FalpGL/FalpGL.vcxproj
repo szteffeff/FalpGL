@@ -195,6 +195,7 @@
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\basicBlank.shader" />
     <None Include="res\shaders\chroma.shader" />
+    <None Include="res\shaders\decoration.shader" />
     <None Include="res\shaders\hsl.shader" />
     <None Include="res\shaders\hell.shader" />
     <None Include="res\shaders\kernel.shader" />
