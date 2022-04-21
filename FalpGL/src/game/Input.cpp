@@ -116,12 +116,12 @@ void Input::mouse_recive(int button, int action, int mods)
 
 	if (mouse_x > 0)
 	{
-		*pause_menu = false;
+		//*pause_menu = false;
 	}
 
 	if (mouse_x < 0)
 	{
-		*pause_menu = true;
+		//*pause_menu = true;
 	}
 }
 

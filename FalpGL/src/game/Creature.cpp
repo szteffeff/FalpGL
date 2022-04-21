@@ -274,12 +274,14 @@ void Player::tick()
 	static int dagger_frame = 0;
 	static int dagger_start = 0;
 	static int dagger_end = 0;
+	float direction = 0;
 
-	if (light_dagger == true) {
+	if (light_dagger == true and not dagger_start) {
 		Player_dagger.teleport(position[0], position[1]);
-		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1], position[0]);
+		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1]- position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
+		//Player_dagger.rotate(direction + 90, Player_dagger.center());
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		dagger_start = 1;
@@ -299,6 +301,7 @@ void Player::tick()
 		dagger_start = 0;
 		frames_dagger = 0;
 		light_dagger = false;
+		//Player_dagger.rotate(-direction-90, Player_dagger.center());
 	}
 
 	Player_arrow.tick();
@@ -540,8 +543,10 @@ void Enemy_Ghost::tick()
 		}
 	}
 
+	static int bullet_lifespan = 60 * 4;
 	static float dx = 0, dy = 0;
-	if (frames_magic++ == 60 * 4 and pewpew == false) {
+	if (frames_magic++ == 60 * 6 and pewpew == false) {
+		bullet_lifespan = 60 * 4;
 		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(position[0], position[1]);
 		dmg_control = 0;
@@ -553,9 +558,14 @@ void Enemy_Ghost::tick()
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 	}
-
+	bullet_lifespan -= 1;
 	Wizard_pink_bullet.translate(dx, dy);
 
+	if (bullet_lifespan == 0) {
+		dx = 0;
+		dy = 0;
+		Wizard_pink_bullet.set_animation(1);
+	}
 
 	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
 		dx = 0;
@@ -567,10 +577,11 @@ void Enemy_Ghost::tick()
 		}
 		
 		std::cout << "IVE BEEN HIT" << std::endl;
-		if (tick_bullet.anim_state == animation_state::ended)
-		{
-			Wizard_pink_bullet.teleport(1000000000, 100000000);
-		}
+	}
+	if (tick_bullet.anim_state == animation_state::ended)
+	{
+		Wizard_pink_bullet.set_animation(0);
+		Wizard_pink_bullet.teleport(100000, 10000);
 	}
 }
 
