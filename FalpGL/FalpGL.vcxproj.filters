@@ -31,6 +31,7 @@
     <ClCompile Include="src\renderer\Log.cpp" />
     <ClCompile Include="src\game\SFX.cpp" />
     <ClCompile Include="src\renderer\Particles.cpp" />
+    <ClCompile Include="src\game\Decoration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />
@@ -350,6 +351,7 @@
     <ClInclude Include="src\renderer\Log.h" />
     <ClInclude Include="src\renderer\Particles.h" />
     <ClInclude Include="src\game\SFX.h" />
+    <ClInclude Include="src\game\Decoration.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\gfx\atlas0.png" />
