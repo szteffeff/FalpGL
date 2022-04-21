@@ -353,6 +353,7 @@ int main(void)
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
+            nmap.tick();
             if (pause == false) {
                 player.tick();
                 //red_slime.tick();
@@ -381,6 +382,7 @@ int main(void)
 
                 player_render.draw(projection_matrix * *player.get_trans_matrix());
 
+                nmap.draw_extras(projection_matrix * *player.get_trans_matrix());
 
                 /* Setup chromatic aberration framebuffer */
                 c_framebuffer.bind();

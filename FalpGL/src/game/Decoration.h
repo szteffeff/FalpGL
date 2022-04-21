@@ -52,4 +52,6 @@ public:
 	void add_decoration(Decoration d);
 
 	void draw(glm::mat4 projection_matrix);
+
+	void tick(float pos_x = 0, float pos_y = 0);
 };

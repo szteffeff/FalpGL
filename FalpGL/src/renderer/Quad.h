@@ -7,6 +7,8 @@ private:
 	float quad_data[24];
 	void update();
 
+	float height, width;
+
 	unsigned int buffer_index;
 	VertexBuffer* active_buffer;
 
@@ -31,6 +33,7 @@ public:
 	void rotate(float degrees, Point point, bool radians = false);
 	void scale(float ratio);
 	void translate(float delta_x, float delta_y);
+	void reset();
 
 	Point center() const;
 

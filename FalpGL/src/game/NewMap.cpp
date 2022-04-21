@@ -156,6 +156,11 @@ bool New_Map::init()
 	return true;
 }
 
+void New_Map::tick()
+{
+	dec_renderer.tick();
+}
+
 void New_Map::draw(glm::mat4 matrix)
 {
 	/* Bind GL things*/
@@ -171,7 +176,10 @@ void New_Map::draw(glm::mat4 matrix)
 	glDepthMask(false);
 	GLCall(glDrawElements(GL_TRIANGLES, map_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
 	glDepthMask(true);
+}
 
+void New_Map::draw_extras(glm::mat4 matrix)
+{
 	dec_renderer.draw(matrix);
 }
 
