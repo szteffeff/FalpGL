@@ -97,6 +97,8 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 	case(GLFW_KEY_P):
 		player->Take_Heal();
 		break;
+	
+
 
 	default:
 		break;
@@ -106,7 +108,11 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 
 void Input::mouse_recive(int button, int action, int mods)
 {
-	if (action != GLFW_PRESS) { return; }
+	if (action == GLFW_PRESS)
+	{ 
+		player->Shoot_bow();
+		return; 
+	}
 
 	if (mouse_x > 0)
 	{

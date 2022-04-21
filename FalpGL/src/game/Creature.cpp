@@ -155,9 +155,13 @@ void Health_Bar::tick(float h, float s, frame_animations level)
 /* Player */
 
 Player::Player(VertexBuffer* vb)
-	: m_player(vb, loader->entities["PLAYER"]), momentum(), position(), Player_bow(vb, loader->entities["Player_Bow"])
+	: m_player(vb, loader->entities["PLAYER"]), momentum(), position(), Player_bow(vb, loader->entities["Player_Bow"]), Player_arrow(vb, loader->entities["Player_Arrow"]), Player_spear(vb, loader->entities["Player_Spear"]), Player_dagger(vb, loader->entities["Player_Dagger"]), Player_Shatter_axe(vb, loader->entities["Player_Shatter_Axe"])
 {
-	Player_bow.teleport(200000, 2000000);
+	Player_bow.teleport(0, 100);
+	Player_arrow.teleport(0, 100);
+	Player_dagger.teleport(0, 150);
+	Player_spear.teleport(0, 200);
+	Player_Shatter_axe.teleport(0, 250);
 }
 
 void Player::walk(float direction, float magnitude)
@@ -243,8 +247,30 @@ void Player::tick()
 		walking_sound.Stop_sound(walking);
 	}	
 
+
+
 	momentum[0] = 0;
 	momentum[1] = 0;
+
+	static float dx = 0, dy = 0;
+	static int frames_magic = 0;
+
+	if (shoot_bow == true) {
+		
+		
+		
+		Player_arrow.teleport(position[0], position[1]);
+		std::cout << "Yeet thy bullet" << std::endl;
+		frames_magic = 0;
+		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		dx = (float)(cos(direction)) * 3;
+		dy = (float)(sin(direction)) * 3;
+
+		shoot_bow == false;
+	}
+	Player_arrow.translate(dx, dy);
 
 	m_player.tick();
 }
@@ -290,6 +316,11 @@ void Player::Recover_Stamina()
 void Player::Lose_Stamina()
 {
 	Stamina -= 0.1;
+}
+
+void Player::Shoot_bow()
+{
+	shoot_bow = true;
 }
 
 glm::mat4* Player::get_trans_matrix()
@@ -423,10 +454,13 @@ void Enemy_Ghost::tick()
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
 	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
 	entity_return tick_state = Enemy_ghost.tick();
+	entity_return tick_bullet = Wizard_pink_bullet.tick();
+	
 	
 	static int frames = 0;
 	static int frames_magic = 0;
 	static int teleporting = 0;
+	static int dmg_control = 0;
 	bool pewpew = false;
 
 	if (tick_state.anim_state == animation_state::ended) {
@@ -444,6 +478,7 @@ void Enemy_Ghost::tick()
 			}
 			else {
 				Enemy_ghost.set_animation(1);
+				Ghost_move_sound.Play_sound(Ghost_move);
 				teleporting += 1;
 				pewpew = false;
 				
@@ -453,6 +488,7 @@ void Enemy_Ghost::tick()
 
 	if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
 		Enemy_ghost.set_animation(0);
+		Ghost_move_sound.Stop_sound(Ghost_move);
 		teleporting = 0;
 	}
 
@@ -461,16 +497,17 @@ void Enemy_Ghost::tick()
 			Enemy_ghost.set_animation(2);
 			position[0] = *player_position_x + (rand() % 1000) - 500;
 			position[1] = *player_position_y + (rand() % 1000) - 500;
-			Ghost_move_sound.Play_sound(Ghost_move);
 			std::cout << "moving" << std::endl;
 			Enemy_ghost.teleport(position[0], position[1]);
 			teleporting++;
 		}
 	}
-	
+
 	static float dx = 0, dy = 0;
 	if (frames_magic++ == 60 * 4 and pewpew == false) {
+		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(position[0], position[1]);
+		dmg_control = 0;
 		std::cout << "Yeet thy bullet" << std::endl;
 		frames_magic = 0;
 		float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
@@ -482,9 +519,21 @@ void Enemy_Ghost::tick()
 
 	Wizard_pink_bullet.translate(dx, dy);
 
+
 	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
-		*player_health -= 1;
+		dx = 0;
+		dy = 0;
+		Wizard_pink_bullet.set_animation(1);
+		if (dmg_control < 10) {
+			*player_health -= 1;
+			dmg_control++;
+		}
+		
 		std::cout << "IVE BEEN HIT" << std::endl;
+		if (tick_bullet.anim_state == animation_state::ended)
+		{
+			Wizard_pink_bullet.teleport(1000000000, 100000000);
+		}
 	}
 }
 

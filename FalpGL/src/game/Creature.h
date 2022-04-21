@@ -33,7 +33,10 @@ class Player : public Creature {
 private:
 	Entity m_player;
 	Entity Player_bow;
-	Entity Wizard_pink_bullet;
+	Entity Player_spear;
+	Entity Player_dagger;
+	Entity Player_Shatter_axe;
+	Entity Player_arrow;
 
 	glm::mat4 player_transform_matrix = glm::mat4(1.0f);
 	SFX walking_sound;
@@ -45,6 +48,7 @@ private:
 	float Health = 100;
 	float Stamina = 100;
 	int Potion = 4;
+	bool shoot_bow = false;
 
 	enum class player_animations {
 		IDLE = 0,
@@ -77,6 +81,7 @@ public:
 	void Take_Heal();
 	void Recover_Stamina();
 	void Lose_Stamina();
+	void Shoot_bow();
 	//float Change_Health(float Damage, float Heal)
 };
 
