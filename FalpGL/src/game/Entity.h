@@ -26,6 +26,7 @@ public:
 public:
 	entity_return tick();
 	void set_animation(int id);
+	int get_animation();
 	void translate(float x, float y);
 	void set_z(float z);
 	void teleport(float new_x, float new_y);

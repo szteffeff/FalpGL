@@ -356,7 +356,7 @@ int main(void)
             if (pause == false) {
                 player.tick();
                 //red_slime.tick();
-                //enemy_ghost.tick();
+                enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();
                 //Chompy_slime.tick();

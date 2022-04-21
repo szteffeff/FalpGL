@@ -1691,20 +1691,124 @@
       ]
     ]
   },
-  "Player_Bow": {
-    "name": "Player_Bow",
+  "Wizard_Pink_bullet_boom": {
+    "name": "Wizard_Pink_bullet_boom",
     "atlas": 0,
     "loop": true,
-    "length": 1,
-    "frame_order": [ 0 ],
-    "frame_times": [ 300 ],
+    "length": 5,
+    "frame_order": [ 0, 1, 2, 3, 4 ],
+    "frame_times": [ 300, 300, 300, 300, 300 ],
     "texture_coordinants": [
       [
-        [ 512, 64 ],
-        [ 585, 64 ],
-        [ 585, 80 ],
-        [ 512, 80 ]
+        [ 544, 128 ],
+        [ 576, 128 ],
+        [ 576, 160 ],
+        [ 544, 160 ]
+      ],
+      [
+        [ 576, 128 ],
+        [ 608, 128 ],
+        [ 608, 160 ],
+        [ 576, 160 ]
+      ],
+      [
+        [ 608, 128 ],
+        [ 640, 128 ],
+        [ 640, 160 ],
+        [ 608, 160 ]
+      ],
+      [
+        [ 640, 128 ],
+        [ 672, 128 ],
+        [ 672, 160 ],
+        [ 640, 160 ]
+      ],
+      [
+        [ 672, 128 ],
+        [ 704, 128 ],
+        [ 704, 160 ],
+        [ 672, 160 ]
       ]
     ]
+  },
+    "Player_Bow": {
+      "name": "Player_Bow",
+      "atlas": 0,
+      "loop": true,
+      "length": 1,
+      "frame_order": [ 0 ],
+      "frame_times": [ 300 ],
+      "texture_coordinants": [
+        [
+          [ 512, 64 ],
+          [ 585, 64 ],
+          [ 585, 80 ],
+          [ 512, 80 ]
+        ]
+      ]
+    },
+    "Player_Arrow": {
+      "name": "Player_Arrow",
+      "atlas": 0,
+      "loop": true,
+      "length": 1,
+      "frame_order": [ 0 ],
+      "frame_times": [ 300 ],
+      "texture_coordinants": [
+        [
+          [ 512, 96 ],
+          [ 516, 96 ],
+          [ 516, 141 ],
+          [ 512, 141 ]
+        ]
+      ]
+    },
+    "Player_Spear": {
+      "name": "Player_Spear",
+      "atlas": 0,
+      "loop": true,
+      "length": 1,
+      "frame_order": [ 0 ],
+      "frame_times": [ 300 ],
+      "texture_coordinants": [
+        [
+          [ 608, 64 ],
+          [ 672, 64 ],
+          [ 672, 256 ],
+          [ 608, 256 ]
+        ]
+      ]
+    },
+    "Player_Dagger": {
+      "name": "Player_Dagger",
+      "atlas": 0,
+      "loop": true,
+      "length": 1,
+      "frame_order": [ 0 ],
+      "frame_times": [ 300 ],
+      "texture_coordinants": [
+        [
+          [ 672, 64 ],
+          [ 736, 64 ],
+          [ 736, 256 ],
+          [ 672, 256 ]
+        ]
+      ]
+    },
+    "Player_Shatter_Axe": {
+      "name": "Player_Shatter_Axe",
+      "atlas": 0,
+      "loop": true,
+      "length": 1,
+      "frame_order": [ 0 ],
+      "frame_times": [ 300 ],
+      "texture_coordinants": [
+        [
+          [ 736, 64 ],
+          [ 782, 64 ],
+          [ 782, 256 ],
+          [ 736, 256 ]
+        ]
+      ]
+    }
   }
-}
