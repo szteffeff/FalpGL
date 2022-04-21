@@ -110,7 +110,7 @@ void Input::mouse_recive(int button, int action, int mods)
 {
 	if (action == GLFW_PRESS)
 	{ 
-		player->Shoot_bow();
+		player->Dagger_light();
 		return; 
 	}
 
