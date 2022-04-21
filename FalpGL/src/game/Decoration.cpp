@@ -23,7 +23,7 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 	vertex_data[14] = 1.0f;
 
 	vertex_data[15] = x;
-	vertex_data[16] = y = size_y;
+	vertex_data[16] = y + size_y;
 	vertex_data[17] = tile.texture_coord[6];
 	vertex_data[18] = tile.texture_coord[7];
 	vertex_data[19] = 1.0f;
@@ -39,12 +39,12 @@ float* Decoration::data()
 }
 
 Decoration_Renderer::Decoration_Renderer()
-	: dec_shader("res/shaders/basic.shader")
+	: dec_shader("res/shaders/decoration.shader")
 {
 }
 
 Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations)
-	: decoration_set(tileset_json, 5), dec_shader("res/shaders/basic.shader"), dec_vertex_array()
+	: decoration_set(tileset_json, 5), dec_shader("res/shaders/decoration.shader"), dec_vertex_array()
 {
 	int amount = decorations["objects"].size();
 	dec_vertex_buffer.init(amount * 20);
@@ -66,13 +66,16 @@ Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::
 
 void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decorations)
 {
+	decoration_set.init(tileset_json, texture_index);
+
+
 	int amount = decorations["objects"].size();
-	dec_vertex_buffer.init(amount * 20);
+	dec_vertex_buffer.init(amount * 20 * sizeof(float));
 	dec_index_buffer.init(amount);
 
 	for (auto d : decorations["objects"])
 	{
-		add_decoration(Decoration(d["x"], d["y"], d["width"], d["height"], decoration_set[d["gid"]]));
+		add_decoration(Decoration(d["x"], (d["y"]) * -1.0f, d["width"], d["height"], decoration_set[d["gid"]]));
 	}
 
 	VertexBufferLayout layout;
@@ -103,14 +106,11 @@ void Decoration_Renderer::draw(glm::mat4 projection_matrix)
 	dec_index_buffer.Bind();
 	dec_shader.Bind();
 
-	/* Set uniforms. 4 is temporary. Matrix is projection matrix to put verticies in pixel space */
-	decoration_set.bind_texture(5.0f);
+	decoration_set.bind_texture(texture_index);
 	dec_shader.SetUniformMat4f("u_MVP", projection_matrix);
 	dec_shader.SetUniform1iv("u_Textures", 16, samplers);
 	dec_shader.SetUniform1f("u_Texture", texture_index);
 
-	/* Draw without depth test to be sure that all fragments are visible */
-	glDepthMask(false);
+
 	GLCall(glDrawElements(GL_TRIANGLES, dec_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
-	glDepthMask(true);
 }

@@ -54,4 +54,12 @@ void main()
     hsl.y = hsl.y * (sat  / 100.0f);
     hsl.z = hsl.z * (val / 100.0f);
     frag_color = vec4(hsv2rgb(hsl), 1.0);
+
+    float x = abs((v_TexCoord.x - 0.5) * 2);
+    float y = abs((v_TexCoord.y - 0.5) * 2);
+
+    float scale = 1.5;
+    float intensity = 0.5;
+
+    frag_color.rgb *= clamp(vec3(1 - sqrt(x * x + y * y)) + scale - 1, 0, 1);
 }

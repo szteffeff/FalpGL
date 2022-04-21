@@ -146,8 +146,8 @@ New_Map::New_Map()
 
 
 	if (map_json["layers"].size() > 1)
-	{ // decorations
-		//dec_renderer.init(map_json["tilesets"][1], map_json["layers"][1]);
+	{
+		dec_renderer.init(map_json["tilesets"][1], map_json["layers"][1]);
 	}
 }
 
@@ -171,6 +171,8 @@ void New_Map::draw(glm::mat4 matrix)
 	glDepthMask(false);
 	GLCall(glDrawElements(GL_TRIANGLES, map_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
 	glDepthMask(true);
+
+	dec_renderer.draw(matrix);
 }
 
 

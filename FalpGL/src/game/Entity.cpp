@@ -60,6 +60,11 @@ void Entity::set_animation(int id)
 	animations[active_animation].set();
 }
 
+void Entity::rotate(float degrees, Point point, bool radians)
+{
+	main_quad.rotate(degrees, point, radians);
+}
+
 void Entity::translate(float x, float y)
 {
 	main_quad.translate(x, y);

@@ -79,6 +79,8 @@ protected:
 	unsigned int active_texture_unit;
 	virtual void create_atlas();
 
+	int tilesize_x, tilesize_y;
+
 	size_t first_gid;
 
 public:
