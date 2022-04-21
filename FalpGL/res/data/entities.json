@@ -56,7 +56,7 @@
   "Wizard_Pink_bullet": {
     "name": "Wizard_Pink_bullet",
     "size": [ 32, 32 ],
-    "animation_count": 1,
+    "animation_count": 2,
     "animation_names": [ "Wizard_Pink_bullet", "Wizard_Pink_bullet_boom" ]
   },
   "Player_Bow": {
