@@ -81,6 +81,18 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 		*zoom_matrix = glm::scale(*zoom_matrix, glm::vec3(2.0f, 2.0f, 1.0f));
 		break;
 
+	case(GLFW_KEY_1):
+		weapon = 1;
+		break;
+
+	case(GLFW_KEY_2):
+		weapon = 2;
+		break;
+
+	case(GLFW_KEY_3):
+		weapon = 3;
+		break;
+
 	case(GLFW_KEY_9):
 		*zoom_matrix = glm::scale(*zoom_matrix, glm::vec3(0.5f, 0.5f, 1.0f));
 		break;
@@ -110,7 +122,15 @@ void Input::mouse_recive(int button, int action, int mods)
 {
 	if (action == GLFW_PRESS)
 	{ 
-		player->Dagger_light();
+		if (weapon == 1) {
+			player->Shoot_bow();
+		}
+		else if (weapon == 2) {
+			player->Dagger_light();
+		}
+		else if (weapon == 3) {
+			player->Axe_Light();
+		}
 		return; 
 	}
 

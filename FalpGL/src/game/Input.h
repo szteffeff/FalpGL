@@ -7,7 +7,6 @@ struct key {
 	bool held = false;
 };
 
-
 class Input
 {
 public:
@@ -31,6 +30,7 @@ private:
 
 	float mouse_x, mouse_y;
 	float window_width, window_height;
+	int weapon;
 
 	Player* player;
 	glm::mat4* zoom_matrix;

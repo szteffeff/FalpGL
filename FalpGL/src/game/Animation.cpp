@@ -50,6 +50,9 @@ animation_state Animation::tick()
 				current_frame = 0;
 			else
 			{
+				m_quad->set_texture_coords(tex_coords[current_frame]);
+
+				last_time = std::chrono::high_resolution_clock::now();
 				current_frame = 0;
 				return animation_state::ended;
 			}

@@ -304,14 +304,15 @@ int main(void)
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
         Chompy_slime.Get_player_position(player.get_position_x(), player.get_position_y());
+        Bush_boi.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
-        SFX Sound_player;
-        uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
-        Sound_player.Play_sound(intro);
-        SFX Sound_song;
-        SFX Background_sound;
-        uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
+        //SFX Sound_player;
+        //uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
+        //Sound_player.Play_sound(intro);
+        //SFX Sound_song;
+        //SFX Background_sound;
+        //uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -319,6 +320,7 @@ int main(void)
         enemy_ghost.Player_Health(player.GetHealth());
         red_slime.Player_Health(player.GetHealth());
         Chompy_slime.Player_Health(player.GetHealth());
+        Bush_boi.Player_Health(player.GetHealth());
         controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -347,7 +349,7 @@ int main(void)
 
             /*SOUND THINGY*/
             
-            Background_sound.Play_sound(background);
+            //Background_sound.Play_sound(background);
 
             //myspeaker.Play(intro);
 
@@ -357,7 +359,7 @@ int main(void)
             if (pause == false) {
                 player.tick();
                 //red_slime.tick();
-                enemy_ghost.tick();
+                //enemy_ghost.tick();
                 garfield.tick();
                 Bush_boi.tick();
                 //Chompy_slime.tick();

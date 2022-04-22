@@ -48,8 +48,33 @@ private:
 	float Health = 100;
 	float Stamina = 100;
 	int Potion = 4;
+
+	/// //////////////////////////////////////// Bow stuff
+	
 	bool shoot_bow = false;
+	bool shwoop_shwoop = true;
+	int dmg_control = 0;
+	int arrow_lifespan = 60 * 4;
+	float dx = 0, dy = 0;
+
+	/// //////////////////////////////////////// Shanky stuff
+	
 	bool light_dagger = false;
+	int frames_dagger = 0;
+	int dagger_frame = 0;
+	int dagger_start = 0;
+	int dagger_end = 0;
+	float direction = 0;
+
+	/// //////////////////////////////////////// Axy stuff
+	
+	bool light_axe = false;
+	int frames_axe = 0;
+	int axe_frame = 0;
+	int axe_start = 0;
+	int axe_end = 0;
+	float direction_axe = 0;
+
 
 	enum class player_animations {
 		IDLE = 0,
@@ -84,6 +109,7 @@ public:
 	void Lose_Stamina();
 	void Shoot_bow();
 	void Dagger_light();
+	void Axe_Light();
 	//float Change_Health(float Damage, float Heal)
 };
 
@@ -95,6 +121,10 @@ private:
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
+	int frame;
+	int bops;
+	int bops_frame;
+	int dmg_control = 0;
 
 public:
 	Red_Slime(VertexBuffer* vb);
@@ -112,6 +142,12 @@ private:
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
+	int bullet_lifespan = 60 * 4;
+	float dx = 0, dy = 0;
+	int frames = 0;
+	int frames_magic = 0;
+	int teleporting = 0;
+	int dmg_control = 0;
 	SFX Ghost_move_sound;
 	uint32_t Ghost_move = SoundBuffer::get()->addSoundEffect("files/SFX/ghost-moving-sound.wav");
 
@@ -134,10 +170,20 @@ public:
 class Bush_Boi : public Creature {
 private:
 	Entity Bush_boi;
+	float momentum[2], position[2];
+	const float Health = 20;
+	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
+	int frame;
+	int bops;
+	int bops_frame;
+	int dmg_control = 0;
+	bool move = true;
+
 public:
 	Bush_Boi(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
 	void tick();
 };
 
@@ -149,6 +195,10 @@ private:
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
+	int frame;
+	int bops;
+	int bops_frame;
+	int dmg_control = 0;
 
 public:
 	Chompy_Slime(VertexBuffer* vb);
