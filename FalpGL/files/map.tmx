@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="left-up" width="384" height="384" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#ff00ff" nextlayerid="3" nextobjectid="1052">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="left-up" width="384" height="384" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#ff00ff" nextlayerid="3" nextobjectid="1052">
  <editorsettings>
   <chunksize width="64" height="64"/>
   <export target="../res/data/map2.json" format="json"/>
@@ -384,6 +384,9 @@
   </tile>
   <tile id="111">
    <image width="32" height="32" source="tiles/forest-04-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="6.5" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="112">
    <image width="32" height="32" source="tiles/forest-04-06.png"/>
@@ -411,6 +414,9 @@
   </tile>
   <tile id="120">
    <image width="32" height="32" source="tiles/forest-05-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="121">
    <image width="32" height="32" source="tiles/forest-05-07.png"/>
@@ -435,6 +441,9 @@
   </tile>
   <tile id="128">
    <image width="32" height="32" source="tiles/forest-06-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="10" width="32" height="22"/>
+   </objectgroup>
   </tile>
   <tile id="129">
    <image width="32" height="32" source="tiles/forest-06-07.png"/>
@@ -459,6 +468,9 @@
   </tile>
   <tile id="136">
    <image width="32" height="32" source="tiles/forest-07-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="10" width="32" height="22"/>
+   </objectgroup>
   </tile>
   <tile id="137">
    <image width="32" height="32" source="tiles/forest-07-07.png"/>
@@ -491,73 +503,73 @@
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/CRATES-1.png_1 (Custom).png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/CRATES-1.png_1 (Custom).png"/>
   </tile>
   <tile id="1">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="64" height="128" source="../../../../../Downloads/forest-things/forest_clutter_tall-01-01.png"/>
+   <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-01-01.png"/>
   </tile>
   <tile id="2">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="64" height="128" source="../../../../../Downloads/forest-things/forest_clutter_tall-01-02.png"/>
+   <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-01-02.png"/>
   </tile>
   <tile id="3">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="64" height="128" source="../../../../../Downloads/forest-things/forest_clutter_tall-02-01.png"/>
+   <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-02-01.png"/>
   </tile>
   <tile id="4">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="64" height="128" source="../../../../../Downloads/forest-things/forest_clutter_tall-03-01.png"/>
+   <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-03-01.png"/>
   </tile>
   <tile id="5">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/forest_clutter-01-01.png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-01-01.png"/>
   </tile>
   <tile id="6">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/forest_clutter-02-01.png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-02-01.png"/>
   </tile>
   <tile id="7">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/forest_clutter-03-01.png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-03-01.png"/>
   </tile>
   <tile id="8">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/forest_clutter-04-01.png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-04-01.png"/>
   </tile>
   <tile id="9">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="256" height="256" source="../../../../../Downloads/forest-things/tree.png"/>
+   <image width="256" height="256" source="../../../../../../Downloads/forest-things/tree.png"/>
   </tile>
   <tile id="10">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
-   <image width="128" height="128" source="../../../../../Downloads/forest-things/tree_stump_1_1.png"/>
+   <image width="128" height="128" source="../../../../../../Downloads/forest-things/tree_stump_1_1.png"/>
   </tile>
   <tile id="11">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
-   <image width="64" height="64" source="../../../../../Downloads/forest-things/Vase_mk3-1.png (Custom).png"/>
+   <image width="64" height="64" source="../../../../../../Downloads/forest-things/Vase_mk3-1.png (Custom).png"/>
   </tile>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="384" height="384">
