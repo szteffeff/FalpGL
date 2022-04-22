@@ -5,7 +5,7 @@
 #include <fstream>
 #include <math.h>
 
-
+/* Write prototype tile constructor that take json */
 
 /* Bounding box and offset */
 struct Collision_Box {
@@ -34,6 +34,10 @@ struct Prototype_Tile {
 	/* Unique id */
 	float id;
 
+
+	/* If an object is allowed to fade when the player walks behind it */
+	bool nofade;
+
 	/* Filepath to texture's image file */
 	std::string filepath;
 
@@ -44,7 +48,7 @@ struct Prototype_Tile {
 	bool collision_circle(float x, float y, float radius);
 	bool has_collision();
 
-	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, int size_x = 32, int size_y = 32);
+	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, bool nf = false, int size_x = 32, int size_y = 32);
 	Prototype_Tile();
 };
 

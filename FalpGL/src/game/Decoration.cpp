@@ -2,7 +2,7 @@
 
 
 Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile)
-	: buffer_index(-1), id(-1)
+	: buffer_index(-1), id(-1), x(x), y(y), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), size_x(size_x), size_y(size_y), nofade(false)
 {
 	vertex_data[0] = x;                        /* x */
 	vertex_data[1] = y;                        /* y */
@@ -29,8 +29,43 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 	vertex_data[19] = 1.0f;
 }
 
+Decoration::Decoration(nlohmann::json object, Tileset& set)
+	: x(object["x"]), y(-(object["y"])), size_x(object["width"]), size_y(object["height"]), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), nofade(false)
+{
+	Prototype_Tile tile = set[object["gid"]];
+	nofade = tile.nofade;
+
+	vertex_data[0] = x;                        /* x */
+	vertex_data[1] = y;                        /* y */
+	vertex_data[2] = tile.texture_coord[0];    /* s */
+	vertex_data[3] = tile.texture_coord[1];    /* t */
+	vertex_data[4] = 1.0f;                     /* opacity */
+
+	vertex_data[5] = x + size_x;
+	vertex_data[6] = y;
+	vertex_data[7] = tile.texture_coord[2];
+	vertex_data[8] = tile.texture_coord[3];
+	vertex_data[9] = 1.0f;
+
+	vertex_data[10] = x + size_x;
+	vertex_data[11] = y + size_y;
+	vertex_data[12] = tile.texture_coord[4];
+	vertex_data[13] = tile.texture_coord[5];
+	vertex_data[14] = 1.0f;
+
+	vertex_data[15] = x;
+	vertex_data[16] = y + size_y;
+	vertex_data[17] = tile.texture_coord[6];
+	vertex_data[18] = tile.texture_coord[7];
+	vertex_data[19] = 1.0f;
+
+
+}
+
 void Decoration::fade(float opacity)
 {
+	if (nofade) { return; }
+
 	vertex_data[4] = opacity;
 	vertex_data[9] = opacity;
 	vertex_data[14] = opacity;
@@ -56,7 +91,7 @@ Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::
 
 	for (auto d : decorations["objects"])
 	{
-		add_decoration(Decoration(d["x"], d["y"], d["width"], d["height"], decoration_set[d["gid"]]));
+		add_decoration(Decoration(d, decoration_set));
 	}
 
 	VertexBufferLayout layout;
@@ -79,7 +114,7 @@ void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decor
 
 	for (auto d : decorations["objects"])
 	{
-		add_decoration(Decoration(d["x"], (d["y"]) * -1.0f, d["width"], d["height"], decoration_set[d["gid"]]));
+		add_decoration(Decoration(d, decoration_set));
 	}
 
 	VertexBufferLayout layout;
@@ -125,7 +160,7 @@ void Decoration_Renderer::tick(float pos_x, float pos_y)
 
 	for (auto d : decorations)
 	{
-		d.fade(0.5);
+		d.fade((float)std::clamp(sqrt(pow(abs(d.center_x - pos_x), 2) + pow(abs(d.center_y - pos_y), 2)) / (((d.size_x + d.size_y) / 2) * 0.8), 0.45, 1.0));
 		for (int i = 0; i < 20; i++)
 		{
 			vertex_data.push_back(*(d.data() + i));

@@ -355,7 +355,7 @@ int main(void)
 
             /* Tick things that need to be ticked */
             ui.UI_Tick();
-            nmap.tick();
+            nmap.tick(*player.get_position_x(), *player.get_position_y());
             if (pause == false) {
                 player.tick();
                 //red_slime.tick();

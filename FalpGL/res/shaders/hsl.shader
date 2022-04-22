@@ -58,8 +58,8 @@ void main()
     float x = abs((v_TexCoord.x - 0.5) * 2);
     float y = abs((v_TexCoord.y - 0.5) * 2);
 
-    float scale = 1.5;
-    float intensity = 0.5;
+    float scale = 2;
+    float intensity = 0.75;
 
-    frag_color.rgb *= clamp(vec3(1 - sqrt(x * x + y * y)) + scale - 1, 0, 1);
+    frag_color.rgb *= clamp((vec3(1 - sqrt(x * x + y * y)) + scale) * intensity - 1, 0, 1);
 }

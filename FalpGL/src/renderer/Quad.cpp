@@ -92,6 +92,7 @@ void Quad::update()
 void Quad::teleport(float new_x, float new_y)
 {
 	Point p = center();
+
 	quad_data[0] = (new_x)+(quad_data[0] - p.x);
 	quad_data[1] = (new_y)+(quad_data[1] - p.y);
 
@@ -115,6 +116,8 @@ void Quad::rotate(float degrees, Point point, bool radians)
 	else
 		degrees *= -1;
 
+	Point current_center = center();
+
 	float x = quad_data[0];
 	float y = quad_data[1];
 	quad_data[0] = x * cos(degrees) - y * sin(degrees);
@@ -134,6 +137,8 @@ void Quad::rotate(float degrees, Point point, bool radians)
 	y = quad_data[19];
 	quad_data[18] = x * cos(degrees) - y * sin(degrees);
 	quad_data[19] = x * sin(degrees) + y * cos(degrees);
+
+	teleport(current_center.x, current_center.y);
 
 	update();
 }
