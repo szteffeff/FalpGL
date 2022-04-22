@@ -279,11 +279,12 @@ void Player::tick()
 	std::cout << position[0] << "and" << position[1] << std::endl;
 
 	if (light_dagger == true and not dagger_start) {
-		Player_dagger.teleport(100, 0);
+		Player_dagger.reset();
 		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1]- position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
-		Player_dagger.rotate(direction + 90, Player_dagger.center());
+		Player_dagger.teleport(position[0], position[1]);
+		Player_dagger.rotate(direction * 180 / 3.14159 + 90, Player_dagger.center());
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		dagger_start = 1;

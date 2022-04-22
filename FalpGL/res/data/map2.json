@@ -713,6 +713,18 @@
                  "width":64,
                  "x":432,
                  "y":424
+                }, 
+                {
+                 "gid":146,
+                 "height":64,
+                 "id":215,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":352,
+                 "y":-416
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -721,10 +733,10 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":214,
+ "nextobjectid":216,
  "orientation":"orthogonal",
  "renderorder":"left-up",
- "tiledversion":"1.8.2",
+ "tiledversion":"1.8.1",
  "tileheight":32,
  "tilesets":[
         {
@@ -1964,75 +1976,147 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/CRATES-1.png_1 (Custom).png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/CRATES-1.png_1 (Custom).png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":1,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-01.png",
                  "imageheight":128,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":2,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-02.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-02.png",
                  "imageheight":128,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":3,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-02-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-02-01.png",
                  "imageheight":128,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":4,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-03-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-03-01.png",
                  "imageheight":128,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":5,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-01-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-01-01.png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":6,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-02-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-02-01.png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":7,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-03-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-03-01.png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":8,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-04-01.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-04-01.png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":9,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree.png",
                  "imageheight":256,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":10,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree_stump_1_1.png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree_stump_1_1.png",
                  "imageheight":128,
-                 "imagewidth":128
+                 "imagewidth":128,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":11,
-                 "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/Vase_mk3-1.png (Custom).png",
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/Vase_mk3-1.png (Custom).png",
                  "imageheight":64,
-                 "imagewidth":64
+                 "imagewidth":64,
+                 "properties":[
+                        {
+                         "name":"nofade",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }],
          "tilewidth":256
         }],

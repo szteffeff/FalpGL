@@ -117,5 +117,5 @@ public:
 
 	bool collision_tile(float x, float y);
 
-	void tick();
+	void tick(float x = 0, float y = 0);
 };

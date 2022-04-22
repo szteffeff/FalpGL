@@ -156,9 +156,9 @@ bool New_Map::init()
 	return true;
 }
 
-void New_Map::tick()
+void New_Map::tick(float x, float y)
 {
-	dec_renderer.tick();
+	dec_renderer.tick(x, y);
 }
 
 void New_Map::draw(glm::mat4 matrix)
