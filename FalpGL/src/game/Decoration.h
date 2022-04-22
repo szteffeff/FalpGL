@@ -1,5 +1,6 @@
 #pragma once
 #include "../renderer/RendererIncludes.h"
+#include <algorithm>
 
 
 
@@ -10,8 +11,15 @@ protected:
 	int buffer_index;
 	int id;
 
+	bool nofade;
 public:
+	const float x, y;
+	const float center_x, center_y;
+	const float size_x, size_y;
+
+
 	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile);
+	Decoration(nlohmann::json object, Tileset& set);
 
 	void fade(float opacity = 1.0f);
 	float* data();

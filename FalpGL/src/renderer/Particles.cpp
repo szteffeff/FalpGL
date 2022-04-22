@@ -21,7 +21,7 @@ float* Particle::tick()
 
 
 Particle_Renderer::Particle_Renderer(const size_t amount)
-	: size(amount)
+	: size(amount), current_index(0)
 {
 	particles.resize(size);
 	particle_vertex_data.resize(size * particle_size, 0.0f);

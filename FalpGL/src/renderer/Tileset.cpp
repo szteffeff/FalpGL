@@ -59,8 +59,8 @@ Prototype_Tile::Prototype_Tile()
 {
 }
 
-Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, int size_x, int size_y)
-	: collisions(boxes)
+Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, bool nf, int size_x, int size_y)
+	: collisions(boxes), nofade(nf)
 {
 	id = in_id;
 
@@ -290,6 +290,20 @@ void Tileset::create_atlas()
 	{
 		/* Generate new tile protype */
 		Prototype_Tile new_tile;
+		
+		/* Bool for nofade */
+		bool nf = false;
+
+		if ((*tile).contains("properties"))
+		{
+			for (auto prop : (*tile)["properties"])
+			{
+				if (prop["name"] == "nofade")
+				{
+					nf = prop["value"];
+				}
+			}
+		}
 
 		/* If tile has collisions, use them*/
 		if ((*tile).contains("objectgroup"))
@@ -301,13 +315,13 @@ void Tileset::create_atlas()
 				boxes.push_back(Collision_Box((*box)["x"], (*box)["y"], (*box)["width"], (*box)["height"]));
 			}
 
-			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes, (*tile)["imageheight"], (*tile)["imagewidth"]);
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes, nf, (*tile)["imageheight"], (*tile)["imagewidth"]);
 			tileset_tiles.push_back(new_tile);
 		}
 		else
 		{
 			/* Else provide empty box*/
-			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)), (*tile)["imageheight"], (*tile)["imagewidth"]);
+			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, std::vector<Collision_Box>(1, Collision_Box(0, 0, 0, 0)), nf, (*tile)["imageheight"], (*tile)["imagewidth"]);
 			tileset_tiles.push_back(new_tile);
 		}
 

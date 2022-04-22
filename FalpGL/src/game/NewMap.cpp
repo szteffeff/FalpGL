@@ -156,9 +156,9 @@ bool New_Map::init()
 	return true;
 }
 
-void New_Map::tick()
+void New_Map::tick(float x, float y)
 {
-	dec_renderer.tick();
+	dec_renderer.tick(x, y);
 }
 
 void New_Map::draw(glm::mat4 matrix)
@@ -235,7 +235,7 @@ bool New_Map::collision_circle(float x, float y, float radius)
 		stream << "\n";
 	}
 
-	console_log(stream.str());
+	//console_log(stream.str());
 
 	return false;
 }
