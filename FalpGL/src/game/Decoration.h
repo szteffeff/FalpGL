@@ -9,13 +9,14 @@ class Decoration {
 protected:
 	float vertex_data[20];
 	int buffer_index;
-	int id;
 
 	bool nofade;
+
 public:
 	const float x, y;
 	const float center_x, center_y;
 	const float size_x, size_y;
+	const int id;
 
 
 	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile);
@@ -49,11 +50,14 @@ private:
 	float texture_index = 5.0f;
 
 	std::vector<Decoration> decorations;
+	std::vector<Decoration> close_to_player;
 	std::vector<float> vertex_data;
 
 public:
 	Decoration_Renderer(nlohmann::json tileset_json, nlohmann::json decorations);
 	Decoration_Renderer();
+
+	bool collision(float x, float y);
 
 	void init(nlohmann::json tileset_json, nlohmann::json decorations);
 

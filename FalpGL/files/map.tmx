@@ -501,75 +501,111 @@
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <properties>
-    <property name="nofade" type="bool" value="false"/>
+    <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/CRATES-1.png_1 (Custom).png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="22" width="44" height="38"/>
+   </objectgroup>
   </tile>
   <tile id="1">
    <properties>
-    <property name="nofade" type="bool" value="false"/>
+    <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.18182" y="76.1818" width="51.2727" height="35.2727"/>
+   </objectgroup>
   </tile>
   <tile id="2">
    <properties>
-    <property name="nofade" type="bool" value="false"/>
+    <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12.3636" y="72.3636" width="38.9091" height="39.0909"/>
+   </objectgroup>
   </tile>
   <tile id="3">
    <properties>
-    <property name="nofade" type="bool" value="false"/>
+    <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.18182" y="76" width="51.4545" height="35.6364"/>
+   </objectgroup>
   </tile>
   <tile id="4">
    <properties>
-    <property name="nofade" type="bool" value="false"/>
+    <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="128" source="../../../../../../Downloads/forest-things/forest_clutter_tall-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="73.8182" width="43.6364" height="37.8182"/>
+   </objectgroup>
   </tile>
   <tile id="5">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="24" width="64" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="6">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="22.9091" y="34.1818" width="18.1818" height="16"/>
+   </objectgroup>
   </tile>
   <tile id="7">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14.7273" y="15.8182" width="35.6364" height="39.6364"/>
+   </objectgroup>
   </tile>
   <tile id="8">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/forest_clutter-04-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="12.9091" width="37.0909" height="41.4545"/>
+   </objectgroup>
   </tile>
   <tile id="9">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
    <image width="256" height="256" source="../../../../../../Downloads/forest-things/tree.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="97" y="211.5" width="64" height="35"/>
+   </objectgroup>
   </tile>
   <tile id="10">
    <properties>
     <property name="nofade" type="bool" value="false"/>
    </properties>
    <image width="128" height="128" source="../../../../../../Downloads/forest-things/tree_stump_1_1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="21" y="86" width="91" height="16"/>
+   </objectgroup>
   </tile>
   <tile id="11">
    <properties>
     <property name="nofade" type="bool" value="true"/>
    </properties>
    <image width="64" height="64" source="../../../../../../Downloads/forest-things/Vase_mk3-1.png (Custom).png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="23.2727" y="31.6364" width="16.9091" height="15.2727"/>
+   </objectgroup>
   </tile>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="384" height="384">
