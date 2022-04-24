@@ -30,9 +30,9 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 }
 
 Decoration::Decoration(nlohmann::json object, Tileset& set)
-	: x(object["x"]), y(-(object["y"])), size_x(object["width"]), size_y(object["height"]), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), nofade(false)
+	: x(object["x"]), y(-(object["y"])), size_x(object["width"]), size_y(object["height"]), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), nofade(false), id(object["gid"])
 {
-	Prototype_Tile tile = set[object["gid"]];
+	Prototype_Tile tile = set[id];
 	nofade = tile.nofade;
 
 	vertex_data[0] = x;                        /* x */
@@ -109,6 +109,7 @@ void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decor
 
 
 	int amount = decorations["objects"].size();
+	console_log("[INFO]: Loading " + std::to_string(amount) + " objects");
 	dec_vertex_buffer.init(amount * 20 * sizeof(float));
 	dec_index_buffer.init(amount);
 
@@ -154,9 +155,24 @@ void Decoration_Renderer::draw(glm::mat4 projection_matrix)
 	GLCall(glDrawElements(GL_TRIANGLES, dec_index_buffer.GetCount(), GL_UNSIGNED_INT, nullptr));
 }
 
+bool Decoration_Renderer::collision(float x, float y)
+{
+	for (auto d : close_to_player)
+	{
+		if (decoration_set[d.id].collides(x - d.x, y - d.y))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Decoration_Renderer::tick(float pos_x, float pos_y)
 {
+	pos_y -= 40;
 	vertex_data.clear();
+	close_to_player.clear();
 
 	for (auto d : decorations)
 	{
@@ -164,6 +180,11 @@ void Decoration_Renderer::tick(float pos_x, float pos_y)
 		for (int i = 0; i < 20; i++)
 		{
 			vertex_data.push_back(*(d.data() + i));
+		}
+
+		if (sqrt(pow(abs(d.center_x - pos_x), 2) + pow(abs(d.center_y - pos_y), 2)) < 100)
+		{
+			close_to_player.push_back(d);
 		}
 	}
 

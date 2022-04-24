@@ -213,11 +213,17 @@ bool New_Map::collision_at(float x, float y)
 	if (local_x < 0.0f) { local_x += 32.0f; }
 	if (local_y < 0.0f) { local_y += 32.0f; }
 
-	return set[tile_at(x, y)].collides(local_x, local_y);
+	if (set[tile_at(x, y)].collides(local_x, local_y))
+	{
+		return true;
+	}
+
+	return false;
 }
 
 bool New_Map::collision_circle(float x, float y, float radius)
 {
+	bool collided = false;
 	std::stringstream stream;
 	stream << "[INFO]: Testing tiles:\n";
 
@@ -229,7 +235,7 @@ bool New_Map::collision_circle(float x, float y, float radius)
 
 			if (set[tile_at(x, y)].collision_circle(test_x, test_y, radius))
 			{
-				return true;
+				collided =  true;
 			}
 		}
 		stream << "\n";
@@ -237,7 +243,12 @@ bool New_Map::collision_circle(float x, float y, float radius)
 
 	//console_log(stream.str());
 
-	return false;
+	if (dec_renderer.collision(x, y))
+	{
+		collided = true;
+	}
+
+	return collided;
 }
 
 bool New_Map::collision_tile(float x, float y)

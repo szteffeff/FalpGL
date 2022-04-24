@@ -10436,11 +10436,34 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/CRATES-1.png_1 (Custom).png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":38,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":44,
+                             "x":10,
+                             "y":22
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -10448,11 +10471,34 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-01.png",
                  "imageheight":128,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":35.2727272727273,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":51.2727272727273,
+                             "x":6.18181818181818,
+                             "y":76.1818181818182
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -10460,11 +10506,34 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-01-02.png",
                  "imageheight":128,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":39.0909090909091,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":38.9090909090909,
+                             "x":12.3636363636364,
+                             "y":72.3636363636364
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -10472,11 +10541,34 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-02-01.png",
                  "imageheight":128,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":35.6363636363636,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":51.4545454545455,
+                             "x":6.18181818181818,
+                             "y":76
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -10484,11 +10576,34 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter_tall-03-01.png",
                  "imageheight":128,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":37.8181818181818,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":43.6363636363636,
+                             "x":10,
+                             "y":73.8181818181818
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -10496,6 +10611,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-01-01.png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":32,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":64,
+                             "x":0,
+                             "y":24
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10508,6 +10646,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-02-01.png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":18.1818181818182,
+                             "x":22.9090909090909,
+                             "y":34.1818181818182
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10520,6 +10681,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-03-01.png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":39.6363636363636,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":35.6363636363636,
+                             "x":14.7272727272727,
+                             "y":15.8181818181818
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10532,6 +10716,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/forest_clutter-04-01.png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":41.4545454545455,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":37.0909090909091,
+                             "x":14,
+                             "y":12.9090909090909
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10544,6 +10751,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree.png",
                  "imageheight":256,
                  "imagewidth":256,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":35,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":64,
+                             "x":97,
+                             "y":211.5
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10556,6 +10786,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/tree_stump_1_1.png",
                  "imageheight":128,
                  "imagewidth":128,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":91,
+                             "x":21,
+                             "y":86
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",
@@ -10568,6 +10821,29 @@
                  "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/forest-things\/Vase_mk3-1.png (Custom).png",
                  "imageheight":64,
                  "imagewidth":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15.2727272727273,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16.9090909090909,
+                             "x":23.2727272727273,
+                             "y":31.6363636363636
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
                  "properties":[
                         {
                          "name":"nofade",

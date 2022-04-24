@@ -16,7 +16,7 @@ private:
 	bool valid;
 
 public:
-	Collision_Box(float offset_x, float offset_y, float size_x, float size_y);
+	Collision_Box(float offset_x, float offset_y, float size_x, float size_y, float tile_size_y = 32.0f);
 
 	bool collides_at(float x, float y);
 	bool collision_circle(float x, float y, float radius);

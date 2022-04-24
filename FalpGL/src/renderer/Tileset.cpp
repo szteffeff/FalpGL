@@ -2,12 +2,12 @@
 #include "renderer.h"
 
 
-Collision_Box::Collision_Box(float offset_x, float offset_y, float size_x, float size_y)
+Collision_Box::Collision_Box(float offset_x, float offset_y, float size_x, float size_y, float tile_size_y)
 	: valid(true)
 {
 	/* Change y origin from top to bottom */
 	offset[0] = offset_x;
-	offset[1] = 32.0f - (offset_y + size_y);
+	offset[1] = tile_size_y - (offset_y + size_y);
 
 	size[0] = size_x;
 	size[1] = size_y;
@@ -312,7 +312,7 @@ void Tileset::create_atlas()
 
 			for (auto box = (*tile)["objectgroup"]["objects"].begin(); box != (*tile)["objectgroup"]["objects"].end(); box++)
 			{
-				boxes.push_back(Collision_Box((*box)["x"], (*box)["y"], (*box)["width"], (*box)["height"]));
+				boxes.push_back(Collision_Box((*box)["x"], (*box)["y"], (*box)["width"], (*box)["height"], (*tile)["imageheight"]));
 			}
 
 			new_tile = Prototype_Tile((*tile)["id"] + 1, (*tile)["image"], tex_coords, size, boxes, nf, (*tile)["imageheight"], (*tile)["imagewidth"]);
