@@ -206,6 +206,7 @@ int New_Map::tile_at(float x, float y)
 bool New_Map::collision_at(float x, float y)
 { /* Returns true on collision */
 
+	return false;
 	/* Position on tile. 0 - 32 */
 	float local_x = fmod(x, 32.0f);
 	float local_y = fmod(y, 32.0f);
@@ -223,6 +224,7 @@ bool New_Map::collision_at(float x, float y)
 
 bool New_Map::collision_circle(float x, float y, float radius)
 {
+	return false;
 	bool collided = false;
 	std::stringstream stream;
 	stream << "[INFO]: Testing tiles:\n";
