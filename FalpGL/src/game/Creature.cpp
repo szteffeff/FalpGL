@@ -460,6 +460,72 @@ void Player::tick()
 		attacking = false;
 	}
 
+
+	/// //////////////////////////////// spear stuff
+
+	// spear light attack
+	if (light_spear == true and not spear_start_L and attacking == false) { // creates the direction of dagger and turns it
+		attacking == true;
+		Player_spear.teleport(position[0], position[1]);
+		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
+		dx = (float)(cos(direction)) * 2.5;
+		dy = (float)(sin(direction)) * 2.5;
+		spear_start_L = 1;
+	}
+	if (spear_start_L > 0 and spear_frame_L < 40) { // moves dagger forward
+		Player_spear.translate(dx, dy);
+		spear_frame_L++;
+	}
+	else if (spear_start_L > 0 and spear_frame_L == 40 and spear_end_L < 40) { // moves dagger back
+		Player_spear.translate(-dx, -dy);
+		spear_end_L++;
+	}
+	else if (spear_start_L > 0 and spear_frame_L == 40 and spear_end_L == 40) { // teleports dagger away and resets the attack
+		Player_spear.reset();
+		Player_spear.teleport(100000, 100000);
+		spear_end_L = 0;
+		spear_frame_L = 0;
+		spear_start_L = 0;
+		//frames_dagger_L = 0;
+		light_spear = false;
+		attacking == false;
+	}
+
+	// spear heavy (the same as light but farther)
+	if (heavy_spear == true and not spear_start_H and attacking == false) { // creates the direction of dagger and turns it
+		attacking == true;
+		Player_spear.teleport(position[0], position[1]);
+		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		if (direction < 0) { direction += 2.0f * 3.14159f; }
+		std::cout << direction << std::endl;
+		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
+		dx = (float)(cos(direction)) * 3;
+		dy = (float)(sin(direction)) * 3;
+		spear_start_H = 1;
+	}
+	if (spear_start_H > 0 and spear_frame_H < 80) { // moves dagger forward
+		Player_spear.translate(dx, dy);
+		spear_frame_H++;
+	}
+	else if (spear_start_H > 0 and spear_frame_H == 80 and spear_end_H < 80) { // moves dagger back
+		Player_spear.translate(-dx, -dy);
+		spear_end_H++;
+	}
+	else if (spear_start_H > 0 and spear_frame_H == 80 and spear_end_H == 80) { // teleports dagger away and resets the attack
+		Player_spear.reset();
+		Player_spear.teleport(100000, 100000);
+		spear_end_H = 0;
+		spear_frame_H = 0;
+		spear_start_H = 0;
+		//frames_dagger_L = 0;
+		heavy_spear = false;
+		attacking == false;
+	}
+
+	Player_spear.tick();
 	Player_Shatter_axe.tick();
 	Player_arrow.tick();
 	Player_dagger.tick();
@@ -517,28 +583,38 @@ bool Player::shwoop_doop()
 
 void Player::Shoot_bow()
 {
-	if (heavy_dagger == false and light_dagger == false and light_axe == false and heavy_axe == false) { shoot_bow = true; }
+	if (heavy_dagger == false and light_dagger == false and light_axe == false and heavy_axe == false and heavy_spear == false) { shoot_bow = true; }
 }
 
 void Player::Dagger_light()
 {
-	if(heavy_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false){ light_dagger = true; }
+	if(heavy_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false){ light_dagger = true; }
 }
 
 void Player::Dagger_Heavy()
 {
-	if (light_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false) { heavy_dagger = true; }
+	if (light_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { heavy_dagger = true; }
 }
 
 void Player::Axe_Light()
 {
-	if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false) { light_axe = true; }
+	if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false and light_spear == false and heavy_spear == false) { light_axe = true; }
 	std::cout << "I WAS CLICKED BRO JUST SHOOT LIKE GOD UR A PRICK" << std::endl;
 }
 
 void Player::Axe_Heavy()
 {
-	if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false) { heavy_axe = true; }
+	if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_spear == false) { heavy_axe = true; }
+}
+
+void Player::Spear_Light()
+{
+	if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and heavy_spear == false and heavy_axe == false) { light_spear = true; }
+}
+
+void Player::Spear_Heavy()
+{
+	if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_axe == false) { heavy_spear = true; }
 }
 
 glm::mat4* Player::get_trans_matrix()

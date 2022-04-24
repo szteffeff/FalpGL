@@ -105,6 +105,23 @@ private:
 	bool got_num_axe = false;
 	int speacial_move_axe = rand() % 10;
 
+	///////////////////////////////////////////// Speary stuff
+
+	//light attack stuff
+	bool light_spear = false;
+	int frames_spear_L = 0;
+	int spear_frame_L = 0;
+	int spear_start_L = 0;
+	int spear_end_L = 0;
+
+	//heavy attack stuff
+	bool heavy_spear = false;
+	int frames_spear_H = 0;
+	int spear_frame_H = 0;
+	int spear_start_H = 0;
+	int spear_end_H = 0;
+
+
 	/// ////////////////////////////////////////
 
 	enum class player_animations {
@@ -144,6 +161,8 @@ public:
 	void Dagger_Heavy();
 	void Axe_Light();
 	void Axe_Heavy();
+	void Spear_Light();
+	void Spear_Heavy();
 	//float Change_Health(float Damage, float Heal)
 };
 
