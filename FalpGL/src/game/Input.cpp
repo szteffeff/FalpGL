@@ -122,16 +122,30 @@ void Input::mouse_recive(int button, int action, int mods)
 {
 	if (action == GLFW_PRESS)
 	{ 
-		if (weapon == 1) {
-			player->Shoot_bow();
+		if (button == GLFW_MOUSE_BUTTON_LEFT) {
+			if (weapon == 1 and player->shwoop_doop() == true) {
+				player->Shoot_bow();
+			}
+			else if (weapon == 2) {
+				player->Dagger_light();
+			}
+			else if (weapon == 3) {
+				player->Axe_Light();
+			}
+			return;
 		}
-		else if (weapon == 2) {
-			player->Dagger_light();
+		else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+			if (weapon == 1 and player->shwoop_doop() == true) {
+				player->Shoot_bow();
+			}
+			else if (weapon == 2) {
+				player->Dagger_Heavy();
+			}
+			else if (weapon == 3) {
+				player->Axe_Heavy();
+			}
+			return;
 		}
-		else if (weapon == 3) {
-			player->Axe_Light();
-		}
-		return; 
 	}
 
 	if (mouse_x > 0)

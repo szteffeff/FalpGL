@@ -48,33 +48,64 @@ private:
 	float Health = 100;
 	float Stamina = 100;
 	int Potion = 4;
+	float direction = 0;
 
 	/// //////////////////////////////////////// Bow stuff
 	
 	bool shoot_bow = false;
 	bool shwoop_shwoop = true;
 	int dmg_control = 0;
-	int arrow_lifespan = 60 * 4;
 	float dx = 0, dy = 0;
+	float dx2 = 0, dy2 = 0;
+	int arrow_lifespan = 60 * 4;
+	int bow_lifespan = 60 * 1;
+	bool arrow_going = false;
 
 	/// //////////////////////////////////////// Shanky stuff
 	
+	// light attack stuff
 	bool light_dagger = false;
-	int frames_dagger = 0;
-	int dagger_frame = 0;
-	int dagger_start = 0;
-	int dagger_end = 0;
-	float direction = 0;
+	int frames_dagger_L = 0;
+	int dagger_frame_L = 0;
+	int dagger_start_L = 0;
+	int dagger_end_L = 0;
+
+	// heavy attack stuff
+	bool heavy_dagger = false;
+	int dagger_start_H = 0;
+	int dagger_frame_H = 0;
+	int dagger_mid_H = 0;
+	int dagger_end_H = 0;
+	float rad_dagger = 10;
+	float time_dagger = 60 * 2;
+	bool got_num_dagger = false;
+	int speacial_move_dagger = rand() % 10;
+
 
 	/// //////////////////////////////////////// Axy stuff
 	
+	bool attacking = false;
+
+	// light attack stuff
 	bool light_axe = false;
 	int frames_axe = 0;
 	int axe_frame = 0;
 	int axe_start = 0;
 	int axe_end = 0;
-	float direction_axe = 0;
 
+	//heavy attack stuff
+
+	bool heavy_axe = false;
+	int axe_start_H = 0;
+	int axe_frame_H = 0;
+	int axe_mid_H = 0;
+	int axe_end_H = 0;
+	float rad_axe = 10;
+	float time_axe = 60 * 7.5;
+	bool got_num_axe = false;
+	int speacial_move_axe = rand() % 10;
+
+	/// ////////////////////////////////////////
 
 	enum class player_animations {
 		IDLE = 0,
@@ -107,9 +138,12 @@ public:
 	void Take_Heal();
 	void Recover_Stamina();
 	void Lose_Stamina();
+	bool shwoop_doop();
 	void Shoot_bow();
 	void Dagger_light();
+	void Dagger_Heavy();
 	void Axe_Light();
+	void Axe_Heavy();
 	//float Change_Health(float Damage, float Heal)
 };
 
@@ -179,7 +213,8 @@ private:
 	int bops;
 	int bops_frame;
 	int dmg_control = 0;
-	bool move = true;
+	bool side_change = true;
+	bool change_animation = true;
 
 public:
 	Bush_Boi(VertexBuffer* vb);
