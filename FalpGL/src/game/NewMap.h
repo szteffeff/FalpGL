@@ -38,7 +38,7 @@ private:
 	float quad_data[16];
 
 public:
-	n_Tile(Prototype_Tile& tile_in, float position[2]);
+	n_Tile(Prototype_Tile tile_in, float position[2]);
 	n_Tile();
 };
 

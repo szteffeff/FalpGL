@@ -334,7 +334,7 @@ int Chunk::tile_at(int x, int y)
 	return chunk_data[idx(x, y)];
 }
 
-n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
+n_Tile::n_Tile(Prototype_Tile tile, float position[2])
 {
 	/* Math for texture coordinants is done completely for prototype tiles so it doesn't have to be done many times here */
 	quad_data[0] = position[0] * 32;  //X

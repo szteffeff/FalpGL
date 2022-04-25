@@ -161,22 +161,115 @@ bool Prototype_Tile::collision_circle(float x, float y, float radius)
 	return false;
 }
 
+Prototype_Tile Prototype_Tile::transformed(unsigned int transforms)
+{
+	Prototype_Tile transformed_tile(*this);
+	float original_coords[8];
+	memcpy(&original_coords, &transformed_tile.texture_coord, sizeof(original_coords));
+
+	/*
+	* 
+	* 0
+	* 1
+	* 2
+	* 3
+	* 
+	*  Vertical: flip on horizontal axis
+	*  Horizontal: flip on vertical axis
+	*  Anti-Diagonal: swap point 1 and 3
+	* 
+	* 3-2
+	* | |
+	* 0-1
+	* 
+	*/
+
+	if (transforms & transformations::flip_verticle)
+	{
+		transformed_tile.texture_coord[0] = original_coords[6];
+		transformed_tile.texture_coord[1] = original_coords[7];
+
+		transformed_tile.texture_coord[2] = original_coords[4];
+		transformed_tile.texture_coord[3] = original_coords[5];
+
+		transformed_tile.texture_coord[4] = original_coords[2];
+		transformed_tile.texture_coord[5] = original_coords[3];
+
+		transformed_tile.texture_coord[6] = original_coords[0];
+		transformed_tile.texture_coord[7] = original_coords[1];
+		memcpy(&original_coords, &transformed_tile.texture_coord, sizeof(original_coords));
+	}
+
+	if (transforms & transformations::flip_horizontal)
+	{
+		transformed_tile.texture_coord[0] = original_coords[2];
+		transformed_tile.texture_coord[1] = original_coords[3];
+
+		transformed_tile.texture_coord[2] = original_coords[0];
+		transformed_tile.texture_coord[3] = original_coords[1];
+
+		transformed_tile.texture_coord[4] = original_coords[6];
+		transformed_tile.texture_coord[5] = original_coords[7];
+
+		transformed_tile.texture_coord[6] = original_coords[4];
+		transformed_tile.texture_coord[7] = original_coords[5];
+		memcpy(&original_coords, &transformed_tile.texture_coord, sizeof(original_coords));
+	}
+
+	if (transforms & transformations::flip_anti_diagonal)
+	{
+		transformed_tile.texture_coord[0] = original_coords[0];
+		transformed_tile.texture_coord[1] = original_coords[1];
+
+		transformed_tile.texture_coord[2] = original_coords[6];
+		transformed_tile.texture_coord[3] = original_coords[7];
+
+		transformed_tile.texture_coord[4] = original_coords[4];
+		transformed_tile.texture_coord[5] = original_coords[5];
+
+		transformed_tile.texture_coord[6] = original_coords[2];
+		transformed_tile.texture_coord[7] = original_coords[3];
+	}
+
+	return transformed_tile;
+}
+
 
 /* #### Tileset #### */
 
-Prototype_Tile& Tileset::operator[](int index)
+Prototype_Tile Tileset::operator[](int index)
 {
 	uint32_t id = index;
 	uint32_t mask = 0b00001111111111111111111111111111;
+	uint32_t horizontal = 0b10000000000000000000000000000000;
+	uint32_t vertical = 0b01000000000000000000000000000000;
+	uint32_t antidiagonal = 0b00100000000000000000000000000000;
 
 	id &= mask;
+
+	uint32_t transforms = 0;
+
+	if (index & horizontal)
+	{
+		transforms |= Prototype_Tile::transformations::flip_horizontal;
+	}
+
+	if (index & vertical)
+	{
+		transforms |= Prototype_Tile::transformations::flip_verticle;
+	}
+
+	if (index & antidiagonal)
+	{
+		transforms |= Prototype_Tile::transformations::flip_anti_diagonal;
+	}
 
 	if (id_map.find(id - first_gid) == id_map.end())
 	{
 		std::cout << "help!\n";
 	}
 
-	return tileset_tiles[id_map.at(id - first_gid)];
+	return tileset_tiles[id_map.at(id - first_gid)].transformed(transforms);
 }
 
 

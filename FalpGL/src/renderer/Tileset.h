@@ -25,7 +25,7 @@ public:
 
 /* Contains data needed to construct specific tiles */
 struct Prototype_Tile {
-	enum class transformations {
+	enum transformations {
 		flip_verticle = 0b001,
 		flip_horizontal = 0b010,
 		flip_anti_diagonal = 0b100
@@ -107,5 +107,5 @@ public:
 	void bind_texture(unsigned int unit);
 
 	/* Array-like access to prototype tiles */
-	Prototype_Tile& operator[](int index);
+	Prototype_Tile operator[](int index);
 };
