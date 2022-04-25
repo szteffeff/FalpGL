@@ -13,14 +13,21 @@ protected:
 	bool nofade;
 
 public:
-	const float x, y;
-	const float center_x, center_y;
-	const float size_x, size_y;
-	const int id;
+	float x = 0;
+	float y = 0;
+	float center_x = 0;
+	float center_y = 0;
+	float size_x = 0;
+	float size_y = 0;
+	int id = 0;
 
 
 	Decoration(float x, float y, float size_x, float size_y, Prototype_Tile tile);
 	Decoration(nlohmann::json object, Tileset& set);
+
+	struct compare_decoration {
+		bool operator() (const Decoration& a, const Decoration& b);
+	};
 
 	void fade(float opacity = 1.0f);
 	float* data();
@@ -59,7 +66,7 @@ public:
 
 	bool collision(float x, float y);
 
-	void init(nlohmann::json tileset_json, nlohmann::json decorations);
+	void init(nlohmann::json tileset_json, nlohmann::json decorations_json);
 
 	void add_decoration(Decoration d);
 
