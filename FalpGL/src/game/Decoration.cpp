@@ -72,6 +72,11 @@ void Decoration::fade(float opacity)
 	vertex_data[19] = opacity;
 }
 
+bool Decoration::compare_decoration::operator()(const Decoration& a, const Decoration& b)
+{
+	return (a.y > b.y);
+}
+
 float* Decoration::data()
 {
 	return &vertex_data[0];
@@ -103,20 +108,22 @@ Decoration_Renderer::Decoration_Renderer(nlohmann::json tileset_json, nlohmann::
 	dec_vertex_array.AddBuffer(dec_vertex_buffer, layout);
 }
 
-void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decorations)
+void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decorations_json)
 {
 	decoration_set.init(tileset_json, texture_index);
 
 
-	int amount = decorations["objects"].size();
+	int amount = decorations_json["objects"].size();
 	console_log("[INFO]: Loading " + std::to_string(amount) + " objects");
 	dec_vertex_buffer.init(amount * 20 * sizeof(float));
 	dec_index_buffer.init(amount);
 
-	for (auto d : decorations["objects"])
+	for (auto d : decorations_json["objects"])
 	{
 		add_decoration(Decoration(d, decoration_set));
 	}
+
+	std::sort(decorations.begin(), decorations.end(), Decoration::compare_decoration());
 
 	VertexBufferLayout layout;
 	layout.Push<float>(2);

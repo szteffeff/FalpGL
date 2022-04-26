@@ -206,6 +206,7 @@ int New_Map::tile_at(float x, float y)
 bool New_Map::collision_at(float x, float y)
 { /* Returns true on collision */
 
+	return false;
 	/* Position on tile. 0 - 32 */
 	float local_x = fmod(x, 32.0f);
 	float local_y = fmod(y, 32.0f);
@@ -223,6 +224,7 @@ bool New_Map::collision_at(float x, float y)
 
 bool New_Map::collision_circle(float x, float y, float radius)
 {
+	return false;
 	bool collided = false;
 	std::stringstream stream;
 	stream << "[INFO]: Testing tiles:\n";
@@ -332,7 +334,7 @@ int Chunk::tile_at(int x, int y)
 	return chunk_data[idx(x, y)];
 }
 
-n_Tile::n_Tile(Prototype_Tile& tile, float position[2])
+n_Tile::n_Tile(Prototype_Tile tile, float position[2])
 {
 	/* Math for texture coordinants is done completely for prototype tiles so it doesn't have to be done many times here */
 	quad_data[0] = position[0] * 32;  //X

@@ -38,7 +38,7 @@ private:
 	float quad_data[16];
 
 public:
-	n_Tile(Prototype_Tile& tile_in, float position[2]);
+	n_Tile(Prototype_Tile tile_in, float position[2]);
 	n_Tile();
 };
 
@@ -76,7 +76,7 @@ private:
 	VertexBuffer map_vertex_buffer;
 	IndexBuffer map_index_buffer;
 
-	const std::string map_json_filename = "res/data/map2.json";
+	const std::string map_json_filename = "res/data/map3.json";
 
 	nlohmann::json map_json;
 

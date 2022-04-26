@@ -5,7 +5,6 @@
 #include <fstream>
 #include <math.h>
 
-/* Write prototype tile constructor that take json */
 
 /* Bounding box and offset */
 struct Collision_Box {
@@ -26,6 +25,12 @@ public:
 
 /* Contains data needed to construct specific tiles */
 struct Prototype_Tile {
+	enum transformations {
+		flip_verticle = 0b001,
+		flip_horizontal = 0b010,
+		flip_anti_diagonal = 0b100
+	};
+
 	int size_x, size_y;
 
 	/* Texture coordinants of tile's texture on an atlas */
@@ -48,7 +53,10 @@ struct Prototype_Tile {
 	bool collision_circle(float x, float y, float radius);
 	bool has_collision();
 
+	Prototype_Tile transformed(unsigned int transforms);
+
 	Prototype_Tile(float in_id, std::string image, float tex_origin[2], float atlas_size, std::vector<Collision_Box> boxes, bool nf = false, int size_x = 32, int size_y = 32);
+	Prototype_Tile(nlohmann::json tile_json, float tex_origin[2], float atlas_size);
 	Prototype_Tile();
 };
 
@@ -74,7 +82,7 @@ protected:
 
 	/* Vector of constructed prototype tiles */
 	std::vector<Prototype_Tile> tileset_tiles;
-
+	std::unordered_map<int, int> id_map;
 
 	/* Render tile to atlas */
 	virtual void stitch_tile(Prototype_Tile tile_to_stich);
@@ -99,5 +107,5 @@ public:
 	void bind_texture(unsigned int unit);
 
 	/* Array-like access to prototype tiles */
-	Prototype_Tile& operator[](int index);
+	Prototype_Tile operator[](int index);
 };
