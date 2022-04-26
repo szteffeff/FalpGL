@@ -88,5 +88,11 @@
     "size": [ 128, 94 ],
     "animation_count": 1,
     "animation_names": [ "Player_Shatter_Axe" ]
+  },
+  "Sussy_Vase": {
+    "name": "Sussy_Vase",
+    "size": [ 64, 64 ],
+    "animation_count": 2,
+    "animation_names": [ "Sussy_Vase", "Sussy_Vase_Woke" ]
   }
 }

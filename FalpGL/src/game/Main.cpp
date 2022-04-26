@@ -300,11 +300,13 @@ int main(void)
         Garfield garfield(&player_render.vertex_buffer);
         Bush_Boi Bush_boi(&player_render.vertex_buffer);
         Chompy_Slime Chompy_slime(&player_render.vertex_buffer);
+        Sussy_Vase Sussy_vase(&player_render.vertex_buffer);
 
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
         Chompy_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         Bush_boi.Get_player_position(player.get_position_x(), player.get_position_y());
+        Sussy_vase.Get_player_position(player.get_position_x(), player.get_position_y());
 
         /*Sound crap*/
         //SFX Sound_player;
@@ -321,6 +323,7 @@ int main(void)
         red_slime.Player_Health(player.GetHealth());
         Chompy_slime.Player_Health(player.GetHealth());
         Bush_boi.Player_Health(player.GetHealth());
+        Sussy_vase.Player_Health(player.GetHealth());
         controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -361,8 +364,9 @@ int main(void)
                 //red_slime.tick();
                 //enemy_ghost.tick();
                 garfield.tick();
-                Bush_boi.tick();
+                //Bush_boi.tick();
                 //Chompy_slime.tick();
+                //Sussy_vase.tick();
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
