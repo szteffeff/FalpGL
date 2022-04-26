@@ -26,6 +26,8 @@ public:
 	virtual void Player_Health(float* health);
 	virtual void walk(float direction, float magnitude);
 
+	
+
 	virtual void tick();
 };
 
