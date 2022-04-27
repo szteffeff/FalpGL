@@ -51,6 +51,11 @@ private:
 	float Stamina = 100;
 	int Potion = 4;
 	float direction = 0;
+	bool dodging = false;
+	int magnitude;
+	int dodge_frames = 60 * 2;
+	bool RUN = false;
+	int dodge_momentum = 5;
 
 	/// //////////////////////////////////////// Bow stuff
 	
@@ -143,6 +148,7 @@ public:
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
 	void sprint(float direction, float magnitude);
+	void dodge(float direction, float magnitude);
 	glm::mat4* get_trans_matrix();
 	float position_x();
 	float position_y();
@@ -219,6 +225,36 @@ private:
 	float* player_position_y;
 public:
 	Garfield(VertexBuffer* vb);
+	void tick();
+};
+
+class Cow : public Creature {
+private:
+	Entity cow;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Cow(VertexBuffer* vb);
+	void tick();
+};
+
+class Perry : public Creature {
+private:
+	Entity perry;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Perry(VertexBuffer* vb);
+	void tick();
+};
+
+class Edgelord : public Creature {
+private:
+	Entity edgelord;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Edgelord(VertexBuffer* vb);
 	void tick();
 };
 

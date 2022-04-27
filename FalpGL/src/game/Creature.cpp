@@ -184,7 +184,7 @@ void Player::sprint(float direction, float magnitude)
 {
 	if (attacking == false)
 	{
-		magnitude *= 3;
+		magnitude *= 2;
 		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
 		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
@@ -193,6 +193,12 @@ void Player::sprint(float direction, float magnitude)
 
 		//Lose_Stamina();
 	}
+}
+
+void Player::dodge(float direction, float magnitude)
+{
+	dodging = true;
+	Stamina -= 10;
 }
 
 void Player::set_active_map(New_Map* map)
@@ -211,12 +217,25 @@ void Player::tick()
 		{} /* If collision, do nothing */
 		else
 		{
-			position[0] += momentum[0];
-			position[1] += momentum[1];
-
-			m_player.translate(momentum[0], momentum[1]);
+			if (dodging == true and dodge_momentum > 0 and Stamina > 10) {
+				position[0] += momentum[0] * dodge_momentum;
+				position[1] += momentum[1] * dodge_momentum;
+				m_player.translate(momentum[0] * dodge_momentum, momentum[1] * dodge_momentum);
+				dodge_momentum -= 0.0625;
+			}
+			else if (dodging == true and dodge_momentum == 0) {
+				dodge_momentum = 10;
+				dodging = false;
+			}
+			else
+			{
+				position[0] += momentum[0];
+				position[1] += momentum[1];
+				m_player.translate(momentum[0], momentum[1]);
+			}
 
 			player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+
 		}
 	}
 	else
@@ -224,7 +243,21 @@ void Player::tick()
 		position[0] += momentum[0];
 		position[1] += momentum[1];
 
-		m_player.translate(momentum[0], momentum[1]);
+		if (dodging == true and dodge_frames > 0) {
+			m_player.translate(momentum[0] * dodge_momentum, momentum[1] * dodge_momentum);
+			dodge_frames -= 1;
+			dodge_momentum -= 0.0625;
+		}
+		else if (dodging == true and dodge_frames == 0) {
+			dodge_frames = 60 * 4;
+			dodge_momentum = 15;
+			dodging = false;
+		}
+		else
+		{
+			m_player.translate(momentum[0], momentum[1]);
+		}
+		
 
 		player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
 	}
@@ -250,6 +283,31 @@ void Player::tick()
 	momentum[0] = 0;
 	momentum[1] = 0;
 
+	/*
+	static int dodge = 60*4;
+	static bool RUN = false;
+
+	if (attacking == false and dodging == true and Stamina > 25 )
+	{
+		magnitude *= 15;
+		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+
+		//Lose_Stamina();
+		RUN = true; std::cout<< " U suck" std<< ur mom << gottem.
+	}
+	if (attacking == false and dodging == true and RUN == true and dodge > 0) {
+		//position[0] += momentum[0];
+		//position[1] += momentum[1];
+		m_player.translate(dx,dy);
+		dodge -= 1;
+	}
+	else if (dodge == 0) {
+		dodging = false;
+		RUN = false;
+		dodge = 10;
+	}
+	*/
 
 	/// ///////////////////////////////////// Bow stuff
 
@@ -1149,4 +1207,40 @@ void Sussy_Vase::tick()
 		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(100000, 10000);
 	}
+}
+
+Cow::Cow(VertexBuffer* vb)
+	: cow(vb, loader->entities["Cow"])
+{
+	cow.set_animation(0);
+}
+
+void Cow::tick()
+{
+	cow.tick();
+	cow.teleport(-100, -300);
+}
+
+Perry::Perry(VertexBuffer* vb)
+	: perry(vb, loader->entities["Perry"])
+{
+	perry.set_animation(0);
+}
+
+void Perry::tick()
+{
+	perry.tick();
+	perry.teleport(-100, -500);
+}
+
+Edgelord::Edgelord(VertexBuffer* vb)
+	: edgelord(vb, loader->entities["edgelord"])
+{
+	edgelord.set_animation(0);
+}
+
+void Edgelord::tick()
+{
+	edgelord.tick();
+	edgelord.teleport(-100, -700);
 }

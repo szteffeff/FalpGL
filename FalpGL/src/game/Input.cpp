@@ -114,7 +114,24 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 		player->Take_Heal();
 		break;
 	
+	case(GLFW_KEY_SPACE ):
+		if (keys[0].held) {
+			player->dodge(90, 1);
+		}
 
+		if (keys[1].held) {
+			player->dodge(180, 1);
+		}
+
+		if (keys[2].held) {
+			player->dodge(270, 1);
+		}
+
+		if (keys[3].held) {
+			player->dodge(0, 1);
+		}
+
+		break;
 
 	default:
 		break;

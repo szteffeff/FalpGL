@@ -41,6 +41,24 @@
     "animation_count": 1,
     "animation_names": [ "Garfield" ]
   },
+  "Cow": {
+    "name": "Cow",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Cow" ]
+  },
+  "Perry": {
+    "name": "Perry",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Perry" ]
+  },
+  "Edgelord": {
+    "name": "Edgelord",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Edgelord" ]
+  },
   "Bush_Boi": {
     "name": "Bush_Boi",
     "size": [ 128, 128 ],
