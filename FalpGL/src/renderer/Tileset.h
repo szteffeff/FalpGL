@@ -45,6 +45,7 @@ struct Prototype_Tile {
 
 	/* Filepath to texture's image file */
 	std::string filepath;
+	std::string tile_name;
 
 	/* Vector of collision boxes*/
 	std::vector<Collision_Box> collisions;
