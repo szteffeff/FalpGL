@@ -26,6 +26,19 @@ public:
 	virtual void Player_Health(float* health);
 	virtual void walk(float direction, float magnitude);
 
+	//weapon detection
+	virtual float Arrow_Detection_horizontal(float x, float* arrow_x);
+	virtual float Arrow_Detection_vertical(float y, float* arrow_y);
+
+	virtual float Dagger_Detection_horizontal(float x, float* dagger_x);
+	virtual float Dagger_Detection_vertical(float y, float* dagger_y);
+
+	virtual float Axe_Detection_horizontal(float x, float* axe_x);
+	virtual float Axe_Detection_vertical(float y, float* axe_y);
+
+	virtual float Spear_Detection_horizontal(float x, float* spear_x);
+	virtual float Spear_Detection_vertical(float y, float* spear_y);
+
 	virtual void tick();
 };
 
@@ -49,6 +62,11 @@ private:
 	float Stamina = 100;
 	int Potion = 4;
 	float direction = 0;
+	bool dodging = false;
+	int magnitude;
+	int dodge_frames = 60 * 2;
+	bool RUN = false;
+	int dodge_momentum = 5;
 
 	/// //////////////////////////////////////// Bow stuff
 	
@@ -141,6 +159,7 @@ public:
 	Player(VertexBuffer* vb);
 	void walk(float direction, float magnitude);
 	void sprint(float direction, float magnitude);
+	void dodge(float direction, float magnitude);
 	glm::mat4* get_trans_matrix();
 	float position_x();
 	float position_y();
@@ -220,6 +239,36 @@ public:
 	void tick();
 };
 
+class Cow : public Creature {
+private:
+	Entity cow;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Cow(VertexBuffer* vb);
+	void tick();
+};
+
+class Perry : public Creature {
+private:
+	Entity perry;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Perry(VertexBuffer* vb);
+	void tick();
+};
+
+class Edgelord : public Creature {
+private:
+	Entity edgelord;
+	float* player_position_x;
+	float* player_position_y;
+public:
+	Edgelord(VertexBuffer* vb);
+	void tick();
+};
+
 class Bush_Boi : public Creature {
 private:
 	Entity Bush_boi;
@@ -290,4 +339,27 @@ public:
 	void set_health(float h);
 	void set_stamina(float s);
 	void set_level(frame_animations level);
+};
+
+class Sussy_Vase : public Creature {
+private:
+	Entity Sussy_vase;
+	Entity Wizard_pink_bullet;
+
+	float momentum[2], position[2];
+	const float Health = 20;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+	int bullet_lifespan = 60 * 4;
+	float dx = 0, dy = 0;
+	int frames = 0;
+	int frames_magic = 0;
+	int dmg_control = 0;
+	
+
+public:
+	Sussy_Vase(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void tick();
 };
