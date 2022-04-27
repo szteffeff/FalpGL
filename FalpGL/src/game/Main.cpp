@@ -298,6 +298,9 @@ int main(void)
         Red_Slime red_slime(&player_render.vertex_buffer);
         Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
         Garfield garfield(&player_render.vertex_buffer);
+        Cow cow(&player_render.vertex_buffer);
+        Perry perry(&player_render.vertex_buffer);
+        Edgelord edgelord(&player_render.vertex_buffer);
         Bush_Boi Bush_boi(&player_render.vertex_buffer);
         Chompy_Slime Chompy_slime(&player_render.vertex_buffer);
         Sussy_Vase Sussy_vase(&player_render.vertex_buffer);
@@ -364,6 +367,9 @@ int main(void)
                 //red_slime.tick();
                 //enemy_ghost.tick();
                 garfield.tick();
+                cow.tick();
+                perry.tick();
+                edgelord.tick();
                 //Bush_boi.tick();
                 //Chompy_slime.tick();
                 //Sussy_vase.tick();

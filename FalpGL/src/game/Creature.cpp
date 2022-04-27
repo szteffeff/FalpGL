@@ -77,6 +77,87 @@ void Creature::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 }
 
+float Creature::Arrow_Detection_horizontal(float x, float* arrow_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, arrow_x);
+	float horizontal;
+
+	if (direction == true) {horizontal = *arrow_x - x;}
+	else {horizontal = x - *arrow_x;}
+	return horizontal;
+}
+
+float Creature::Arrow_Detection_vertical(float y, float* arrow_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, arrow_y);
+	float vertical;
+
+	if (direction == true) {vertical = *arrow_y - y;}
+	else {vertical = y - *arrow_y;}
+	return vertical;
+}
+
+float Creature::Dagger_Detection_horizontal(float x, float* dagger_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, dagger_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *dagger_x - x; }
+	else { horizontal = x - *dagger_x; }
+	return horizontal;
+}
+
+float Creature::Dagger_Detection_vertical(float y, float* dagger_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, dagger_y);
+	float vertical;
+
+	if (direction == true) { vertical = *dagger_y - y; }
+	else { vertical = y - *dagger_y; }
+	return vertical;
+}
+
+float Creature::Axe_Detection_horizontal(float x, float* axe_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, axe_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *axe_x - x; }
+	else { horizontal = x - *axe_x; }
+	return horizontal;
+}
+
+float Creature::Axe_Detection_vertical(float y, float* axe_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, axe_y);
+	float vertical;
+
+	if (direction == true) { vertical = *axe_y - y; }
+	else { vertical = y - *axe_y; }
+	return vertical;
+}
+
+float Creature::Spear_Detection_horizontal(float x, float* spear_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, spear_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *spear_x - x; }
+	else { horizontal = x - *spear_x; }
+	return horizontal;
+}
+
+float Creature::Spear_Detection_vertical(float y, float* spear_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, spear_y);
+	float vertical;
+
+	if (direction == true) { vertical = *spear_y - y; }
+	else { vertical = y - *spear_y; }
+	return vertical;
+}
+
+
 void Creature::tick() {}
 
 /* Health_Bar */
@@ -1218,7 +1299,7 @@ Cow::Cow(VertexBuffer* vb)
 void Cow::tick()
 {
 	cow.tick();
-	cow.teleport(-100, -300);
+	//cow.teleport(-100, -300);
 }
 
 Perry::Perry(VertexBuffer* vb)
@@ -1230,11 +1311,11 @@ Perry::Perry(VertexBuffer* vb)
 void Perry::tick()
 {
 	perry.tick();
-	perry.teleport(-100, -500);
+	//perry.teleport(-100, -500);
 }
 
 Edgelord::Edgelord(VertexBuffer* vb)
-	: edgelord(vb, loader->entities["edgelord"])
+	: edgelord(vb, loader->entities["Edgelord"])
 {
 	edgelord.set_animation(0);
 }
@@ -1242,5 +1323,5 @@ Edgelord::Edgelord(VertexBuffer* vb)
 void Edgelord::tick()
 {
 	edgelord.tick();
-	edgelord.teleport(-100, -700);
+	//edgelord.teleport(-100, -700);
 }

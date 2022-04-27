@@ -26,7 +26,18 @@ public:
 	virtual void Player_Health(float* health);
 	virtual void walk(float direction, float magnitude);
 
-	
+	//weapon detection
+	virtual float Arrow_Detection_horizontal(float x, float* arrow_x);
+	virtual float Arrow_Detection_vertical(float y, float* arrow_y);
+
+	virtual float Dagger_Detection_horizontal(float x, float* dagger_x);
+	virtual float Dagger_Detection_vertical(float y, float* dagger_y);
+
+	virtual float Axe_Detection_horizontal(float x, float* axe_x);
+	virtual float Axe_Detection_vertical(float y, float* axe_y);
+
+	virtual float Spear_Detection_horizontal(float x, float* spear_x);
+	virtual float Spear_Detection_vertical(float y, float* spear_y);
 
 	virtual void tick();
 };
