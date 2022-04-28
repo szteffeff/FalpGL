@@ -96,6 +96,8 @@ protected:
 
 	size_t first_gid;
 
+	std::string name;
+
 public:
 	Tileset(std::string Tileset_path, int texture_unit);
 	Tileset(nlohmann::json set_json, int texture_unit);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="807">
+<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="842">
  <editorsettings>
   <chunksize width="64" height="64"/>
+  <export target="../res/data/map3.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Lizardpower" tilewidth="32" tileheight="32" tilecount="289" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
@@ -4405,5 +4406,12 @@
   <object id="796" gid="302" x="-7312" y="-4976" width="64" height="64"/>
   <object id="804" gid="317" x="-6856" y="-4235.33" width="166.667" height="174.667"/>
   <object id="805" gid="320" x="-6855.67" y="-4199" width="43" height="42"/>
+  <object id="831" gid="296" x="-256" y="-480" width="64" height="128"/>
+  <object id="832" gid="296" x="-480" y="-480" width="64" height="128"/>
+  <object id="833" gid="297" x="-256" y="-768" width="64" height="128"/>
+  <object id="834" gid="295" x="-480" y="-768" width="64" height="128"/>
+  <object id="835" gid="299" x="-368" y="-768" width="64" height="64"/>
+  <object id="840" gid="300" x="-320" y="-768" width="64" height="64"/>
+  <object id="841" gid="300" x="-416" y="-768" width="64" height="64"/>
  </objectgroup>
 </map>

@@ -382,6 +382,10 @@ void Tileset::create_atlas()
 		}
 	}
 
+
+	/* Keep track of tileset's name */
+	name = tileset_json["name"];
+
 	/* Create framebuffer - same as framebuffer.cpp */
 	GLCall(glGenFramebuffers(1, &gl_framebuffer_id));
 	GLCall(glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id));

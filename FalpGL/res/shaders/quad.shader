@@ -27,7 +27,8 @@ uniform float u_alpha;
 
 void main()
 {
-	color = vec4(texture(u_Texture, v_TexCoord).rgb, u_alpha);
+	color = texture(u_Texture, v_TexCoord);
+	color = vec4(color.rgb, u_alpha * color.a);
 }
 
 

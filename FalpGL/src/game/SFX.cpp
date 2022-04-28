@@ -7,7 +7,7 @@ void SFX::Play_sound(const ALuint Sound_thing)
 	if (state != AL_PLAYING) {
 		SFX_Sound.Play(Sound_thing);
 		//alSourcePlay(Sound_thing);
-		console_log("Playing walking noise");
+		//console_log("Playing walking noise");
 	}
 }
 

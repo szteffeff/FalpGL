@@ -232,7 +232,7 @@ int main(void)
     
     { /* OpenGL objects need to be created in this scope */
 
-        { /* Loading screen */
+        /* Loading screen */
             float vertices[24] = {
                  1.0f, -1.0f,  1.0f, 0.0f,
                 -1.0f, -1.0f,  0.0f, 0.0f,
@@ -252,7 +252,7 @@ int main(void)
             Shader s("res/shaders/quad.shader");
             s.Bind();
             s.SetUniform1i("u_Texture", 0);
-            s.SetUniform1f("u_alpha", 1.0f);
+            s.SetUniform1f("u_alpha", 0.5f);
 
             Texture loading_screen("res/gfx/textures/loading.jpeg");
             loading_screen.Bind();
@@ -266,7 +266,7 @@ int main(void)
             glDrawArrays(GL_TRIANGLES, 0, 6);
             glEnable(GL_DEPTH_TEST);
             glfwSwapBuffers(window);
-        }
+        
 
         console_log("[INFO]: Started constructing map");
         New_Map nmap;
@@ -418,9 +418,6 @@ int main(void)
             /* Draw processed image and UI */
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix);
-
-
-
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

@@ -62,6 +62,4 @@ void main()
     float intensity = 0.75;
 
     frag_color.rgb *= clamp((vec3(1 - sqrt(x * x + y * y)) + scale) * intensity - 1, 0, 1);
-
-    frag_color.rgb = (vec3(1) - frag_color.rgb);
 }

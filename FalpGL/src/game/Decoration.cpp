@@ -117,7 +117,6 @@ void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decor
 
 
 	int amount = decorations_json["objects"].size();
-	console_log("[INFO]: Loading " + std::to_string(amount) + " objects");
 	dec_vertex_buffer.init(amount * 20 * sizeof(float));
 	dec_index_buffer.init(amount);
 
@@ -135,6 +134,8 @@ void Decoration_Renderer::init(nlohmann::json tileset_json, nlohmann::json decor
 
 	dec_vertex_buffer.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
 	dec_vertex_array.AddBuffer(dec_vertex_buffer, layout);
+
+	console_log("[INFO]: Loaded " + std::to_string(amount) + " objects");
 }
 
 

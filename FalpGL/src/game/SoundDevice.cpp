@@ -1,5 +1,6 @@
 #include "SoundDevice.h"
 #include "Open_AL/al.h"
+#include "../renderer/Log.h"
 #include <stdio.h>
 
 SoundDevice* SoundDevice::get()
@@ -26,7 +27,8 @@ SoundDevice::SoundDevice()
 		name = alcGetString(p_ALCDevice, ALC_ALL_DEVICES_SPECIFIER);
 	if (!name || alcGetError(p_ALCDevice) != AL_NO_ERROR)
 		name = alcGetString(p_ALCDevice, ALC_DEVICE_SPECIFIER);
-	printf("Opened \"%s\n", name);
+
+	console_log(std::string("[SOUND]: Opened device '") + name + std::string("'"));
 }
 
 SoundDevice::~SoundDevice()

@@ -59,7 +59,7 @@ New_Map::New_Map()
 	else
 	{
 		/* If so, pass tileset json to create tileset */
-		console_log("[INFO]: Using embedded tileset");
+		//console_log("[INFO]: Using embedded tileset");
 		nlohmann::json tileset_json = map_json["tilesets"][0];
 		set.init(tileset_json, 0);
 	}
@@ -144,11 +144,14 @@ New_Map::New_Map()
 		map_vertex_buffer.buffer_data(sizeof(n_Tile) * 64 * 64 * i, sizeof(n_Tile) * 64 * 64, chunks[i].vertex_data());
 	}
 
+	console_log(std::string("[INFO]: Loaded ") + std::to_string(chunks.size() * 64 * 64) + std::string(" tiles in ") + std::to_string(chunks.size()) + std::string(" chunks"));
 
 	if (map_json["layers"].size() > 1)
 	{
 		dec_renderer.init(map_json["tilesets"][1], map_json["layers"][1]);
 	}
+
+	
 }
 
 bool New_Map::init()
