@@ -283,6 +283,8 @@ int main(void)
         BatchRenderer player_render(1000, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
+        std::vector<Creature*> bad_bois;
+
         BatchRenderer interface_renderer(1000, "res/shaders/ui.shader");
         interface_renderer.add_layout(layout);
         
@@ -295,21 +297,20 @@ int main(void)
         UserInterface ui(&interface_renderer.vertex_buffer);
 
         Player player(&player_render.vertex_buffer);
-        Red_Slime red_slime(&player_render.vertex_buffer);
-        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
         Garfield garfield(&player_render.vertex_buffer);
         Cow cow(&player_render.vertex_buffer);
         Perry perry(&player_render.vertex_buffer);
         Edgelord edgelord(&player_render.vertex_buffer);
-        Bush_Boi Bush_boi(&player_render.vertex_buffer);
-        Chompy_Slime Chompy_slime(&player_render.vertex_buffer);
-        Sussy_Vase Sussy_vase(&player_render.vertex_buffer);
+        bad_bois.emplace_back(new Red_Slime(&player_render.vertex_buffer));
+        bad_bois.emplace_back(new Enemy_Ghost(&player_render.vertex_buffer));
+        bad_bois.emplace_back(new Bush_Boi(&player_render.vertex_buffer));
+        bad_bois.emplace_back(new Chompy_Slime(&player_render.vertex_buffer));
+        bad_bois.emplace_back(new Sussy_Vase(&player_render.vertex_buffer));
 
-        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
-        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
-        Chompy_slime.Get_player_position(player.get_position_x(), player.get_position_y());
-        Bush_boi.Get_player_position(player.get_position_x(), player.get_position_y());
-        Sussy_vase.Get_player_position(player.get_position_x(), player.get_position_y());
+        for (Creature* boi : bad_bois) {
+            boi->Get_player_position(player.get_position_x(), player.get_position_y());
+            boi->Player_Health(player.GetHealth());
+        }
 
         /*Sound crap*/
         //SFX Sound_player;
@@ -322,11 +323,7 @@ int main(void)
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
         ui.SetPotion(player.GetPotion());
-        enemy_ghost.Player_Health(player.GetHealth());
-        red_slime.Player_Health(player.GetHealth());
-        Chompy_slime.Player_Health(player.GetHealth());
-        Bush_boi.Player_Health(player.GetHealth());
-        Sussy_vase.Player_Health(player.GetHealth());
+
         controller.set_pause(&pause);
         controller.set_player(&player);
         controller.set_keepalive(&running);
@@ -364,7 +361,7 @@ int main(void)
             nmap.tick(*player.get_position_x(), *player.get_position_y());
             if (pause == false) {
                 player.tick();
-                //red_slime.tick();
+                bad_bois[0]->tick();
                 //enemy_ghost.tick();
                 garfield.tick();
                 cow.tick();
@@ -373,6 +370,17 @@ int main(void)
                 //Bush_boi.tick();
                 //Chompy_slime.tick();
                 //Sussy_vase.tick();
+                /*
+                for (Creature* boi : bad_bois) {
+                    boi->tick();
+                }
+                */
+                for (Creature* boi : bad_bois) {
+                    if (player.am_attacking() == true) {
+                        boi->attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type());
+                    }
+                }
+                
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
@@ -419,14 +427,14 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix);
 
-
-
-
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
             /* Poll for and process events */
             glfwPollEvents();
+        }
+        for (Creature* boi : bad_bois) {
+            delete boi;
         }
     }
     glfwTerminate();
