@@ -35,6 +35,9 @@ Decoration::Decoration(nlohmann::json object, Tileset& set)
 	Prototype_Tile tile = set[id];
 	nofade = tile.nofade;
 
+	center_x = x + (size_x / 2);
+	center_y = y + (size_y / 2);
+
 	vertex_data[0] = x;                        /* x */
 	vertex_data[1] = y;                        /* y */
 	vertex_data[2] = tile.texture_coord[0];    /* s */
