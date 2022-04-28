@@ -77,6 +77,87 @@ void Creature::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 }
 
+float Creature::Arrow_Detection_horizontal(float x, float* arrow_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, arrow_x);
+	float horizontal;
+
+	if (direction == true) {horizontal = *arrow_x - x;}
+	else {horizontal = x - *arrow_x;}
+	return horizontal;
+}
+
+float Creature::Arrow_Detection_vertical(float y, float* arrow_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, arrow_y);
+	float vertical;
+
+	if (direction == true) {vertical = *arrow_y - y;}
+	else {vertical = y - *arrow_y;}
+	return vertical;
+}
+
+float Creature::Dagger_Detection_horizontal(float x, float* dagger_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, dagger_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *dagger_x - x; }
+	else { horizontal = x - *dagger_x; }
+	return horizontal;
+}
+
+float Creature::Dagger_Detection_vertical(float y, float* dagger_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, dagger_y);
+	float vertical;
+
+	if (direction == true) { vertical = *dagger_y - y; }
+	else { vertical = y - *dagger_y; }
+	return vertical;
+}
+
+float Creature::Axe_Detection_horizontal(float x, float* axe_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, axe_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *axe_x - x; }
+	else { horizontal = x - *axe_x; }
+	return horizontal;
+}
+
+float Creature::Axe_Detection_vertical(float y, float* axe_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, axe_y);
+	float vertical;
+
+	if (direction == true) { vertical = *axe_y - y; }
+	else { vertical = y - *axe_y; }
+	return vertical;
+}
+
+float Creature::Spear_Detection_horizontal(float x, float* spear_x)
+{
+	bool direction = Player_Detection_simple_horizontal(x, spear_x);
+	float horizontal;
+
+	if (direction == true) { horizontal = *spear_x - x; }
+	else { horizontal = x - *spear_x; }
+	return horizontal;
+}
+
+float Creature::Spear_Detection_vertical(float y, float* spear_y)
+{
+	bool direction = Player_Detection_simple_horizontal(y, spear_y);
+	float vertical;
+
+	if (direction == true) { vertical = *spear_y - y; }
+	else { vertical = y - *spear_y; }
+	return vertical;
+}
+
+
 void Creature::tick() {}
 
 /* Health_Bar */
@@ -166,29 +247,39 @@ Player::Player(VertexBuffer* vb)
 
 void Player::walk(float direction, float magnitude)
 {
-	magnitude *= 3;
-	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+	if (attacking == false) {
+		magnitude *= 3;
+		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
-	momentum[0] += round(dx);
-	momentum[1] += round(dy);
+		momentum[0] += round(dx);
+		momentum[1] += round(dy);
 
-	Recover_Stamina();
-	//walk_noise();
-	walking_sound.Play_sound(walking);
+		Recover_Stamina();
+		//walk_noise();
+		walking_sound.Play_sound(walking);
+	}
 }
 
 void Player::sprint(float direction, float magnitude)
 {
-	magnitude *= 3;
-	float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-	float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+	if (attacking == false)
+	{
+		magnitude *= 2;
+		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
-	momentum[0] += round(1.5 * dx);
-	momentum[1] += round(1.5 * dy);
+		momentum[0] += round(1.5 * dx);
+		momentum[1] += round(1.5 * dy);
 
-	//Lose_Stamina();
-	
+		//Lose_Stamina();
+	}
+}
+
+void Player::dodge(float direction, float magnitude)
+{
+	dodging = true;
+	Stamina -= 10;
 }
 
 void Player::set_active_map(New_Map* map)
@@ -207,12 +298,25 @@ void Player::tick()
 		{} /* If collision, do nothing */
 		else
 		{
-			position[0] += momentum[0];
-			position[1] += momentum[1];
-
-			m_player.translate(momentum[0], momentum[1]);
+			if (dodging == true and dodge_momentum > 0 and Stamina > 10) {
+				position[0] += momentum[0] * dodge_momentum;
+				position[1] += momentum[1] * dodge_momentum;
+				m_player.translate(momentum[0] * dodge_momentum, momentum[1] * dodge_momentum);
+				dodge_momentum -= 0.0625;
+			}
+			else if (dodging == true and dodge_momentum == 0) {
+				dodge_momentum = 10;
+				dodging = false;
+			}
+			else
+			{
+				position[0] += momentum[0];
+				position[1] += momentum[1];
+				m_player.translate(momentum[0], momentum[1]);
+			}
 
 			player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
+
 		}
 	}
 	else
@@ -220,7 +324,21 @@ void Player::tick()
 		position[0] += momentum[0];
 		position[1] += momentum[1];
 
-		m_player.translate(momentum[0], momentum[1]);
+		if (dodging == true and dodge_frames > 0) {
+			m_player.translate(momentum[0] * dodge_momentum, momentum[1] * dodge_momentum);
+			dodge_frames -= 1;
+			dodge_momentum -= 0.0625;
+		}
+		else if (dodging == true and dodge_frames == 0) {
+			dodge_frames = 60 * 4;
+			dodge_momentum = 15;
+			dodging = false;
+		}
+		else
+		{
+			m_player.translate(momentum[0], momentum[1]);
+		}
+		
 
 		player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
 	}
@@ -246,10 +364,35 @@ void Player::tick()
 	momentum[0] = 0;
 	momentum[1] = 0;
 
+	/*
+	static int dodge = 60*4;
+	static bool RUN = false;
+
+	if (attacking == false and dodging == true and Stamina > 25 )
+	{
+		magnitude *= 15;
+		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
+		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
+
+		//Lose_Stamina();
+		RUN = true; std::cout<< " U suck" std<< ur mom << gottem.
+	}
+	if (attacking == false and dodging == true and RUN == true and dodge > 0) {
+		//position[0] += momentum[0];
+		//position[1] += momentum[1];
+		m_player.translate(dx,dy);
+		dodge -= 1;
+	}
+	else if (dodge == 0) {
+		dodging = false;
+		RUN = false;
+		dodge = 10;
+	}
+	*/
 
 	/// ///////////////////////////////////// Bow stuff
 
-	if (shoot_bow == true and shwoop_shwoop == true) { //creates the direction for bow and arrow to point
+	if (shoot_bow == true and shwoop_shwoop == true and attacking == false and Stamina >= 25) { //creates the direction for bow and arrow to point
 		Player_arrow.teleport(position[0], position[1]);
 		dmg_control = 0;
 		std::cout << "Yeet thy arrow" << std::endl;
@@ -264,7 +407,13 @@ void Player::tick()
 
 		Player_bow.rotate(-direction + glm::pi<float>() * 0.5, Player_arrow.center(), true);
 		Player_bow.teleport(position[0] + dx*20, position[1] + dy*20);
+
+		attacking = true;
+		Stamina -= 25;
 	}
+
+	if (Stamina < 25 and shoot_bow == true) { shoot_bow = false; }
+
 	if (arrow_going == true) { // keeps track of how long the bow and arrow are on the screeen as well as moves arrow
 		bow_lifespan -= 1;
 		arrow_lifespan -= 1;
@@ -285,13 +434,14 @@ void Player::tick()
 		bow_lifespan = 60 * 1;
 		Player_bow.reset();
 		Player_bow.teleport(1000, 1000);
+		attacking = false;
 	}
 	
 	/// //////////////////////////////////// Shifty Shank
 
 	// dagger light attack
-	if (light_dagger == true and not dagger_start_L and attacking == false) { // creates the direction of dagger and turns it
-		attacking == true;
+	if (light_dagger == true and not dagger_start_L and attacking == false and Stamina >= 10) { // creates the direction of dagger and turns it
+		attacking = true;
 		Player_dagger.teleport(position[0], position[1]);
 		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1]- position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
@@ -300,7 +450,15 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		dagger_start_L = 1;
+
+		Stamina -= 10;
+		position[0] += dx / 3;
+		position[1] += dy / 3;
+		m_player.translate(dx/3, dy/3);
 	}
+
+	if (Stamina < 10 and light_dagger == true) { light_dagger = false; }
+
 	if (dagger_start_L > 0 and dagger_frame_L < 25) { // moves dagger forward
 		Player_dagger.translate(dx, dy);
 		dagger_frame_L++;
@@ -317,12 +475,12 @@ void Player::tick()
 		dagger_start_L = 0;
 		//frames_dagger_L = 0;
 		light_dagger = false;
-		attacking == false;
+		attacking = false;
 	}
 
 	// dagger Heavy attack
 	
-	if (heavy_dagger == true and not dagger_start_H and attacking == false) {  // creates direction for dagger to move in
+	if (heavy_dagger == true and not dagger_start_H and attacking == false and Stamina >= 15) {  // creates direction for dagger to move in
 		attacking = true;
 		speacial_move_dagger = rand() % 10;
 		Player_dagger.teleport(position[0], position[1]);
@@ -334,7 +492,12 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		dagger_start_H = 1;
+
+		Stamina -= 15;
 	}
+
+	if (Stamina < 15 and heavy_dagger == true) { heavy_dagger = false; }
+
 	if (dagger_start_H > 0 and dagger_frame_H < 25) { // moves dagger outward
 		Player_dagger.translate(dx, dy);
 		dagger_frame_H++;
@@ -377,7 +540,7 @@ void Player::tick()
 	/// ///////////////////////////// Axe sutff
 
 	// axe light attack
-	if (light_axe == true and not axe_start and attacking == false) { //makes direction for axe to point in
+	if (light_axe == true and not axe_start and attacking == false and Stamina >= 20) { //makes direction for axe to point in
 		attacking = true;
 		Player_Shatter_axe.teleport(position[0], position[1]);
 		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
@@ -386,7 +549,15 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 2;
 		dy = (float)(sin(direction)) * 2;
 		axe_start = 1;
+
+		Stamina -= 20;
+		position[0] += dx / 2;
+		position[1] += dy / 2;
+		m_player.translate(dx/2, dy/2);
 	}
+
+	if (Stamina < 20 and light_axe == true) { light_axe = false; }
+
 	if (axe_start > 0 and axe_frame < 40) { // moves axe outward
 		Player_Shatter_axe.translate(dx, dy);
 		axe_frame++;
@@ -408,7 +579,7 @@ void Player::tick()
 
 	// heavy attack
 
-	if (heavy_axe == true and not axe_start_H and attacking == false) {  // creates direction for axe to move in
+	if (heavy_axe == true and not axe_start_H and attacking == false and Stamina >= 70) {  // creates direction for axe to move in
 		attacking = true;
 		speacial_move_axe = rand() % 10;
 		Player_Shatter_axe.teleport(position[0], position[1]);
@@ -420,7 +591,12 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		axe_start_H = 1;
+
+		Stamina -= 70;
 	}
+
+	if (Stamina < 70 and heavy_axe == true) { heavy_axe = false; }
+
 	if (axe_start_H > 0 and axe_frame_H < 25) { // moves axe outward
 		Player_Shatter_axe.translate(dx, dy);
 		axe_frame_H++;
@@ -434,7 +610,7 @@ void Player::tick()
 		Player_Shatter_axe.reset();
 		dx = 0;
 		dy = 0;
-		direction += (glm::pi<float>() * 2 / time_axe) * pow(((axe_mid_H < time_axe / 2.0f ? axe_mid_H * 2 : time_axe - (axe_mid_H - time_axe / 2) * 2)) / time_axe, 3.0f) * 4;
+		direction -= (glm::pi<float>() * 2 / time_axe) * pow(((axe_mid_H < time_axe / 2.0f ? axe_mid_H * 2 : time_axe - (axe_mid_H - time_axe / 2) * 2)) / time_axe, 3.0f) * 4;
 		if (speacial_move_axe == 9) {
 			Player_Shatter_axe.rotate((-direction + glm::pi<float>() * 0.5) * pow(((axe_mid_H < time_axe / 2.0f ? axe_mid_H * 2 : time_axe - (axe_mid_H - time_axe / 2) * 2) / time_axe), 3.0f), Player_Shatter_axe.center(), true);
 		}
@@ -464,8 +640,8 @@ void Player::tick()
 	/// //////////////////////////////// spear stuff
 
 	// spear light attack
-	if (light_spear == true and not spear_start_L and attacking == false) { // creates the direction of dagger and turns it
-		attacking == true;
+	if (light_spear == true and not spear_start_L and attacking == false and Stamina >= 20) { // creates the direction of dagger and turns it
+		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
@@ -474,7 +650,15 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 2.5;
 		dy = (float)(sin(direction)) * 2.5;
 		spear_start_L = 1;
+
+		Stamina -= 20;
+		position[0] += dx / 2.5;
+		position[1] += dy / 2.5;
+		m_player.translate(dx/2.5, dy/2.5);
 	}
+
+	if (Stamina < 20 and light_spear == true ) { light_spear = false; }
+
 	if (spear_start_L > 0 and spear_frame_L < 40) { // moves dagger forward
 		Player_spear.translate(dx, dy);
 		spear_frame_L++;
@@ -491,12 +675,12 @@ void Player::tick()
 		spear_start_L = 0;
 		//frames_dagger_L = 0;
 		light_spear = false;
-		attacking == false;
+		attacking = false;
 	}
 
 	// spear heavy (the same as light but farther)
-	if (heavy_spear == true and not spear_start_H and attacking == false) { // creates the direction of dagger and turns it
-		attacking == true;
+	if (heavy_spear == true and not spear_start_H and attacking == false and Stamina >= 30) { // creates the direction of dagger and turns it
+		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
@@ -505,7 +689,15 @@ void Player::tick()
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
 		spear_start_H = 1;
+
+		Stamina -= 30;
+		position[0] += dx/3;
+		position[1] += dy/3;
+		m_player.translate(dx / 3, dy / 3);
 	}
+
+	if (Stamina < 30 and heavy_spear == true) { heavy_spear = false; }
+
 	if (spear_start_H > 0 and spear_frame_H < 80) { // moves dagger forward
 		Player_spear.translate(dx, dy);
 		spear_frame_H++;
@@ -522,7 +714,7 @@ void Player::tick()
 		spear_start_H = 0;
 		//frames_dagger_L = 0;
 		heavy_spear = false;
-		attacking == false;
+		attacking = false;
 	}
 
 	Player_spear.tick();
@@ -1021,4 +1213,115 @@ void Chompy_Slime::tick()
 			bops += 1;
 		}
 	}
+}
+
+Sussy_Vase::Sussy_Vase(VertexBuffer* vb)
+	: Sussy_vase(vb, loader->entities["Sussy_Vase"]), momentum(), position(), Wizard_pink_bullet(vb, loader->entities["Wizard_Pink_bullet"])
+{
+	Sussy_vase.set_animation(0);
+	position[0] += 1500;
+	position[1] += 100;
+	Sussy_vase.teleport(1500, 100);
+	Wizard_pink_bullet.teleport(10000000, 10000000);
+	Wizard_pink_bullet.set_animation(0);
+}
+
+
+void Sussy_Vase::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Sussy_Vase::tick()
+{
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	entity_return tick_state = Sussy_vase.tick();
+	entity_return tick_bullet = Wizard_pink_bullet.tick();
+	bool pewpew = false;
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) >= 500) {
+		Sussy_vase.set_animation(0);
+	}
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500) {
+			
+		Sussy_vase.set_animation(1);
+			
+		if (frames_magic++ == 60 * 6 and pewpew == false) {
+			bullet_lifespan = 60 * 4;
+			Wizard_pink_bullet.set_animation(0);
+			Wizard_pink_bullet.teleport(position[0], position[1]);
+			dmg_control = 0;
+			std::cout << "Yeet thy bullet" << std::endl;
+			frames_magic = 0;
+			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+			if (direction < 0) { direction += 2.0f * 3.14159f; }
+			std::cout << direction << std::endl;
+			dx = (float)(cos(direction)) * 3;
+			dy = (float)(sin(direction)) * 3;
+		}
+	}
+	bullet_lifespan -= 1;
+	Wizard_pink_bullet.translate(dx, dy);
+
+	if (bullet_lifespan == 0) {
+		dx = 0;
+		dy = 0;
+		Wizard_pink_bullet.set_animation(1);
+	}
+
+	if (abs(Wizard_pink_bullet.center().x - *player_position_x) < 20 and abs(Wizard_pink_bullet.center().y - *player_position_y) < 20) {
+		dx = 0;
+		dy = 0;
+		Wizard_pink_bullet.set_animation(1);
+		if (dmg_control < 10) {
+			*player_health -= 1;
+			dmg_control++;
+		}
+
+		std::cout << "IVE BEEN HIT" << std::endl;
+	}
+	if (tick_bullet.anim_state == animation_state::ended)
+	{
+		Wizard_pink_bullet.set_animation(0);
+		Wizard_pink_bullet.teleport(100000, 10000);
+	}
+}
+
+Cow::Cow(VertexBuffer* vb)
+	: cow(vb, loader->entities["Cow"])
+{
+	cow.set_animation(0);
+}
+
+void Cow::tick()
+{
+	cow.tick();
+	//cow.teleport(-100, -300);
+}
+
+Perry::Perry(VertexBuffer* vb)
+	: perry(vb, loader->entities["Perry"])
+{
+	perry.set_animation(0);
+}
+
+void Perry::tick()
+{
+	perry.tick();
+	//perry.teleport(-100, -500);
+}
+
+Edgelord::Edgelord(VertexBuffer* vb)
+	: edgelord(vb, loader->entities["Edgelord"])
+{
+	edgelord.set_animation(0);
+}
+
+void Edgelord::tick()
+{
+	edgelord.tick();
+	//edgelord.teleport(-100, -700);
 }
