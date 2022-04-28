@@ -81,6 +81,8 @@ Prototype_Tile::Prototype_Tile(float in_id, std::string image, float tex_origin[
 		image = image.substr(image.rfind("/") + 1);
 	}
 
+	tile_name = image;
+
 	filepath = std::string("files/tiles/") + image;
 }
 
@@ -131,6 +133,8 @@ Prototype_Tile::Prototype_Tile(nlohmann::json tile_json, float tex_origin[2], fl
 	}
 
 	filepath = std::string("files/tiles/") + image;
+
+	tile_name = image;
 }
 
 bool Prototype_Tile::collides(float x, float y)

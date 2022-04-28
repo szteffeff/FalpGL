@@ -30,10 +30,13 @@ Decoration::Decoration(float x, float y, float size_x, float size_y, Prototype_T
 }
 
 Decoration::Decoration(nlohmann::json object, Tileset& set)
-	: x(object["x"]), y(-(object["y"])), size_x(object["width"]), size_y(object["height"]), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), nofade(false), id(object["gid"])
+	: x(object["x"]), y(-1 * (object["y"])), size_x(object["width"]), size_y(object["height"]), center_x(x + (size_x / 2)), center_y(y + (size_y / 2)), nofade(false), id(object["gid"])
 {
 	Prototype_Tile tile = set[id];
 	nofade = tile.nofade;
+
+	center_x = x + (size_x / 2);
+	center_y = y + (size_y / 2);
 
 	vertex_data[0] = x;                        /* x */
 	vertex_data[1] = y;                        /* y */
@@ -184,6 +187,7 @@ void Decoration_Renderer::tick(float pos_x, float pos_y)
 	for (auto d : decorations)
 	{
 		d.fade((float)std::clamp(sqrt(pow(abs(d.center_x - pos_x), 2) + pow(abs(d.center_y - pos_y), 2)) / (((d.size_x + d.size_y) / 2) * 0.8), 0.45, 1.0));
+
 		for (int i = 0; i < 20; i++)
 		{
 			vertex_data.push_back(*(d.data() + i));
@@ -194,6 +198,7 @@ void Decoration_Renderer::tick(float pos_x, float pos_y)
 			close_to_player.push_back(d);
 		}
 	}
+
 
 	dec_vertex_buffer.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
 }
