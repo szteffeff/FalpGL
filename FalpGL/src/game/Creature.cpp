@@ -7,7 +7,7 @@ Creature::Creature() {}
 
 bool Creature::Player_Detection_simple_horizontal(float x, float* player_x)
 {
-	if (x < *player_x){ // if thing is left of player
+	if (x < *player_x) { // if thing is left of player
 		return true;
 	}
 	else // if thing is to the left of player
@@ -76,6 +76,32 @@ void Creature::walk(float direction, float magnitude)
 	momentum[0] += round(dx);
 	momentum[1] += round(dy);
 }
+
+void Creature::attacked(float x, float y, float radius, int attack)
+{
+	if (sqrt(pow(abs(position[0] - x), 2) + pow(abs(position[0] - y), 2)) < radius) {
+		if (attack == 0) {health -= 14;}
+		else if (attack == 1) { health -= 9; }
+		else if (attack == 2) { health -= 12; }
+		else if (attack == 3) { health -= 10; }
+		else if (attack == 4) { health -= 35; }
+		else if (attack == 5) { health -= 15; }
+		else if (attack == 6) { health -= 25; }
+	}
+}
+
+void Creature::get_weapon(int* weapon)
+{
+	int* using_weapon = weapon;
+}
+
+void Creature::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+
 
 float Creature::Arrow_Detection_horizontal(float x, float* arrow_x)
 {
@@ -158,7 +184,9 @@ float Creature::Spear_Detection_vertical(float y, float* spear_y)
 }
 
 
-void Creature::tick() {}
+void Creature::tick() {
+
+}
 
 /* Health_Bar */
 
@@ -265,7 +293,7 @@ void Player::sprint(float direction, float magnitude)
 {
 	if (attacking == false)
 	{
-		magnitude *= 2;
+		magnitude *= 3;
 		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
 		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
 
@@ -278,8 +306,10 @@ void Player::sprint(float direction, float magnitude)
 
 void Player::dodge(float direction, float magnitude)
 {
-	dodging = true;
-	Stamina -= 10;
+	if (Stamina > 10) {
+		dodging = true;
+		Stamina -= 10;
+	}
 }
 
 void Player::set_active_map(New_Map* map)
@@ -298,7 +328,7 @@ void Player::tick()
 		{} /* If collision, do nothing */
 		else
 		{
-			if (dodging == true and dodge_momentum > 0 and Stamina > 10) {
+			if (dodging == true and dodge_momentum > 0) {
 				position[0] += momentum[0] * dodge_momentum;
 				position[1] += momentum[1] * dodge_momentum;
 				m_player.translate(momentum[0] * dodge_momentum, momentum[1] * dodge_momentum);
@@ -734,6 +764,18 @@ float* Player::GetStamina()
 	return &Stamina;
 }
 
+int Player::get_weapon_type()
+{
+	if (heavy_dagger == false and light_dagger == false and light_axe == false and heavy_axe == false and heavy_spear == false) { weapon_type = 0; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_type = 1; }
+	else if (light_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_type = 2; }
+	else if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_type = 3; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_spear == false) { weapon_type = 4; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and heavy_spear == false and heavy_axe == false) { weapon_type = 5; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_axe == false) { weapon_type = 6; }
+	return weapon_type;
+}
+
 int* Player::GetPotion()
 {
 	return &Potion;
@@ -750,6 +792,32 @@ void Player::Take_Damage_tile()
 	if (Health > 0) { Health -= 1; };
 }
 
+float Player::weapon_x()
+{
+	float weapon_x;
+	if (heavy_dagger == false and light_dagger == false and light_axe == false and heavy_axe == false and heavy_spear == false) { weapon_x = Player_arrow.center().x; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_x = Player_dagger.center().x;; }
+	else if (light_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_x = Player_dagger.center().x; }
+	else if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_x = Player_Shatter_axe.center().x; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_spear == false) { weapon_x = Player_Shatter_axe.center().x; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and heavy_spear == false and heavy_axe == false) { weapon_x = Player_spear.center().x; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_axe == false) { weapon_x = Player_spear.center().x; }
+	return weapon_x;
+}
+
+float Player::weapon_y()
+{
+	float weapon_y;
+	if (heavy_dagger == false and light_dagger == false and light_axe == false and heavy_axe == false and heavy_spear == false) { weapon_y = Player_arrow.center().y; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_y = Player_dagger.center().y; }
+	else if (light_dagger == false and shoot_bow == false and light_axe == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_y = Player_dagger.center().y; }
+	else if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false and light_spear == false and heavy_spear == false) { weapon_y = Player_Shatter_axe.center().y; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_spear == false) { weapon_y = Player_Shatter_axe.center().y; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and heavy_spear == false and heavy_axe == false) { weapon_y = Player_spear.center().y; }
+	else if (heavy_dagger == false and shoot_bow == false and light_axe == false and light_dagger == false and light_spear == false and heavy_axe == false) { weapon_y = Player_spear.center().y; }
+	return weapon_y;
+}
+
 void Player::Take_Heal()
 {
 	if (Health < 100 && Potion != 0) {
@@ -761,6 +829,11 @@ void Player::Take_Heal()
 void Player::Recover_Stamina()
 {
 	Stamina += 0.05;
+}
+
+bool Player::am_attacking()
+{
+	return attacking;
 }
 
 void Player::Lose_Stamina()
@@ -908,6 +981,11 @@ void Red_Slime::tick()
 			}
 		}
 	}
+	if (health <= 0) {
+		position[0] = 1000;
+		position[1] = 1000;
+		Red_slime.teleport(1000, 1000);
+	}
 }
 
 Enemy_Ghost::Enemy_Ghost(VertexBuffer* vb)
@@ -1020,6 +1098,8 @@ void Garfield::tick()
 {
 	garfield.tick();
 	garfield.teleport(-100, -100);
+	position[0] = -100;
+	position[1] = -100;
 }
 
 Bush_Boi::Bush_Boi(VertexBuffer* vb)

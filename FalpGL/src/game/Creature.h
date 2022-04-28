@@ -15,6 +15,21 @@ public:
 	float* player_health;
 	static float* curser_x;
 	static float* curser_y;
+	float health = 100;
+
+	float* player_position_x;
+	float* player_position_y;
+	int* using_weapon;
+
+	enum attacks {
+		bow,
+		dagger_light,
+		dagger_heavy,
+		axe_light,
+		axe_heavy,
+		spear_light,
+		spear_heavy,
+	};
 
 public:
 	Creature();
@@ -25,6 +40,11 @@ public:
 	virtual float Player_Detetion_distance(float horizontal, float vertical);
 	virtual void Player_Health(float* health);
 	virtual void walk(float direction, float magnitude);
+
+	virtual void attacked(float x, float y, float radius, int attack);
+	virtual void get_weapon(int* weapon);
+
+	virtual void Get_player_position(float* x, float* y);
 
 	//weapon detection
 	virtual float Arrow_Detection_horizontal(float x, float* arrow_x);
@@ -68,6 +88,8 @@ private:
 	bool RUN = false;
 	int dodge_momentum = 5;
 
+	int weapon_type;
+	
 	/// //////////////////////////////////////// Bow stuff
 	
 	bool shoot_bow = false;
@@ -165,6 +187,10 @@ public:
 	float position_y();
 	float* get_position_x();
 	float* get_position_y();
+	int get_weapon_type();
+	float weapon_x();
+	float weapon_y();
+	bool am_attacking();
 	void tick();
 	float* GetHealth();
 	float* GetStamina();
@@ -189,7 +215,6 @@ class Red_Slime : public Creature {
 private:
 	Entity Red_slime;
 	float momentum[2], position[2];
-	const float Health = 20;
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
@@ -201,7 +226,7 @@ private:
 public:
 	Red_Slime(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
-	void tick();
+	void tick() override;
 };
 
 class Enemy_Ghost : public Creature {
@@ -357,7 +382,6 @@ private:
 	int frames_magic = 0;
 	int dmg_control = 0;
 	
-
 public:
 	Sussy_Vase(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
