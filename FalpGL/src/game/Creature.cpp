@@ -1379,7 +1379,7 @@ Cow::Cow(VertexBuffer* vb)
 void Cow::tick()
 {
 	cow.tick();
-	//cow.teleport(-100, -300);
+	cow.teleport(-100, -300);
 }
 
 Perry::Perry(VertexBuffer* vb)
@@ -1391,7 +1391,7 @@ Perry::Perry(VertexBuffer* vb)
 void Perry::tick()
 {
 	perry.tick();
-	//perry.teleport(-100, -500);
+	perry.teleport(-100, -500);
 }
 
 Edgelord::Edgelord(VertexBuffer* vb)
@@ -1403,5 +1403,66 @@ Edgelord::Edgelord(VertexBuffer* vb)
 void Edgelord::tick()
 {
 	edgelord.tick();
-	//edgelord.teleport(-100, -700);
+	edgelord.teleport(-100, -700);
+}
+
+Clair_Of_Cavern::Clair_Of_Cavern(VertexBuffer* vb)
+	: clair_of_cavern(vb, loader->entities["Clair_Of_Cavern"])
+{
+	//clair_of_cavern.set_animation(0);
+	clair_of_cavern.teleport(0, 200);
+}
+
+void Clair_Of_Cavern::tick()
+{
+	clair_of_cavern.tick();
+}
+
+Del_Ibra_of_Hillsby::Del_Ibra_of_Hillsby(VertexBuffer* vb)
+	: del_ibra_of_hillsby(vb, loader->entities["Del_Ibra_of_Hillsby"])
+{
+	//del_ibra_of_hillsby.set_animation(0);
+	del_ibra_of_hillsby.teleport(-200, 200);
+}
+
+
+void Del_Ibra_of_Hillsby::tick()
+{
+	del_ibra_of_hillsby.tick();
+}
+
+Eloah_of_Minlet::Eloah_of_Minlet(VertexBuffer* vb)
+	: eloah_of_minlet(vb, loader->entities["Eloah_of_Minlet"])
+{
+	//eloah_of_minlet.set_animation(0);
+	eloah_of_minlet.teleport(-400, 200);
+}
+
+void Eloah_of_Minlet::tick()
+{
+	eloah_of_minlet.tick();
+}
+
+Felix_of_Festria::Felix_of_Festria(VertexBuffer* vb)
+	: felix_of_festria(vb, loader->entities["Felix_of_Festria"])
+{
+	//felix_of_festria.set_animation(0);
+	felix_of_festria.teleport(-600, 200);
+}
+
+void Felix_of_Festria::tick()
+{
+	felix_of_festria.tick();
+}
+
+Maban_of_Undermount::Maban_of_Undermount(VertexBuffer* vb)
+	: maban_of_undermount(vb, loader->entities["Maban_of_Undermount"])
+{
+	//maban_of_undermount.set_animation(0);
+	maban_of_undermount.teleport(-800, 200);
+}
+
+void Maban_of_Undermount::tick()
+{
+	maban_of_undermount.tick();
 }

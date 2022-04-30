@@ -112,5 +112,35 @@
     "size": [ 64, 64 ],
     "animation_count": 2,
     "animation_names": [ "Sussy_Vase", "Sussy_Vase_Woke" ]
+  },
+  "Clair_Of_Cavern": {
+    "name": "Clair_Of_Cavern",
+    "size": [ 94, 46 ],
+    "animation_count": 1,
+    "animation_names": [ "Clair_Of_Cavern" ]
+  },
+  "Del_Ibra_of_Hillsby": {
+    "name": "Del_Ibra_of_Hillsby",
+    "size": [ 98, 46 ],
+    "animation_count": 1,
+    "animation_names": [ "Del_Ibra_of_Hillsby" ]
+  },
+  "Eloah_of_Minlet": {
+    "name": "Eloah_of_Minlet",
+    "size": [ 88, 72 ],
+    "animation_count": 1,
+    "animation_names": [ "Eloah_of_Minlet" ]
+  },
+  "Felix_of_Festria": {
+    "name": "Felix_of_Festria",
+    "size": [ 94, 68 ],
+    "animation_count": 1,
+    "animation_names": [ "Felix_of_Festria" ]
+  },
+  "Maban_of_Undermount": {
+    "name": "Maban_of_Undermount",
+    "size": [ 98, 46 ],
+    "animation_count": 1,
+    "animation_names": [ "Maban_of_Undermount" ]
   }
 }

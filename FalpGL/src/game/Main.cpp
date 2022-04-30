@@ -257,6 +257,9 @@ int main(void)
             Texture loading_screen("res/gfx/textures/loading.jpeg");
             loading_screen.Bind();
 
+            Texture pause_screen("res/gfx/textures/leo the danny(epic pause screen).png"); /*path to image*/
+            pause_screen.Bind(8);
+
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -283,7 +286,13 @@ int main(void)
         BatchRenderer player_render(1000, "res/shaders/basic.shader");
         player_render.add_layout(layout);
 
-        std::vector<Creature*> bad_bois;
+        //std::vector<Creature*> bad_bois;
+
+        std::vector<Red_Slime> bad_Red_slimes;
+        std::vector<Chompy_Slime> bad_Chompy_slimes;
+        std::vector<Enemy_Ghost> bad_Enemy_ghost;
+        std::vector<Bush_Boi> bad_Bush_boi;
+        std::vector<Sussy_Vase> bad_Sussy_vase;
 
         BatchRenderer interface_renderer(1000, "res/shaders/ui.shader");
         interface_renderer.add_layout(layout);
@@ -296,21 +305,61 @@ int main(void)
         
         UserInterface ui(&interface_renderer.vertex_buffer);
 
+        // npc and players
         Player player(&player_render.vertex_buffer);
         Garfield garfield(&player_render.vertex_buffer);
         Cow cow(&player_render.vertex_buffer);
         Perry perry(&player_render.vertex_buffer);
         Edgelord edgelord(&player_render.vertex_buffer);
-        bad_bois.emplace_back(new Red_Slime(&player_render.vertex_buffer));
-        bad_bois.emplace_back(new Enemy_Ghost(&player_render.vertex_buffer));
-        bad_bois.emplace_back(new Bush_Boi(&player_render.vertex_buffer));
-        bad_bois.emplace_back(new Chompy_Slime(&player_render.vertex_buffer));
-        bad_bois.emplace_back(new Sussy_Vase(&player_render.vertex_buffer));
+        Clair_Of_Cavern clair_of_cavern(&player_render.vertex_buffer);
+        Del_Ibra_of_Hillsby del_ibra_of_hillsby(&player_render.vertex_buffer);
+        Eloah_of_Minlet eloah_of_minlet(&player_render.vertex_buffer);
+        Felix_of_Festria felix_of_festria(&player_render.vertex_buffer);
+        Maban_of_Undermount maban_of_undermount(&player_render.vertex_buffer);
 
+        // the bad bois
+        Red_Slime red_slime(&player_render.vertex_buffer);
+
+        bad_Red_slimes.emplace_back(&player_render.vertex_buffer);
+        bad_Chompy_slimes.emplace_back(&player_render.vertex_buffer);
+        bad_Enemy_ghost.emplace_back(&player_render.vertex_buffer);
+        bad_Bush_boi.emplace_back(&player_render.vertex_buffer);
+        bad_Sussy_vase.emplace_back(&player_render.vertex_buffer);
+        
+        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime.Player_Health(player.GetHealth());
+
+        /*
         for (Creature* boi : bad_bois) {
             boi->Get_player_position(player.get_position_x(), player.get_position_y());
             boi->Player_Health(player.GetHealth());
         }
+        
+        
+        bad_Red_slimes[0].Get_player_position(player.get_position_x(), player.get_position_y());
+
+        for (Red_Slime boi : bad_Red_slimes) {
+            boi.Get_player_position(player.get_position_x(), player.get_position_y());
+            boi.Player_Health(player.GetHealth());
+        }
+        
+        for (Chompy_Slime boi : bad_Chompy_slimes) {
+            boi.Get_player_position(player.get_position_x(), player.get_position_y());
+            boi.Player_Health(player.GetHealth());
+        }
+        for (Enemy_Ghost boi : bad_Enemy_ghost) {
+            boi.Get_player_position(player.get_position_x(), player.get_position_y());
+            boi.Player_Health(player.GetHealth());
+        }
+        for (Bush_Boi boi : bad_Bush_boi) {
+            boi.Get_player_position(player.get_position_x(), player.get_position_y());
+            boi.Player_Health(player.GetHealth());
+        }
+        for (Sussy_Vase boi : bad_Sussy_vase) {
+            boi.Get_player_position(player.get_position_x(), player.get_position_y());
+            boi.Player_Health(player.GetHealth());
+        }
+       */
 
         /*Sound crap*/
         //SFX Sound_player;
@@ -361,26 +410,54 @@ int main(void)
             nmap.tick(*player.get_position_x(), *player.get_position_y());
             if (pause == false) {
                 player.tick();
-                bad_bois[0]->tick();
+                //bad_bois[0]->tick();
                 //enemy_ghost.tick();
+                //red_slime.tick();
                 garfield.tick();
                 cow.tick();
                 perry.tick();
                 edgelord.tick();
+                clair_of_cavern.tick();
+                del_ibra_of_hillsby.tick();
+                eloah_of_minlet.tick();
+                felix_of_festria.tick();
+                maban_of_undermount.tick();
                 //Bush_boi.tick();
                 //Chompy_slime.tick();
                 //Sussy_vase.tick();
+
                 /*
+                for (Red_Slime boi : bad_Red_slimes) {
+                    boi.tick();
+                }
+                
+                
+                for (Chompy_Slime boi : bad_Chompy_slimes) {
+                    boi.tick();
+                }
+                for (Enemy_Ghost boi : bad_Enemy_ghost) {
+                    boi.tick();
+                }
+                for (Bush_Boi boi : bad_Bush_boi) {
+                    boi.tick();
+                }
+                for (Sussy_Vase boi : bad_Sussy_vase) {
+                    boi.tick();
+                }
+                */
+                /*
+                
                 for (Creature* boi : bad_bois) {
                     boi->tick();
                 }
                 */
+                /*
                 for (Creature* boi : bad_bois) {
                     if (player.am_attacking() == true) {
                         boi->attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type());
                     }
                 }
-                
+                */
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));
@@ -427,15 +504,28 @@ int main(void)
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix);
 
+            if (pause == true) /*variable to test is paused*/
+            {
+                glDisable(GL_DEPTH_TEST);
+                va.Bind();
+                s.Bind();
+                s.SetUniform1i("u_Texture", 0);
+                s.SetUniform1f("u_alpha", 0.5f);
+                glDrawArrays(GL_TRIANGLES, 0, 6);
+                glEnable(GL_DEPTH_TEST);
+            }
+
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
             /* Poll for and process events */
             glfwPollEvents();
         }
+        /*
         for (Creature* boi : bad_bois) {
             delete boi;
         }
+        */
     }
     glfwTerminate();
     return (0);

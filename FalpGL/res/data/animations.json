@@ -2024,5 +2024,85 @@
         [ 640, 192 ]
       ]
     ]
+  },
+  "Clair_Of_Cavern": {
+    "name": "Clair_Of_Cavern",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 192, 192 ],
+        [ 215, 192 ],
+        [ 215, 239 ],
+        [ 192, 239 ]
+      ]
+    ]
+  },
+  "Del_Ibra_of_Hillsby": {
+    "name": "Del_Ibra_of_Hillsby",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 224, 192 ],
+        [ 247, 192 ],
+        [ 247, 241 ],
+        [ 224, 241 ]
+      ]
+    ]
+  },
+  "Eloah_of_Minlet": {
+    "name": "Eloah_of_Minlet",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 192, 256 ],
+        [ 228, 256 ],
+        [ 228, 300 ],
+        [ 192, 300 ]
+      ]
+    ]
+  },
+  "Felix_of_Festria": {
+    "name": "Felix_of_Festria",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 256, 192 ],
+        [ 290, 192 ],
+        [ 290, 239 ],
+        [ 256, 239 ]
+      ]
+    ]
+  },
+  "Maban_of_Undermount": {
+    "name": "Maban_of_Undermount",
+    "atlas": 0,
+    "loop": true,
+    "length": 1,
+    "frame_order": [ 0 ],
+    "frame_times": [ 60 ],
+    "texture_coordinants": [
+      [
+        [ 256, 256 ],
+        [ 278, 256 ],
+        [ 278, 305 ],
+        [ 256, 305 ]
+      ]
+    ]
   }
 }

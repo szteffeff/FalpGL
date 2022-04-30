@@ -17,8 +17,8 @@ public:
 	static float* curser_y;
 	float health = 100;
 
-	float* player_position_x;
-	float* player_position_y;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
 	int* using_weapon;
 
 	enum attacks {
@@ -385,5 +385,55 @@ private:
 public:
 	Sussy_Vase(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	void tick();
+};
+
+class Clair_Of_Cavern : public Creature {
+private:
+	Entity clair_of_cavern;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+public:
+	Clair_Of_Cavern(VertexBuffer* vb);
+	void tick();
+};
+
+class Del_Ibra_of_Hillsby : public Creature {
+private:
+	Entity del_ibra_of_hillsby;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+public:
+	Del_Ibra_of_Hillsby(VertexBuffer* vb);
+	void tick();
+};
+
+class Eloah_of_Minlet : public Creature {
+private:
+	Entity eloah_of_minlet;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+public:
+	Eloah_of_Minlet(VertexBuffer* vb);
+	void tick();
+};
+
+class Felix_of_Festria : public Creature {
+private:
+	Entity felix_of_festria;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+public:
+	Felix_of_Festria(VertexBuffer* vb);
+	void tick();
+};
+
+class Maban_of_Undermount: public Creature {
+private:
+	Entity maban_of_undermount;
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+public:
+	Maban_of_Undermount(VertexBuffer* vb);
 	void tick();
 };
