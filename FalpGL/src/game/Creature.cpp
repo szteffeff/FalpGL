@@ -324,6 +324,12 @@ void Player::tick()
 
 	if (active_map)
 	{
+		if (talk_frames == 0 and talk == true) {
+			talk = false;
+			talk_frames = 60 * 2;
+		}
+		talk_frames -= 1;
+
 		if (active_map->collision_circle(position[0] + momentum[0], position[1] + momentum[1] - 47, 100))
 		{} /* If collision, do nothing */
 		else
@@ -747,6 +753,41 @@ void Player::tick()
 		attacking = false;
 	}
 
+	// if you die (at this point im just gonna teleport them for now)
+
+	if (Health <= 0 and check_point_location == 0) {
+		m_player.teleport(-100, -100);
+		position[0] = -100;
+		position[1] = -100;
+		Health = 100;
+		Stamina = 100;
+		Potion = 4;
+	}
+	else if (Health <= 0 and check_point_location == 1) {
+		m_player.teleport(-100, -300);
+		position[0] = -100;
+		position[1] = -300;
+		Health = 100;
+		Stamina = 100;
+		Potion = 4;
+	}
+	else if (Health <= 0 and check_point_location == 2) {
+		m_player.teleport(-100, -500);
+		position[0] = -100;
+		position[1] = -500;
+		Health = 100;
+		Stamina = 100;
+		Potion = 4;
+	}
+	else if (Health <= 0 and check_point_location == 3) {
+		m_player.teleport(-100, -700);
+		position[0] = -100;
+		position[1] = -700;
+		Health = 100;
+		Stamina = 100;
+		Potion = 4;
+	}
+
 	Player_spear.tick();
 	Player_Shatter_axe.tick();
 	Player_arrow.tick();
@@ -900,6 +941,19 @@ float* Player::get_position_x()
 float* Player::get_position_y()
 {
 	return &position[1];
+}
+
+bool* Player::speaking()
+{
+	if (talk == false) {
+		talk = true;
+	}
+	return &talk;
+}
+
+int* Player::check_points()
+{
+	return &check_point_location;
 }
 
 float Player::position_x()
@@ -1090,16 +1144,39 @@ void Enemy_Ghost::tick()
 }
 
 Garfield::Garfield(VertexBuffer* vb)
-	: garfield(vb, loader->entities["Garfield"])
+	: garfield(vb, loader->entities["Garfield"]), momentum(), position()
 {
 	garfield.set_animation(0);
+	garfield.teleport(-100, -100);
+	position[0] = -100;
+	position[1] = -100;
+}
+void Garfield::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+void Garfield::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+void Garfield::Get_point(int* current_player_checkpoint)
+{
+	player_check_point = current_player_checkpoint;
 }
 void Garfield::tick()
 {
 	garfield.tick();
-	garfield.teleport(-100, -100);
-	position[0] = -100;
-	position[1] = -100;
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		*player_check_point = checkpoint_num;
+		/*
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		garfield.teleport(position[0], position[1]);
+		*/
+	}
 }
 
 Bush_Boi::Bush_Boi(VertexBuffer* vb)
@@ -1371,98 +1448,276 @@ void Sussy_Vase::tick()
 }
 
 Cow::Cow(VertexBuffer* vb)
-	: cow(vb, loader->entities["Cow"])
+	: cow(vb, loader->entities["Cow"]), momentum(), position()
 {
 	cow.set_animation(0);
+	cow.teleport(-100, -300);
+	position[0] = -100;
+	position[1] = -300;
+}
+
+void Cow::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Cow::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+
+void Cow::Get_point(int* current_player_checkpoint)
+{
+	player_check_point = current_player_checkpoint;
 }
 
 void Cow::tick()
 {
 	cow.tick();
-	cow.teleport(-100, -300);
+	
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		*player_check_point = checkpoint_num;
+		//position[0] = *player_position_x + (rand() % 1000) - 500;
+		//position[1] = *player_position_y + (rand() % 1000) - 500;
+		//cow.teleport(position[0], position[1]);
+	}
 }
 
 Perry::Perry(VertexBuffer* vb)
-	: perry(vb, loader->entities["Perry"])
+	: perry(vb, loader->entities["Perry"]), momentum(), position()
 {
 	perry.set_animation(0);
+	perry.teleport(-100, -500);
+	position[0] = -100;
+	position[1] = -500;
+}
+
+void Perry::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Perry::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+
+void Perry::Get_point(int* current_player_checkpoint)
+{
+	player_check_point = current_player_checkpoint;
 }
 
 void Perry::tick()
 {
 	perry.tick();
-	perry.teleport(-100, -500);
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		*player_check_point = checkpoint_num;
+		//position[0] = *player_position_x + (rand() % 1000) - 500;
+		//position[1] = *player_position_y + (rand() % 1000) - 500;
+		//perry.teleport(position[0], position[1]);
+	}
+
 }
 
 Edgelord::Edgelord(VertexBuffer* vb)
-	: edgelord(vb, loader->entities["Edgelord"])
+	: edgelord(vb, loader->entities["Edgelord"]), momentum(), position()
 {
 	edgelord.set_animation(0);
+	edgelord.teleport(-100, -700);
+	position[0] = -100;
+	position[1] = -700;
+}
+
+void Edgelord::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Edgelord::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+
+void Edgelord::Get_point(int* current_player_checkpoint)
+{
+	player_check_point = current_player_checkpoint;
 }
 
 void Edgelord::tick()
 {
 	edgelord.tick();
-	edgelord.teleport(-100, -700);
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		*player_check_point = checkpoint_num;
+		//position[0] = *player_position_x + (rand() % 1000) - 500;
+		//position[1] = *player_position_y + (rand() % 1000) - 500;
+		//edgelord.teleport(position[0], position[1]);
+	}
 }
 
 Clair_Of_Cavern::Clair_Of_Cavern(VertexBuffer* vb)
-	: clair_of_cavern(vb, loader->entities["Clair_Of_Cavern"])
+	: clair_of_cavern(vb, loader->entities["Clair_Of_Cavern"]), momentum(), position()
 {
 	//clair_of_cavern.set_animation(0);
 	clair_of_cavern.teleport(0, 200);
+	position[0] = 0;
+	position[1] = 200;
+	
+}
+
+void Clair_Of_Cavern::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Clair_Of_Cavern::Get_talk(bool* spoken)
+{
+	talk = spoken;
 }
 
 void Clair_Of_Cavern::tick()
 {
 	clair_of_cavern.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		clair_of_cavern.teleport(position[0], position[1]);
+	}
 }
 
 Del_Ibra_of_Hillsby::Del_Ibra_of_Hillsby(VertexBuffer* vb)
-	: del_ibra_of_hillsby(vb, loader->entities["Del_Ibra_of_Hillsby"])
+	: del_ibra_of_hillsby(vb, loader->entities["Del_Ibra_of_Hillsby"]), momentum(), position()
 {
 	//del_ibra_of_hillsby.set_animation(0);
 	del_ibra_of_hillsby.teleport(-200, 200);
+	position[0] = -200;
+	position[1] = 200;
+}
+
+void Del_Ibra_of_Hillsby::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Del_Ibra_of_Hillsby::Get_talk(bool* spoken)
+{
+	talk = spoken;
 }
 
 
 void Del_Ibra_of_Hillsby::tick()
 {
 	del_ibra_of_hillsby.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		del_ibra_of_hillsby.teleport(position[0], position[1]);
+	}
 }
 
 Eloah_of_Minlet::Eloah_of_Minlet(VertexBuffer* vb)
-	: eloah_of_minlet(vb, loader->entities["Eloah_of_Minlet"])
+	: eloah_of_minlet(vb, loader->entities["Eloah_of_Minlet"]), momentum(), position()
 {
 	//eloah_of_minlet.set_animation(0);
 	eloah_of_minlet.teleport(-400, 200);
+	position[0] = -400;
+	position[1] = 200;
+}
+
+void Eloah_of_Minlet::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Eloah_of_Minlet::Get_talk(bool* spoken)
+{
+	talk = spoken;
 }
 
 void Eloah_of_Minlet::tick()
 {
 	eloah_of_minlet.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		eloah_of_minlet.teleport(position[0], position[1]);
+	}
 }
 
 Felix_of_Festria::Felix_of_Festria(VertexBuffer* vb)
-	: felix_of_festria(vb, loader->entities["Felix_of_Festria"])
+	: felix_of_festria(vb, loader->entities["Felix_of_Festria"]), momentum(), position()
 {
 	//felix_of_festria.set_animation(0);
 	felix_of_festria.teleport(-600, 200);
+	position[0] = -600;
+	position[1] = 200;
+}
+
+void Felix_of_Festria::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Felix_of_Festria::Get_talk(bool* spoken)
+{
+	talk = spoken;
 }
 
 void Felix_of_Festria::tick()
 {
 	felix_of_festria.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		felix_of_festria.teleport(position[0], position[1]);
+	}
 }
 
 Maban_of_Undermount::Maban_of_Undermount(VertexBuffer* vb)
-	: maban_of_undermount(vb, loader->entities["Maban_of_Undermount"])
+	: maban_of_undermount(vb, loader->entities["Maban_of_Undermount"]), momentum(), position()
 {
 	//maban_of_undermount.set_animation(0);
 	maban_of_undermount.teleport(-800, 200);
+	position[0] = -800;
+	position[1] = 200;
+}
+
+void Maban_of_Undermount::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Maban_of_Undermount::Get_talk(bool* spoken)
+{
+	talk = spoken;
 }
 
 void Maban_of_Undermount::tick()
 {
 	maban_of_undermount.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		maban_of_undermount.teleport(position[0], position[1]);
+	}
 }

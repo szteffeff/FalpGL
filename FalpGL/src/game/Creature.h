@@ -87,7 +87,9 @@ private:
 	int dodge_frames = 60 * 2;
 	bool RUN = false;
 	int dodge_momentum = 5;
-
+	bool talk = false;
+	int talk_frames = 60 * 2;
+	int check_point_location;
 	int weapon_type;
 	
 	/// //////////////////////////////////////// Bow stuff
@@ -187,6 +189,8 @@ public:
 	float position_y();
 	float* get_position_x();
 	float* get_position_y();
+	bool* speaking();
+	int* check_points();
 	int get_weapon_type();
 	float weapon_x();
 	float weapon_y();
@@ -257,40 +261,69 @@ public:
 class Garfield : public Creature {
 private:
 	Entity garfield;
+	float momentum[2], position[2];
 	float* player_position_x;
 	float* player_position_y;
+	bool* talk;
+	int* player_check_point;
+	int checkpoint_num = 0;
+
 public:
 	Garfield(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
+	void Get_point(int* current_player_checkpoint);
 	void tick();
 };
 
 class Cow : public Creature {
 private:
 	Entity cow;
+	float momentum[2], position[2];
 	float* player_position_x;
 	float* player_position_y;
+	bool* talk;
+	int* player_check_point;
+	int checkpoint_num = 1;
 public:
 	Cow(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
+	void Get_point(int* current_player_checkpoint);
 	void tick();
 };
 
 class Perry : public Creature {
 private:
 	Entity perry;
+	float momentum[2], position[2];
 	float* player_position_x;
 	float* player_position_y;
+	bool* talk;
+	int* player_check_point;
+	int checkpoint_num = 2;
 public:
 	Perry(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
+	void Get_point(int* current_player_checkpoint);
 	void tick();
 };
 
 class Edgelord : public Creature {
 private:
 	Entity edgelord;
+	float momentum[2], position[2];
 	float* player_position_x;
 	float* player_position_y;
+	bool* talk;
+	int* player_check_point;
+	int checkpoint_num = 3;
 public:
 	Edgelord(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
+	void Get_point(int* current_player_checkpoint);
 	void tick();
 };
 
@@ -391,49 +424,69 @@ public:
 class Clair_Of_Cavern : public Creature {
 private:
 	Entity clair_of_cavern;
+	float momentum[2], position[2];
 	float* player_position_x = 0;
 	float* player_position_y = 0;
+	bool* talk;
 public:
 	Clair_Of_Cavern(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
 	void tick();
 };
 
 class Del_Ibra_of_Hillsby : public Creature {
 private:
 	Entity del_ibra_of_hillsby;
+	float momentum[2], position[2];
 	float* player_position_x = 0;
 	float* player_position_y = 0;
+	bool* talk;
 public:
 	Del_Ibra_of_Hillsby(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
 	void tick();
 };
 
 class Eloah_of_Minlet : public Creature {
 private:
 	Entity eloah_of_minlet;
+	float momentum[2], position[2];
 	float* player_position_x = 0;
 	float* player_position_y = 0;
+	bool* talk;
 public:
 	Eloah_of_Minlet(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
 	void tick();
 };
 
 class Felix_of_Festria : public Creature {
 private:
 	Entity felix_of_festria;
+	float momentum[2], position[2];
 	float* player_position_x = 0;
 	float* player_position_y = 0;
+	bool* talk;
 public:
 	Felix_of_Festria(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
 	void tick();
 };
 
 class Maban_of_Undermount: public Creature {
 private:
 	Entity maban_of_undermount;
+	float momentum[2], position[2];
 	float* player_position_x = 0;
 	float* player_position_y = 0;
+	bool* talk;
 public:
 	Maban_of_Undermount(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
 	void tick();
 };

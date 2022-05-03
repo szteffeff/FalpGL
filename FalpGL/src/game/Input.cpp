@@ -106,6 +106,10 @@ void Input::keys_recive(int key, int scancode, int action, int mods) /* release 
 		std::cout << "Pausing\n";
 		break;
 
+	case(GLFW_KEY_E):
+		player->speaking();
+		break;
+
 	case(GLFW_KEY_O):
 		player->Take_Damage();
 		break;

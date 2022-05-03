@@ -255,10 +255,10 @@ int main(void)
             s.SetUniform1f("u_alpha", 0.5f);
 
             Texture loading_screen("res/gfx/textures/loading.jpeg");
-            loading_screen.Bind();
-
             Texture pause_screen("res/gfx/textures/leo the danny(epic pause screen).png"); /*path to image*/
+            
             pause_screen.Bind(8);
+            loading_screen.Bind();
 
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -326,6 +326,39 @@ int main(void)
         bad_Bush_boi.emplace_back(&player_render.vertex_buffer);
         bad_Sussy_vase.emplace_back(&player_render.vertex_buffer);
         
+        //npc getting player stuff
+        garfield.Get_player_position(player.get_position_x(), player.get_position_y());
+        garfield.Get_talk(player.speaking());
+        garfield.Get_point(player.check_points());
+
+        cow.Get_player_position(player.get_position_x(), player.get_position_y());
+        cow.Get_talk(player.speaking());
+        cow.Get_point(player.check_points());
+
+        perry.Get_player_position(player.get_position_x(), player.get_position_y());
+        perry.Get_talk(player.speaking());
+        perry.Get_point(player.check_points());
+
+        edgelord.Get_player_position(player.get_position_x(), player.get_position_y());
+        edgelord.Get_talk(player.speaking());
+        edgelord.Get_point(player.check_points());
+
+        clair_of_cavern.Get_player_position(player.get_position_x(), player.get_position_y());
+        clair_of_cavern.Get_talk(player.speaking());
+
+        del_ibra_of_hillsby.Get_player_position(player.get_position_x(), player.get_position_y());
+        del_ibra_of_hillsby.Get_talk(player.speaking());
+
+        eloah_of_minlet.Get_player_position(player.get_position_x(), player.get_position_y());
+        eloah_of_minlet.Get_talk(player.speaking());
+
+        felix_of_festria.Get_player_position(player.get_position_x(), player.get_position_y());
+        felix_of_festria.Get_talk(player.speaking());
+        
+        maban_of_undermount.Get_player_position(player.get_position_x(), player.get_position_y());
+        maban_of_undermount.Get_talk(player.speaking());
+
+
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         red_slime.Player_Health(player.GetHealth());
 
@@ -509,7 +542,7 @@ int main(void)
                 glDisable(GL_DEPTH_TEST);
                 va.Bind();
                 s.Bind();
-                s.SetUniform1i("u_Texture", 0);
+                s.SetUniform1i("u_Texture", 8);
                 s.SetUniform1f("u_alpha", 0.5f);
                 glDrawArrays(GL_TRIANGLES, 0, 6);
                 glEnable(GL_DEPTH_TEST);

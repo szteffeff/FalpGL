@@ -115,32 +115,32 @@
   },
   "Clair_Of_Cavern": {
     "name": "Clair_Of_Cavern",
-    "size": [ 94, 46 ],
-    "animation_count": 1,
-    "animation_names": [ "Clair_Of_Cavern" ]
+    "size": [ 128, 128 ],
+    "animation_count": 2,
+    "animation_names": [ "Clair_Of_Cavern_idle", "Clair_Of_Cavern_dead" ]
   },
   "Del_Ibra_of_Hillsby": {
     "name": "Del_Ibra_of_Hillsby",
-    "size": [ 98, 46 ],
+    "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Del_Ibra_of_Hillsby" ]
+    "animation_names": [ "Del_Ibra_of_Hillsby_idle" ]
   },
   "Eloah_of_Minlet": {
     "name": "Eloah_of_Minlet",
-    "size": [ 88, 72 ],
+    "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Eloah_of_Minlet" ]
+    "animation_names": [ "Eloah_of_Minlet_idle" ]
   },
   "Felix_of_Festria": {
     "name": "Felix_of_Festria",
-    "size": [ 94, 68 ],
+    "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Felix_of_Festria" ]
+    "animation_names": [ "Felix_of_Festria_idle" ]
   },
   "Maban_of_Undermount": {
     "name": "Maban_of_Undermount",
-    "size": [ 98, 46 ],
+    "size": [ 128, 128 ],
     "animation_count": 1,
-    "animation_names": [ "Maban_of_Undermount" ]
+    "animation_names": [ "Maban_of_Undermount_idle" ]
   }
 }
