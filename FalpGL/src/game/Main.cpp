@@ -319,6 +319,7 @@ int main(void)
 
         // the bad bois
         Red_Slime red_slime(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
 
         bad_Red_slimes.emplace_back(&player_render.vertex_buffer);
         bad_Chompy_slimes.emplace_back(&player_render.vertex_buffer);
@@ -361,6 +362,8 @@ int main(void)
 
         red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
         red_slime.Player_Health(player.GetHealth());
+        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost.Player_Health(player.GetHealth());
 
         /*
         for (Creature* boi : bad_bois) {
@@ -445,7 +448,7 @@ int main(void)
                 player.tick();
                 //bad_bois[0]->tick();
                 //enemy_ghost.tick();
-                //red_slime.tick();
+                red_slime.tick();
                 garfield.tick();
                 cow.tick();
                 perry.tick();
@@ -459,6 +462,9 @@ int main(void)
                 //Chompy_slime.tick();
                 //Sussy_vase.tick();
 
+                if (player.am_attacking() == true) {
+                    red_slime.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type());
+                }
                 /*
                 for (Red_Slime boi : bad_Red_slimes) {
                     boi.tick();

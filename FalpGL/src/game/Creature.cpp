@@ -400,39 +400,13 @@ void Player::tick()
 	momentum[0] = 0;
 	momentum[1] = 0;
 
-	/*
-	static int dodge = 60*4;
-	static bool RUN = false;
-
-	if (attacking == false and dodging == true and Stamina > 25 )
-	{
-		magnitude *= 15;
-		float dx = (float)(cos(direction * 3.14159 / 180)) * magnitude;
-		float dy = (float)(sin(direction * 3.14159 / 180)) * magnitude;
-
-		//Lose_Stamina();
-		RUN = true; std::cout<< " U suck" std<< ur mom << gottem.
-	}
-	if (attacking == false and dodging == true and RUN == true and dodge > 0) {
-		//position[0] += momentum[0];
-		//position[1] += momentum[1];
-		m_player.translate(dx,dy);
-		dodge -= 1;
-	}
-	else if (dodge == 0) {
-		dodging = false;
-		RUN = false;
-		dodge = 10;
-	}
-	*/
-
 	/// ///////////////////////////////////// Bow stuff
 
 	if (shoot_bow == true and shwoop_shwoop == true and attacking == false and Stamina >= 25) { //creates the direction for bow and arrow to point
 		Player_arrow.teleport(position[0], position[1]);
 		dmg_control = 0;
 		std::cout << "Yeet thy arrow" << std::endl;
-		float direction = atan2(*curser_y - position[1], *curser_x - position[0]);
+		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		Player_arrow.rotate(-direction + glm::pi<float>()*0.5, Player_arrow.center(), true);
 		dx = (float)(cos(direction)) * 3;

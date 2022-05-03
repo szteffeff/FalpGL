@@ -2081,7 +2081,7 @@
     "loop": true,
     "length": 4,
     "frame_order": [ 0, 1, 2, 3 ],
-    "frame_times": [ 150, 150, 150, 150 ],
+    "frame_times": [ 300, 300, 300, 300 ],
     "texture_coordinants": [
       [
         [ 864, 64 ],
@@ -2181,7 +2181,7 @@
     "loop": true,
     "length": 4,
     "frame_order": [ 0, 1, 2, 3 ],
-    "frame_times": [ 150, 150, 150, 150 ],
+    "frame_times": [ 300, 300, 300, 300 ],
     "texture_coordinants": [
       [
         [ 992, 64 ],
