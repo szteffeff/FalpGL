@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="945">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="945">
  <editorsettings>
   <chunksize width="64" height="64"/>
   <export target="../res/data/map3.json" format="json"/>
@@ -8,72 +8,144 @@
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="32" height="32" source="tiles/dungeon_forest-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="12">
    <image width="32" height="32" source="tiles/dungeon_forest-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="6">
    <image width="32" height="32" source="tiles/dungeon_forest-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="21">
    <image width="32" height="32" source="tiles/dungeon_forest-04-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="33">
    <image width="32" height="32" source="tiles/dungeon_forest-06-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="27">
    <image width="32" height="32" source="tiles/dungeon_forest-05-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="24">
    <image width="32" height="32" source="tiles/dungeon_forest-05-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="30">
    <image width="32" height="32" source="tiles/dungeon_forest-06-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32"/>
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="18">
    <image width="32" height="32" source="tiles/dungeon_forest-04-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="1">
    <image width="32" height="32" source="tiles/dungeon_forest-01-02.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="3" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="7">
    <image width="32" height="32" source="tiles/dungeon_forest-02-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="2">
    <image width="32" height="32" source="tiles/dungeon_forest-01-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="8">
    <image width="32" height="32" source="tiles/dungeon_forest-02-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="52">
    <image width="32" height="32" source="tiles/dungeon-05-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="55">
    <image width="32" height="32" source="tiles/dungeon-06-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="48">
    <image width="32" height="32" source="tiles/dungeon-04-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="36">
    <image width="32" height="32" source="tiles/dungeon-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="40">
    <image width="32" height="32" source="tiles/dungeon-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="44">
    <image width="32" height="32" source="tiles/dungeon-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="37">
    <image width="32" height="32" source="tiles/dungeon-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32"/>
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="41">
    <image width="32" height="32" source="tiles/dungeon-02-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="38">
    <image width="32" height="32" source="tiles/dungeon-01-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="42">
    <image width="32" height="32" source="tiles/dungeon-02-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="3">
    <image width="32" height="32" source="tiles/dungeon_forest-01-04.png"/>
@@ -92,15 +164,28 @@
   </tile>
   <tile id="13">
    <image width="32" height="32" source="tiles/dungeon_forest-03-02.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="3" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="19">
    <image width="32" height="32" source="tiles/dungeon_forest-04-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="14">
    <image width="32" height="32" source="tiles/dungeon_forest-03-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="20">
    <image width="32" height="32" source="tiles/dungeon_forest-04-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32.125" height="29.125"/>
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="43">
    <image width="32" height="32" source="tiles/dungeon-02-04.png"/>
@@ -146,39 +231,75 @@
   </tile>
   <tile id="32">
    <image width="32" height="32" source="tiles/dungeon_forest-06-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="31">
    <image width="32" height="32" source="tiles/dungeon_forest-06-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="26">
    <image width="32" height="32" source="tiles/dungeon_forest-05-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="25">
    <image width="32" height="32" source="tiles/dungeon_forest-05-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="45">
    <image width="32" height="32" source="tiles/dungeon-03-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="49">
    <image width="32" height="32" source="tiles/dungeon-04-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="46">
    <image width="32" height="32" source="tiles/dungeon-03-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="3" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="50">
    <image width="32" height="32" source="tiles/dungeon-04-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="53">
    <image width="32" height="32" source="tiles/dungeon-05-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="54" probability="0.2">
    <image width="32" height="32" source="tiles/dungeon-05-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="57">
    <image width="32" height="32" source="tiles/dungeon-06-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="56">
    <image width="32" height="32" source="tiles/dungeon-06-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="58">
    <image width="32" height="32" source="tiles/empty.png"/>
@@ -188,54 +309,109 @@
   </tile>
   <tile id="62">
    <image width="32" height="32" source="tiles/forest_ruins-01-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="72">
    <image width="32" height="32" source="tiles/forest_ruins-03-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="61">
    <image width="32" height="32" source="tiles/forest_ruins-01-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="6" height="32"/>
+    <object id="2" x="0" y="9" width="32" height="23"/>
+   </objectgroup>
   </tile>
   <tile id="66">
    <image width="32" height="32" source="tiles/forest_ruins-02-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="32" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="71">
    <image width="32" height="32" source="tiles/forest_ruins-03-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="32" height="24"/>
+    <object id="2" x="25" y="0" width="7" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="69">
    <image width="32" height="32" source="tiles/forest_ruins-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="9"/>
+    <object id="2" x="25" y="0" width="7" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="59">
    <image width="32" height="32" source="tiles/forest_ruins-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="7" height="32"/>
+    <object id="2" x="0" y="0" width="32" height="9"/>
+   </objectgroup>
   </tile>
   <tile id="63">
    <image width="32" height="32" source="tiles/forest_ruins-01-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="68">
    <image width="32" height="32" source="tiles/forest_ruins-02-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="73">
    <image width="32" height="32" source="tiles/forest_ruins-03-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="60">
    <image width="32" height="32" source="tiles/forest_ruins-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="6" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="70">
    <image width="32" height="32" source="tiles/forest_ruins-03-02.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="3" x="25" y="0" width="7" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="76">
    <image width="32" height="32" source="tiles/forest_ruins-04-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="80">
    <image width="32" height="32" source="tiles/forest_ruins-05-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="64">
    <image width="32" height="32" source="tiles/forest_ruins-02-01.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="32" height="9"/>
+   </objectgroup>
   </tile>
   <tile id="77">
    <image width="32" height="32" source="tiles/forest_ruins-04-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="0" width="7" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="81">
    <image width="32" height="32" source="tiles/forest_ruins-05-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="7" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="65" probability="250">
    <image width="32" height="32" source="tiles/forest_ruins-02-02.png"/>
@@ -245,33 +421,55 @@
   </tile>
   <tile id="74">
    <image width="32" height="32" source="tiles/forest_ruins-04-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="78">
    <image width="32" height="32" source="tiles/forest_ruins-05-01.png"/>
   </tile>
   <tile id="82">
    <image width="32" height="32" source="tiles/forest_ruins-06-01.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="25" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="75">
    <image width="32" height="32" source="tiles/forest_ruins-04-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="7" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="79">
    <image width="32" height="32" source="tiles/forest_ruins-05-02.png"/>
   </tile>
   <tile id="83">
    <image width="32" height="32" source="tiles/forest_ruins-06-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="0" width="7" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="96">
    <image width="32" height="32" source="tiles/forest-02-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="142">
    <image width="32" height="32" source="tiles/forest-08-04.png"/>
   </tile>
   <tile id="88">
    <image width="32" height="32" source="tiles/forest-01-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="112">
    <image width="32" height="32" source="tiles/forest-04-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="7" height="32"/>
+    <object id="2" x="0" y="0" width="7" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="143" probability="0.1">
    <image width="32" height="32" source="tiles/forest-08-05.png"/>
@@ -281,15 +479,24 @@
   </tile>
   <tile id="104">
    <image width="32" height="32" source="tiles/forest-03-05.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="25" y="0" width="7" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="120">
    <image width="32" height="32" source="tiles/forest-05-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="7" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="128">
    <image width="32" height="32" source="tiles/forest-06-05.png"/>
   </tile>
   <tile id="136">
    <image width="32" height="32" source="tiles/forest-07-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="0" width="7" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="93" probability="0.05">
    <image width="32" height="32" source="tiles/forest-02-02.png"/>
@@ -359,81 +566,177 @@
   </tile>
   <tile id="89">
    <image width="32" height="32" source="tiles/forest-01-06.png"/>
+   <objectgroup draworder="index" id="4">
+    <object id="3" x="14" y="0" width="18" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="105">
    <image width="32" height="32" source="tiles/forest-03-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="121">
    <image width="32" height="32" source="tiles/forest-05-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="113">
    <image width="32" height="32" source="tiles/forest-04-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="97">
    <image width="32" height="32" source="tiles/forest-02-06.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="18" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="130">
    <image width="32" height="32" source="tiles/forest-06-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="16" width="16" height="16"/>
+    <object id="2" x="16" y="0" width="5" height="16"/>
+    <object id="3" x="21" y="9" width="11" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="129">
    <image width="32" height="32" source="tiles/forest-06-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="137">
    <image width="32" height="32" source="tiles/forest-07-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="131">
    <image width="32" height="32" source="tiles/forest-06-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="17" width="16" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="123">
    <image width="32" height="32" source="tiles/forest-05-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="17" width="16" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="99">
    <image width="32" height="32" source="tiles/forest-02-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="19" height="20"/>
+    <object id="3" x="13" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="145">
    <image width="32" height="32" source="tiles/forest-08-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="16" width="16" height="16"/>
+    <object id="2" x="11" y="0" width="5" height="16"/>
+    <object id="3" x="0" y="9" width="11" height="7"/>
+   </objectgroup>
   </tile>
   <tile id="144">
    <image width="32" height="32" source="tiles/forest-08-06.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="138">
    <image width="32" height="32" source="tiles/forest-07-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="17" height="20"/>
+    <object id="2" x="0" y="16" width="15" height="16"/>
+    <object id="3" x="8" y="3" width="7" height="13"/>
+    <object id="4" x="0" y="11" width="8" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="115">
    <image width="32" height="32" source="tiles/forest-04-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16" height="20"/>
+    <object id="2" x="15" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="122">
    <image width="32" height="32" source="tiles/forest-05-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="20"/>
+    <object id="2" x="17" y="16" width="15" height="16"/>
+    <object id="3" x="17" y="3" width="5" height="13"/>
+    <object id="4" x="22" y="11" width="10" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="114">
    <image width="32" height="32" source="tiles/forest-04-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="20"/>
+    <object id="2" x="17" y="16" width="15" height="16"/>
+    <object id="3" x="17" y="3" width="5" height="13"/>
+    <object id="4" x="22" y="11" width="10" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="107">
    <image width="32" height="32" source="tiles/forest-03-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="19" height="19"/>
+    <object id="4" x="15" y="0" width="4" height="13"/>
+   </objectgroup>
   </tile>
   <tile id="210">
    <image width="32" height="32" source="tiles/cliffleft.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="5" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="211">
    <image width="32" height="32" source="tiles/cliffright.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="91">
    <image width="32" height="32" source="tiles/forest-01-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="13" width="16" height="19"/>
+    <object id="2" x="13" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="213">
    <image width="32" height="32" source="tiles/cliffrightbottom.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16" height="20"/>
+    <object id="2" x="16" y="0" width="3" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="212">
    <image width="32" height="32" source="tiles/cliffleftmid.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="19" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="106">
    <image width="32" height="32" source="tiles/forest-03-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="17" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="90">
    <image width="32" height="32" source="tiles/forest-01-07.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="3" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="98">
    <image width="32" height="32" source="tiles/forest-02-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="100" probability="0.5">
    <image width="32" height="32" source="tiles/forest-03-01.png"/>
@@ -539,102 +842,210 @@
   </tile>
   <tile id="170">
    <image width="32" height="32" source="tiles/sno_tiles-02-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="6" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="198">
    <image width="32" height="32" source="tiles/sno_tiles-06-03.png"/>
   </tile>
   <tile id="205">
    <image width="32" height="32" source="tiles/sno_tiles-07-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="26" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="178">
    <image width="32" height="32" source="tiles/sno_tiles-03-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="162">
    <image width="32" height="32" source="tiles/sno_tiles-01-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="26" y="8" width="7" height="24"/>
+   </objectgroup>
   </tile>
   <tile id="199">
    <image width="32" height="32" source="tiles/sno_tiles-06-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="6" height="16"/>
+   </objectgroup>
   </tile>
   <tile id="206">
    <image width="32" height="32" source="tiles/sno_tiles-07-04.png"/>
   </tile>
   <tile id="163">
    <image width="32" height="32" source="tiles/sno_tiles-01-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="26" y="0" width="6" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="192">
    <image width="32" height="32" source="tiles/sno_tiles-05-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="6" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="191">
    <image width="32" height="32" source="tiles/sno_tiles-05-03.png"/>
   </tile>
   <tile id="185">
    <image width="32" height="32" source="tiles/sno_tiles-04-04.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="0" width="7" height="31.9375"/>
+   </objectgroup>
   </tile>
   <tile id="166">
    <image width="32" height="32" source="tiles/sno_tiles-01-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="17" width="16" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="164">
    <image width="32" height="32" source="tiles/sno_tiles-01-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="174">
    <image width="32" height="32" source="tiles/sno_tiles-02-08.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="17" width="16" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="171">
    <image width="32" height="32" source="tiles/sno_tiles-02-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="0" width="18" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="208">
    <image width="32" height="32" source="tiles/sno_tiles-07-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="20"/>
+    <object id="3" x="17" y="16" width="15" height="16"/>
+    <object id="4" x="17" y="0" width="4" height="16"/>
+    <object id="5" x="21" y="8" width="11" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="172">
    <image width="32" height="32" source="tiles/sno_tiles-02-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="173">
    <image width="32" height="32" source="tiles/sno_tiles-02-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="17" height="20"/>
+    <object id="2" x="0" y="16" width="15" height="17"/>
+    <object id="4" x="11" y="0" width="4" height="16"/>
+    <object id="5" x="0" y="10" width="11" height="6"/>
+   </objectgroup>
   </tile>
   <tile id="179">
    <image width="32" height="32" source="tiles/sno_tiles-03-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="165">
    <image width="32" height="32" source="tiles/sno_tiles-01-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="17" y="16" width="15" height="16"/>
+    <object id="2" x="16" y="0" width="6" height="16"/>
+    <object id="3" x="22" y="9" width="10" height="7"/>
+   </objectgroup>
   </tile>
   <tile id="207">
    <image width="32" height="32" source="tiles/sno_tiles-07-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="32" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="181">
    <image width="32" height="32" source="tiles/sno_tiles-03-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="15" width="15" height="17"/>
+    <object id="2" x="12" y="0" width="4" height="15"/>
+    <object id="3" x="9" y="5" width="4" height="10"/>
+    <object id="4" x="0" y="11" width="9" height="4"/>
+   </objectgroup>
   </tile>
   <tile id="188">
    <image width="32" height="32" source="tiles/sno_tiles-04-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="4" height="32"/>
+    <object id="2" x="17" y="13" width="15" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="202">
    <image width="32" height="32" source="tiles/sno_tiles-06-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="16" height="19"/>
+    <object id="2" x="15" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="195">
    <image width="32" height="32" source="tiles/sno_tiles-05-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="19" height="20"/>
+    <object id="2" x="13" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="201">
    <image width="32" height="32" source="tiles/sno_tiles-06-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="20"/>
+    <object id="3" x="17" y="15" width="15" height="16"/>
+    <object id="4" x="18" y="5" width="4" height="11"/>
+    <object id="5" x="22" y="11" width="10" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="186">
    <image width="32" height="32" source="tiles/sno_tiles-04-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="193">
    <image width="32" height="32" source="tiles/sno_tiles-05-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="200">
    <image width="32" height="32" source="tiles/sno_tiles-06-05.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="209">
    <image width="32" height="32" source="tiles/sno_tiles-07-07.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="15" height="20"/>
+    <object id="3" x="15" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="194">
    <image width="32" height="32" source="tiles/sno_tiles-05-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="17" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="180">
    <image width="32" height="32" source="tiles/sno_tiles-03-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32.0435"/>
+   </objectgroup>
   </tile>
   <tile id="187">
    <image width="32" height="32" source="tiles/sno_tiles-04-06.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="175" probability="0.1">
    <image width="32" height="32" source="tiles/sno_tiles-03-01.png"/>
@@ -686,192 +1097,424 @@
   </tile>
   <tile id="226">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_1-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15.0625" y="0.03125" width="8" height="15.9063"/>
+    <object id="2" x="16.6563" y="9.375" width="15.375" height="7.6875"/>
+   </objectgroup>
   </tile>
   <tile id="227">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_1-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="3" x="0" y="11.9565" width="32.0435" height="5.08696"/>
+   </objectgroup>
   </tile>
   <tile id="228">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_1-01-03.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="16.913" y="11.7826" width="15.1304" height="10.2174"/>
+    <object id="3" x="13.2609" y="16.8261" width="6.82609" height="15.087"/>
+   </objectgroup>
   </tile>
   <tile id="229">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_1-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="11.3913" y="-0.0434783" width="5.69565" height="16.1739"/>
+    <object id="2" x="-0.0869565" y="11" width="17.3043" height="5.95652"/>
+   </objectgroup>
   </tile>
   <tile id="230">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_1-02-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-0.0434783" y="13.7391" width="13.8696" height="6.21739"/>
+    <object id="3" x="12.087" y="13.7826" width="4.86957" height="18.2174"/>
+   </objectgroup>
   </tile>
   <tile id="231">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="11.913" y="-0.0434783" width="5.21739" height="16.0435"/>
+    <object id="2" x="15.0435" y="12.0435" width="16.9565" height="4.91304"/>
+   </objectgroup>
   </tile>
   <tile id="232">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="4.91304" height="15.913"/>
+    <object id="2" x="0.0434783" y="11.913" width="16.9565" height="5.08696"/>
+   </objectgroup>
   </tile>
   <tile id="233">
    <image width="32" height="32" source="tiles/aaa111.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="32"/>
+    <object id="2" x="15" y="16" width="17" height="16"/>
+    <object id="3" x="17" y="3" width="4" height="14"/>
+    <object id="4" x="21" y="9" width="11" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="234">
    <image width="32" height="32" source="tiles/aaa112.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="20"/>
+    <object id="2" x="16" y="0" width="16" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="235">
    <image width="32" height="32" source="tiles/aaa113.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="236">
    <image width="32" height="32" source="tiles/aaa114.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="4" x="13" y="13" width="19" height="8"/>
+    <object id="5" x="13" y="12" width="5" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="237">
    <image width="32" height="32" source="tiles/aaa115.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="17" height="32"/>
+    <object id="2" x="0" y="0" width="16" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="238">
    <image width="32" height="32" source="tiles/aaa116.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="16"/>
+   </objectgroup>
   </tile>
   <tile id="239">
    <image width="32" height="32" source="tiles/aaa117.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="19" height="32"/>
+    <object id="2" x="0" y="0" width="20" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="240">
    <image width="32" height="32" source="tiles/aaa118.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12" y="0" width="9" height="19"/>
+    <object id="2" x="0" y="12" width="32" height="7"/>
+   </objectgroup>
   </tile>
   <tile id="241">
    <image width="32" height="32" source="tiles/aaa119.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="20"/>
+    <object id="2" x="13" y="13" width="19" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="242">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_1-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12" y="0" width="5" height="16"/>
+    <object id="2" x="16" y="12" width="16" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="243">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_1-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="32" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="244">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_1-01-03.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="12" width="19" height="8"/>
+    <object id="2" x="13" y="12" width="8" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="245">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_1-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="5" height="16"/>
+    <object id="3" x="0" y="14" width="17" height="3"/>
+   </objectgroup>
   </tile>
   <tile id="246">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_1-02-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="14" width="14" height="8"/>
+    <object id="2" x="12" y="18" width="5" height="14"/>
+   </objectgroup>
   </tile>
   <tile id="247">
    <image width="32" height="32" source="tiles/20200915_214933_lost_forest_sprites_1_1_2_2.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="5" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="248">
    <image width="32" height="32" source="tiles/aaa122.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="32"/>
+    <object id="2" x="15" y="16" width="17" height="16"/>
+    <object id="3" x="17" y="3" width="5" height="14"/>
+    <object id="4" x="21" y="11" width="11" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="249">
    <image width="32" height="32" source="tiles/aaa120.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="0" width="16" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="251">
    <image width="32" height="32" source="tiles/aaa123.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="19" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="252">
    <image width="32" height="32" source="tiles/aaa124.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="0" width="16" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="253">
    <image width="32" height="32" source="tiles/aaa125.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="0" width="18" height="19"/>
+   </objectgroup>
   </tile>
   <tile id="254">
    <image width="32" height="32" source="tiles/aaa126.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="12" y="0" width="5" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="256">
    <image width="32" height="32" source="tiles/aaa127.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="4" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="257">
    <image width="32" height="32" source="tiles/aaa128.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="17" width="16" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="258">
    <image width="32" height="32" source="tiles/aaa121.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="0" width="16" height="32"/>
+    <object id="2" x="0" y="0" width="17" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="259">
    <image width="32" height="32" source="tiles/aaa129.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="32" height="6"/>
+    <object id="2" x="15" y="18" width="7" height="14"/>
+   </objectgroup>
   </tile>
   <tile id="260">
    <image width="32" height="32" source="tiles/aaa130.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="12" width="18" height="5"/>
+    <object id="3" x="18" y="16" width="14" height="17"/>
+    <object id="4" x="16" y="1" width="5" height="15"/>
+    <object id="6" x="21" y="9" width="11" height="7"/>
+   </objectgroup>
   </tile>
   <tile id="261">
    <image width="32" height="32" source="tiles/aaa131.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16" height="20"/>
+    <object id="3" x="15" y="0" width="6" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="262">
    <image width="32" height="32" source="tiles/aaa132.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12" y="0" width="5" height="16"/>
+   </objectgroup>
   </tile>
   <tile id="263">
    <image width="32" height="32" source="tiles/aaa133.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="0" width="18" height="16"/>
+    <object id="2" x="0" y="12" width="32" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="264">
    <image width="32" height="32" source="tiles/AAA134.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="5" height="32"/>
+    <object id="2" x="0" y="12" width="15" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="265">
    <image width="32" height="32" source="tiles/aaa001.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="15" y="0" width="5" height="16"/>
+    <object id="2" x="0" y="12" width="16" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="266">
    <image width="32" height="32" source="tiles/aaa002.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="18" height="20"/>
+    <object id="2" x="0" y="12" width="32" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="267">
    <image width="32" height="32" source="tiles/aaa003.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="20" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="268">
    <image width="32" height="32" source="tiles/aaa004.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="18"/>
+    <object id="2" x="0" y="0" width="22" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="269">
    <image width="32" height="32" source="tiles/aaa005.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="20"/>
+    <object id="2" x="14" y="20" width="6" height="12"/>
+   </objectgroup>
   </tile>
   <tile id="270">
    <image width="32" height="32" source="tiles/aaa006.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="17" height="32"/>
+    <object id="2" x="17" y="3" width="5" height="20"/>
+    <object id="3" x="22" y="10" width="10" height="8"/>
+   </objectgroup>
   </tile>
   <tile id="271">
    <image width="32" height="32" source="tiles/aaa007.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="0" width="18" height="19"/>
+    <object id="2" x="14" y="19" width="7" height="13"/>
+   </objectgroup>
   </tile>
   <tile id="272">
    <image width="32" height="32" source="tiles/aaa008.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="20" height="32"/>
+    <object id="2" x="20" y="0" width="12" height="20"/>
+   </objectgroup>
   </tile>
   <tile id="273">
    <image width="32" height="32" source="tiles/aaa009.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="20" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="274">
    <image width="32" height="32" source="tiles/aaa010.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="19"/>
+    <object id="2" x="13" y="15" width="19" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="275">
    <image width="32" height="32" source="tiles/aaa011.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="19"/>
+    <object id="2" x="13" y="17" width="4" height="15"/>
+   </objectgroup>
   </tile>
   <tile id="276">
    <image width="32" height="32" source="tiles/aaa012.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="13" y="0" width="4" height="16"/>
+    <object id="2" x="0" y="12" width="32" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="278">
    <image width="32" height="32" source="tiles/aaa013.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="19"/>
+    <object id="2" x="13" y="19" width="6" height="13"/>
+   </objectgroup>
   </tile>
   <tile id="279">
    <image width="32" height="32" source="tiles/aaaaaaaaaaaaaaaaaaaaaaaaaaaablack.png"/>
   </tile>
   <tile id="281">
    <image width="32" height="32" source="tiles/b2.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="32" height="20"/>
+    <object id="3" x="0" y="0" width="20" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="282">
    <image width="32" height="32" source="tiles/b3.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="20" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="283">
    <image width="32" height="32" source="tiles/b4.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="19" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="284">
    <image width="32" height="32" source="tiles/b5.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32.0625"/>
+   </objectgroup>
   </tile>
   <tile id="285">
    <image width="32" height="32" source="tiles/b6.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="18" height="32"/>
+    <object id="2" x="17" y="16" width="15" height="16"/>
+    <object id="3" x="18" y="5" width="4" height="11"/>
+    <object id="4" x="22" y="11" width="10" height="5"/>
+   </objectgroup>
   </tile>
   <tile id="286">
    <image width="32" height="32" source="tiles/b7.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="287">
    <image width="32" height="32" source="tiles/b8.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="288">
    <image width="32" height="32" source="tiles/b9.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="289">
    <image width="32" height="32" source="tiles/b10.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="20" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="290">
    <image width="32" height="32" source="tiles/b1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="17"/>
+   </objectgroup>
   </tile>
   <tile id="291">
    <image width="32" height="32" source="tiles/b11.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="292">
    <image width="32" height="32" source="tiles/b12.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
   </tile>
   <tile id="293" probability="0.01">
    <image width="32" height="32" source="tiles/Grass_tiles_Magical_Mr._go_fuck_yourself-02-01.png"/>
@@ -959,24 +1602,47 @@
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="64" height="64" source="objects/CRATES-1.png_1 (Custom).png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="12" width="43" height="50"/>
+   </objectgroup>
   </tile>
   <tile id="1">
    <image width="64" height="128" source="objects/forest_clutter_tall-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="76" width="52" height="35"/>
+    <object id="2" x="12" y="12" width="39" height="82"/>
+   </objectgroup>
   </tile>
   <tile id="2">
    <image width="64" height="128" source="objects/forest_clutter_tall-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="36" width="43" height="76"/>
+   </objectgroup>
   </tile>
   <tile id="3">
    <image width="64" height="128" source="objects/forest_clutter_tall-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="76" width="52" height="35"/>
+    <object id="2" x="12" y="0" width="39" height="77"/>
+   </objectgroup>
   </tile>
   <tile id="4">
    <image width="64" height="128" source="objects/forest_clutter_tall-03-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="36" width="43" height="75"/>
+   </objectgroup>
   </tile>
   <tile id="5">
    <image width="64" height="64" source="objects/forest_clutter-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="63" height="44"/>
+   </objectgroup>
   </tile>
   <tile id="6">
    <image width="64" height="64" source="objects/forest_clutter-02-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="18" y="17" width="28" height="36"/>
+   </objectgroup>
   </tile>
   <tile id="7">
    <image width="64" height="64" source="objects/forest_clutter-03-01.png"/>
@@ -986,21 +1652,39 @@
   </tile>
   <tile id="9">
    <image width="256" height="256" source="objects/tree.png"/>
+   <objectgroup draworder="index" id="5">
+    <object id="4" x="96" y="199" width="63" height="56"/>
+   </objectgroup>
   </tile>
   <tile id="10">
    <image width="256" height="256" source="objects/tree_1-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="97" y="200" width="60" height="54"/>
+   </objectgroup>
   </tile>
   <tile id="11">
    <image width="256" height="256" source="objects/tree_1-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="97" y="197" width="62" height="59"/>
+   </objectgroup>
   </tile>
   <tile id="12">
    <image width="128" height="128" source="objects/tree_stump_1_1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="32" y="57" width="66" height="60"/>
+   </objectgroup>
   </tile>
   <tile id="13">
    <image width="128" height="128" source="objects/tree_stump_1_1_1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="32" y="55" width="66" height="68"/>
+   </objectgroup>
   </tile>
   <tile id="14">
    <image width="64" height="64" source="objects/Vase_mk3-1.png (Custom).png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="17" y="16" width="29" height="36"/>
+   </objectgroup>
   </tile>
   <tile id="15">
    <image width="23" height="49" source="objects/bat.png"/>
@@ -1028,36 +1712,69 @@
   </tile>
   <tile id="23">
    <image width="128" height="128" source="objects/tents0.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="32" y="17" width="65" height="95"/>
+   </objectgroup>
   </tile>
   <tile id="24">
    <image width="128" height="128" source="objects/tents1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="31" y="17" width="65" height="96"/>
+   </objectgroup>
   </tile>
   <tile id="25">
    <image width="128" height="128" source="objects/tents2.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="30" y="18" width="67" height="94"/>
+   </objectgroup>
   </tile>
   <tile id="26">
    <image width="43" height="42" source="objects/campfireplaceholder.png"/>
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="6" y="29" width="32" height="13"/>
+   </objectgroup>
   </tile>
   <tile id="27">
    <image width="256" height="256" source="objects/New_Piskel_5-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="114" y="197" width="33" height="48"/>
+   </objectgroup>
   </tile>
   <tile id="28">
    <image width="256" height="256" source="objects/New_Piskel_5-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="114" y="177" width="30" height="66"/>
+   </objectgroup>
   </tile>
   <tile id="29">
    <image width="256" height="256" source="objects/New_Piskel_6-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="104" y="206" width="49" height="51"/>
+   </objectgroup>
   </tile>
   <tile id="30">
    <image width="256" height="256" source="objects/New_Piskel_6-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="104" y="207" width="49" height="50"/>
+   </objectgroup>
   </tile>
   <tile id="31">
    <image width="256" height="256" source="objects/tree.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="95" y="200" width="65" height="57"/>
+   </objectgroup>
   </tile>
   <tile id="32">
    <image width="256" height="256" source="objects/tree_1-01-01.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="96" y="200" width="64" height="56"/>
+   </objectgroup>
   </tile>
   <tile id="33">
    <image width="256" height="256" source="objects/tree_1-01-02.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="94" y="198" width="63" height="57"/>
+   </objectgroup>
   </tile>
   <tile id="34">
    <image width="256" height="256" source="objects/image_2.png"/>
