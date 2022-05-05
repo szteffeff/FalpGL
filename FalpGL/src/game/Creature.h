@@ -15,7 +15,6 @@ public:
 	float* player_health;
 	static float* curser_x;
 	static float* curser_y;
-	float health = 100;
 
 	float* player_position_x = 0;
 	float* player_position_y = 0;
@@ -41,7 +40,7 @@ public:
 	virtual void Player_Health(float* health);
 	virtual void walk(float direction, float magnitude);
 
-	virtual void attacked(float x, float y, float radius, int attack);
+	virtual void attacked(float x, float y, float radius, int attack, float* health, float* monster_x, float* monster_y);
 	virtual void get_weapon(int* weapon);
 
 	virtual void Get_player_position(float* x, float* y);
@@ -220,6 +219,7 @@ private:
 	Entity Red_slime;
 	float momentum[2], position[2];
 	const float Damage = 10;
+	float Health = 10;
 	float* player_position_x;
 	float* player_position_y;
 	int frame;
@@ -230,6 +230,10 @@ private:
 public:
 	Red_Slime(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick() override;
 };
 
@@ -239,7 +243,7 @@ private:
 	Entity Wizard_pink_bullet;
 
 	float momentum[2], position[2];
-	const float Health = 20;
+	float Health = 20;
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
@@ -255,6 +259,10 @@ private:
 public:
 	Enemy_Ghost(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick();
 };
 
@@ -331,7 +339,7 @@ class Bush_Boi : public Creature {
 private:
 	Entity Bush_boi;
 	float momentum[2], position[2];
-	const float Health = 20;
+	float Health = 20;
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
@@ -345,6 +353,10 @@ private:
 public:
 	Bush_Boi(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick();
 };
 
@@ -352,7 +364,7 @@ class Chompy_Slime : public Creature {
 private:
 	Entity Chompy_slime;
 	float momentum[2], position[2];
-	const float Health = 20;
+	float Health = 20;
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
@@ -364,6 +376,10 @@ private:
 public:
 	Chompy_Slime(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick();
 };
 
@@ -405,7 +421,7 @@ private:
 	Entity Wizard_pink_bullet;
 
 	float momentum[2], position[2];
-	const float Health = 20;
+	float Health = 20;
 	const float Damage = 10;
 	float* player_position_x;
 	float* player_position_y;
@@ -418,6 +434,10 @@ private:
 public:
 	Sussy_Vase(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick();
 };
 
@@ -430,6 +450,20 @@ private:
 	bool* talk;
 public:
 	Clair_Of_Cavern(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	void Get_talk(bool* spoken);
+	void tick();
+};
+
+class Destus_Of_Cavern : public Creature {
+private:
+	Entity destus_of_cavern;
+	float momentum[2], position[2];
+	float* player_position_x = 0;
+	float* player_position_y = 0;
+	bool* talk;
+public:
+	Destus_Of_Cavern(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
 	void tick();
@@ -488,5 +522,61 @@ public:
 	Maban_of_Undermount(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
+	void tick();
+};
+
+class Campfire : public Creature {
+private:
+	Entity campfire;
+	
+public:
+	Campfire(VertexBuffer* vb);
+	void tick();
+	void teleport(float x, float y);
+};
+
+class Blue_Slime : public Creature {
+private:
+	Entity blue_slime;
+	float momentum[2], position[2];
+	float Health = 10;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+	int frame;
+	int bops;
+	int bops_frame;
+	int dmg_control = 0;
+
+public:
+	Blue_Slime(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
+	void tick() override;
+};
+
+class Ice_Slime : public Creature {
+private:
+	Entity ice_slime;
+	float momentum[2], position[2];
+	float Health = 20;
+	const float Damage = 10;
+	float* player_position_x;
+	float* player_position_y;
+	int frame;
+	int bops;
+	int bops_frame;
+	int dmg_control = 0;
+
+public:
+	Ice_Slime(VertexBuffer* vb);
+	void Get_player_position(float* x, float* y);
+	float* give_health();
+	float* give_x();
+	float* give_y();
+	void teleport(float x, float y);
 	void tick();
 };

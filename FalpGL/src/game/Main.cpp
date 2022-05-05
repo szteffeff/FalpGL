@@ -288,12 +288,6 @@ int main(void)
 
         //std::vector<Creature*> bad_bois;
 
-        std::vector<Red_Slime> bad_Red_slimes;
-        std::vector<Chompy_Slime> bad_Chompy_slimes;
-        std::vector<Enemy_Ghost> bad_Enemy_ghost;
-        std::vector<Bush_Boi> bad_Bush_boi;
-        std::vector<Sussy_Vase> bad_Sussy_vase;
-
         BatchRenderer interface_renderer(1000, "res/shaders/ui.shader");
         interface_renderer.add_layout(layout);
         
@@ -312,22 +306,104 @@ int main(void)
         Perry perry(&player_render.vertex_buffer);
         Edgelord edgelord(&player_render.vertex_buffer);
         Clair_Of_Cavern clair_of_cavern(&player_render.vertex_buffer);
+        Destus_Of_Cavern destus_of_cavern(&player_render.vertex_buffer);
         Del_Ibra_of_Hillsby del_ibra_of_hillsby(&player_render.vertex_buffer);
         Eloah_of_Minlet eloah_of_minlet(&player_render.vertex_buffer);
         Felix_of_Festria felix_of_festria(&player_render.vertex_buffer);
         Maban_of_Undermount maban_of_undermount(&player_render.vertex_buffer);
 
         // the bad bois
-        Red_Slime red_slime(&player_render.vertex_buffer);
-        Enemy_Ghost enemy_ghost(&player_render.vertex_buffer);
 
-        bad_Red_slimes.emplace_back(&player_render.vertex_buffer);
-        bad_Chompy_slimes.emplace_back(&player_render.vertex_buffer);
-        bad_Enemy_ghost.emplace_back(&player_render.vertex_buffer);
-        bad_Bush_boi.emplace_back(&player_render.vertex_buffer);
-        bad_Sussy_vase.emplace_back(&player_render.vertex_buffer);
+        // red slimes
+
+        Red_Slime red_slime_0(&player_render.vertex_buffer);
+        Red_Slime red_slime_1(&player_render.vertex_buffer);
+        Red_Slime red_slime_2(&player_render.vertex_buffer);
+        Red_Slime red_slime_3(&player_render.vertex_buffer);
+        Red_Slime red_slime_4(&player_render.vertex_buffer);
+        Red_Slime red_slime_5(&player_render.vertex_buffer);
+        Red_Slime red_slime_6(&player_render.vertex_buffer);
+        Red_Slime red_slime_7(&player_render.vertex_buffer);
+        Red_Slime red_slime_8(&player_render.vertex_buffer);
+        Red_Slime red_slime_9(&player_render.vertex_buffer);
+
+        // chompy slimes
+
+        Chompy_Slime chompy_slime_0(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_1(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_2(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_3(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_4(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_5(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_6(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_7(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_8(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_9(&player_render.vertex_buffer);
+        Chompy_Slime chompy_slime_10(&player_render.vertex_buffer);
+
+        // blue slimes
+
+        Blue_Slime blue_slime_0(&player_render.vertex_buffer);
+        Blue_Slime blue_slime_1(&player_render.vertex_buffer);
+        Blue_Slime blue_slime_2(&player_render.vertex_buffer);
+        Blue_Slime blue_slime_3(&player_render.vertex_buffer);
+
+        // icy slimes
+
+        Ice_Slime ice_slime_0(&player_render.vertex_buffer);
+        Ice_Slime ice_slime_1(&player_render.vertex_buffer);
+        Ice_Slime ice_slime_2(&player_render.vertex_buffer);
+        Ice_Slime ice_slime_3(&player_render.vertex_buffer);
+        Ice_Slime ice_slime_4(&player_render.vertex_buffer);
+        Ice_Slime ice_slime_5(&player_render.vertex_buffer);
+
+        // bushy da boi
+
+        Bush_Boi bush_boi_0(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_1(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_2(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_3(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_4(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_5(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_6(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_7(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_8(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_9(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_10(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_11(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_12(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_13(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_14(&player_render.vertex_buffer);
+        Bush_Boi bush_boi_15(&player_render.vertex_buffer);
+
+        // enemy ghosty toasty
+
+        Enemy_Ghost enemy_ghost_0(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost_1(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost_2(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost_3(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost_4(&player_render.vertex_buffer);
+        Enemy_Ghost enemy_ghost_5(&player_render.vertex_buffer);
+
+        // sussy vase acting kinda sus ;D
+
+        Sussy_Vase sussy_vase_0(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_1(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_2(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_3(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_4(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_5(&player_render.vertex_buffer);
+        Sussy_Vase sussy_vase_6(&player_render.vertex_buffer);
+
+
+        //moving objects???
+        Campfire campfire_1(&player_render.vertex_buffer);
+        Campfire campfire_2(&player_render.vertex_buffer);
         
         //npc getting player stuff
+        campfire_1.teleport(-4155.34, 3440.17);
+        campfire_2.teleport(-6769.67, 4205.33);
+
         garfield.Get_player_position(player.get_position_x(), player.get_position_y());
         garfield.Get_talk(player.speaking());
         garfield.Get_point(player.check_points());
@@ -359,43 +435,259 @@ int main(void)
         maban_of_undermount.Get_player_position(player.get_position_x(), player.get_position_y());
         maban_of_undermount.Get_talk(player.speaking());
 
+        destus_of_cavern.Get_player_position(player.get_position_x(), player.get_position_y());
+        destus_of_cavern.Get_talk(player.speaking());
 
-        red_slime.Get_player_position(player.get_position_x(), player.get_position_y());
-        red_slime.Player_Health(player.GetHealth());
-        enemy_ghost.Get_player_position(player.get_position_x(), player.get_position_y());
-        enemy_ghost.Player_Health(player.GetHealth());
+        // enemys..... OH GOOOD THERE SO MANY.....
 
-        /*
-        for (Creature* boi : bad_bois) {
-            boi->Get_player_position(player.get_position_x(), player.get_position_y());
-            boi->Player_Health(player.GetHealth());
-        }
-        
-        
-        bad_Red_slimes[0].Get_player_position(player.get_position_x(), player.get_position_y());
+        // red_slimes
+        red_slime_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_0.Player_Health(player.GetHealth());
+        red_slime_0.teleport(-817, -796);
 
-        for (Red_Slime boi : bad_Red_slimes) {
-            boi.Get_player_position(player.get_position_x(), player.get_position_y());
-            boi.Player_Health(player.GetHealth());
-        }
+        red_slime_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_1.Player_Health(player.GetHealth());
+        red_slime_1.teleport(-499, 913);
+
+        red_slime_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_2.Player_Health(player.GetHealth());
+        red_slime_2.teleport(2095, 204);
+
+        red_slime_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_3.Player_Health(player.GetHealth());
+        red_slime_3.teleport(1839, 2639);
+
+        red_slime_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_4.Player_Health(player.GetHealth());
+        red_slime_4.teleport(10, 2888);
+
+        red_slime_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_5.Player_Health(player.GetHealth());
+        red_slime_5.teleport(-1677, 4785);
+
+        red_slime_6.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_6.Player_Health(player.GetHealth());
+        red_slime_6.teleport(-1777, 3125);
+
+        red_slime_7.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_7.Player_Health(player.GetHealth());
+        red_slime_7.teleport(-1621, 2227);
+
+        red_slime_8.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_8.Player_Health(player.GetHealth());
+        red_slime_8.teleport(-1877, 2163);
+
+        red_slime_9.Get_player_position(player.get_position_x(), player.get_position_y());
+        red_slime_9.Player_Health(player.GetHealth());
+        red_slime_9.teleport(-5299, 2992);
         
-        for (Chompy_Slime boi : bad_Chompy_slimes) {
-            boi.Get_player_position(player.get_position_x(), player.get_position_y());
-            boi.Player_Health(player.GetHealth());
-        }
-        for (Enemy_Ghost boi : bad_Enemy_ghost) {
-            boi.Get_player_position(player.get_position_x(), player.get_position_y());
-            boi.Player_Health(player.GetHealth());
-        }
-        for (Bush_Boi boi : bad_Bush_boi) {
-            boi.Get_player_position(player.get_position_x(), player.get_position_y());
-            boi.Player_Health(player.GetHealth());
-        }
-        for (Sussy_Vase boi : bad_Sussy_vase) {
-            boi.Get_player_position(player.get_position_x(), player.get_position_y());
-            boi.Player_Health(player.GetHealth());
-        }
-       */
+        // chompy slime chomp
+
+        chompy_slime_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_0.Player_Health(player.GetHealth());
+        chompy_slime_0.teleport(-1812, -913);
+
+        chompy_slime_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_1.Player_Health(player.GetHealth());
+        chompy_slime_1.teleport(-592, -492);
+
+        chompy_slime_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_2.Player_Health(player.GetHealth());
+        chompy_slime_2.teleport(-3151, 600);
+
+        chompy_slime_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_3.Player_Health(player.GetHealth());
+        chompy_slime_3.teleport(-5454, 2129);
+
+        chompy_slime_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_4.Player_Health(player.GetHealth());
+        chompy_slime_4.teleport(-2770, 3055);
+
+        chompy_slime_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_5.Player_Health(player.GetHealth());
+        chompy_slime_5.teleport(-1598, 689);
+
+        chompy_slime_6.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_6.Player_Health(player.GetHealth());
+        chompy_slime_6.teleport(1613, -141);
+
+        chompy_slime_7.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_7.Player_Health(player.GetHealth());
+        chompy_slime_7.teleport(1744, 1167);
+
+        chompy_slime_8.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_8.Player_Health(player.GetHealth());
+        chompy_slime_8.teleport(75, 2160);
+
+        chompy_slime_9.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_9.Player_Health(player.GetHealth());
+        chompy_slime_9.teleport(-526, 2643);
+
+        chompy_slime_10.Get_player_position(player.get_position_x(), player.get_position_y());
+        chompy_slime_10.Player_Health(player.GetHealth());
+        chompy_slime_10.teleport(1581, 4083);
+
+        // bluey the slime
+
+        blue_slime_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        blue_slime_0.Player_Health(player.GetHealth());
+        blue_slime_0.teleport(-9458, 4308);
+
+        blue_slime_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        blue_slime_1.Player_Health(player.GetHealth());
+        blue_slime_1.teleport(-6515, 9485);
+
+        blue_slime_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        blue_slime_2.Player_Health(player.GetHealth());
+        blue_slime_2.teleport(-6257, 9584);
+
+        blue_slime_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        blue_slime_3.Player_Health(player.GetHealth());
+        blue_slime_3.teleport(-3633, 8211);
+
+        // icelce slimecilce
+
+        ice_slime_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_0.Player_Health(player.GetHealth());
+        ice_slime_0.teleport(-8404, 4946);
+
+        ice_slime_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_1.Player_Health(player.GetHealth());
+        ice_slime_1.teleport(-8209, 7439);
+
+        ice_slime_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_2.Player_Health(player.GetHealth());
+        ice_slime_2.teleport(-9011, 9267);
+
+        ice_slime_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_3.Player_Health(player.GetHealth());
+        ice_slime_3.teleport(-6197, 8047);
+
+        ice_slime_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_4.Player_Health(player.GetHealth());
+        ice_slime_4.teleport(79, 6830);
+
+        ice_slime_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        ice_slime_5.Player_Health(player.GetHealth());
+        ice_slime_5.teleport(1191, 6862);
+
+        // OH GOD ITS AN ARMY OF BUSHES
+
+        bush_boi_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_0.Player_Health(player.GetHealth());
+        bush_boi_0.teleport(1253, -137);
+
+        bush_boi_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_1.Player_Health(player.GetHealth());
+        bush_boi_1.teleport(401, 1489);
+
+        bush_boi_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_2.Player_Health(player.GetHealth());
+        bush_boi_2.teleport(-350, 1583);
+
+        bush_boi_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_3.Player_Health(player.GetHealth());
+        bush_boi_3.teleport(-3570, 1073);
+
+        bush_boi_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_4.Player_Health(player.GetHealth());
+        bush_boi_4.teleport(-2721, 2209);
+
+        bush_boi_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_5.Player_Health(player.GetHealth());
+        bush_boi_5.teleport(-274, 3120);
+
+        bush_boi_6.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_6.Player_Health(player.GetHealth());
+        bush_boi_6.teleport(-4145, 2801);
+
+        bush_boi_7.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_7.Player_Health(player.GetHealth());
+        bush_boi_7.teleport(-2230, 4365);
+
+        bush_boi_8.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_8.Player_Health(player.GetHealth());
+        bush_boi_8.teleport(-9712, 5742);
+
+        bush_boi_9.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_9.Player_Health(player.GetHealth());
+        bush_boi_9.teleport(-8110, 8496);
+
+        bush_boi_10.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_10.Player_Health(player.GetHealth());
+        bush_boi_10.teleport(-5422, 8786);
+
+        bush_boi_11.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_11.Player_Health(player.GetHealth());
+        bush_boi_11.teleport(-6195, 6512);
+
+        bush_boi_12.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_12.Player_Health(player.GetHealth());
+        bush_boi_12.teleport(-3697, 7150);
+
+        bush_boi_13.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_13.Player_Health(player.GetHealth());
+        bush_boi_13.teleport(-659, 7855);
+
+        bush_boi_14.Get_player_position(player.get_position_x(), player.get_position_y());
+        bush_boi_14.Player_Health(player.GetHealth());
+        bush_boi_14.teleport(750, 8879);
+
+        /// ghosty time
+
+        enemy_ghost_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_0.Player_Health(player.GetHealth());
+        enemy_ghost_0.teleport(-468, -1104);
+
+        enemy_ghost_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_1.Player_Health(player.GetHealth());
+        enemy_ghost_1.teleport(543, 1277);
+
+        enemy_ghost_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_2.Player_Health(player.GetHealth());
+        enemy_ghost_2.teleport(-3279, 3350);
+
+        enemy_ghost_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_3.Player_Health(player.GetHealth());
+        enemy_ghost_3.teleport(-5715, 6957);
+
+        enemy_ghost_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_4.Player_Health(player.GetHealth());
+        enemy_ghost_4.teleport(-2153, 8263);
+
+        enemy_ghost_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        enemy_ghost_5.Player_Health(player.GetHealth());
+        enemy_ghost_5.teleport(142, 8431);
+        
+        // sussy vase vibin doe
+
+        sussy_vase_0.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_0.Player_Health(player.GetHealth());
+        sussy_vase_0.teleport(-1921, -543);
+
+        sussy_vase_1.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_1.Player_Health(player.GetHealth());
+        sussy_vase_1.teleport(247, 1053);
+
+        sussy_vase_2.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_2.Player_Health(player.GetHealth());
+        sussy_vase_2.teleport(-4237, 3408);
+
+        sussy_vase_3.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_3.Player_Health(player.GetHealth());
+        sussy_vase_3.teleport(1744, 3122);
+
+        sussy_vase_4.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_4.Player_Health(player.GetHealth());
+        sussy_vase_4.teleport(-5361, 6961);
+
+        sussy_vase_5.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_5.Player_Health(player.GetHealth());
+        sussy_vase_5.teleport(-2289, 8302);
+
+        sussy_vase_6.Get_player_position(player.get_position_x(), player.get_position_y());
+        sussy_vase_6.Player_Health(player.GetHealth());
+        sussy_vase_6.teleport(-594, 8530);
 
         /*Sound crap*/
         //SFX Sound_player;
@@ -446,57 +738,173 @@ int main(void)
             nmap.tick(*player.get_position_x(), *player.get_position_y());
             if (pause == false) {
                 player.tick();
-                //bad_bois[0]->tick();
-                //enemy_ghost.tick();
-                red_slime.tick();
                 garfield.tick();
                 cow.tick();
                 perry.tick();
                 edgelord.tick();
                 clair_of_cavern.tick();
+                destus_of_cavern.tick();
                 del_ibra_of_hillsby.tick();
                 eloah_of_minlet.tick();
                 felix_of_festria.tick();
                 maban_of_undermount.tick();
-                //Bush_boi.tick();
-                //Chompy_slime.tick();
-                //Sussy_vase.tick();
+
+                campfire_1.tick();
+                campfire_2.tick();
+
+                // ALOT OF MOBS
+                // red slimes doe
+                red_slime_0.tick();
+                red_slime_1.tick();
+                red_slime_2.tick();
+                red_slime_3.tick();
+                red_slime_4.tick();
+                red_slime_5.tick();
+                red_slime_6.tick();
+                red_slime_7.tick();
+                red_slime_8.tick();
+                red_slime_9.tick();
+
+                // chomper chompy slime
+                chompy_slime_0.tick();
+                chompy_slime_1.tick();
+                chompy_slime_2.tick();
+                chompy_slime_3.tick();
+                chompy_slime_4.tick();
+                chompy_slime_5.tick();
+                chompy_slime_6.tick();
+                chompy_slime_7.tick();
+                chompy_slime_8.tick();
+                chompy_slime_9.tick();
+                chompy_slime_10.tick();
+
+                // bluey slimgton
+                blue_slime_0.tick();
+                blue_slime_1.tick();
+                blue_slime_2.tick();
+                blue_slime_3.tick();
+
+                //spikey icey slime
+
+                ice_slime_0.tick();
+                ice_slime_1.tick();
+                ice_slime_2.tick();
+                ice_slime_3.tick();
+                ice_slime_4.tick();
+                ice_slime_5.tick();
+
+                //bushyist of bois
+
+                bush_boi_0.tick();
+                bush_boi_1.tick();
+                bush_boi_2.tick();
+                bush_boi_3.tick();
+                bush_boi_4.tick();
+                bush_boi_5.tick();
+                bush_boi_6.tick();
+                bush_boi_7.tick();
+                bush_boi_8.tick();
+                bush_boi_9.tick();
+                bush_boi_10.tick();
+                bush_boi_11.tick();
+                bush_boi_12.tick();
+                bush_boi_13.tick();
+                bush_boi_14.tick();
+
+                // spoopy ghosters
+                enemy_ghost_0.tick();
+                enemy_ghost_1.tick();
+                enemy_ghost_2.tick();
+                enemy_ghost_3.tick();
+                enemy_ghost_4.tick();
+                enemy_ghost_5.tick();
+                
+                // sussy vase
+                sussy_vase_0.tick();
+                sussy_vase_1.tick();
+                sussy_vase_2.tick();
+                sussy_vase_3.tick();
+                sussy_vase_4.tick();
+                sussy_vase_5.tick();
+                sussy_vase_6.tick();
 
                 if (player.am_attacking() == true) {
-                    red_slime.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type());
+                    //red slimes
+                    red_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_0.give_health(), red_slime_0.give_x(), red_slime_0.give_y());
+                    red_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_1.give_health(), red_slime_1.give_x(), red_slime_1.give_y());
+                    red_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_2.give_health(), red_slime_2.give_x(), red_slime_2.give_y());
+                    red_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_3.give_health(), red_slime_3.give_x(), red_slime_3.give_y());
+                    red_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_4.give_health(), red_slime_4.give_x(), red_slime_4.give_y());
+                    red_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_5.give_health(), red_slime_5.give_x(), red_slime_5.give_y());
+                    red_slime_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_6.give_health(), red_slime_6.give_x(), red_slime_6.give_y());
+                    red_slime_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_7.give_health(), red_slime_7.give_x(), red_slime_7.give_y());
+                    red_slime_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_8.give_health(), red_slime_8.give_x(), red_slime_8.give_y());
+                    red_slime_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_9.give_health(), red_slime_9.give_x(), red_slime_9.give_y());
+
+                    //commpers the slimington
+
+                    chompy_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_0.give_health(), chompy_slime_0.give_x(), chompy_slime_0.give_y());
+                    chompy_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_1.give_health(), chompy_slime_1.give_x(), chompy_slime_1.give_y());
+                    chompy_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_2.give_health(), chompy_slime_2.give_x(), chompy_slime_2.give_y());
+                    chompy_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_3.give_health(), chompy_slime_3.give_x(), chompy_slime_3.give_y());
+                    chompy_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_4.give_health(), chompy_slime_4.give_x(), chompy_slime_4.give_y());
+                    chompy_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_5.give_health(), chompy_slime_5.give_x(), chompy_slime_5.give_y());
+                    chompy_slime_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_6.give_health(), chompy_slime_6.give_x(), chompy_slime_6.give_y());
+                    chompy_slime_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_7.give_health(), chompy_slime_7.give_x(), chompy_slime_7.give_y());
+                    chompy_slime_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_8.give_health(), chompy_slime_8.give_x(), chompy_slime_8.give_y());
+                    chompy_slime_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_9.give_health(), chompy_slime_9.give_x(), chompy_slime_9.give_y());
+                    chompy_slime_10.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_10.give_health(), chompy_slime_10.give_x(), chompy_slime_10.give_y());
+
+                    // blooper the bluey slime
+
+                    blue_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_0.give_health(), blue_slime_0.give_x(), blue_slime_0.give_y());
+                    blue_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_1.give_health(), blue_slime_1.give_x(), blue_slime_1.give_y());
+                    blue_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_2.give_health(), blue_slime_2.give_x(), blue_slime_2.give_y());
+                    blue_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_3.give_health(), blue_slime_3.give_x(), blue_slime_3.give_y());
+
+                    // icey the spikey slime
+
+                    ice_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_0.give_health(), ice_slime_0.give_x(), ice_slime_0.give_y());
+                    ice_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_1.give_health(), ice_slime_1.give_x(), ice_slime_1.give_y());
+                    ice_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_2.give_health(), ice_slime_2.give_x(), ice_slime_2.give_y());
+                    ice_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_3.give_health(), ice_slime_3.give_x(), ice_slime_3.give_y());
+                    ice_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_4.give_health(), ice_slime_4.give_x(), ice_slime_4.give_y());
+                    ice_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_5.give_health(), ice_slime_5.give_x(), ice_slime_5.give_y());
+
+                    // bushy bois be dying
+                    bush_boi_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_0.give_health(), bush_boi_0.give_x(), bush_boi_0.give_y());
+                    bush_boi_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_1.give_health(), bush_boi_1.give_x(), bush_boi_1.give_y());
+                    bush_boi_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_2.give_health(), bush_boi_2.give_x(), bush_boi_2.give_y());
+                    bush_boi_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_3.give_health(), bush_boi_3.give_x(), bush_boi_3.give_y());
+                    bush_boi_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_4.give_health(), bush_boi_4.give_x(), bush_boi_4.give_y());
+                    bush_boi_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_5.give_health(), bush_boi_5.give_x(), bush_boi_5.give_y());
+                    bush_boi_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_6.give_health(), bush_boi_6.give_x(), bush_boi_6.give_y());
+                    bush_boi_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_7.give_health(), bush_boi_7.give_x(), bush_boi_7.give_y());
+                    bush_boi_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_8.give_health(), bush_boi_8.give_x(), bush_boi_8.give_y());
+                    bush_boi_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_9.give_health(), bush_boi_9.give_x(), bush_boi_9.give_y());
+                    bush_boi_10.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_10.give_health(), bush_boi_10.give_x(), bush_boi_10.give_y());
+                    bush_boi_11.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_11.give_health(), bush_boi_11.give_x(), bush_boi_11.give_y());
+                    bush_boi_12.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_12.give_health(), bush_boi_12.give_x(), bush_boi_12.give_y());
+                    bush_boi_13.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_13.give_health(), bush_boi_13.give_x(), bush_boi_13.give_y());
+                    bush_boi_14.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_14.give_health(), bush_boi_14.give_x(), bush_boi_14.give_y());
+                    
+                    // spoopy ghost
+                    enemy_ghost_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_0.give_health(), enemy_ghost_0.give_x(), enemy_ghost_0.give_y());
+                    enemy_ghost_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_1.give_health(), enemy_ghost_1.give_x(), enemy_ghost_1.give_y());
+                    enemy_ghost_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_2.give_health(), enemy_ghost_2.give_x(), enemy_ghost_2.give_y());
+                    enemy_ghost_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_3.give_health(), enemy_ghost_3.give_x(), enemy_ghost_3.give_y());
+                    enemy_ghost_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_4.give_health(), enemy_ghost_4.give_x(), enemy_ghost_4.give_y());
+                    enemy_ghost_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_5.give_health(), enemy_ghost_5.give_x(), enemy_ghost_5.give_y());
+                    
+                    // sussy vase
+                    sussy_vase_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_0.give_health(), sussy_vase_0.give_x(), sussy_vase_0.give_y());
+                    sussy_vase_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_1.give_health(), sussy_vase_1.give_x(), sussy_vase_1.give_y());
+                    sussy_vase_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_2.give_health(), sussy_vase_2.give_x(), sussy_vase_2.give_y());
+                    sussy_vase_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_3.give_health(), sussy_vase_3.give_x(), sussy_vase_3.give_y());
+                    sussy_vase_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_4.give_health(), sussy_vase_4.give_x(), sussy_vase_4.give_y());
+                    sussy_vase_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_5.give_health(), sussy_vase_5.give_x(), sussy_vase_5.give_y());
+                    sussy_vase_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_6.give_health(), sussy_vase_6.give_x(), sussy_vase_6.give_y());
                 }
-                /*
-                for (Red_Slime boi : bad_Red_slimes) {
-                    boi.tick();
-                }
-                
-                
-                for (Chompy_Slime boi : bad_Chompy_slimes) {
-                    boi.tick();
-                }
-                for (Enemy_Ghost boi : bad_Enemy_ghost) {
-                    boi.tick();
-                }
-                for (Bush_Boi boi : bad_Bush_boi) {
-                    boi.tick();
-                }
-                for (Sussy_Vase boi : bad_Sussy_vase) {
-                    boi.tick();
-                }
-                */
-                /*
-                
-                for (Creature* boi : bad_bois) {
-                    boi->tick();
-                }
-                */
-                /*
-                for (Creature* boi : bad_bois) {
-                    if (player.am_attacking() == true) {
-                        boi->attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type());
-                    }
-                }
-                */
             }
            
             //console_log(std::string("[INFO]: Player on tile: ") + std::to_string(nmap.tile_at(*player.get_position_x(), *player.get_position_y())));

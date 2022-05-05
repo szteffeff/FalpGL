@@ -5047,7 +5047,7 @@
   <object id="567" gid="353" x="-792" y="-7448" width="256" height="256"/>
   <object id="568" gid="353" x="-920" y="-6520" width="256" height="256"/>
   <object id="569" gid="353" x="-1824" y="-6952" width="256" height="256"/>
-  <object id="570" gid="353" x="-1482" y="-8420" width="256" height="256"/>
+  <object id="570" gid="353" x="-1477.33" y="-8449.33" width="256" height="256"/>
   <object id="571" gid="353" x="-3272" y="-7880" width="256" height="256"/>
   <object id="572" gid="353" x="-2757.45" y="-8939.76" width="256" height="256"/>
   <object id="573" gid="353" x="-1384" y="-7608" width="256" height="256"/>
@@ -5312,7 +5312,6 @@
     <property name="NPC" value="Del Libra"/>
    </properties>
   </object>
-  <object id="877" gid="160" x="-1434" y="-8528" width="32" height="32"/>
   <object id="880" gid="357" x="1012.5" y="-9258.83" width="36" height="72.5">
    <properties>
     <property name="NPC" value="Claire"/>

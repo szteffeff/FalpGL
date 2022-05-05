@@ -29,6 +29,18 @@
     "animation_count": 1,
     "animation_names": [ "Red_Slime" ]
   },
+  "Blue_Slime": {
+    "name": "Blue_Slime",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Blue_Slime" ]
+  },
+  "Ice_Slime": {
+    "name": "Ice_Slime",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Ice_Slime" ]
+  },
   "Enemy_Ghost": {
     "name": "Enemy_Ghost",
     "size": [ 128, 128 ],
@@ -116,8 +128,14 @@
   "Clair_Of_Cavern": {
     "name": "Clair_Of_Cavern",
     "size": [ 128, 128 ],
-    "animation_count": 2,
-    "animation_names": [ "Clair_Of_Cavern_idle", "Clair_Of_Cavern_dead" ]
+    "animation_count": 1,
+    "animation_names": [ "Clair_Of_Cavern_idle" ]
+  },
+  "Destus_Of_Cavern": {
+    "name": "Destus_Of_Cavern",
+    "size": [ 128, 128 ],
+    "animation_count": 1,
+    "animation_names": [ "Destus_Of_Cavern" ]
   },
   "Del_Ibra_of_Hillsby": {
     "name": "Del_Ibra_of_Hillsby",
@@ -142,5 +160,11 @@
     "size": [ 128, 128 ],
     "animation_count": 1,
     "animation_names": [ "Maban_of_Undermount_idle" ]
+  },
+  "Campfire": {
+    "name": "Campfire",
+    "size": [ 64, 64 ],
+    "animation_count": 1,
+    "animation_names": [ "Campfire" ]
   }
 }

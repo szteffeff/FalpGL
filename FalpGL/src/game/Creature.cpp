@@ -77,16 +77,16 @@ void Creature::walk(float direction, float magnitude)
 	momentum[1] += round(dy);
 }
 
-void Creature::attacked(float x, float y, float radius, int attack)
+void Creature::attacked(float x, float y, float radius, int attack, float* health, float* monster_x, float* monster_y)
 {
-	if (sqrt(pow(abs(position[0] - x), 2) + pow(abs(position[0] - y), 2)) < radius) {
-		if (attack == 0) {health -= 14;}
-		else if (attack == 1) { health -= 9; }
-		else if (attack == 2) { health -= 12; }
-		else if (attack == 3) { health -= 10; }
-		else if (attack == 4) { health -= 35; }
-		else if (attack == 5) { health -= 15; }
-		else if (attack == 6) { health -= 25; }
+	if (sqrt(pow(abs(*monster_x - x), 2) + pow(abs(*monster_y - y), 2)) < radius) {
+		if (attack == 0) {*health -= 14;}
+		else if (attack == 1) { *health -= 9; }
+		else if (attack == 2) { *health -= 12; }
+		else if (attack == 3) { *health -= 10; }
+		else if (attack == 4) { *health -= 35; }
+		else if (attack == 5) { *health -= 15; }
+		else if (attack == 6) { *health -= 25; }
 	}
 }
 
@@ -406,7 +406,7 @@ void Player::tick()
 		Player_arrow.teleport(position[0], position[1]);
 		dmg_control = 0;
 		std::cout << "Yeet thy arrow" << std::endl;
-		float direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		float direction = atan2(*curser_y , *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		Player_arrow.rotate(-direction + glm::pi<float>()*0.5, Player_arrow.center(), true);
 		dx = (float)(cos(direction)) * 3;
@@ -453,7 +453,7 @@ void Player::tick()
 	if (light_dagger == true and not dagger_start_L and attacking == false and Stamina >= 10) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_dagger.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1]- position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		Player_dagger.rotate(-direction + glm::pi<float>() * 0.5, Player_dagger.center(), true);
@@ -494,7 +494,7 @@ void Player::tick()
 		attacking = true;
 		speacial_move_dagger = rand() % 10;
 		Player_dagger.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		direction += glm::pi<float>() / 2;
@@ -553,7 +553,7 @@ void Player::tick()
 	if (light_axe == true and not axe_start and attacking == false and Stamina >= 20) { //makes direction for axe to point in
 		attacking = true;
 		Player_Shatter_axe.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		Player_Shatter_axe.rotate(-direction + glm::pi<float>() * 0.5, Player_Shatter_axe.center(), true);
 		dx = (float)(cos(direction)) * 2;
@@ -593,7 +593,7 @@ void Player::tick()
 		attacking = true;
 		speacial_move_axe = rand() % 10;
 		Player_Shatter_axe.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		direction += glm::pi<float>() / 2;
@@ -653,7 +653,7 @@ void Player::tick()
 	if (light_spear == true and not spear_start_L and attacking == false and Stamina >= 20) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
@@ -692,7 +692,7 @@ void Player::tick()
 	if (heavy_spear == true and not spear_start_H and attacking == false and Stamina >= 30) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
-		direction = atan2(*curser_y - position[1], *curser_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		std::cout << direction << std::endl;
 		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
@@ -949,6 +949,28 @@ void Red_Slime::Get_player_position(float* x, float* y)
 	player_position_y = y;
 }
 
+float* Red_Slime::give_health()
+{
+	return &Health;
+}
+
+float* Red_Slime::give_x()
+{
+	return &position[0];
+}
+
+float* Red_Slime::give_y()
+{
+	return &position[1];
+}
+
+void Red_Slime::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	Red_slime.teleport(x, y);
+}
+
 void Red_Slime::tick()
 {
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
@@ -1009,10 +1031,10 @@ void Red_Slime::tick()
 			}
 		}
 	}
-	if (health <= 0) {
-		position[0] = 1000;
-		position[1] = 1000;
-		Red_slime.teleport(1000, 1000);
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		Red_slime.teleport(100000, 100000);
 	}
 }
 
@@ -1029,6 +1051,28 @@ void Enemy_Ghost::Get_player_position(float* x, float* y)
 	player_position_y = y;
 }
 
+float* Enemy_Ghost::give_health()
+{
+	return &Health;
+}
+
+float* Enemy_Ghost::give_x()
+{
+	return &position[0];
+}
+
+float* Enemy_Ghost::give_y()
+{
+	return &position[0];
+}
+
+void Enemy_Ghost::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	Enemy_ghost.teleport(x, y);
+}
+
 void Enemy_Ghost::tick()
 {
 	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
@@ -1041,8 +1085,7 @@ void Enemy_Ghost::tick()
 		Enemy_ghost.set_animation(0);
 	}
 
-	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500 )
-
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500) {
 		if (frames++ == 60 * 12) {
 			int random = 1 + (rand() % 2);
 
@@ -1055,40 +1098,41 @@ void Enemy_Ghost::tick()
 				Ghost_move_sound.Play_sound(Ghost_move);
 				teleporting += 1;
 				pewpew = false;
-				
+
 			}
 			frames = 0;
 		}
 
-	if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
-		Enemy_ghost.set_animation(0);
-		Ghost_move_sound.Stop_sound(Ghost_move);
-		teleporting = 0;
-	}
-
-	if (teleporting > 0) {
-		if (tick_state.anim_state == animation_state::ended) {
-			Enemy_ghost.set_animation(2);
-			position[0] = *player_position_x + (rand() % 1000) - 500;
-			position[1] = *player_position_y + (rand() % 1000) - 500;
-			std::cout << "moving" << std::endl;
-			Enemy_ghost.teleport(position[0], position[1]);
-			teleporting++;
+		if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
+			Enemy_ghost.set_animation(0);
+			Ghost_move_sound.Stop_sound(Ghost_move);
+			teleporting = 0;
 		}
-	}
 
-	if (frames_magic++ == 60 * 6 and pewpew == false) {
-		bullet_lifespan = 60 * 4;
-		Wizard_pink_bullet.set_animation(0);
-		Wizard_pink_bullet.teleport(position[0], position[1]);
-		dmg_control = 0;
-		std::cout << "Yeet thy bullet" << std::endl;
-		frames_magic = 0;
-		float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
-		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
-		dx = (float)(cos(direction)) * 3;
-		dy = (float)(sin(direction)) * 3;
+		if (teleporting > 0) {
+			if (tick_state.anim_state == animation_state::ended) {
+				Enemy_ghost.set_animation(2);
+				position[0] = *player_position_x + (rand() % 1000) - 500;
+				position[1] = *player_position_y + (rand() % 1000) - 500;
+				std::cout << "moving" << std::endl;
+				Enemy_ghost.teleport(position[0], position[1]);
+				teleporting++;
+			}
+		}
+
+		if (frames_magic++ == 60 * 6 and pewpew == false) {
+			bullet_lifespan = 60 * 4;
+			Wizard_pink_bullet.set_animation(0);
+			Wizard_pink_bullet.teleport(position[0], position[1]);
+			dmg_control = 0;
+			std::cout << "Yeet thy bullet" << std::endl;
+			frames_magic = 0;
+			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+			if (direction < 0) { direction += 2.0f * 3.14159f; }
+			std::cout << direction << std::endl;
+			dx = (float)(cos(direction)) * 3;
+			dy = (float)(sin(direction)) * 3;
+		}
 	}
 	bullet_lifespan -= 1;
 	Wizard_pink_bullet.translate(dx, dy);
@@ -1115,15 +1159,21 @@ void Enemy_Ghost::tick()
 		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(100000, 10000);
 	}
+
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		Enemy_ghost.teleport(100000, 100000);
+	}
 }
 
 Garfield::Garfield(VertexBuffer* vb)
 	: garfield(vb, loader->entities["Garfield"]), momentum(), position()
 {
 	garfield.set_animation(0);
-	garfield.teleport(-100, -100);
-	position[0] = -100;
-	position[1] = -100;
+	garfield.teleport(306, -465);
+	position[0] = 306;
+	position[1] = -465;
 }
 void Garfield::Get_player_position(float* x, float* y)
 {
@@ -1166,6 +1216,28 @@ void Bush_Boi::Get_player_position(float* x, float* y)
 {
 	player_position_x = x;
 	player_position_y = y;
+}
+
+float* Bush_Boi::give_health()
+{
+	return &Health;
+}
+
+float* Bush_Boi::give_x()
+{
+	return &position[0];
+}
+
+float* Bush_Boi::give_y()
+{
+	return &position[1];
+}
+
+void Bush_Boi::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	Bush_boi.teleport(x, y);
 }
 
 void Bush_Boi::tick()
@@ -1270,6 +1342,11 @@ void Bush_Boi::tick()
 		momentum[1] = 0;
 
 	}
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		Bush_boi.teleport(100000, 100000);
+	}
 }
 
 Chompy_Slime::Chompy_Slime(VertexBuffer* vb)
@@ -1282,6 +1359,28 @@ void Chompy_Slime::Get_player_position(float* x, float* y)
 {
 	player_position_x = x;
 	player_position_y = y;
+}
+
+float* Chompy_Slime::give_health()
+{
+	return &Health;
+}
+
+float* Chompy_Slime::give_x()
+{
+	return &position[0];
+}
+
+float* Chompy_Slime::give_y()
+{
+	return &position[1];
+}
+
+void Chompy_Slime::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	Chompy_slime.teleport(x, y);
 }
 
 void Chompy_Slime::tick()
@@ -1344,6 +1443,11 @@ void Chompy_Slime::tick()
 			bops += 1;
 		}
 	}
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		Chompy_slime.teleport(100000, 100000);
+	}
 }
 
 Sussy_Vase::Sussy_Vase(VertexBuffer* vb)
@@ -1362,6 +1466,28 @@ void Sussy_Vase::Get_player_position(float* x, float* y)
 {
 	player_position_x = x;
 	player_position_y = y;
+}
+
+float* Sussy_Vase::give_health()
+{
+	return &Health;
+}
+
+float* Sussy_Vase::give_x()
+{
+	return &position[0];
+}
+
+float* Sussy_Vase::give_y()
+{
+	return &position[1];
+}
+
+void Sussy_Vase::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	Sussy_vase.teleport(x, y);
 }
 
 void Sussy_Vase::tick()
@@ -1419,15 +1545,20 @@ void Sussy_Vase::tick()
 		Wizard_pink_bullet.set_animation(0);
 		Wizard_pink_bullet.teleport(100000, 10000);
 	}
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		Sussy_vase.teleport(100000, 100000);
+	}
 }
 
 Cow::Cow(VertexBuffer* vb)
 	: cow(vb, loader->entities["Cow"]), momentum(), position()
 {
 	cow.set_animation(0);
-	cow.teleport(-100, -300);
-	position[0] = -100;
-	position[1] = -300;
+	cow.teleport(-2780, 6005.67);
+	position[0] = -2810;
+	position[1] = -6005.67;
 }
 
 void Cow::Get_player_position(float* x, float* y)
@@ -1463,9 +1594,9 @@ Perry::Perry(VertexBuffer* vb)
 	: perry(vb, loader->entities["Perry"]), momentum(), position()
 {
 	perry.set_animation(0);
-	perry.teleport(-100, -500);
-	position[0] = -100;
-	position[1] = -500;
+	perry.teleport(-7110.5, 9406.5);
+	position[0] = -7110.5;
+	position[1] = 9406.5;
 }
 
 void Perry::Get_player_position(float* x, float* y)
@@ -1538,9 +1669,9 @@ Clair_Of_Cavern::Clair_Of_Cavern(VertexBuffer* vb)
 	: clair_of_cavern(vb, loader->entities["Clair_Of_Cavern"]), momentum(), position()
 {
 	//clair_of_cavern.set_animation(0);
-	clair_of_cavern.teleport(0, 200);
-	position[0] = 0;
-	position[1] = 200;
+	clair_of_cavern.teleport(1711, 2995);
+	position[0] = 1711;
+	position[1] = 2995;
 	
 }
 
@@ -1571,9 +1702,9 @@ Del_Ibra_of_Hillsby::Del_Ibra_of_Hillsby(VertexBuffer* vb)
 	: del_ibra_of_hillsby(vb, loader->entities["Del_Ibra_of_Hillsby"]), momentum(), position()
 {
 	//del_ibra_of_hillsby.set_animation(0);
-	del_ibra_of_hillsby.teleport(-200, 200);
-	position[0] = -200;
-	position[1] = 200;
+	del_ibra_of_hillsby.teleport(-6869.5, 4256.5);
+	position[0] = -6869.5;
+	position[1] = 4256.5;
 }
 
 void Del_Ibra_of_Hillsby::Get_player_position(float* x, float* y)
@@ -1604,9 +1735,9 @@ Eloah_of_Minlet::Eloah_of_Minlet(VertexBuffer* vb)
 	: eloah_of_minlet(vb, loader->entities["Eloah_of_Minlet"]), momentum(), position()
 {
 	//eloah_of_minlet.set_animation(0);
-	eloah_of_minlet.teleport(-400, 200);
-	position[0] = -400;
-	position[1] = 200;
+	eloah_of_minlet.teleport(213, -568);
+	position[0] = 213;
+	position[1] = -568;
 }
 
 void Eloah_of_Minlet::Get_player_position(float* x, float* y)
@@ -1636,9 +1767,9 @@ Felix_of_Festria::Felix_of_Festria(VertexBuffer* vb)
 	: felix_of_festria(vb, loader->entities["Felix_of_Festria"]), momentum(), position()
 {
 	//felix_of_festria.set_animation(0);
-	felix_of_festria.teleport(-600, 200);
-	position[0] = -600;
-	position[1] = 200;
+	felix_of_festria.teleport(-4152.67, 3495.67);
+	position[0] = -4152.67;
+	position[1] = 3495.67;
 }
 
 void Felix_of_Festria::Get_player_position(float* x, float* y)
@@ -1668,9 +1799,9 @@ Maban_of_Undermount::Maban_of_Undermount(VertexBuffer* vb)
 	: maban_of_undermount(vb, loader->entities["Maban_of_Undermount"]), momentum(), position()
 {
 	//maban_of_undermount.set_animation(0);
-	maban_of_undermount.teleport(-800, 200);
-	position[0] = -800;
-	position[1] = 200;
+	maban_of_undermount.teleport(-1966, 8428);
+	position[0] = -1966;
+	position[1] = 8428;
 }
 
 void Maban_of_Undermount::Get_player_position(float* x, float* y)
@@ -1693,5 +1824,254 @@ void Maban_of_Undermount::tick()
 		position[0] = *player_position_x + (rand() % 1000) - 500;
 		position[1] = *player_position_y + (rand() % 1000) - 500;
 		maban_of_undermount.teleport(position[0], position[1]);
+	}
+}
+
+Campfire::Campfire(VertexBuffer* vb)
+	: campfire(vb, loader->entities["Campfire"])
+{
+}
+
+void Campfire::tick()
+{
+	campfire.tick();
+}
+
+void Campfire::teleport(float x, float y)
+{
+	campfire.teleport(x, y);
+}
+
+Blue_Slime::Blue_Slime(VertexBuffer* vb)
+	: blue_slime(vb, loader->entities["Blue_Slime"]), momentum(), position()
+{
+	blue_slime.set_animation(0);
+}
+
+void Blue_Slime::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+float* Blue_Slime::give_health()
+{
+	return &Health;
+}
+
+float* Blue_Slime::give_x()
+{
+	return &position[0];
+}
+
+float* Blue_Slime::give_y()
+{
+	return &position[1];
+}
+
+void Blue_Slime::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	blue_slime.teleport(x, y);
+}
+
+void Blue_Slime::tick()
+{
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	entity_return tick_state = blue_slime.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500) {
+		if (tick_state.anim_state == animation_state::advanced_frame)
+		{
+			frame++;
+			if (frame > 3)
+				frame = 0;
+		}
+
+		if (frame == 2)
+		{
+			if (frame == 2)
+			{
+				float magnitude = 2;
+				if (bops < 3) {
+					if (horizontal == true) { momentum[0] += magnitude; }
+					else if (horizontal == false) { momentum[0] += -magnitude; }
+
+					if (vertical == false) { momentum[1] += -magnitude; }
+					else if (vertical == true) { momentum[1] += magnitude; }
+
+					dmg_control = 0;
+				}
+				else if (bops > 3) {
+					magnitude = 2;
+					if (horizontal == true) { momentum[0] += -magnitude; }
+					else if (horizontal == false) { momentum[0] += magnitude; }
+
+					if (vertical == false) { momentum[1] += magnitude; }
+					else if (vertical == true) { momentum[1] += -magnitude; }
+					bops_frame += 1;
+				}
+				if (bops_frame > 60 * 2) {
+					bops_frame = 0;
+					bops = 0;
+				}
+
+				position[0] += round(momentum[0]);
+				position[1] += round(momentum[1]);
+
+				blue_slime.translate(round(momentum[0]), round(momentum[1]));
+
+				momentum[0] = 0;
+				momentum[1] = 0;
+			}
+
+			if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+				if (dmg_control < 10) {
+					*player_health -= 1;
+					dmg_control++;
+				}
+				bops += 1;
+			}
+		}
+	}
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		blue_slime.teleport(100000, 100000);
+	}
+}
+
+Ice_Slime::Ice_Slime(VertexBuffer* vb)
+	: ice_slime(vb, loader->entities["Ice_Slime"]), momentum(), position()
+{
+	ice_slime.set_animation(0);
+}
+
+void Ice_Slime::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+float* Ice_Slime::give_health()
+{
+	return &Health;
+}
+
+float* Ice_Slime::give_x()
+{
+	return &position[0];
+}
+
+float* Ice_Slime::give_y()
+{
+	return &position[1];
+}
+
+void Ice_Slime::teleport(float x, float y)
+{
+	position[0] = x;
+	position[1] = y;
+	ice_slime.teleport(x, y);
+}
+
+void Ice_Slime::tick()
+{
+	bool horizontal = Player_Detection_simple_horizontal(position[0], player_position_x);
+	bool vertical = Player_Detectoin_simple_vertical(position[1], player_position_y);
+	entity_return tick_state = ice_slime.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 500) {
+		if (tick_state.anim_state == animation_state::advanced_frame)
+		{
+			frame++;
+			if (frame > 3)
+				frame = 0;
+		}
+
+		if (frame == 2)
+		{
+			if (frame == 2)
+			{
+				float magnitude = 2;
+				if (bops < 3) {
+					if (horizontal == true) { momentum[0] += magnitude; }
+					else if (horizontal == false) { momentum[0] += -magnitude; }
+
+					if (vertical == false) { momentum[1] += -magnitude; }
+					else if (vertical == true) { momentum[1] += magnitude; }
+
+					dmg_control = 0;
+				}
+				else if (bops > 3) {
+					magnitude = 2;
+					if (horizontal == true) { momentum[0] += -magnitude; }
+					else if (horizontal == false) { momentum[0] += magnitude; }
+
+					if (vertical == false) { momentum[1] += magnitude; }
+					else if (vertical == true) { momentum[1] += -magnitude; }
+					bops_frame += 1;
+				}
+				if (bops_frame > 60 * 2) {
+					bops_frame = 0;
+					bops = 0;
+				}
+
+				position[0] += round(momentum[0]);
+				position[1] += round(momentum[1]);
+
+				ice_slime.translate(round(momentum[0]), round(momentum[1]));
+
+				momentum[0] = 0;
+				momentum[1] = 0;
+			}
+
+			if (abs(position[0] - *player_position_x) < 40 and abs(position[1] - *player_position_y) < 40) {
+				if (dmg_control < 10) {
+					*player_health -= 1;
+					dmg_control++;
+				}
+				bops += 1;
+			}
+		}
+	}
+	if (Health <= 0) {
+		position[0] = 100000;
+		position[1] = 100000;
+		ice_slime.teleport(100000, 100000);
+	}
+}
+
+Destus_Of_Cavern::Destus_Of_Cavern(VertexBuffer* vb)
+	: destus_of_cavern(vb, loader->entities["Destus_Of_Cavern"]), momentum(), position()
+{
+	destus_of_cavern.teleport(349, 9137);
+	position[0] = 349;
+	position[1] = 9137;
+
+}
+
+void Destus_Of_Cavern::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Destus_Of_Cavern::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+
+void Destus_Of_Cavern::tick()
+{
+	destus_of_cavern.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		position[0] = *player_position_x + (rand() % 1000) - 500;
+		position[1] = *player_position_y + (rand() % 1000) - 500;
+		destus_of_cavern.teleport(position[0], position[1]);
 	}
 }
