@@ -102,3 +102,4 @@ void presentaion(Project capstone) {
 
 	std::cout << std::string(text).append("\n").c_str();
 }
+
