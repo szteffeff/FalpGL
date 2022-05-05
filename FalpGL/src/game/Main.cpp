@@ -19,6 +19,8 @@
 #include "NewMap.h"
 #include "../renderer/Log.h"
 #include "SFX.h"
+#include "Presentation.h"
+
 
 std::string get_current_dir() {
     void* v; //stops unused return value warning
