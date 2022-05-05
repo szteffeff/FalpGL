@@ -416,6 +416,7 @@ int main(void)
 
         player.set_active_map(&nmap);
 
+        ui.create_text("fsdfs", 0, 0);
 
         glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -542,6 +543,7 @@ int main(void)
             /* Draw processed image and UI */
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix);
+            ui.draw_text(projection_matrix * *player.get_trans_matrix());
 
             if (pause == true) /*variable to test is paused*/
             {

@@ -8738,13 +8738,13 @@
                 }, 
                 {
                  "gid":356,
-                 "height":502,
+                 "height":175,
                  "id":904,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":468,
+                 "width":609,
                  "x":-2395,
                  "y":-8407
                 }, 
@@ -8962,7 +8962,7 @@
  "nextobjectid":945,
  "orientation":"orthogonal",
  "renderorder":"left-up",
- "tiledversion":"1.8.1",
+ "tiledversion":"1.8.2",
  "tileheight":32,
  "tilesets":[
         {
