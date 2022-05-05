@@ -1,0 +1,14 @@
+{ "columns":26,
+ "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/drive-download-20220504T164651Z-001\/good ones.png",
+ "imageheight":8,
+ "imagewidth":208,
+ "margin":0,
+ "name":"good-text",
+ "spacing":0,
+ "tilecount":26,
+ "tiledversion":"1.8.2",
+ "tileheight":8,
+ "tilewidth":8,
+ "type":"tileset",
+ "version":"1.8"
+}

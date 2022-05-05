@@ -271,6 +271,11 @@ Player::Player(VertexBuffer* vb)
 	Player_dagger.teleport(300, -100);
 	Player_spear.teleport(400, -100);
 	Player_Shatter_axe.teleport(500, -100);
+
+	m_player.teleport(1215, -1268);
+	position[0] += 1215;
+	position[1] += -1268;
+	player_transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position[0], -position[1], 0.0f));
 }
 
 void Player::walk(float direction, float magnitude)
@@ -330,7 +335,7 @@ void Player::tick()
 		}
 		talk_frames -= 1;
 
-		if (active_map->collision_circle(position[0] + momentum[0], position[1] + momentum[1] - 47, 100))
+		if (active_map->collision_at(position[0] + momentum[0], position[1] + momentum[1] - 47))
 		{} /* If collision, do nothing */
 		else
 		{
