@@ -172,27 +172,8 @@ int main(void)
     GLCall(glEnable(GL_MULTISAMPLE));
 
     /* glfw functions */
-    std::string names[18] = {
-        "The Small Lands",
-        "A Hobbit's Journey",
-        "Splund",
-        "Stop the Dungeon",
-        "Catland",
-        "Evergrow",
-        "Unnamed Dungeon Game",
-        "Spooklands",
-        "Nowhere",
-        "Gloom",
-        "Live",
-        "Maghide",
-        "Inside the Dungeon",
-        "Don't Die",
-        "Bruh",
-        "Archworks",
-        "A Dungeon Story",
-        "Dungeon Dive"
-    };
-    glfwSetWindowTitle(window, names[(rand() % 18)].c_str());
+
+    glfwSetWindowTitle(window, "RedCape");
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     glfwSetWindowSize(window, window_width, window_height);
     glfwSetKeyCallback(window, key_callback);
