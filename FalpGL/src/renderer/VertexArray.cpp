@@ -5,12 +5,12 @@
 VertexArray::VertexArray()
 {
 	GLCall(glGenVertexArrays(1, &m_renderer_id));
-	console_log("[INFO] Created vertex array: " + std::to_string(m_renderer_id));
+	console_log("[OPENGL]: Created vertex array: " + std::to_string(m_renderer_id));
 }
 
 VertexArray::~VertexArray()
 {
-	console_log("[INFO] Destroyed vertex array: " + std::to_string(m_renderer_id));
+	console_log("[OPENGL]: Destroyed vertex array: " + std::to_string(m_renderer_id));
 	GLCall(glDeleteVertexArrays(1, &m_renderer_id));
 }
 

@@ -11,5 +11,32 @@ void console_log(std::string message)
 		started = true;
 	}
 
+	std::cout << "\033[0m";
+
+	if (message.find("[INFO]") != std::string::npos)
+	{
+		std::cout << "\033[33m";
+	}
+
+	if (message.find("[SHADER]") != std::string::npos)
+	{
+		std::cout << "\033[36m";
+	}
+
+	if (message.find("[SOUND]") != std::string::npos)
+	{
+		std::cout << "\033[35m";
+	}
+
+	if (message.find("[OPENGL]") != std::string::npos)
+	{
+		std::cout << "\033[96m";
+	}
+
+	if (message.find("]!") != std::string::npos)
+	{
+		std::cout << "\033[31m";
+	}
+
 	std::cout << "[" << std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch() - start_time) << "]" << message << "\n";
 }
