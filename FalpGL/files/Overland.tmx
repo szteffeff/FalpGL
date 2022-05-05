@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="945">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" infinite="1" backgroundcolor="#acada1" nextlayerid="3" nextobjectid="945">
  <editorsettings>
   <chunksize width="64" height="64"/>
   <export target="../res/data/map3.json" format="json"/>
@@ -5341,7 +5341,7 @@
   </object>
   <object id="897" gid="325" x="-2273.33" y="-8313.82" width="64" height="128"/>
   <object id="898" gid="325" x="-2110.67" y="-8312.48" width="64" height="128"/>
-  <object id="904" gid="356" x="-2395" y="-8407" width="468" height="502"/>
+  <object id="904" gid="356" x="-2395" y="-8407" width="609" height="175"/>
   <object id="907" gid="324" x="53" y="-8449" width="64" height="128">
    <properties>
     <property name="SIGN" value="11"/>

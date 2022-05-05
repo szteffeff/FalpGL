@@ -425,7 +425,15 @@ void Tileset::create_atlas()
 	/* Keep track of where a tile is being drawn to */
 	float tex_coords[2] = { 0, 0 };
 
-	first_gid = tileset_json["firstgid"];
+	if (tileset_json.contains("firstgid"))
+	{
+		first_gid = tileset_json["firstgid"];
+	}
+	else
+	{
+		first_gid = 0;
+	}
+
 	int index = 0;
 
 	/* Create dummy tile to for id 0 */

@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\data\entities.json" />
+    <None Include="res\data\good-text.json" />
     <None Include="res\data\map.json" />
     <None Include="res\data\map2.json" />
     <None Include="res\data\map3.json" />
