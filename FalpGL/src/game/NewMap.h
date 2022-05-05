@@ -91,6 +91,7 @@ private:
 	Tileset set;
 
 	int map_height, map_width;
+	int origin_x, origin_y;
 
 	Decoration_Renderer dec_renderer;
 

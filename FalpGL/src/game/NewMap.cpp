@@ -39,6 +39,9 @@ New_Map::New_Map()
 		std::cout << "error parsing map json!\n";
 	}
 
+	origin_x = map_json["layers"][0]["startx"];
+	origin_y = -map_json["layers"][0]["starty"] - map_json["layers"][0]["height"];
+
 	/* Check if mpa has embedded tileset */
 	if (map_json["tilesets"][0].contains("source"))
 	{
@@ -189,8 +192,8 @@ void New_Map::draw_extras(glm::mat4 matrix)
 
 int New_Map::tile_at(float x, float y)
 {
-	x += (map_width * 32 * 64) / 2;
-	y += (map_height * 32 * 64) / 2;
+	x -= origin_x * 32;
+	y -= origin_y * 32;
 
 	int chunk_x = (int)ceil(x / (32 * 64)) - 1;
 	int chunk_y = (int)ceil(y / (32 * 64)) - 1;
@@ -198,8 +201,8 @@ int New_Map::tile_at(float x, float y)
 	int tile_x = 63 - (((chunk_x + 1) * 64) - ceil(x / 32));
 	int tile_y = 63 - (((chunk_y + 1) * 64) - ceil(y / 32));
 
-	//std::stringstream stream;
-	//stream << "[INFO]: Chunk:" << chunk_x << ", " << chunk_y << ". Tile: " << tile_x << ", " << tile_y << ".\n";
+	std::stringstream stream;
+	stream << "[INFO]: Chunk:" << chunk_x << ", " << chunk_y << ". Tile: " << tile_x << ", " << tile_y << ".\n";
 
 	//console_log(stream.str());
 
@@ -215,6 +218,8 @@ bool New_Map::collision_at(float x, float y)
 
 	if (local_x < 0.0f) { local_x += 32.0f; }
 	if (local_y < 0.0f) { local_y += 32.0f; }
+
+	//console_log(set[tile_at(x, y)].tile_name + " " + std::to_string(set[tile_at(x, y)].id) + " " + std::to_string(x) + ", " + std::to_string(y));
 
 	if (set[tile_at(x, y)].collides(local_x, local_y))
 	{
@@ -282,6 +287,11 @@ New_Map::~New_Map()
 }
 
 /* Chunk */
+
+Point Chunk::get_position() const
+{
+	return Point(position[0], position[1]);
+}
 
 Chunk::Chunk(Tileset& set, std::vector<int>& data, float position_x, float position_y, int size_x, int size_y)
 	: tileset(set), chunk_data(data), loaded(false)
