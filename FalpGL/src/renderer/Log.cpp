@@ -11,8 +11,6 @@ void console_log(std::string message)
 		started = true;
 	}
 
-	std::cout << "\033[0m";
-
 	if (message.find("[INFO]") != std::string::npos)
 	{
 		std::cout << "\033[33m";
@@ -38,5 +36,9 @@ void console_log(std::string message)
 		std::cout << "\033[31m";
 	}
 
-	std::cout << "[" << std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch() - start_time) << "]" << message << "\n";
+	std::cout << std::fixed;
+
+	std::cout << "[" << std::chrono::duration<float>(std::chrono::high_resolution_clock::now().time_since_epoch() - start_time).count() << "]" << message << "\n";
+
+	std::cout << "\033[0m";
 }
