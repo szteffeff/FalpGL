@@ -416,7 +416,11 @@ int main(void)
 
         player.set_active_map(&nmap);
 
-        ui.create_text("fsdfs", 0, 0);
+        ui.create_text("example\ntext", *player.get_position_x(), *player.get_position_y(), 60);
+        ui.create_text("example\ntext", *player.get_position_x(), *player.get_position_y() - 64, 120);
+
+        atlas_0.Bind(0);
+        atlas_1.Bind(1);
 
         glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -521,6 +525,8 @@ int main(void)
 
                 nmap.draw_extras(projection_matrix * *player.get_trans_matrix());
 
+                ui.draw_text(projection_matrix * *player.get_trans_matrix());
+
                 /* Setup chromatic aberration framebuffer */
                 c_framebuffer.bind();
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -543,7 +549,6 @@ int main(void)
             /* Draw processed image and UI */
             c_framebuffer.draw();
             interface_renderer.draw(projection_matrix);
-            ui.draw_text(projection_matrix * *player.get_trans_matrix());
 
             if (pause == true) /*variable to test is paused*/
             {

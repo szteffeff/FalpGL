@@ -514,6 +514,8 @@
     <None Include="res\shaders\decoration.shader" />
     <None Include="res\data\map3.json" />
     <None Include="res\data\good-text.json" />
+    <None Include="res\data\letters.json" />
+    <None Include="res\shaders\letter.shader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\data\animations.json" />

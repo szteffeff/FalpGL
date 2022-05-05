@@ -1,37 +1,45 @@
 #include "UI.h"
 
 
-Text::Text(std::string text, float x, float y, Tileset& set)
+Text::Text(std::string text, float x, float y, int time, Tileset& set)
+	: count(0), ttl(time)
 {
-	ttl = 5 * 60;
+
+	float original_x = round(x);
 
 	x = round(x);
 	y = round(y);
 
-	int size = 0;
 
 	for (int i = 0; i < text.size(); i++)
 	{
 
 		if (text[i] == *("\n"))
 		{
-			y -= 8;
+			y -= size + 4;
+			x = original_x;
 			continue;
 		}
 
-		Prototype_Tile letter = set[1];
+		if (text[i] == *(" "))
+		{
+			x += size;
+			continue;
+		}
+
+		Prototype_Tile letter = set[text[i] - 97];
 
 		vertex_data.push_back(x); // x
-		vertex_data.push_back(y - 8); // y
+		vertex_data.push_back(y - size); // y
 		vertex_data.push_back(letter.texture_coord[0]); // u
 		vertex_data.push_back(letter.texture_coord[1]); // v
 
-		vertex_data.push_back(x + 8); 
-		vertex_data.push_back(y - 8);
+		vertex_data.push_back(x + size); 
+		vertex_data.push_back(y - size);
 		vertex_data.push_back(letter.texture_coord[2]);
 		vertex_data.push_back(letter.texture_coord[3]);
 		
-		vertex_data.push_back(x + 8);
+		vertex_data.push_back(x + size);
 		vertex_data.push_back(y);
 		vertex_data.push_back(letter.texture_coord[4]);
 		vertex_data.push_back(letter.texture_coord[5]);
@@ -41,21 +49,22 @@ Text::Text(std::string text, float x, float y, Tileset& set)
 		vertex_data.push_back(letter.texture_coord[6]);
 		vertex_data.push_back(letter.texture_coord[7]);
 
-		x += 8;
+		x += size;
 
-		size++;
+		count++;
 	}
 
-	ib.init(size);
-	vb.init(size * 16 * sizeof(float));
+	ib.init(count);
+	vb.init(count * 16 * sizeof(float));
 
 	VertexBufferLayout vbl;
 	vbl.Push<float>(2);
 	vbl.Push<float>(2);
 
+	va.AddBuffer(vb, vbl);
+
 	vb.buffer_data(0, vertex_data.size() * sizeof(float), vertex_data.data());
 
-	va.AddBuffer(vb, vbl);
 }
 
 
@@ -65,24 +74,27 @@ void UserInterface::draw_text(glm::mat4 matrix)
 	glDisable(GL_DEPTH_TEST);
 
 	text_shader.Bind();
-	for (Text t : texts)
+	text_shader.SetUniform1i("u_Texture", 12);
+	text_shader.SetUniformMat4f("u_MVP", matrix);
+
+	for (Text* t : texts)
 	{
-		t.va.Bind();
-		t.ib.Bind();
-		glDrawElements(GL_TRIANGLES, t.ib.GetCount(), GL_UNSIGNED_BYTE, nullptr);
+		t->va.Bind();
+		t->ib.Bind();
+		glDrawElements(GL_TRIANGLES, t->ib.GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 	glEnable(GL_DEPTH_TEST);
 }
 
 
-void UserInterface::create_text(std::string text, float x, float y)
+void UserInterface::create_text(std::string text, float x, float y, int time)
 {
-	texts.emplace_back(text, x, y, text_set);
+	texts.emplace_back(new Text(text, x, y, time, text_set));
 }
 
 
 UserInterface::UserInterface(VertexBuffer* buffer)
-	: health_Bar(buffer), text_shader("res/shaders/quad.shader"), text_set(std::string("res/data/letters.json"), 12)
+	: health_Bar(buffer), text_shader("res/shaders/letter.shader"), text_set(std::string("res/data/letters.json"), 12)
 {
 }
 
@@ -146,11 +158,13 @@ void UserInterface::UI_Tick()
 	health_Bar.tick();
 
 	int index = 0;
-	for (Text t : texts)
+	for (Text* t : texts)
 	{
-		if (t.ttl-- <= 0)
+		if (t->ttl-- <= 0)
 		{
+			delete t;
 			texts.erase(texts.begin() + index);
+			index--;
 		}
 		index++;
 	}

@@ -449,9 +449,6 @@ void Tileset::create_atlas()
 		/* Load texture image */
 		Texture working_texture(new_tile.filepath);
 		working_texture.Bind(0);
-
-		/* Draw tile to atlas */
-		stitch_tile(new_tile);
 	}
 
 

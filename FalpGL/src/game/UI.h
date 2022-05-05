@@ -41,8 +41,9 @@ struct Text {
 
 	int ttl;
 	int count;
+	int size = 16;
 
-	Text(std::string text, float x, float y, Tileset& set);
+	Text(std::string text, float x, float y, int time, Tileset& set);
 };
 
 class UserInterface {
@@ -54,10 +55,10 @@ class UserInterface {
 
 	Shader text_shader;
 	Tileset text_set;
-	std::vector<Text> texts;
+	std::vector<Text*> texts;
 
 public:
-	void create_text(std::string text, float x, float y);
+	void create_text(std::string text, float x, float y, int time);
 	void draw_text(glm::mat4 matrix);
 
 
