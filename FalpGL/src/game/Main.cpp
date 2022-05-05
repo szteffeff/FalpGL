@@ -671,12 +671,12 @@ int main(void)
         sussy_vase_6.teleport(-594, 8530);
 
         /*Sound crap*/
-        //SFX Sound_player;
-        //uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
-        //Sound_player.Play_sound(intro);
-        //SFX Sound_song;
-        //SFX Background_sound;
-        //uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
+        SFX Sound_player;
+        uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
+        Sound_player.Play_sound(intro);
+        SFX Sound_song;
+        SFX Background_sound;
+        uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -715,7 +715,7 @@ int main(void)
 
             /*SOUND THINGY*/
             
-            //Background_sound.Play_sound(background);
+            Background_sound.Play_sound(background);
 
             //myspeaker.Play(intro);
 
@@ -816,80 +816,80 @@ int main(void)
 
                 if (player.am_attacking() == true) {
                     //red slimes
-                    red_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_0.give_health(), red_slime_0.give_x(), red_slime_0.give_y());
-                    red_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_1.give_health(), red_slime_1.give_x(), red_slime_1.give_y());
-                    red_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_2.give_health(), red_slime_2.give_x(), red_slime_2.give_y());
-                    red_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_3.give_health(), red_slime_3.give_x(), red_slime_3.give_y());
-                    red_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_4.give_health(), red_slime_4.give_x(), red_slime_4.give_y());
-                    red_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_5.give_health(), red_slime_5.give_x(), red_slime_5.give_y());
-                    red_slime_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_6.give_health(), red_slime_6.give_x(), red_slime_6.give_y());
-                    red_slime_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_7.give_health(), red_slime_7.give_x(), red_slime_7.give_y());
-                    red_slime_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_8.give_health(), red_slime_8.give_x(), red_slime_8.give_y());
-                    red_slime_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), red_slime_9.give_health(), red_slime_9.give_x(), red_slime_9.give_y());
+                    red_slime_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_0.give_health(), red_slime_0.give_x(), red_slime_0.give_y());
+                    red_slime_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_1.give_health(), red_slime_1.give_x(), red_slime_1.give_y());
+                    red_slime_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_2.give_health(), red_slime_2.give_x(), red_slime_2.give_y());
+                    red_slime_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_3.give_health(), red_slime_3.give_x(), red_slime_3.give_y());
+                    red_slime_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_4.give_health(), red_slime_4.give_x(), red_slime_4.give_y());
+                    red_slime_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_5.give_health(), red_slime_5.give_x(), red_slime_5.give_y());
+                    red_slime_6.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_6.give_health(), red_slime_6.give_x(), red_slime_6.give_y());
+                    red_slime_7.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_7.give_health(), red_slime_7.give_x(), red_slime_7.give_y());
+                    red_slime_8.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_8.give_health(), red_slime_8.give_x(), red_slime_8.give_y());
+                    red_slime_9.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), red_slime_9.give_health(), red_slime_9.give_x(), red_slime_9.give_y());
 
                     //commpers the slimington
 
-                    chompy_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_0.give_health(), chompy_slime_0.give_x(), chompy_slime_0.give_y());
-                    chompy_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_1.give_health(), chompy_slime_1.give_x(), chompy_slime_1.give_y());
-                    chompy_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_2.give_health(), chompy_slime_2.give_x(), chompy_slime_2.give_y());
-                    chompy_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_3.give_health(), chompy_slime_3.give_x(), chompy_slime_3.give_y());
-                    chompy_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_4.give_health(), chompy_slime_4.give_x(), chompy_slime_4.give_y());
-                    chompy_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_5.give_health(), chompy_slime_5.give_x(), chompy_slime_5.give_y());
-                    chompy_slime_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_6.give_health(), chompy_slime_6.give_x(), chompy_slime_6.give_y());
-                    chompy_slime_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_7.give_health(), chompy_slime_7.give_x(), chompy_slime_7.give_y());
-                    chompy_slime_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_8.give_health(), chompy_slime_8.give_x(), chompy_slime_8.give_y());
-                    chompy_slime_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_9.give_health(), chompy_slime_9.give_x(), chompy_slime_9.give_y());
-                    chompy_slime_10.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), chompy_slime_10.give_health(), chompy_slime_10.give_x(), chompy_slime_10.give_y());
+                    chompy_slime_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_0.give_health(), chompy_slime_0.give_x(), chompy_slime_0.give_y());
+                    chompy_slime_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_1.give_health(), chompy_slime_1.give_x(), chompy_slime_1.give_y());
+                    chompy_slime_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_2.give_health(), chompy_slime_2.give_x(), chompy_slime_2.give_y());
+                    chompy_slime_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_3.give_health(), chompy_slime_3.give_x(), chompy_slime_3.give_y());
+                    chompy_slime_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_4.give_health(), chompy_slime_4.give_x(), chompy_slime_4.give_y());
+                    chompy_slime_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_5.give_health(), chompy_slime_5.give_x(), chompy_slime_5.give_y());
+                    chompy_slime_6.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_6.give_health(), chompy_slime_6.give_x(), chompy_slime_6.give_y());
+                    chompy_slime_7.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_7.give_health(), chompy_slime_7.give_x(), chompy_slime_7.give_y());
+                    chompy_slime_8.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_8.give_health(), chompy_slime_8.give_x(), chompy_slime_8.give_y());
+                    chompy_slime_9.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_9.give_health(), chompy_slime_9.give_x(), chompy_slime_9.give_y());
+                    chompy_slime_10.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), chompy_slime_10.give_health(), chompy_slime_10.give_x(), chompy_slime_10.give_y());
 
                     // blooper the bluey slime
 
-                    blue_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_0.give_health(), blue_slime_0.give_x(), blue_slime_0.give_y());
-                    blue_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_1.give_health(), blue_slime_1.give_x(), blue_slime_1.give_y());
-                    blue_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_2.give_health(), blue_slime_2.give_x(), blue_slime_2.give_y());
-                    blue_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), blue_slime_3.give_health(), blue_slime_3.give_x(), blue_slime_3.give_y());
+                    blue_slime_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), blue_slime_0.give_health(), blue_slime_0.give_x(), blue_slime_0.give_y());
+                    blue_slime_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), blue_slime_1.give_health(), blue_slime_1.give_x(), blue_slime_1.give_y());
+                    blue_slime_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), blue_slime_2.give_health(), blue_slime_2.give_x(), blue_slime_2.give_y());
+                    blue_slime_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), blue_slime_3.give_health(), blue_slime_3.give_x(), blue_slime_3.give_y());
 
                     // icey the spikey slime
 
-                    ice_slime_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_0.give_health(), ice_slime_0.give_x(), ice_slime_0.give_y());
-                    ice_slime_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_1.give_health(), ice_slime_1.give_x(), ice_slime_1.give_y());
-                    ice_slime_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_2.give_health(), ice_slime_2.give_x(), ice_slime_2.give_y());
-                    ice_slime_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_3.give_health(), ice_slime_3.give_x(), ice_slime_3.give_y());
-                    ice_slime_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_4.give_health(), ice_slime_4.give_x(), ice_slime_4.give_y());
-                    ice_slime_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), ice_slime_5.give_health(), ice_slime_5.give_x(), ice_slime_5.give_y());
+                    ice_slime_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_0.give_health(), ice_slime_0.give_x(), ice_slime_0.give_y());
+                    ice_slime_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_1.give_health(), ice_slime_1.give_x(), ice_slime_1.give_y());
+                    ice_slime_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_2.give_health(), ice_slime_2.give_x(), ice_slime_2.give_y());
+                    ice_slime_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_3.give_health(), ice_slime_3.give_x(), ice_slime_3.give_y());
+                    ice_slime_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_4.give_health(), ice_slime_4.give_x(), ice_slime_4.give_y());
+                    ice_slime_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), ice_slime_5.give_health(), ice_slime_5.give_x(), ice_slime_5.give_y());
 
                     // bushy bois be dying
-                    bush_boi_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_0.give_health(), bush_boi_0.give_x(), bush_boi_0.give_y());
-                    bush_boi_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_1.give_health(), bush_boi_1.give_x(), bush_boi_1.give_y());
-                    bush_boi_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_2.give_health(), bush_boi_2.give_x(), bush_boi_2.give_y());
-                    bush_boi_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_3.give_health(), bush_boi_3.give_x(), bush_boi_3.give_y());
-                    bush_boi_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_4.give_health(), bush_boi_4.give_x(), bush_boi_4.give_y());
-                    bush_boi_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_5.give_health(), bush_boi_5.give_x(), bush_boi_5.give_y());
-                    bush_boi_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_6.give_health(), bush_boi_6.give_x(), bush_boi_6.give_y());
-                    bush_boi_7.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_7.give_health(), bush_boi_7.give_x(), bush_boi_7.give_y());
-                    bush_boi_8.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_8.give_health(), bush_boi_8.give_x(), bush_boi_8.give_y());
-                    bush_boi_9.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_9.give_health(), bush_boi_9.give_x(), bush_boi_9.give_y());
-                    bush_boi_10.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_10.give_health(), bush_boi_10.give_x(), bush_boi_10.give_y());
-                    bush_boi_11.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_11.give_health(), bush_boi_11.give_x(), bush_boi_11.give_y());
-                    bush_boi_12.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_12.give_health(), bush_boi_12.give_x(), bush_boi_12.give_y());
-                    bush_boi_13.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_13.give_health(), bush_boi_13.give_x(), bush_boi_13.give_y());
-                    bush_boi_14.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), bush_boi_14.give_health(), bush_boi_14.give_x(), bush_boi_14.give_y());
+                    bush_boi_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_0.give_health(), bush_boi_0.give_x(), bush_boi_0.give_y());
+                    bush_boi_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_1.give_health(), bush_boi_1.give_x(), bush_boi_1.give_y());
+                    bush_boi_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_2.give_health(), bush_boi_2.give_x(), bush_boi_2.give_y());
+                    bush_boi_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_3.give_health(), bush_boi_3.give_x(), bush_boi_3.give_y());
+                    bush_boi_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_4.give_health(), bush_boi_4.give_x(), bush_boi_4.give_y());
+                    bush_boi_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_5.give_health(), bush_boi_5.give_x(), bush_boi_5.give_y());
+                    bush_boi_6.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_6.give_health(), bush_boi_6.give_x(), bush_boi_6.give_y());
+                    bush_boi_7.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_7.give_health(), bush_boi_7.give_x(), bush_boi_7.give_y());
+                    bush_boi_8.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_8.give_health(), bush_boi_8.give_x(), bush_boi_8.give_y());
+                    bush_boi_9.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_9.give_health(), bush_boi_9.give_x(), bush_boi_9.give_y());
+                    bush_boi_10.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_10.give_health(), bush_boi_10.give_x(), bush_boi_10.give_y());
+                    bush_boi_11.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_11.give_health(), bush_boi_11.give_x(), bush_boi_11.give_y());
+                    bush_boi_12.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_12.give_health(), bush_boi_12.give_x(), bush_boi_12.give_y());
+                    bush_boi_13.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_13.give_health(), bush_boi_13.give_x(), bush_boi_13.give_y());
+                    bush_boi_14.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), bush_boi_14.give_health(), bush_boi_14.give_x(), bush_boi_14.give_y());
                     
                     // spoopy ghost
-                    enemy_ghost_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_0.give_health(), enemy_ghost_0.give_x(), enemy_ghost_0.give_y());
-                    enemy_ghost_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_1.give_health(), enemy_ghost_1.give_x(), enemy_ghost_1.give_y());
-                    enemy_ghost_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_2.give_health(), enemy_ghost_2.give_x(), enemy_ghost_2.give_y());
-                    enemy_ghost_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_3.give_health(), enemy_ghost_3.give_x(), enemy_ghost_3.give_y());
-                    enemy_ghost_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_4.give_health(), enemy_ghost_4.give_x(), enemy_ghost_4.give_y());
-                    enemy_ghost_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), enemy_ghost_5.give_health(), enemy_ghost_5.give_x(), enemy_ghost_5.give_y());
+                    enemy_ghost_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_0.give_health(), enemy_ghost_0.give_x(), enemy_ghost_0.give_y());
+                    enemy_ghost_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_1.give_health(), enemy_ghost_1.give_x(), enemy_ghost_1.give_y());
+                    enemy_ghost_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_2.give_health(), enemy_ghost_2.give_x(), enemy_ghost_2.give_y());
+                    enemy_ghost_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_3.give_health(), enemy_ghost_3.give_x(), enemy_ghost_3.give_y());
+                    enemy_ghost_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_4.give_health(), enemy_ghost_4.give_x(), enemy_ghost_4.give_y());
+                    enemy_ghost_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), enemy_ghost_5.give_health(), enemy_ghost_5.give_x(), enemy_ghost_5.give_y());
                     
                     // sussy vase
-                    sussy_vase_0.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_0.give_health(), sussy_vase_0.give_x(), sussy_vase_0.give_y());
-                    sussy_vase_1.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_1.give_health(), sussy_vase_1.give_x(), sussy_vase_1.give_y());
-                    sussy_vase_2.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_2.give_health(), sussy_vase_2.give_x(), sussy_vase_2.give_y());
-                    sussy_vase_3.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_3.give_health(), sussy_vase_3.give_x(), sussy_vase_3.give_y());
-                    sussy_vase_4.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_4.give_health(), sussy_vase_4.give_x(), sussy_vase_4.give_y());
-                    sussy_vase_5.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_5.give_health(), sussy_vase_5.give_x(), sussy_vase_5.give_y());
-                    sussy_vase_6.attacked(player.weapon_x(), player.weapon_y(), 32, player.get_weapon_type(), sussy_vase_6.give_health(), sussy_vase_6.give_x(), sussy_vase_6.give_y());
+                    sussy_vase_0.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_0.give_health(), sussy_vase_0.give_x(), sussy_vase_0.give_y());
+                    sussy_vase_1.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_1.give_health(), sussy_vase_1.give_x(), sussy_vase_1.give_y());
+                    sussy_vase_2.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_2.give_health(), sussy_vase_2.give_x(), sussy_vase_2.give_y());
+                    sussy_vase_3.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_3.give_health(), sussy_vase_3.give_x(), sussy_vase_3.give_y());
+                    sussy_vase_4.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_4.give_health(), sussy_vase_4.give_x(), sussy_vase_4.give_y());
+                    sussy_vase_5.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_5.give_health(), sussy_vase_5.give_x(), sussy_vase_5.give_y());
+                    sussy_vase_6.attacked(player.weapon_x(), player.weapon_y(), 58, player.get_weapon_type(), sussy_vase_6.give_health(), sussy_vase_6.give_x(), sussy_vase_6.give_y());
                 }
             }
            
