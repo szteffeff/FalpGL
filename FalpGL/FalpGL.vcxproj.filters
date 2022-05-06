@@ -33,6 +33,7 @@
     <ClCompile Include="src\renderer\Particles.cpp" />
     <ClCompile Include="src\game\Decoration.cpp" />
     <ClCompile Include="src\game\Presentation.cpp" />
+    <ClCompile Include="src\game\Presentation_Leo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />

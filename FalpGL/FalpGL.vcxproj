@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\game\Decoration.cpp" />
     <ClCompile Include="src\game\Presentation.cpp" />
+    <ClCompile Include="src\game\Presentation_Leo.cpp" />
     <ClCompile Include="src\game\SFX.cpp" />
     <ClCompile Include="src\game\SoundBuffer.cpp" />
     <ClCompile Include="src\game\SoundSource.cpp" />
