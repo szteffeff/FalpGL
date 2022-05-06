@@ -290,7 +290,7 @@ void Player::walk(float direction, float magnitude)
 
 		Recover_Stamina();
 		//walk_noise();
-		walking_sound.Play_sound(walking);
+		//walking_sound.Play_sound(walking);
 	}
 }
 
@@ -407,7 +407,7 @@ void Player::tick()
 
 	/// ///////////////////////////////////// Bow stuff
 
-	if (shoot_bow == true and shwoop_shwoop == true and attacking == false and Stamina >= 25) { //creates the direction for bow and arrow to point
+	if (shoot_bow == true and shwoop_shwoop == true and attacking == false and Stamina >= 25 and pewpew_unlock == true) { //creates the direction for bow and arrow to point
 		Player_arrow.teleport(position[0], position[1]);
 		dmg_control = 0;
 		std::cout << "Yeet thy arrow" << std::endl;
@@ -455,7 +455,7 @@ void Player::tick()
 	/// //////////////////////////////////// Shifty Shank
 
 	// dagger light attack
-	if (light_dagger == true and not dagger_start_L and attacking == false and Stamina >= 10) { // creates the direction of dagger and turns it
+	if (light_dagger == true and not dagger_start_L and attacking == false and Stamina >= 10 and shanky_unlock == true) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_dagger.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
@@ -495,7 +495,7 @@ void Player::tick()
 
 	// dagger Heavy attack
 	
-	if (heavy_dagger == true and not dagger_start_H and attacking == false and Stamina >= 15) {  // creates direction for dagger to move in
+	if (heavy_dagger == true and not dagger_start_H and attacking == false and Stamina >= 15 and shanky_unlock == true) {  // creates direction for dagger to move in
 		attacking = true;
 		speacial_move_dagger = rand() % 10;
 		Player_dagger.teleport(position[0], position[1]);
@@ -555,7 +555,7 @@ void Player::tick()
 	/// ///////////////////////////// Axe sutff
 
 	// axe light attack
-	if (light_axe == true and not axe_start and attacking == false and Stamina >= 20) { //makes direction for axe to point in
+	if (light_axe == true and not axe_start and attacking == false and Stamina >= 20 and huge_axe_unlock == true) { //makes direction for axe to point in
 		attacking = true;
 		Player_Shatter_axe.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
@@ -594,7 +594,7 @@ void Player::tick()
 
 	// heavy attack
 
-	if (heavy_axe == true and not axe_start_H and attacking == false and Stamina >= 70) {  // creates direction for axe to move in
+	if (heavy_axe == true and not axe_start_H and attacking == false and Stamina >= 70 and huge_axe_unlock == true) {  // creates direction for axe to move in
 		attacking = true;
 		speacial_move_axe = rand() % 10;
 		Player_Shatter_axe.teleport(position[0], position[1]);
@@ -655,7 +655,7 @@ void Player::tick()
 	/// //////////////////////////////// spear stuff
 
 	// spear light attack
-	if (light_spear == true and not spear_start_L and attacking == false and Stamina >= 20) { // creates the direction of dagger and turns it
+	if (light_spear == true and not spear_start_L and attacking == false and Stamina >= 20 and bigger_shank_unlock == true) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
@@ -694,7 +694,7 @@ void Player::tick()
 	}
 
 	// spear heavy (the same as light but farther)
-	if (heavy_spear == true and not spear_start_H and attacking == false and Stamina >= 30) { // creates the direction of dagger and turns it
+	if (heavy_spear == true and not spear_start_H and attacking == false and Stamina >= 30 and bigger_shank_unlock == true) { // creates the direction of dagger and turns it
 		attacking = true;
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
@@ -930,6 +930,26 @@ bool* Player::speaking()
 	return &talk;
 }
 
+bool* Player::bow_unlock()
+{
+	return &pewpew_unlock;
+}
+
+bool* Player::shifty_shank_unlock()
+{
+	return &shanky_unlock;
+}
+
+bool* Player::big_axe_unlock()
+{
+	return &huge_axe_unlock;
+}
+
+bool* Player::bigger_shity_shank_unlock()
+{
+	return &bigger_shank_unlock;
+}
+
 int* Player::check_points()
 {
 	return &check_point_location;
@@ -1100,7 +1120,7 @@ void Enemy_Ghost::tick()
 			}
 			else {
 				Enemy_ghost.set_animation(1);
-				Ghost_move_sound.Play_sound(Ghost_move);
+				//Ghost_move_sound.Play_sound(Ghost_move);
 				teleporting += 1;
 				pewpew = false;
 
@@ -1110,7 +1130,7 @@ void Enemy_Ghost::tick()
 
 		if (teleporting > 1 and tick_state.anim_state == animation_state::ended) {
 			Enemy_ghost.set_animation(0);
-			Ghost_move_sound.Stop_sound(Ghost_move);
+			//Ghost_move_sound.Stop_sound(Ghost_move);
 			teleporting = 0;
 		}
 
@@ -1743,22 +1763,22 @@ void Destus_Of_Cavern::tick()
 		spoken += 1;
 
 		if (spoken == 1) {
-			text->create_text("You… You there.\nI don’t have much time left,\nso listen. My name is Destus of Caven.\nI am an expert in hunting the\nabominable, but whatever is\nin there.. It made a joke of me.", position[0], position[1], 60 * 12);
+			text->create_text("You... You there.\nI don’t have much time left,\nso listen. My name is Destus of Caven.\nI am an expert in hunting the\nabominable, but whatever is\nin there.. It made a joke of me.", position[0] + 25, position[1] + 150, 60 * 12);
 		}
 		else if (spoken == 2) {
-			text->create_text("That creature, it’s worse than any of the others…", position[0], position[1], 60 * 12);
+			text->create_text("That creature,\nit’s worse than any of the\nothers...", position[0] + 25, position[1] + 100, 60 * 12);
 		}
 		else if (spoken == 3) {
-			text->create_text("It’s powerful… If you value your life, run", position[0], position[1], 60 * 12);
+			text->create_text("It’s powerful...\nIf you value your life, run", position[0] + 25, position[1] + 80, 60 * 12);
 		}
 		else if (spoken == 4) {
-			text->create_text("... If you see my sister, Claire… Tell her I’m sorry for running off. Tell her to get out and that I’ll always watch over her.", position[0], position[1], 60 * 12);
+			text->create_text("... If you see my sister, Claire...\nTell her I’m sorry for running off.\nTell her to get out and that\nI’ll always watch over her.", position[0] + 25, position[1] + 150, 60 * 12);
 		}
 		else if (spoken == 5) {
-			text->create_text("Good luck…", position[0], position[1], 60 * 12);
+			text->create_text("Good luck...", position[0] + 25, position[1] + 80, 60 * 12);
 		}
 		else if (spoken >= 6) {
-			text->create_text("...", position[0], position[1], 60 * 12);
+			text->create_text("...", position[0] + 25, position[1] + 80, 60 * 12);
 		}
 
 	}
@@ -1784,6 +1804,11 @@ void Del_Ibra_of_Hillsby::Get_talk(bool* spoken)
 	talk = spoken;
 }
 
+void Del_Ibra_of_Hillsby::Get_pewpew_lock(bool* lock)
+{
+	unlock = lock;
+}
+
 
 void Del_Ibra_of_Hillsby::tick()
 {
@@ -1801,6 +1826,7 @@ void Del_Ibra_of_Hillsby::tick()
 		}
 		else if (spoken == 3) {
 			text->create_text("There’s not much you can do \nwith those little weapons,\ntake this.", position[0] - 350 , position[1] + 150 , 60 * 12);
+			*unlock = true;
 		}
 		else if (spoken == 4) {
 			text->create_text("Don’t you worry about me,\nthat’s just a spare.\nNow go on, show them what\na rabbit can do.", position[0] - 350, position[1] + 150, 60 * 12);
@@ -1838,6 +1864,11 @@ void Eloah_of_Minlet::Get_talk(bool* spoken)
 	talk = spoken;
 }
 
+void Eloah_of_Minlet::Get_shank_unlock(bool* lock)
+{
+	unlock = lock;
+}
+
 void Eloah_of_Minlet::tick()
 {
 	eloah_of_minlet.tick();
@@ -1851,6 +1882,7 @@ void Eloah_of_Minlet::tick()
 		 }
 		 else if (spoken == 2) {
 			 text->create_text("You’re brave to have entered this place,\nmost wouldn’t dare. I’m grateful for the backup,\nbut you seem to have forgotten a weapon. Take this.", position[0] - 320, position[1] + 100, 60 * 12);
+			 *unlock = true;
 		 }
 		 else if (spoken == 3) {
 			 text->create_text("You should be able to protect yourself with that.\n You go on ahead, little one. I’ll rest here.", position[0] - 320, position[1] + 75, 60 * 12);
@@ -1893,15 +1925,53 @@ void Felix_of_Festria::Get_talk(bool* spoken)
 	talk = spoken;
 }
 
+void Felix_of_Festria::Get_big_axe_unlock(bool* lock)
+{
+	unlock = lock;
+}
+
 void Felix_of_Festria::tick()
 {
 	felix_of_festria.tick();
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		felix_of_festria.teleport(position[0], position[1]);
+		spoken += 1;
+
+		if (spoken == 1) {
+			text->create_text("...", position[0], position[1], 60 * 12);
+		}
+		else if (spoken == 2) {
+			text->create_text("Oh, apologies.\nI was lost in thought.\nMy name is Felix,\nI come from Festria.", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 3) {
+			text->create_text("You don’t talk much,\neh? No matter, you\nonly need to listen.", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 4) {
+			text->create_text("It’s quite strange,\nI came here with many, and\nnow I’m the only Festrian\nleft,yet the monsters\ncontinue to grow in\n\number.", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 5) {
+			text->create_text("I suspect the monsters\nare made from those who\ndie in this land.\nPerhaps that’s how the\ndungeon grows its\nmonsters, from the souls\nof the fallen.", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 6) {
+			text->create_text("Ah, forget it.\nYou shouldn’t think too much\nof these things, just take\nthis and go thin their\nnumbers.", position[0] - 800, position[1], 60 * 12);
+			*unlock = true;
+		}
+		else if (spoken == 7) {
+			text->create_text("Get on with it,\nleave me to my\nthoughts.", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 8) {
+			text->create_text("...", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 9) {
+			text->create_text("...", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 10) {
+			text->create_text("For someone who doesn’t talk,\nyou sure expect others to!\nShoo! Shoo!", position[0] - 800, position[1], 60 * 12);
+		}
+		else if (spoken == 11) {
+			text->create_text("...", position[0] - 800, position[1], 60 * 12);
+		}
 	}
 }
 
@@ -1925,6 +1995,11 @@ void Maban_of_Undermount::Get_talk(bool* spoken)
 	talk = spoken;
 }
 
+void Maban_of_Undermount::Get_Bigger_Shock(bool* lock)
+{
+	unlock = lock;
+}
+
 void Maban_of_Undermount::tick()
 {
 	maban_of_undermount.tick();
@@ -1941,6 +2016,7 @@ void Maban_of_Undermount::tick()
 		}
 		else if (spoken == 3) {
 			text->create_text("You’re really growing on me, kid.\nTake this, as a token of\nmy respect.", position[0] + 32, position[1] + 70, 60 * 12);
+			*unlock = true;
 		}
 		else if (spoken == 4) {
 			text->create_text("Now go and hunt yourself\na biggun, there’s \nsomething powerful lurking\n down here and I\nwant its teeth.", position[0] + 32, position[1] + 70, 60 * 12);

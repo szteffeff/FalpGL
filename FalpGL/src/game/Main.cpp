@@ -411,21 +411,27 @@ int main(void)
         clair_of_cavern.Get_player_position(player.get_position_x(), player.get_position_y());
         clair_of_cavern.Get_talk(player.speaking());
 
-        del_ibra_of_hillsby.Get_player_position(player.get_position_x(), player.get_position_y());
-        del_ibra_of_hillsby.Get_talk(player.speaking());
-
-        eloah_of_minlet.Get_player_position(player.get_position_x(), player.get_position_y());
-        eloah_of_minlet.Get_talk(player.speaking());
-
-        felix_of_festria.Get_player_position(player.get_position_x(), player.get_position_y());
-        felix_of_festria.Get_talk(player.speaking());
-        
-        maban_of_undermount.Get_player_position(player.get_position_x(), player.get_position_y());
-        maban_of_undermount.Get_talk(player.speaking());
-
         destus_of_cavern.Get_player_position(player.get_position_x(), player.get_position_y());
         destus_of_cavern.Get_talk(player.speaking());
 
+
+        del_ibra_of_hillsby.Get_player_position(player.get_position_x(), player.get_position_y());
+        del_ibra_of_hillsby.Get_talk(player.speaking());
+        del_ibra_of_hillsby.Get_pewpew_lock(player.bow_unlock());
+
+        eloah_of_minlet.Get_player_position(player.get_position_x(), player.get_position_y());
+        eloah_of_minlet.Get_talk(player.speaking());
+        eloah_of_minlet.Get_shank_unlock(player.shifty_shank_unlock());
+
+        felix_of_festria.Get_player_position(player.get_position_x(), player.get_position_y());
+        felix_of_festria.Get_talk(player.speaking());
+        felix_of_festria.Get_big_axe_unlock(player.big_axe_unlock());
+        
+        maban_of_undermount.Get_player_position(player.get_position_x(), player.get_position_y());
+        maban_of_undermount.Get_talk(player.speaking());
+        maban_of_undermount.Get_Bigger_Shock(player.bigger_shity_shank_unlock());
+
+        
         // enemys..... OH GOOOD THERE SO MANY.....
 
         // red_slimes
