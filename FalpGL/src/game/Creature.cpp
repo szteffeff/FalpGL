@@ -266,11 +266,11 @@ void Health_Bar::tick(float h, float s, frame_animations level)
 Player::Player(VertexBuffer* vb)
 	: m_player(vb, loader->entities["PLAYER"]), momentum(), position(), Player_bow(vb, loader->entities["Player_Bow"]), Player_arrow(vb, loader->entities["Player_Arrow"]), Player_spear(vb, loader->entities["Player_Spear"]), Player_dagger(vb, loader->entities["Player_Dagger"]), Player_Shatter_axe(vb, loader->entities["Player_Shatter_Axe"])
 {
-	Player_bow.teleport(100, -100);
-	Player_arrow.teleport(200, -100);
-	Player_dagger.teleport(300, -100);
-	Player_spear.teleport(400, -100);
-	Player_Shatter_axe.teleport(500, -100);
+	Player_bow.teleport(10000, -10000);
+	Player_arrow.teleport(20000, -10000);
+	Player_dagger.teleport(30000, -10000);
+	Player_spear.teleport(40000, -10000);
+	Player_Shatter_axe.teleport(50000, -10000);
 
 	m_player.teleport(1215, -1268);
 	position[0] += 1215;
@@ -440,7 +440,7 @@ void Player::tick()
 		dy = 0;
 		arrow_lifespan = 60 * 4;
 		Player_arrow.reset();
-		Player_arrow.teleport(1000, 1000);
+		Player_arrow.teleport(100000, 100000);
 		shwoop_shwoop = true;
 		arrow_going = false;
 	}
@@ -448,7 +448,7 @@ void Player::tick()
 	if (bow_lifespan == 0) { // when bow runs out of time, resets bow
 		bow_lifespan = 60 * 1;
 		Player_bow.reset();
-		Player_bow.teleport(1000, 1000);
+		Player_bow.teleport(100000, 100000);
 		attacking = false;
 	}
 	
@@ -735,33 +735,33 @@ void Player::tick()
 	// if you die (at this point im just gonna teleport them for now)
 
 	if (Health <= 0 and check_point_location == 0) {
-		m_player.teleport(-100, -100);
-		position[0] = -100;
-		position[1] = -100;
+		m_player.teleport(306, -405);
+		position[0] = 306;
+		position[1] = -405;
 		Health = 100;
 		Stamina = 100;
 		Potion = 4;
 	}
 	else if (Health <= 0 and check_point_location == 1) {
-		m_player.teleport(-100, -300);
-		position[0] = -100;
-		position[1] = -300;
+		m_player.teleport(-2780, 5950);
+		position[0] = -2780;
+		position[1] = 5950;
 		Health = 100;
 		Stamina = 100;
 		Potion = 4;
 	}
 	else if (Health <= 0 and check_point_location == 2) {
-		m_player.teleport(-100, -500);
-		position[0] = -100;
-		position[1] = -500;
+		m_player.teleport(-7111, 9407);
+		position[0] = -7111;
+		position[1] = 9407;
 		Health = 100;
 		Stamina = 100;
 		Potion = 4;
 	}
 	else if (Health <= 0 and check_point_location == 3) {
-		m_player.teleport(-100, -700);
-		position[0] = -100;
-		position[1] = -700;
+		m_player.teleport(-10000, -7000);
+		position[0] = -10000;
+		position[1] = -7000;
 		Health = 100;
 		Stamina = 100;
 		Potion = 4;
@@ -1200,11 +1200,7 @@ void Garfield::tick()
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
 		*player_check_point = checkpoint_num;
-		/*
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		garfield.teleport(position[0], position[1]);
-		*/
+		text->create_text("Meow", position[0] + 40, position[1], 60 * 3);
 	}
 }
 
@@ -1561,9 +1557,9 @@ Cow::Cow(VertexBuffer* vb)
 	: cow(vb, loader->entities["Cow"]), momentum(), position()
 {
 	cow.set_animation(0);
-	cow.teleport(-2780, 6005.67);
+	cow.teleport(-2780, 6006);
 	position[0] = -2810;
-	position[1] = -6005.67;
+	position[1] = -6006;
 }
 
 void Cow::Get_player_position(float* x, float* y)
@@ -1585,13 +1581,13 @@ void Cow::Get_point(int* current_player_checkpoint)
 void Cow::tick()
 {
 	cow.tick();
+
+	float num = sqrt(pow(abs(*player_position_x - position[0]), 2) + pow(abs(*player_position_x - position[0]), 2));
 	
-	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+	if ( num < 100 and *talk == true) {
 		*talk = false;
 		*player_check_point = checkpoint_num;
-		//position[0] = *player_position_x + (rand() % 1000) - 500;
-		//position[1] = *player_position_y + (rand() % 1000) - 500;
-		//cow.teleport(position[0], position[1]);
+		text->create_text("Meow", position[0] + 40, position[1], 60 * 3);
 	}
 }
 
@@ -1599,9 +1595,9 @@ Perry::Perry(VertexBuffer* vb)
 	: perry(vb, loader->entities["Perry"]), momentum(), position()
 {
 	perry.set_animation(0);
-	perry.teleport(-7110.5, 9406.5);
-	position[0] = -7110.5;
-	position[1] = 9406.5;
+	perry.teleport(-7111, 9407);
+	position[0] = -7111;
+	position[1] = 9407;
 }
 
 void Perry::Get_player_position(float* x, float* y)
@@ -1626,9 +1622,7 @@ void Perry::tick()
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
 		*player_check_point = checkpoint_num;
-		//position[0] = *player_position_x + (rand() % 1000) - 500;
-		//position[1] = *player_position_y + (rand() % 1000) - 500;
-		//perry.teleport(position[0], position[1]);
+		text->create_text("Meow", position[0] + 40, position[1], 60 * 3);
 	}
 
 }
@@ -1637,9 +1631,9 @@ Edgelord::Edgelord(VertexBuffer* vb)
 	: edgelord(vb, loader->entities["Edgelord"]), momentum(), position()
 {
 	edgelord.set_animation(0);
-	edgelord.teleport(-100, -700);
-	position[0] = -100;
-	position[1] = -700;
+	edgelord.teleport(-10000, -70000);
+	position[0] = -10000;
+	position[1] = -70000;
 }
 
 void Edgelord::Get_player_position(float* x, float* y)
@@ -1697,9 +1691,76 @@ void Clair_Of_Cavern::tick()
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		clair_of_cavern.teleport(position[0], position[1]);
+		spoken += 1;
+
+		if (spoken == 1) {
+			text->create_text("You look friendly, can I ask a favour?", position[0] - 250, position[1] + 70, 60 * 6);
+		}
+		else if (spoken == 2) {
+			text->create_text("I’m looking for my brother, Destus.\nHe looks like me, but he wears a different hat.\nHe went off on his own and I haven’t seen him since.", position[0] - 300, position[1] + 100, 60 * 12);
+		}
+		else if (spoken == 3) {
+			text->create_text("I’m just worried about him,\nhe always gets in over his head.", position[0] - 200, position[1] + 80, 60 * 12);
+		}
+		else if (spoken == 4) {
+			text->create_text("If you find him, please help him.", position[0] - 250, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 5) {
+			text->create_text("I miss him.", position[0] - 80 , position[1] + 70, 60 * 12);
+		}
+		else if (spoken >= 6) {
+			text->create_text("...", position[0] - 200, position[1] + 70, 60 * 12);
+		}
+	}
+}
+
+Destus_Of_Cavern::Destus_Of_Cavern(VertexBuffer* vb)
+	: destus_of_cavern(vb, loader->entities["Destus_Of_Cavern"]), momentum(), position()
+{
+	destus_of_cavern.teleport(349, 9137);
+	position[0] = 349;
+	position[1] = 9137;
+
+}
+
+void Destus_Of_Cavern::Get_player_position(float* x, float* y)
+{
+	player_position_x = x;
+	player_position_y = y;
+}
+
+void Destus_Of_Cavern::Get_talk(bool* spoken)
+{
+	talk = spoken;
+}
+
+void Destus_Of_Cavern::tick()
+{
+	destus_of_cavern.tick();
+
+	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
+		*talk = false;
+		spoken += 1;
+
+		if (spoken == 1) {
+			text->create_text("You… You there.\nI don’t have much time left,\nso listen. My name is Destus of Caven.\nI am an expert in hunting the\nabominable, but whatever is\nin there.. It made a joke of me.", position[0], position[1], 60 * 12);
+		}
+		else if (spoken == 2) {
+			text->create_text("That creature, it’s worse than any of the others…", position[0], position[1], 60 * 12);
+		}
+		else if (spoken == 3) {
+			text->create_text("It’s powerful… If you value your life, run", position[0], position[1], 60 * 12);
+		}
+		else if (spoken == 4) {
+			text->create_text("... If you see my sister, Claire… Tell her I’m sorry for running off. Tell her to get out and that I’ll always watch over her.", position[0], position[1], 60 * 12);
+		}
+		else if (spoken == 5) {
+			text->create_text("Good luck…", position[0], position[1], 60 * 12);
+		}
+		else if (spoken >= 6) {
+			text->create_text("...", position[0], position[1], 60 * 12);
+		}
+
 	}
 }
 
@@ -1730,9 +1791,30 @@ void Del_Ibra_of_Hillsby::tick()
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		del_ibra_of_hillsby.teleport(position[0], position[1]);
+		spoken += 1;
+
+		if (spoken == 1) {
+			text->create_text("Hello little rabbit,\nI am Del Ibra of Hillsby.\nBy the red of your cloak,\nyou must be from Minlet. ", position[0] - 350, position[1] + 150, 60 * 12);
+		}
+		else if (spoken == 2) {
+			text->create_text("If you’re here,\nMinlet must have fallen.\n I see the scourge has\nalready reached the south.", position[0] - 350, position[1] + 150, 60 * 12);
+		}
+		else if (spoken == 3) {
+			text->create_text("There’s not much you can do \nwith those little weapons,\ntake this.", position[0] - 350 , position[1] + 150 , 60 * 12);
+		}
+		else if (spoken == 4) {
+			text->create_text("Don’t you worry about me,\nthat’s just a spare.\nNow go on, show them what\na rabbit can do.", position[0] - 350, position[1] + 150, 60 * 12);
+		}
+		else if (spoken == 5) {
+			text->create_text("The dungeon entry must\nbe around here somewhere.", position[0] - 350, position[1] + 100, 60 * 12);
+		}
+		else if (spoken == 6) {
+			text->create_text("I appreciate the company.\nAll alone,the snow can be\nquite melancholy and cold.\nIn the presence of others,\nit isn’t so bad.", position[0] - 350, position[1] + 150, 60 * 12);
+		}
+		else if (spoken >= 7) {
+			text->create_text("I miss Hillsby.", position[0] - 250, position[1] + 70, 60 * 12);
+		}
+
 	}
 }
 
@@ -1762,9 +1844,32 @@ void Eloah_of_Minlet::tick()
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		eloah_of_minlet.teleport(position[0], position[1]);
+		 spoken += 1;
+
+		 if (spoken == 1) {
+		    	text->create_text("You, rabbit. Come here!", position[0] - 160, position[1] + 60, 60 * 3);
+		 }
+		 else if (spoken == 2) {
+			 text->create_text("You’re brave to have entered this place,\nmost wouldn’t dare. I’m grateful for the backup,\nbut you seem to have forgotten a weapon. Take this.", position[0] - 320, position[1] + 100, 60 * 12);
+		 }
+		 else if (spoken == 3) {
+			 text->create_text("You should be able to protect yourself with that.\n You go on ahead, little one. I’ll rest here.", position[0] - 320, position[1] + 75, 60 * 12);
+		 }
+		 else if (spoken == 4) {
+			 text->create_text("I appreciate the concern,\nbut you should get going.", position[0] - 200, position[1] + 70, 60 * 12);
+		 }
+		 else if (spoken == 5) {
+			 text->create_text("I said go on, I need to rest. You carry on, \nfind the entrance to the dungeon proper.", position[0] - 320, position[1] + 70, 60 * 12);
+		 }
+		 else if (spoken == 6) {
+			 text->create_text("Move on, little one!", position[0] - 160, position[1] + 60, 60 * 12);
+		 }
+		 else if (spoken == 7) {
+			 text->create_text("Goodluck...", position[0] - 70, position[1] + 60, 60 * 12);
+		 }
+		 else if (spoken >= 8) {
+			 text->create_text("...", position[0] - 160, position[1] + 60, 60 * 12);
+		 }
 	}
 }
 
@@ -1826,9 +1931,41 @@ void Maban_of_Undermount::tick()
 
 	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
 		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		maban_of_undermount.teleport(position[0], position[1]);
+		spoken += 1;
+
+		if (spoken == 1) {
+			text->create_text("How’d you find your\nway down here, rabbit?", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 2) {
+			text->create_text("The silent type...\nI like that.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 3) {
+			text->create_text("You’re really growing on me, kid.\nTake this, as a token of\nmy respect.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 4) {
+			text->create_text("Now go and hunt yourself\na biggun, there’s \nsomething powerful lurking\n down here and I\nwant its teeth.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 5) {
+			text->create_text("What, you have a problem\nwith teeth? Everyone’s got them,\n don’t look so concerned.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 6) {
+			text->create_text("... It’s not like I do anything\nweird with them!\nI just keep the teeth\n as a trophy, the bigger\nthe tooth, the bigger\nthe prey. Like a\nbadge of honour.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 7) {
+			text->create_text("Whatever, go on.\nYour silence is starting\nto freak me out.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 8) {
+			text->create_text("... I know you haven’t said\nanything but the way you\nkeep looking at me is really\nmessing with my head.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 9) {
+			text->create_text("Was it the teeth thing?\nIs that why you keep\ngiving me that look", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken == 10) {
+			text->create_text("Okay fine,\ntwo can play the silent game.", position[0] + 32, position[1] + 70, 60 * 12);
+		}
+		else if (spoken >= 11) {
+			text->create_text("...", position[0] + 32, position[1] + 70, 60 * 12);
+		}
 	}
 }
 
@@ -2046,37 +2183,5 @@ void Ice_Slime::tick()
 		position[0] = 100000;
 		position[1] = 100000;
 		ice_slime.teleport(100000, 100000);
-	}
-}
-
-Destus_Of_Cavern::Destus_Of_Cavern(VertexBuffer* vb)
-	: destus_of_cavern(vb, loader->entities["Destus_Of_Cavern"]), momentum(), position()
-{
-	destus_of_cavern.teleport(349, 9137);
-	position[0] = 349;
-	position[1] = 9137;
-
-}
-
-void Destus_Of_Cavern::Get_player_position(float* x, float* y)
-{
-	player_position_x = x;
-	player_position_y = y;
-}
-
-void Destus_Of_Cavern::Get_talk(bool* spoken)
-{
-	talk = spoken;
-}
-
-void Destus_Of_Cavern::tick()
-{
-	destus_of_cavern.tick();
-
-	if (Player_Detetion_distance(Player_Detection_distance_Horizontal(position[0], player_position_x), Player_Detection_distance_Vertical(position[1], player_position_y)) <= 100 and *talk == true) {
-		*talk = false;
-		position[0] = *player_position_x + (rand() % 1000) - 500;
-		position[1] = *player_position_y + (rand() % 1000) - 500;
-		destus_of_cavern.teleport(position[0], position[1]);
 	}
 }

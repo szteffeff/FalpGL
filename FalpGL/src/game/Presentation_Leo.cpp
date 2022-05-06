@@ -1,4 +1,5 @@
-#include "Presentation.h"
+//#include "Presentation.h"
+
 
 class Leos_Presentation : public Capstone_Project {
 private:
@@ -63,7 +64,7 @@ void Leos_Presentation::Problems_I_Faced(float obstales)
 			- A severe Lack of motivation
 			- A increadibly busy school schedule
 			- Misunderstandings or a lack of knowledge on certain code
-			- Mentor Had to move
+			- Mentor had to move
 
 			After much consideration, I realized that there are many things 
 			that I could have done better, including:

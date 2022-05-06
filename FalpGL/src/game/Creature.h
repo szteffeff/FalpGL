@@ -5,12 +5,14 @@
 #include "SoundDevice.h"
 #include "SFX.h"
 #include "NewMap.h"
+#include "Text.h"
 #include <math.h>
 
 
 class Creature {
 public:
 	static Json_loader* loader;
+	static Text_Renderer* text;
 	float momentum[2], position[2];
 	float* player_health;
 	static float* curser_x;
@@ -448,6 +450,7 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
 public:
 	Clair_Of_Cavern(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
@@ -462,6 +465,8 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
+
 public:
 	Destus_Of_Cavern(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
@@ -476,6 +481,7 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
 public:
 	Del_Ibra_of_Hillsby(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
@@ -490,6 +496,7 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
 public:
 	Eloah_of_Minlet(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
@@ -518,6 +525,7 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
 public:
 	Maban_of_Undermount(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);

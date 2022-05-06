@@ -34,6 +34,7 @@
     <ClCompile Include="src\game\Decoration.cpp" />
     <ClCompile Include="src\game\Presentation.cpp" />
     <ClCompile Include="src\game\Presentation_Leo.cpp" />
+    <ClCompile Include="src\game\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\SoundDevice.h" />
@@ -355,6 +356,7 @@
     <ClInclude Include="src\game\SFX.h" />
     <ClInclude Include="src\game\Decoration.h" />
     <ClInclude Include="src\game\Presentation.h" />
+    <ClInclude Include="src\game\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\gfx\atlas0.png" />

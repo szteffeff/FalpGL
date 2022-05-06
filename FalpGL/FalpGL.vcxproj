@@ -163,6 +163,7 @@
     <ClCompile Include="src\game\SoundDevice.cpp" />
     <ClCompile Include="src\game\Animation.cpp" />
     <ClCompile Include="src\game\NewMap.cpp" />
+    <ClCompile Include="src\game\Text.cpp" />
     <ClCompile Include="src\renderer\BatchRenderer.cpp" />
     <ClCompile Include="src\game\Creature.cpp" />
     <ClCompile Include="src\game\Entity.cpp" />
@@ -363,6 +364,7 @@
     <ClInclude Include="src\game\Animation.h" />
     <ClInclude Include="src\game\Creature.h" />
     <ClInclude Include="src\game\NewMap.h" />
+    <ClInclude Include="src\game\Text.h" />
     <ClInclude Include="src\game\UI.h" />
     <ClInclude Include="src\renderer\Particles.h" />
     <ClInclude Include="src\renderer\Framebuffer.h" />

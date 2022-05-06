@@ -20,6 +20,7 @@
 #include "../renderer/Log.h"
 #include "SFX.h"
 #include "Presentation.h"
+#include "Text.h"
 
 
 std::string get_current_dir() {
@@ -39,6 +40,7 @@ Json_loader* Animation::loader;
 Json_loader* Creature::loader;
 float* Creature::curser_x;
 float* Creature::curser_y;
+Text_Renderer* Creature::text;
 
 
 
@@ -213,6 +215,8 @@ int main(void)
         glfwSetWindowIcon(window, 1, &icon_image);
     }
     
+    //glfwSwapInterval(2);
+
     { /* OpenGL objects need to be created in this scope */
 
         /* Loading screen */
@@ -281,6 +285,8 @@ int main(void)
         atlas_1.Bind(1);
         
         UserInterface ui(&interface_renderer.vertex_buffer);
+        Text_Renderer text;
+        Creature::text = &text;
 
         // npc and players
         Player player(&player_render.vertex_buffer);
@@ -673,12 +679,14 @@ int main(void)
         sussy_vase_6.teleport(-594, 8530);
 
         /*Sound crap*/
+        /*
         SFX Sound_player;
         uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
         Sound_player.Play_sound(intro);
         SFX Sound_song;
         SFX Background_sound;
         uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
+        */
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -691,8 +699,8 @@ int main(void)
 
         player.set_active_map(&nmap);
 
-        ui.create_text("example\ntext", *player.get_position_x(), *player.get_position_y(), 60);
-        ui.create_text("example\ntext", *player.get_position_x(), *player.get_position_y() - 64, 120);
+        text.create_text("example\ntext", *player.get_position_x(), *player.get_position_y(), 60);
+        text.create_text("example\ntext", *player.get_position_x(), *player.get_position_y() - 64, 120);
 
         atlas_0.Bind(0);
         atlas_1.Bind(1);
@@ -717,7 +725,7 @@ int main(void)
 
             /*SOUND THINGY*/
             
-            Background_sound.Play_sound(background);
+            //Background_sound.Play_sound(background);
 
             //myspeaker.Play(intro);
 
@@ -725,6 +733,7 @@ int main(void)
             ui.UI_Tick();
             nmap.tick(*player.get_position_x(), *player.get_position_y());
             if (pause == false) {
+                text.tick();
                 player.tick();
                 garfield.tick();
                 cow.tick();
@@ -916,7 +925,7 @@ int main(void)
 
                 nmap.draw_extras(projection_matrix * *player.get_trans_matrix());
 
-                ui.draw_text(projection_matrix * *player.get_trans_matrix());
+                text.draw_text(projection_matrix * *player.get_trans_matrix());
 
                 /* Setup chromatic aberration framebuffer */
                 c_framebuffer.bind();
