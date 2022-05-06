@@ -4,12 +4,12 @@ Project* introduction()
 {
 	Project* capstone = new Project;
 
-	capstone->name =          "Alex Stefani";
-	capstone->project =       "Game Engine Programing";
+	capstone->name          = "Alex Stefani";
+	capstone->project       = "Game Engine Programing";
 	capstone->group_members = "'Alex', 'Leo', 'Liam', 'Jackson', 'Max'";
-	capstone->mentor =        "Anthony Wagner";
+	capstone->mentor        = "Anthony Wagner";
 
-	capstone->description =   "A 2D pixel art game engine written in C++ with Opengl";
+	capstone->description   = "A 2D pixel art game engine written in C++ with Opengl";
 
 	return capstone;
 }
@@ -31,6 +31,7 @@ void presentaion(Project capstone) {
 					- Maintaining a version control so I can work with others
 			)";
 		break;
+
 
 	case (Why_I_Chose):
 		text = R"(
@@ -100,6 +101,5 @@ void presentaion(Project capstone) {
 	}
 
 
-	std::cout << std::string(text).append("\n").c_str();
+	std::cout << std::string(text).insert(0, "\033[96m").append("\033[0m").c_str();
 }
-
