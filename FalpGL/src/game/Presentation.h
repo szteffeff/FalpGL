@@ -24,7 +24,7 @@ void presentaion(Project capstone);
 
 Project* introduction();
 
-
+/*
 class Capstone_Project {};
 std::string text;
-
+*/

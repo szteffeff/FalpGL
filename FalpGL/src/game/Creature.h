@@ -92,6 +92,13 @@ private:
 	int talk_frames = 60 * 2;
 	int check_point_location;
 	int weapon_type;
+
+	/// //////////////////////////////////////// Weapon unlock?
+
+	bool pewpew_unlock = false;
+	bool shanky_unlock = false;
+	bool huge_axe_unlock = false;
+	bool bigger_shank_unlock = false;
 	
 	/// //////////////////////////////////////// Bow stuff
 	
@@ -191,6 +198,10 @@ public:
 	float* get_position_x();
 	float* get_position_y();
 	bool* speaking();
+	bool* bow_unlock();
+	bool* shifty_shank_unlock();
+	bool* big_axe_unlock();
+	bool* bigger_shity_shank_unlock();
 	int* check_points();
 	int get_weapon_type();
 	float weapon_x();
@@ -482,10 +493,12 @@ private:
 	float* player_position_y = 0;
 	bool* talk;
 	int spoken = 0;
+	bool* unlock;
 public:
 	Del_Ibra_of_Hillsby(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
+	void Get_pewpew_lock(bool* lock);
 	void tick();
 };
 
@@ -497,10 +510,12 @@ private:
 	float* player_position_y = 0;
 	bool* talk;
 	int spoken = 0;
+	bool* unlock;
 public:
 	Eloah_of_Minlet(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
+	void Get_shank_unlock(bool* lock);
 	void tick();
 };
 
@@ -511,10 +526,13 @@ private:
 	float* player_position_x = 0;
 	float* player_position_y = 0;
 	bool* talk;
+	int spoken = 0;
+	bool* unlock;
 public:
 	Felix_of_Festria(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
+	void Get_big_axe_unlock(bool* lock);
 	void tick();
 };
 
@@ -526,10 +544,12 @@ private:
 	float* player_position_y = 0;
 	bool* talk;
 	int spoken = 0;
+	bool* unlock;
 public:
 	Maban_of_Undermount(VertexBuffer* vb);
 	void Get_player_position(float* x, float* y);
 	void Get_talk(bool* spoken);
+	void Get_Bigger_Shock(bool* lock);
 	void tick();
 };
 
