@@ -1,14 +1,13 @@
-//#include "Presentation.h"
+#include "Presentation.h"
 
 
-/*
 class Leos_Presentation : public Capstone_Project {
 private:
 
-	std::string Presentor	=	"Leo Panganiban";
-	std::string Project		=	"Game Software Development";
-	std::string Group_Members	=	"'Leo', 'Alex', 'Liam', 'Max', 'Jackson'";
-	std::string Mentor		=	"Wilbert Chua";
+	std::string Presentor = "Leo Panganiban";
+	std::string Project = "Game Software Development";
+	std::string Group_Members = "'Leo', 'Alex', 'Liam', 'Max', 'Jackson'";
+	std::string Mentor = "Wilbert Chua";
 
 	std::string What_Is_The_Capstone = "A 2D game created through C++ and OpenGL";
 
@@ -103,4 +102,3 @@ void Leos_Presentation::The_end()
 			Thank you very much for reading! Have a great day!
 )";
 }
-*/
