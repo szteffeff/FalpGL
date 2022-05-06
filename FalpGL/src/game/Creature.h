@@ -90,7 +90,7 @@ private:
 	int dodge_momentum = 5;
 	bool talk = false;
 	int talk_frames = 60 * 2;
-	int check_point_location;
+	int check_point_location = 0;
 	int weapon_type;
 
 	/// //////////////////////////////////////// Weapon unlock?

@@ -240,8 +240,8 @@ int main(void)
             s.SetUniform1i("u_Texture", 0);
             s.SetUniform1f("u_alpha", 0.5f);
 
-            Texture loading_screen("res/gfx/textures/loading.jpeg");
-            Texture pause_screen("res/gfx/textures/leo the danny(epic pause screen).png"); /*path to image*/
+            Texture loading_screen("res/gfx/textures/Game_loading.png");
+            Texture pause_screen("res/gfx/textures/Game_Paused_Static.png"); /*path to image*/
             
             pause_screen.Bind(8);
             loading_screen.Bind();
@@ -684,14 +684,16 @@ int main(void)
         sussy_vase_6.teleport(-594, 8530);
 
         /*Sound crap*/
-        /*
+        
         SFX Sound_player;
-        uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
-        Sound_player.Play_sound(intro);
+        //uint32_t intro = SoundBuffer::get()->addSoundEffect("files/SFX/intro.wav");
+        //Sound_player.Play_sound(intro);
         SFX Sound_song;
         SFX Background_sound;
-        uint32_t background = SoundBuffer::get()->addSoundEffect("files/SFX/Spooky_Egyptian_Beat.wav");
-        */
+        SFX Background_sound_2;
+        uint32_t background_forest = SoundBuffer::get()->addSoundEffect("files/SFX/forest music.wav");
+        uint32_t background_snow = SoundBuffer::get()->addSoundEffect("files/SFX/snowy music.wav");
+        
 
         ui.SetHealth(player.GetHealth());
         ui.SetStamina(player.GetStamina());
@@ -730,6 +732,14 @@ int main(void)
 
             /*SOUND THINGY*/
             
+            if (*player.get_position_y() >= 4257) {
+                Background_sound.Stop_sound(background_forest);
+                Background_sound_2.Play_sound(background_snow);
+            }
+            else if (*player.get_position_y() <= 4257) {
+                Background_sound_2.Stop_sound(background_snow);
+                Background_sound.Play_sound(background_forest);
+            }
             //Background_sound.Play_sound(background);
 
             //myspeaker.Play(intro);
