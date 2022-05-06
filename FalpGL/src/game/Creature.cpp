@@ -410,7 +410,7 @@ void Player::tick()
 	if (shoot_bow == true and shwoop_shwoop == true and attacking == false and Stamina >= 25 and pewpew_unlock == true) { //creates the direction for bow and arrow to point
 		Player_arrow.teleport(position[0], position[1]);
 		dmg_control = 0;
-		std::cout << "Yeet thy arrow" << std::endl;
+		//std::cout << "Yeet thy arrow" << std::endl;
 		float direction = atan2(*curser_y , *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
 		Player_arrow.rotate(-direction + glm::pi<float>()*0.5, Player_arrow.center(), true);
@@ -460,7 +460,7 @@ void Player::tick()
 		Player_dagger.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		Player_dagger.rotate(-direction + glm::pi<float>() * 0.5, Player_dagger.center(), true);
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
@@ -501,7 +501,7 @@ void Player::tick()
 		Player_dagger.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		direction += glm::pi<float>() / 2;
 		Player_dagger.rotate(-direction + glm::pi<float>() * 0.5, Player_dagger.center(), true);
 		dx = (float)(cos(direction)) * 3;
@@ -600,7 +600,7 @@ void Player::tick()
 		Player_Shatter_axe.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		direction += glm::pi<float>() / 2;
 		Player_Shatter_axe.rotate(-direction + glm::pi<float>() * 0.5, Player_Shatter_axe.center(), true);
 		dx = (float)(cos(direction)) * 3;
@@ -660,7 +660,7 @@ void Player::tick()
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
 		dx = (float)(cos(direction)) * 2.5;
 		dy = (float)(sin(direction)) * 2.5;
@@ -699,7 +699,7 @@ void Player::tick()
 		Player_spear.teleport(position[0], position[1]);
 		direction = atan2(*curser_y, *curser_x);
 		if (direction < 0) { direction += 2.0f * 3.14159f; }
-		std::cout << direction << std::endl;
+		//std::cout << direction << std::endl;
 		Player_spear.rotate(-direction + glm::pi<float>() * 0.5, Player_spear.center(), true);
 		dx = (float)(cos(direction)) * 3;
 		dy = (float)(sin(direction)) * 3;
@@ -884,7 +884,7 @@ void Player::Dagger_Heavy()
 void Player::Axe_Light()
 {
 	if (heavy_dagger == false and shoot_bow == false and light_dagger == false and heavy_axe == false and light_spear == false and heavy_spear == false) { light_axe = true; }
-	std::cout << "I WAS CLICKED BRO JUST SHOOT LIKE GOD UR A PRICK" << std::endl;
+	//std::cout << "I WAS CLICKED BRO JUST SHOOT LIKE GOD UR A PRICK" << std::endl;
 }
 
 void Player::Axe_Heavy()
@@ -1115,7 +1115,7 @@ void Enemy_Ghost::tick()
 			int random = 1 + (rand() % 2);
 
 			if (random == 1 and teleporting > 0) {
-				std::cout << "not moving" << std::endl;
+				//std::cout << "not moving" << std::endl;
 				pewpew = true;
 			}
 			else {
@@ -1139,7 +1139,7 @@ void Enemy_Ghost::tick()
 				Enemy_ghost.set_animation(2);
 				position[0] = *player_position_x + (rand() % 1000) - 500;
 				position[1] = *player_position_y + (rand() % 1000) - 500;
-				std::cout << "moving" << std::endl;
+				//std::cout << "moving" << std::endl;
 				Enemy_ghost.teleport(position[0], position[1]);
 				teleporting++;
 			}
@@ -1150,11 +1150,11 @@ void Enemy_Ghost::tick()
 			Wizard_pink_bullet.set_animation(0);
 			Wizard_pink_bullet.teleport(position[0], position[1]);
 			dmg_control = 0;
-			std::cout << "Yeet thy bullet" << std::endl;
+			//std::cout << "Yeet thy bullet" << std::endl;
 			frames_magic = 0;
 			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]);
 			if (direction < 0) { direction += 2.0f * 3.14159f; }
-			std::cout << direction << std::endl;
+			//std::cout << direction << std::endl;
 			dx = (float)(cos(direction)) * 3;
 			dy = (float)(sin(direction)) * 3;
 		}
@@ -1177,7 +1177,7 @@ void Enemy_Ghost::tick()
 			dmg_control++;
 		}
 		
-		std::cout << "IVE BEEN HIT" << std::endl;
+		//std::cout << "IVE BEEN HIT" << std::endl;
 	}
 	if (tick_bullet.anim_state == animation_state::ended)
 	{
@@ -1532,11 +1532,11 @@ void Sussy_Vase::tick()
 			Wizard_pink_bullet.set_animation(0);
 			Wizard_pink_bullet.teleport(position[0], position[1]);
 			dmg_control = 0;
-			std::cout << "Yeet thy bullet" << std::endl;
+			//std::cout << "Yeet thy bullet" << std::endl;
 			frames_magic = 0;
 			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
 			if (direction < 0) { direction += 2.0f * 3.14159f; }
-			std::cout << direction << std::endl;
+			//std::cout << direction << std::endl;
 			dx = (float)(cos(direction)) * 3;
 			dy = (float)(sin(direction)) * 3;
 		}
@@ -1559,7 +1559,7 @@ void Sussy_Vase::tick()
 			dmg_control++;
 		}
 
-		std::cout << "IVE BEEN HIT" << std::endl;
+		//std::cout << "IVE BEEN HIT" << std::endl;
 	}
 	if (tick_bullet.anim_state == animation_state::ended)
 	{

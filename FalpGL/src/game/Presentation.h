@@ -24,7 +24,10 @@ void presentaion(Project capstone);
 
 Project* introduction();
 
-/*
+
 class Capstone_Project {};
-std::string text;
-*/
+void What_And_Why_I_Chose(float reason_for_project);
+void Who_Is_My_Mentor(float mentor);
+void Problems_I_Faced(float obstales);
+//void What_I_Enjoyed(float The_Fun_Parts);
+//std::string text;
