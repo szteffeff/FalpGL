@@ -49,7 +49,6 @@ int main(void)
 {
     console_log("[INFO]: Started clock");
 
-
     Json_loader loader;
     if (!loader.init()) { return -1; }
 

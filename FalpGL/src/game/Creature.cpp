@@ -1132,7 +1132,7 @@ void Enemy_Ghost::tick()
 			dmg_control = 0;
 			std::cout << "Yeet thy bullet" << std::endl;
 			frames_magic = 0;
-			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]) - atan2(position[1] - position[1], position[0] - position[0]);
+			float direction = atan2(*player_position_y - position[1], *player_position_x - position[0]);
 			if (direction < 0) { direction += 2.0f * 3.14159f; }
 			std::cout << direction << std::endl;
 			dx = (float)(cos(direction)) * 3;

@@ -28,7 +28,7 @@ void presentaion(Project capstone) {
 				I worked on:
 					- Rendering graphics drawn by other members of my group
 					- Loading and properly displaying a map
-					- Maintaining a version control so I can work with others
+					- Maintaining version control so I can work with others
 			)";
 		break;
 
@@ -73,7 +73,7 @@ void presentaion(Project capstone) {
 
 				Looking back, some things I could have done to make my
 				work easier would be:
-					- Use a schedual to organize and spread out work
+					- Use a schedule to organize and spread out work
 					- Look at tutorials for software instead of guessing
 					- Leave more comments to make code easier to understand	
 			)";
@@ -82,13 +82,13 @@ void presentaion(Project capstone) {
 
 	case (What_I_Enjoyed):
 		text = R"(
-				My favorite part of my capstone was definitly solving problems
+				My favorite part of my capstone was definitely solving problems
 				with things that I had learned. Solving problems in interesting
 				and creative ways is my favorite part of programming and I had
 				lots of opportunity for that in this project.
 
 				Some other things I enjoyed are:
-					- Learing how to use new software
+					- Learning how to use new software
 					- Seeing something I made work properly on the screen
 					- Looking back at silly mistakes and old code 
 			)";
@@ -103,3 +103,26 @@ void presentaion(Project capstone) {
 
 	std::cout << std::string(text).insert(0, "\033[96m").append("\033[0m").c_str();
 }
+
+
+
+
+
+
+/*
+*	Statistics:
+*	
+*	Total lines: 8200
+* 
+*	Size of code: 226KB
+* 
+*	Size of art: 87.8MB
+* 
+*	Size of data: 2.3MB
+* 
+*	Number of commits:  263
+* 
+*   First commit: 3/21/21
+* 
+*	Files: 62
+*/
