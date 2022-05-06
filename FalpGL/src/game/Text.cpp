@@ -12,6 +12,8 @@ Text::Text(std::string text, float x, float y, int time, Tileset& set)
 
 	for (int i = 0; i < text.size(); i++)
 	{
+		float shift_y = 0;
+		float shift_x = 0;
 
 		if (text[i] == *("\n"))
 		{
@@ -28,32 +30,33 @@ Text::Text(std::string text, float x, float y, int time, Tileset& set)
 
 		if (text[i] == *(","))
 		{
-			x += size;
-			continue;
-		}
-
-		if (text[i] == *("."))
-		{
-			x += size;
-			continue;
+			text[i] = 123;
+			shift_y = -4;
+			shift_x = -3;
 		}
 
 		if (text[i] == *("!"))
 		{
-			x += size;
-			continue;
+			text[i] = 124;
+			shift_x = -3;
+		}
+
+		if (text[i] == *("."))
+		{
+			text[i] = 125;
+			shift_x = -3;
 		}
 
 		if (text[i] == *("?"))
 		{
-			x += size;
-			continue;
+			text[i] = 126;
+			shift_x = -3;
 		}
 
-		if (text[i] == *("’"))
+		if (text[i] == *("’") || text[i] == *("'"))
 		{
-			x += size;
-			continue;
+			text[i] = 127;
+			shift_y = 4;
 		}
 
 		if (text[i] < 91 && text[i] > 64)
@@ -63,23 +66,23 @@ Text::Text(std::string text, float x, float y, int time, Tileset& set)
 
 		Prototype_Tile letter = set[text[i] - 97];
 
-		vertex_data.push_back(x); // x
-		vertex_data.push_back(y - size); // y
+		vertex_data.push_back(x + shift_x); // x
+		vertex_data.push_back(y - size + shift_y); // y
 		vertex_data.push_back(letter.texture_coord[0]); // u
 		vertex_data.push_back(letter.texture_coord[1]); // v
 
-		vertex_data.push_back(x + size);
-		vertex_data.push_back(y - size);
+		vertex_data.push_back(x + size + shift_x);
+		vertex_data.push_back(y - size + shift_y);
 		vertex_data.push_back(letter.texture_coord[2]);
 		vertex_data.push_back(letter.texture_coord[3]);
 
-		vertex_data.push_back(x + size);
-		vertex_data.push_back(y);
+		vertex_data.push_back(x + size + shift_x);
+		vertex_data.push_back(y + shift_y);
 		vertex_data.push_back(letter.texture_coord[4]);
 		vertex_data.push_back(letter.texture_coord[5]);
 
-		vertex_data.push_back(x);
-		vertex_data.push_back(y);
+		vertex_data.push_back(x + shift_x);
+		vertex_data.push_back(y + shift_y);
 		vertex_data.push_back(letter.texture_coord[6]);
 		vertex_data.push_back(letter.texture_coord[7]);
 

@@ -1,6 +1,6 @@
 #include "Presentation.h"
 
-
+/*
 class Leos_Presentation : public Capstone_Project {
 private:
 
@@ -102,3 +102,4 @@ void Leos_Presentation::The_end()
 			Thank you very much for reading! Have a great day!
 )";
 }
+*/

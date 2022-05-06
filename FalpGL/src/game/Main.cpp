@@ -704,8 +704,8 @@ int main(void)
 
         player.set_active_map(&nmap);
 
-        text.create_text("example\ntext", *player.get_position_x(), *player.get_position_y(), 60);
-        text.create_text("example\ntext", *player.get_position_x(), *player.get_position_y() - 64, 120);
+        //text.create_text("example\ntext", *player.get_position_x(), *player.get_position_y(), 60);
+        //text.create_text("example\ntext,.?!'", *player.get_position_x(), *player.get_position_y() - 64, 1200);
 
         atlas_0.Bind(0);
         atlas_1.Bind(1);
